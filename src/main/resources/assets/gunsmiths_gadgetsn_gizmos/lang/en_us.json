@@ -1,0 +1,13 @@
+{
+  "itemGroup.gunsmiths_gadgetsn_gizmos": "Example Mod Tab",
+  "block.gunsmiths_gadgetsn_gizmos.example_block": "Example Block",
+  "item.gunsmiths_gadgetsn_gizmos.example_item": "Example Item",
+
+  "gunsmiths_gadgetsn_gizmos.configuration.title": "Gunsmith's Gadgets 'n Gizmos Configs",
+  "gunsmiths_gadgetsn_gizmos.configuration.section.gunsmiths_gadgetsn_gizmos.common.toml": "Gunsmith's Gadgets 'n Gizmos Configs",
+  "gunsmiths_gadgetsn_gizmos.configuration.section.gunsmiths_gadgetsn_gizmos.common.toml.title": "Gunsmith's Gadgets 'n Gizmos Configs",
+  "gunsmiths_gadgetsn_gizmos.configuration.items": "Item List",
+  "gunsmiths_gadgetsn_gizmos.configuration.logDirtBlock": "Log Dirt Block",
+  "gunsmiths_gadgetsn_gizmos.configuration.magicNumberIntroduction": "Magic Number Text",
+  "gunsmiths_gadgetsn_gizmos.configuration.magicNumber": "Magic Number"
+}
