@@ -1,13 +1,46 @@
 {
-  "itemGroup.gunsmiths_gadgetsn_gizmos": "Example Mod Tab",
-  "block.gunsmiths_gadgetsn_gizmos.example_block": "Example Block",
-  "item.gunsmiths_gadgetsn_gizmos.example_item": "Example Item",
+  "itemGroup.gunsmiths_gadgetsn_gizmos": "Gunsmith's Gadgets 'n Gizmos",
 
-  "gunsmiths_gadgetsn_gizmos.configuration.title": "Gunsmith's Gadgets 'n Gizmos Configs",
-  "gunsmiths_gadgetsn_gizmos.configuration.section.gunsmiths_gadgetsn_gizmos.common.toml": "Gunsmith's Gadgets 'n Gizmos Configs",
-  "gunsmiths_gadgetsn_gizmos.configuration.section.gunsmiths_gadgetsn_gizmos.common.toml.title": "Gunsmith's Gadgets 'n Gizmos Configs",
-  "gunsmiths_gadgetsn_gizmos.configuration.items": "Item List",
-  "gunsmiths_gadgetsn_gizmos.configuration.logDirtBlock": "Log Dirt Block",
-  "gunsmiths_gadgetsn_gizmos.configuration.magicNumberIntroduction": "Magic Number Text",
-  "gunsmiths_gadgetsn_gizmos.configuration.magicNumber": "Magic Number"
+  "item.gunsmiths_gadgetsn_gizmos.ominous_clockwork_core": "Ominous Clockwork Core",
+
+  "item.gunsmiths_gadgetsn_gizmos.piston_ramrod_modifier": "Piston Ramrod Modifier",
+  "item.gunsmiths_gadgetsn_gizmos.grappling_anchor_modifier": "Grappling Anchor Modifier",
+  "item.gunsmiths_gadgetsn_gizmos.heavy_core_impact_modifier": "Heavy Core Impact Modifier",
+  "item.gunsmiths_gadgetsn_gizmos.breeze_cyclone_modifier": "Breeze Cyclone Modifier",
+  "item.gunsmiths_gadgetsn_gizmos.ominous_chamber_modifier": "Ominous Chamber Modifier",
+  "item.gunsmiths_gadgetsn_gizmos.town_bell_flare_modifier": "Town Bell Flare Modifier",
+  "item.gunsmiths_gadgetsn_gizmos.bloodbound_calamity_modifier": "Bloodbound Calamity Modifier",
+  "item.gunsmiths_gadgetsn_gizmos.unstable_overclock_modifier": "Unstable Overclock Modifier",
+  "item.gunsmiths_gadgetsn_gizmos.reapers_gambit_modifier": "Reaper's Gambit Modifier",
+  "item.gunsmiths_gadgetsn_gizmos.trial_of_greed_modifier": "Trial of Greed Modifier",
+
+  "gunsmiths_gadgetsn_gizmos.modifier.grappling_anchor": "Pulls the shooter towards the impacted block",
+
+  "gunsmiths_gadgetsn_gizmos.modifier.heavy_core_impact": "+%s Damage per block of distance traveled",
+  "gunsmiths_gadgetsn_gizmos.modifier.heavy_core_impact.desc_bonus": "+1.5 Knockback",
+  "gunsmiths_gadgetsn_gizmos.modifier.heavy_core_impact.desc_penalty": "-15% Bullet Speed",
+
+  "gunsmiths_gadgetsn_gizmos.modifier.breeze_cyclone": "Creates a gust burst on impact, launching targets upwards",
+  "gunsmiths_gadgetsn_gizmos.modifier.rocket_jump_capable": "Enables Rocket Jumping when fired in mid-air",
+
+  "gunsmiths_gadgetsn_gizmos.modifier.ominous_chamber": "Inflicts random trial afflictions on hit",
+  "gunsmiths_gadgetsn_gizmos.modifier.ominous_chamber.bonus": "+25% Damage",
+
+  "gunsmiths_gadgetsn_gizmos.modifier.town_bell_flare": "Rings a warning bell on impact: Highlights nearby enemies and orders villagers to take shelter",
+
+  "gunsmiths_gadgetsn_gizmos.modifier.bloodbound_calamity": "Calamity Shot: Absolute linear trajectory with +2 Piercing",
+  "gunsmiths_gadgetsn_gizmos.modifier.bloodbound_calamity.damage": "+120% Damage",
+  "gunsmiths_gadgetsn_gizmos.modifier.bloodbound_calamity.cost": "Consumes 1 Heart of HP on each shot",
+
+  "gunsmiths_gadgetsn_gizmos.modifier.unstable_overclock": "Supercharged Mechanism: Extremely high fire rate",
+  "gunsmiths_gadgetsn_gizmos.modifier.unstable_overclock.bonus": "+200% Fire Rate (Full-Auto)",
+  "gunsmiths_gadgetsn_gizmos.modifier.unstable_overclock.penalty": "+150% Recoil / Massive Spread & Blowback",
+
+  "gunsmiths_gadgetsn_gizmos.modifier.reapers_gambit": "Reaper's Curse: Fatal direct hit with soul burst",
+  "gunsmiths_gadgetsn_gizmos.modifier.reapers_gambit.bonus": "Direct Hit: +300% Soul Explosion Damage",
+  "gunsmiths_gadgetsn_gizmos.modifier.reapers_gambit.curse": "Missing shot inflicts Wither II & Darkness on self",
+
+  "gunsmiths_gadgetsn_gizmos.modifier.trial_of_greed": "Ominous Plunder: Greatly multiplies spoils of battle",
+  "gunsmiths_gadgetsn_gizmos.modifier.trial_of_greed.bonus": "Slain Mobs drop 4x Loot & EXP",
+  "gunsmiths_gadgetsn_gizmos.modifier.trial_of_greed.enrage": "Firing enrages and empowers all nearby monsters"
 }

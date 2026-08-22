@@ -1,0 +1,46 @@
+{
+  "itemGroup.gunsmiths_gadgetsn_gizmos": "ガンスミスズ・ガジェット＆ギズモ",
+
+  "item.gunsmiths_gadgetsn_gizmos.ominous_clockwork_core": "禍ツからくりコア",
+
+  "item.gunsmiths_gadgetsn_gizmos.piston_ramrod_modifier": "ピストン装填ロッド改造モジュール",
+  "item.gunsmiths_gadgetsn_gizmos.grappling_anchor_modifier": "グラップリング・アンカー改造モジュール",
+  "item.gunsmiths_gadgetsn_gizmos.heavy_core_impact_modifier": "ヘビーコア・インパクト改造モジュール",
+  "item.gunsmiths_gadgetsn_gizmos.breeze_cyclone_modifier": "ブリーズ旋風改造モジュール",
+  "item.gunsmiths_gadgetsn_gizmos.ominous_chamber_modifier": "不吉な試練の薬室モジュール",
+  "item.gunsmiths_gadgetsn_gizmos.town_bell_flare_modifier": "警鐘の照明弾モジュール",
+  "item.gunsmiths_gadgetsn_gizmos.bloodbound_calamity_modifier": "禍神の重撃モジュール",
+  "item.gunsmiths_gadgetsn_gizmos.unstable_overclock_modifier": "暴走過給機モジュール",
+  "item.gunsmiths_gadgetsn_gizmos.reapers_gambit_modifier": "断罪のロシアンルーレットモジュール",
+  "item.gunsmiths_gadgetsn_gizmos.trial_of_greed_modifier": "不吉なる狂宴モジュール",
+
+  "gunsmiths_gadgetsn_gizmos.modifier.grappling_anchor": "着弾したブロックに向けて射手を急速に引き寄せる",
+
+  "gunsmiths_gadgetsn_gizmos.modifier.heavy_core_impact": "飛翔距離1ブロックにつき +%s ダメージ増加",
+  "gunsmiths_gadgetsn_gizmos.modifier.heavy_core_impact.desc_bonus": "+1.5 ノックバック",
+  "gunsmiths_gadgetsn_gizmos.modifier.heavy_core_impact.desc_penalty": "-15% 弾速",
+
+  "gunsmiths_gadgetsn_gizmos.modifier.breeze_cyclone": "着弾時に突風を発生させ、対象を真上に打ち上げる",
+  "gunsmiths_gadgetsn_gizmos.modifier.rocket_jump_capable": "空中で射撃すると強力なロケットジャンプが可能",
+
+  "gunsmiths_gadgetsn_gizmos.modifier.ominous_chamber": "命中した敵に不吉な試練のランダムな状態異常を付与",
+  "gunsmiths_gadgetsn_gizmos.modifier.ominous_chamber.bonus": "+25% ダメージ",
+
+  "gunsmiths_gadgetsn_gizmos.modifier.town_bell_flare": "着弾時に警鐘が鳴り響く：周囲の敵モブを発光表示し、村人を屋内に避難させる",
+
+  "gunsmiths_gadgetsn_gizmos.modifier.bloodbound_calamity": "禍撃：重力の影響を受けず、貫通力 +2 を得る",
+  "gunsmiths_gadgetsn_gizmos.modifier.bloodbound_calamity.damage": "+120% ダメージ",
+  "gunsmiths_gadgetsn_gizmos.modifier.bloodbound_calamity.cost": "射撃ごとに自身のHPをハート1個（2ダメージ）消費",
+
+  "gunsmiths_gadgetsn_gizmos.modifier.unstable_overclock": "過給機構：射撃速度が限界を超えて跳ね上がる",
+  "gunsmiths_gadgetsn_gizmos.modifier.unstable_overclock.bonus": "+200% 連射速度（フルオート化）",
+  "gunsmiths_gadgetsn_gizmos.modifier.unstable_overclock.penalty": "+150% 反動 / 激しい集弾散布＆自ノックバック",
+
+  "gunsmiths_gadgetsn_gizmos.modifier.reapers_gambit": "死神の呪縛：直撃時に致命的なソウル爆発を引き起こす",
+  "gunsmiths_gadgetsn_gizmos.modifier.reapers_gambit.bonus": "直撃時：+300% ソウル爆発ダメージ",
+  "gunsmiths_gadgetsn_gizmos.modifier.reapers_gambit.curse": "弾を外すと自身にウィザーⅡと暗闇が付与される",
+
+  "gunsmiths_gadgetsn_gizmos.modifier.trial_of_greed": "強欲の試練：敵討伐時の戦利品を劇的に増加させる",
+  "gunsmiths_gadgetsn_gizmos.modifier.trial_of_greed.bonus": "討伐モブのドロップアイテム・経験値が 4倍",
+  "gunsmiths_gadgetsn_gizmos.modifier.trial_of_greed.enrage": "射撃時、周囲の全モンスターが強化され一斉に襲いかかる"
+}
