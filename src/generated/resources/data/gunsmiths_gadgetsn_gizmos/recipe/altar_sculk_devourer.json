@@ -1,0 +1,22 @@
+{
+  "type": "gunsmiths_gadgetsn_gizmos:cursed_altar",
+  "base": [
+    "irons_artifice:clockwork_components"
+  ],
+  "catalyst": {
+    "count": 2,
+    "ingredient": [
+      "gunsmiths_gadgetsn_gizmos:coagulated_omen_blood"
+    ]
+  },
+  "material": {
+    "count": 1,
+    "ingredient": [
+      "minecraft:sculk_catalyst"
+    ]
+  },
+  "result": {
+    "count": 1,
+    "id": "gunsmiths_gadgetsn_gizmos:sculk_devourer_modifier"
+  }
+}

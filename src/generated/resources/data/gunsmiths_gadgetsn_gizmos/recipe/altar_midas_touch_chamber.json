@@ -1,0 +1,22 @@
+{
+  "type": "gunsmiths_gadgetsn_gizmos:cursed_altar",
+  "base": [
+    "gunsmiths_gadgetsn_gizmos:merchant_bounty_modifier"
+  ],
+  "catalyst": {
+    "count": 1,
+    "ingredient": [
+      "gunsmiths_gadgetsn_gizmos:ominous_clockwork_core"
+    ]
+  },
+  "material": {
+    "count": 1,
+    "ingredient": [
+      "gunsmiths_gadgetsn_gizmos:trial_of_greed_modifier"
+    ]
+  },
+  "result": {
+    "count": 1,
+    "id": "gunsmiths_gadgetsn_gizmos:midas_touch_chamber_modifier"
+  }
+}

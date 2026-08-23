@@ -1,0 +1,13 @@
+{
+  "gives": {
+    "count": 1,
+    "id": "gunsmiths_gadgetsn_gizmos:mastercrafted_trigger_modifier"
+  },
+  "max_uses": 2,
+  "reputation_discount": 0.05,
+  "wants": {
+    "count": 16,
+    "id": "minecraft:emerald"
+  },
+  "xp": 30
+}

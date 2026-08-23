@@ -24,6 +24,12 @@ public class ModVillagers {
                     1, 1
             )
     );
+    public static final DeferredHolder<PoiType, PoiType> CULTIST_POI = POI_TYPES.register("cultist",
+            () -> new PoiType(
+                    ImmutableSet.copyOf(ModBlocks.CURSED_ALTAR.get().getStateDefinition().getPossibleStates()),
+                    1, 1
+            )
+    );
     public static final DeferredRegister<VillagerProfession> PROFESSIONS =
             DeferredRegister.create(Registries.VILLAGER_PROFESSION, MODID);
     public static final ResourceKey<TradeSet> GUNSMITH_LEVEL_1 = tradeSetKey("gunsmith_level_1");
@@ -45,6 +51,28 @@ public class ModVillagers {
                             Int2ObjectMap.entry(3, GUNSMITH_LEVEL_3),
                             Int2ObjectMap.entry(4, GUNSMITH_LEVEL_4),
                             Int2ObjectMap.entry(5, GUNSMITH_LEVEL_5)
+                    )
+            )
+    );
+    public static final ResourceKey<TradeSet> CULTIST_LEVEL_1 = tradeSetKey("cultist_level_1");
+    public static final ResourceKey<TradeSet> CULTIST_LEVEL_2 = tradeSetKey("cultist_level_2");
+    public static final ResourceKey<TradeSet> CULTIST_LEVEL_3 = tradeSetKey("cultist_level_3");
+    public static final ResourceKey<TradeSet> CULTIST_LEVEL_4 = tradeSetKey("cultist_level_4");
+    public static final ResourceKey<TradeSet> CULTIST_LEVEL_5 = tradeSetKey("cultist_level_5");
+    public static final DeferredHolder<VillagerProfession, VillagerProfession> CULTIST = PROFESSIONS.register("cultist",
+            () -> new VillagerProfession(
+                    Component.translatable("entity." + MODID + ".villager.cultist"),
+                    holder -> holder.is(CULTIST_POI.getKey()),
+                    holder -> holder.is(CULTIST_POI.getKey()),
+                    ImmutableSet.of(),
+                    ImmutableSet.of(),
+                    SoundEvents.SOUL_ESCAPE.value(),
+                    Int2ObjectMap.ofEntries(
+                            Int2ObjectMap.entry(1, CULTIST_LEVEL_1),
+                            Int2ObjectMap.entry(2, CULTIST_LEVEL_2),
+                            Int2ObjectMap.entry(3, CULTIST_LEVEL_3),
+                            Int2ObjectMap.entry(4, CULTIST_LEVEL_4),
+                            Int2ObjectMap.entry(5, CULTIST_LEVEL_5)
                     )
             )
     );

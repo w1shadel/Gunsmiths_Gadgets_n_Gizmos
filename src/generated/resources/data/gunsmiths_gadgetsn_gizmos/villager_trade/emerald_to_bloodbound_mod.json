@@ -1,0 +1,13 @@
+{
+  "gives": {
+    "count": 1,
+    "id": "gunsmiths_gadgetsn_gizmos:bloodbound_calamity_modifier"
+  },
+  "max_uses": 4,
+  "reputation_discount": 0.05,
+  "wants": {
+    "count": 6,
+    "id": "minecraft:emerald"
+  },
+  "xp": 5
+}

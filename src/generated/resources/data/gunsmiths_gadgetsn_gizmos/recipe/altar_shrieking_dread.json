@@ -1,0 +1,22 @@
+{
+  "type": "gunsmiths_gadgetsn_gizmos:cursed_altar",
+  "base": [
+    "gunsmiths_gadgetsn_gizmos:void_casing"
+  ],
+  "catalyst": {
+    "count": 4,
+    "ingredient": [
+      "gunsmiths_gadgetsn_gizmos:soul_cinder"
+    ]
+  },
+  "material": {
+    "count": 1,
+    "ingredient": [
+      "minecraft:sculk_shrieker"
+    ]
+  },
+  "result": {
+    "count": 1,
+    "id": "gunsmiths_gadgetsn_gizmos:shrieking_dread_modifier"
+  }
+}

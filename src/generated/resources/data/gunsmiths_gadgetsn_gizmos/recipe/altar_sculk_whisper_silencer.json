@@ -1,0 +1,22 @@
+{
+  "type": "gunsmiths_gadgetsn_gizmos:cursed_altar",
+  "base": [
+    "gunsmiths_gadgetsn_gizmos:cursed_brass_ingot"
+  ],
+  "catalyst": {
+    "count": 4,
+    "ingredient": [
+      "minecraft:black_wool"
+    ]
+  },
+  "material": {
+    "count": 1,
+    "ingredient": [
+      "minecraft:sculk_sensor"
+    ]
+  },
+  "result": {
+    "count": 1,
+    "id": "gunsmiths_gadgetsn_gizmos:sculk_whisper_silencer_modifier"
+  }
+}

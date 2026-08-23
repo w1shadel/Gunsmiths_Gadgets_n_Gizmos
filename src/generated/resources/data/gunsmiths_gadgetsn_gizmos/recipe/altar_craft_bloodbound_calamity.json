@@ -1,0 +1,22 @@
+{
+  "type": "gunsmiths_gadgetsn_gizmos:cursed_altar",
+  "base": [
+    "gunsmiths_gadgetsn_gizmos:piston_ramrod_modifier"
+  ],
+  "catalyst": {
+    "count": 2,
+    "ingredient": [
+      "gunsmiths_gadgetsn_gizmos:coagulated_omen_blood"
+    ]
+  },
+  "material": {
+    "count": 1,
+    "ingredient": [
+      "gunsmiths_gadgetsn_gizmos:void_casing"
+    ]
+  },
+  "result": {
+    "count": 1,
+    "id": "gunsmiths_gadgetsn_gizmos:bloodbound_calamity_modifier"
+  }
+}

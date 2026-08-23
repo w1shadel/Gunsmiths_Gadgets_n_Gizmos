@@ -1,0 +1,10 @@
+{
+  "amount": 2,
+  "trades": [
+    "gunsmiths_gadgetsn_gizmos:iron_to_emerald",
+    "gunsmiths_gadgetsn_gizmos:copper_to_emerald",
+    "gunsmiths_gadgetsn_gizmos:charcoal_to_emerald",
+    "gunsmiths_gadgetsn_gizmos:emerald_to_bullets",
+    "gunsmiths_gadgetsn_gizmos:emerald_to_blackpowder"
+  ]
+}

@@ -1,9 +1,6 @@
 package com.maxwell.gunsmiths_gadgetsn_gizmos;
 
-import com.maxwell.gunsmiths_gadgetsn_gizmos.registry.ModBlocks;
-import com.maxwell.gunsmiths_gadgetsn_gizmos.registry.ModCreativeTabs;
-import com.maxwell.gunsmiths_gadgetsn_gizmos.registry.ModItems;
-import com.maxwell.gunsmiths_gadgetsn_gizmos.registry.ModVillagers;
+import com.maxwell.gunsmiths_gadgetsn_gizmos.registry.*;
 import com.mojang.logging.LogUtils;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
@@ -18,7 +15,12 @@ public class GunsmithsGadgetsnGizmos {
     public GunsmithsGadgetsnGizmos(IEventBus modEventBus, ModContainer modContainer) {
         ModBlocks.register(modEventBus);
         ModItems.register(modEventBus);
+        ModMenuTypes.register(modEventBus);
+        ModBlockEntities.register(modEventBus);
         ModVillagers.register(modEventBus);
         ModCreativeTabs.register(modEventBus);
+        ModDataComponents.register(modEventBus);
+        ModRecipes.register(modEventBus);
+        ModAmmoTypes.register(modEventBus);
     }
 }

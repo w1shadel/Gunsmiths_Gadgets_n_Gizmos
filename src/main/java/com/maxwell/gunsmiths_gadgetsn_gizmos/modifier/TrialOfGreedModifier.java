@@ -1,5 +1,6 @@
 package com.maxwell.gunsmiths_gadgetsn_gizmos.modifier;
 
+import com.maxwell.gunsmiths_gadgetsn_gizmos.GunsmithsGadgetsnGizmos;
 import io.redspace.irons_artifice.api.GunShootEvent;
 import io.redspace.irons_artifice.client.particle.ColorTransitionParticleOption;
 import io.redspace.irons_artifice.damage.DamageSources;
@@ -26,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-@EventBusSubscriber(modid = "gunsmiths_gadgetsn_gizmos")
+@EventBusSubscriber(modid = GunsmithsGadgetsnGizmos.MODID)
 public final class TrialOfGreedModifier implements GunModifier {
     @SubscribeEvent
     public static void onShoot(GunShootEvent.Post event) {

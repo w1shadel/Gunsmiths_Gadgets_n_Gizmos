@@ -1,0 +1,17 @@
+{
+  "gives": {
+    "count": 1,
+    "id": "gunsmiths_gadgetsn_gizmos:cursed_brass_ingot"
+  },
+  "max_uses": 8,
+  "reputation_discount": 0.05,
+  "second_wants": {
+    "count": 2,
+    "id": "minecraft:gold_ingot"
+  },
+  "wants": {
+    "count": 2,
+    "id": "gunsmiths_gadgetsn_gizmos:soul_cinder"
+  },
+  "xp": 5
+}

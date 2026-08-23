@@ -1,0 +1,17 @@
+{
+  "gives": {
+    "count": 1,
+    "id": "gunsmiths_gadgetsn_gizmos:heavy_core_impact_modifier"
+  },
+  "max_uses": 2,
+  "reputation_discount": 0.05,
+  "second_wants": {
+    "count": 1,
+    "id": "minecraft:iron_block"
+  },
+  "wants": {
+    "count": 14,
+    "id": "minecraft:emerald"
+  },
+  "xp": 30
+}

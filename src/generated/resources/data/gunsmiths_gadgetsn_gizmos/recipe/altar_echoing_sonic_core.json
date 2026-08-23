@@ -1,0 +1,22 @@
+{
+  "type": "gunsmiths_gadgetsn_gizmos:cursed_altar",
+  "base": [
+    "gunsmiths_gadgetsn_gizmos:void_casing"
+  ],
+  "catalyst": {
+    "count": 1,
+    "ingredient": [
+      "minecraft:sculk_catalyst"
+    ]
+  },
+  "material": {
+    "count": 2,
+    "ingredient": [
+      "minecraft:echo_shard"
+    ]
+  },
+  "result": {
+    "count": 1,
+    "id": "gunsmiths_gadgetsn_gizmos:echoing_sonic_core_modifier"
+  }
+}

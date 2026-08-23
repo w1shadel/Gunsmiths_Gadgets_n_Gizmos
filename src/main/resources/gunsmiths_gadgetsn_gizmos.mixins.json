@@ -2,7 +2,11 @@
   "required": true,
   "package": "com.maxwell.gunsmiths_gadgetsn_gizmos.mixin",
   "compatibilityLevel": "JAVA_25",
-  "mixins": [],
+  "mixins": [
+    "GunContainerMixin",
+    "GunItemMixin",
+    "GunplayManagerMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
   },

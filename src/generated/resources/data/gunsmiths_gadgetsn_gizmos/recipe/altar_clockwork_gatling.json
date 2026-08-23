@@ -1,0 +1,22 @@
+{
+  "type": "gunsmiths_gadgetsn_gizmos:cursed_altar",
+  "base": [
+    "gunsmiths_gadgetsn_gizmos:mastercrafted_trigger_modifier"
+  ],
+  "catalyst": {
+    "count": 2,
+    "ingredient": [
+      "gunsmiths_gadgetsn_gizmos:cursed_brass_ingot"
+    ]
+  },
+  "material": {
+    "count": 1,
+    "ingredient": [
+      "gunsmiths_gadgetsn_gizmos:unstable_overclock_modifier"
+    ]
+  },
+  "result": {
+    "count": 1,
+    "id": "gunsmiths_gadgetsn_gizmos:clockwork_gatling_modifier"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "amount": 2,
+  "trades": [
+    "gunsmiths_gadgetsn_gizmos:amethyst_to_emerald",
+    "gunsmiths_gadgetsn_gizmos:breeze_rod_to_emerald",
+    "gunsmiths_gadgetsn_gizmos:emerald_to_piston_ramrod",
+    "gunsmiths_gadgetsn_gizmos:emerald_to_breeze_cyclone",
+    "gunsmiths_gadgetsn_gizmos:emerald_to_merchant_bounty"
+  ]
+}

@@ -42,5 +42,62 @@
 
   "gunsmiths_gadgetsn_gizmos.modifier.trial_of_greed": "Ominous Plunder: Greatly multiplies spoils of battle",
   "gunsmiths_gadgetsn_gizmos.modifier.trial_of_greed.bonus": "Slain Mobs drop 4x Loot & EXP",
-  "gunsmiths_gadgetsn_gizmos.modifier.trial_of_greed.enrage": "Firing enrages and empowers all nearby monsters"
+  "gunsmiths_gadgetsn_gizmos.modifier.trial_of_greed.enrage": "Firing enrages and empowers all nearby monsters",
+
+  "item.gunsmiths_gadgetsn_gizmos.mastercrafted_trigger_modifier": "Mastercrafted Fine Trigger Modifier",
+  "gunsmiths_gadgetsn_gizmos.modifier.mastercrafted_trigger": "Masterwork tuning: Drastically improves stability and precision",
+
+  "item.gunsmiths_gadgetsn_gizmos.merchant_bounty_modifier": "Merchant's Bounty Modifier",
+  "gunsmiths_gadgetsn_gizmos.modifier.merchant_bounty": "Greed Shot: Slain enemies drop emeralds",
+
+  "item.gunsmiths_gadgetsn_gizmos.unidentified_crate": "Unidentified Gunsmith Crate",
+
+  "block.gunsmiths_gadgetsn_gizmos.cursed_altar": "Cursed Gunsmith Altar",
+
+  "item.gunsmiths_gadgetsn_gizmos.void_casing": "Void Bullet Casing",
+  "item.gunsmiths_gadgetsn_gizmos.soul_cinder": "Soul Cinder",
+  "item.gunsmiths_gadgetsn_gizmos.cursed_brass_ingot": "Cursed Brass Ingot",
+  "item.gunsmiths_gadgetsn_gizmos.coagulated_omen_blood": "Coagulated Omen Blood",
+  "item.gunsmiths_gadgetsn_gizmos.forbidden_blueprint": "Forbidden Gunsmith Blueprint",
+
+  "item.gunsmiths_gadgetsn_gizmos.crimson_singularity_modifier": "Crimson Singularity Modifier",
+  "gunsmiths_gadgetsn_gizmos.modifier.crimson_singularity": "Refined Calamity: Absolute linear shot with +3 Piercing",
+  "gunsmiths_gadgetsn_gizmos.modifier.crimson_singularity.desc": "+1.0 Damage per block of distance / Heals on kill",
+  "gunsmiths_gadgetsn_gizmos.modifier.crimson_singularity.cost": "Consumes half a Heart of HP on shot",
+
+  "item.gunsmiths_gadgetsn_gizmos.clockwork_gatling_modifier": "Clockwork Gatling Modifier",
+  "gunsmiths_gadgetsn_gizmos.modifier.clockwork_gatling": "Stabilized Supercharger: Laser-accurate Gatling fire",
+  "gunsmiths_gadgetsn_gizmos.modifier.clockwork_gatling.desc": "+250% Fire Rate (Full-Auto) / Pinpoint Accuracy with Controlled Recoil",
+
+  "item.gunsmiths_gadgetsn_gizmos.reapers_tempest_modifier": "Reaper's Tempest Modifier",
+  "gunsmiths_gadgetsn_gizmos.modifier.reapers_tempest": "Soul Hurricane: Cataclysmic soul cyclone on direct hit",
+  "gunsmiths_gadgetsn_gizmos.modifier.reapers_tempest.desc": "Launches all nearby enemies into the air with +250% Soul Damage",
+  "gunsmiths_gadgetsn_gizmos.modifier.reapers_tempest.curse": "Missing shot inflicts a minor 2s Wither curse",
+
+  "item.gunsmiths_gadgetsn_gizmos.midas_touch_chamber_modifier": "Midas' Touch Chamber Modifier",
+  "gunsmiths_gadgetsn_gizmos.modifier.midas_touch_chamber": "Alchemical Sovereign: Tremendous plunder of riches",
+  "gunsmiths_gadgetsn_gizmos.modifier.midas_touch_chamber.desc": "Slain mobs drop 5x Loot & Emeralds / Enrages but severely weakens nearby enemies",
+
+  "item.gunsmiths_gadgetsn_gizmos.echoing_sonic_core_modifier": "Echoing Sonic Core Modifier",
+  "gunsmiths_gadgetsn_gizmos.modifier.echoing_sonic_core": "Sonic Resonance: Emits Warden's Sonic Boom through walls",
+  "gunsmiths_gadgetsn_gizmos.modifier.echoing_sonic_core.desc": "Penetrates solid terrain and blasts enemies behind cover",
+
+  "item.gunsmiths_gadgetsn_gizmos.sculk_whisper_silencer_modifier": "Sculk Whisper Silencer Modifier",
+  "gunsmiths_gadgetsn_gizmos.modifier.sculk_whisper_silencer": "Sculk Dampener: Completely silences gunfire",
+  "gunsmiths_gadgetsn_gizmos.modifier.sculk_whisper_silencer.desc": "+60% Damage while sneaking without alerting enemies",
+
+  "item.gunsmiths_gadgetsn_gizmos.sculk_devourer_modifier": "Sculk Devourer Mechanism Modifier",
+  "gunsmiths_gadgetsn_gizmos.modifier.sculk_devourer": "Soul Feast: Devours experience of slain enemies",
+  "gunsmiths_gadgetsn_gizmos.modifier.sculk_devourer.desc": "Directly generates and reloads 1 bullet on kill",
+
+  "item.gunsmiths_gadgetsn_gizmos.shrieking_dread_modifier": "Shrieking Dread Bullet Modifier",
+  "gunsmiths_gadgetsn_gizmos.modifier.shrieking_dread": "Shrieker's Curse: Echoes a deafening shriek on impact",
+  "gunsmiths_gadgetsn_gizmos.modifier.shrieking_dread.desc": "Afflicts all nearby enemies with Darkness, Slowness II & Weakness II",
+
+  "item.gunsmiths_gadgetsn_gizmos.infinite_ammo_bag": "Infinite Ammo Bag",
+  "gunsmiths_gadgetsn_gizmos.tooltip.infinite_ammo_bag": "Bottomless Ammo Supply",
+  "gunsmiths_gadgetsn_gizmos.tooltip.infinite_ammo_bag.desc": "Provides infinite bullets for reloading without consuming inventory ammo",
+
+  "entity.gunsmiths_gadgetsn_gizmos.villager.cultist": "Occult Gunsmith",
+  "entity.gunsmiths_gadgetsn_gizmos.villager.gunsmith": "GunSmith"
 }

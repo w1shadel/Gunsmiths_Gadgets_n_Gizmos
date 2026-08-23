@@ -1,0 +1,13 @@
+{
+  "gives": {
+    "count": 1,
+    "id": "gunsmiths_gadgetsn_gizmos:piston_ramrod_modifier"
+  },
+  "max_uses": 3,
+  "reputation_discount": 0.05,
+  "wants": {
+    "count": 7,
+    "id": "minecraft:emerald"
+  },
+  "xp": 15
+}

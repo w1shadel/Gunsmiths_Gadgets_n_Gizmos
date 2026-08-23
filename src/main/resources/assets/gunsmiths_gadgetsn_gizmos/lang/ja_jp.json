@@ -6,7 +6,7 @@
   "item.gunsmiths_gadgetsn_gizmos.piston_ramrod_modifier": "ピストン装填ロッド改造モジュール",
   "item.gunsmiths_gadgetsn_gizmos.grappling_anchor_modifier": "グラップリング・アンカー改造モジュール",
   "item.gunsmiths_gadgetsn_gizmos.heavy_core_impact_modifier": "ヘビーコア・インパクト改造モジュール",
-  "item.gunsmiths_gadgetsn_gizmos.breeze_cyclone_modifier": "ブリーズ旋風改造モジュール",
+  "item.gunsmiths_gadgetsn_gizmos.breeze_cyclone_modifier": "旋風改造モジュール",
   "item.gunsmiths_gadgetsn_gizmos.ominous_chamber_modifier": "不吉な試練の薬室モジュール",
   "item.gunsmiths_gadgetsn_gizmos.town_bell_flare_modifier": "警鐘の照明弾モジュール",
   "item.gunsmiths_gadgetsn_gizmos.bloodbound_calamity_modifier": "禍神の重撃モジュール",
@@ -33,8 +33,8 @@
   "gunsmiths_gadgetsn_gizmos.modifier.bloodbound_calamity.cost": "射撃ごとに自身のHPをハート1個（2ダメージ）消費",
 
   "gunsmiths_gadgetsn_gizmos.modifier.unstable_overclock": "過給機構：射撃速度が限界を超えて跳ね上がる",
-  "gunsmiths_gadgetsn_gizmos.modifier.unstable_overclock.bonus": "+200% 連射速度（フルオート化）",
-  "gunsmiths_gadgetsn_gizmos.modifier.unstable_overclock.penalty": "+150% 反動 / 激しい集弾散布＆自ノックバック",
+  "gunsmiths_gadgetsn_gizmos.modifier.unstable_overclock.bonus": "+200% 連射速度",
+  "gunsmiths_gadgetsn_gizmos.modifier.unstable_overclock.penalty": "+150% 反動 / 激しい集弾散布と強い自ノックバック",
 
   "gunsmiths_gadgetsn_gizmos.modifier.reapers_gambit": "死神の呪縛：直撃時に致命的なソウル爆発を引き起こす",
   "gunsmiths_gadgetsn_gizmos.modifier.reapers_gambit.bonus": "直撃時：+300% ソウル爆発ダメージ",
@@ -42,5 +42,62 @@
 
   "gunsmiths_gadgetsn_gizmos.modifier.trial_of_greed": "強欲の試練：敵討伐時の戦利品を劇的に増加させる",
   "gunsmiths_gadgetsn_gizmos.modifier.trial_of_greed.bonus": "討伐モブのドロップアイテム・経験値が 4倍",
-  "gunsmiths_gadgetsn_gizmos.modifier.trial_of_greed.enrage": "射撃時、周囲の全モンスターが強化され一斉に襲いかかる"
+  "gunsmiths_gadgetsn_gizmos.modifier.trial_of_greed.enrage": "射撃時、周囲の全モンスターが強化され一斉に襲いかかる",
+
+  "item.gunsmiths_gadgetsn_gizmos.mastercrafted_trigger_modifier": "職人の調整済トリガーモジュール",
+  "gunsmiths_gadgetsn_gizmos.modifier.mastercrafted_trigger": "名工の手仕上げ：射撃反動と弾丸拡散を大幅に抑制",
+
+  "item.gunsmiths_gadgetsn_gizmos.merchant_bounty_modifier": "商人の強欲薬莢モジュール",
+  "gunsmiths_gadgetsn_gizmos.modifier.merchant_bounty": "強欲の弾丸：倒した敵がエメラルドを追加ドロップする",
+
+  "item.gunsmiths_gadgetsn_gizmos.unidentified_crate": "未鑑定のからくりパーツ箱",
+
+  "block.gunsmiths_gadgetsn_gizmos.cursed_altar": "呪印の銃工祭壇",
+
+  "item.gunsmiths_gadgetsn_gizmos.void_casing": "虚無の空薬莢",
+  "item.gunsmiths_gadgetsn_gizmos.soul_cinder": "魂の燃え殻",
+  "item.gunsmiths_gadgetsn_gizmos.cursed_brass_ingot": "呪印の真鍮インゴット",
+  "item.gunsmiths_gadgetsn_gizmos.coagulated_omen_blood": "凝固した呪血",
+  "item.gunsmiths_gadgetsn_gizmos.forbidden_blueprint": "禁忌の銃工設計図",
+
+  "item.gunsmiths_gadgetsn_gizmos.crimson_singularity_modifier": "深紅の特異点モジュール",
+  "gunsmiths_gadgetsn_gizmos.modifier.crimson_singularity": "昇華した禍撃：重力の影響を受けず、貫通力 +3 を得る",
+  "gunsmiths_gadgetsn_gizmos.modifier.crimson_singularity.desc": "飛翔距離1ブロックにつき +1.0 ダメージ / 敵討伐時にHP回復",
+  "gunsmiths_gadgetsn_gizmos.modifier.crimson_singularity.cost": "射撃ごとに自身のHPをハート半分（1ダメージ）消費",
+
+  "item.gunsmiths_gadgetsn_gizmos.clockwork_gatling_modifier": "時計仕掛けのガトリング機構モジュール",
+  "gunsmiths_gadgetsn_gizmos.modifier.clockwork_gatling": "安定化過給機構：レーザー精度の超連射ガトリング",
+  "gunsmiths_gadgetsn_gizmos.modifier.clockwork_gatling.desc": "+250% 連射速度 / 拡散なし・制御された極小反動",
+
+  "item.gunsmiths_gadgetsn_gizmos.reapers_tempest_modifier": "死神の鎌鼬モジュール",
+  "gunsmiths_gadgetsn_gizmos.modifier.reapers_tempest": "魂風の審判：直撃時に周囲を巻き込むソウル旋風大爆発",
+  "gunsmiths_gadgetsn_gizmos.modifier.reapers_tempest.desc": "周囲の敵全員を巻き込んで上空へ打ち上げつつ +250% ソウルダメージ",
+  "gunsmiths_gadgetsn_gizmos.modifier.reapers_tempest.curse": "弾を外すと自身に軽微なウィザー（2秒）が付与される",
+
+  "item.gunsmiths_gadgetsn_gizmos.midas_touch_chamber_modifier": "ミダスの黄金薬室モジュール",
+  "gunsmiths_gadgetsn_gizmos.modifier.midas_touch_chamber": "錬金の覇道：富と戦利品の極限獲得",
+  "gunsmiths_gadgetsn_gizmos.modifier.midas_touch_chamber.desc": "討伐モブのドロップが5倍 ＋ エメラルドを確定ドロップ / 敵を高速化させるが同時に攻撃力を激減",
+
+  "item.gunsmiths_gadgetsn_gizmos.echoing_sonic_core_modifier": "残響のソニック共鳴薬室モジュール",
+  "gunsmiths_gadgetsn_gizmos.modifier.echoing_sonic_core": "超音波共鳴：壁を貫通するウォーデンのソニックブームを放射",
+  "gunsmiths_gadgetsn_gizmos.modifier.echoing_sonic_core.desc": "地形・遮蔽物を完全に貫通し、壁の向こうの敵を吹き飛ばす",
+
+  "item.gunsmiths_gadgetsn_gizmos.sculk_whisper_silencer_modifier": "無響のスカルクサイレンサーモジュール",
+  "gunsmiths_gadgetsn_gizmos.modifier.sculk_whisper_silencer": "深淵の消音：銃声を完全に消去する",
+  "gunsmiths_gadgetsn_gizmos.modifier.sculk_whisper_silencer.desc": "スニーク射撃時、敵に気づかれず +60% の暗殺ダメージ",
+
+  "item.gunsmiths_gadgetsn_gizmos.sculk_devourer_modifier": "スカルク触媒の貪食機構モジュール",
+  "gunsmiths_gadgetsn_gizmos.modifier.sculk_devourer": "魂の捕食：倒した敵の経験値を弾丸へ変換",
+  "gunsmiths_gadgetsn_gizmos.modifier.sculk_devourer.desc": "敵討伐時にマガジンへ直接1発自動生成・即座装填",
+
+  "item.gunsmiths_gadgetsn_gizmos.shrieking_dread_modifier": "シュリーカーの呪詛弾頭モジュール",
+  "gunsmiths_gadgetsn_gizmos.modifier.shrieking_dread": "絶叫の呪縛：着弾時にシュリーカーの絶叫を響かせる",
+  "gunsmiths_gadgetsn_gizmos.modifier.shrieking_dread.desc": "周囲の敵全員に「暗闇」＋「移動低下II」＋「弱体化II」を付与",
+
+  "item.gunsmiths_gadgetsn_gizmos.infinite_ammo_bag": "無限弾薬バッグ",
+  "gunsmiths_gadgetsn_gizmos.tooltip.infinite_ammo_bag": "無限の弾薬供給源",
+  "gunsmiths_gadgetsn_gizmos.tooltip.infinite_ammo_bag.desc": "所持中、手持ちの弾丸を消費せずに何度でもリロード可能",
+
+  "entity.gunsmiths_gadgetsn_gizmos.villager.cultist": "異端の銃工",
+  "entity.gunsmiths_gadgetsn_gizmos.villager.gunsmith": "ガンスミス"
 }

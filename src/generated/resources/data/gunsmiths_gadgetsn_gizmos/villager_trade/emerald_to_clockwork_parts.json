@@ -1,0 +1,13 @@
+{
+  "gives": {
+    "count": 1,
+    "id": "irons_artifice:clockwork_components"
+  },
+  "max_uses": 4,
+  "reputation_discount": 0.05,
+  "wants": {
+    "count": 10,
+    "id": "minecraft:emerald"
+  },
+  "xp": 30
+}

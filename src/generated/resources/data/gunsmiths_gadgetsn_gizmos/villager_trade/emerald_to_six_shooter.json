@@ -1,0 +1,13 @@
+{
+  "gives": {
+    "count": 1,
+    "id": "irons_artifice:six_shooter"
+  },
+  "max_uses": 2,
+  "reputation_discount": 0.05,
+  "wants": {
+    "count": 18,
+    "id": "minecraft:emerald"
+  },
+  "xp": 30
+}

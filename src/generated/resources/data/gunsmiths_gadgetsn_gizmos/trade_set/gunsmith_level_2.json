@@ -1,0 +1,9 @@
+{
+  "amount": 2,
+  "trades": [
+    "gunsmiths_gadgetsn_gizmos:gunpowder_to_emerald",
+    "gunsmiths_gadgetsn_gizmos:redstone_to_emerald",
+    "gunsmiths_gadgetsn_gizmos:emerald_to_simple_parts",
+    "gunsmiths_gadgetsn_gizmos:emerald_to_gun_oil"
+  ]
+}

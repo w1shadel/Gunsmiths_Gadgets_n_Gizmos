@@ -1,6 +1,9 @@
 package com.maxwell.gunsmiths_gadgetsn_gizmos.registry;
 
 import com.maxwell.gunsmiths_gadgetsn_gizmos.GunsmithsGadgetsnGizmos;
+import com.maxwell.gunsmiths_gadgetsn_gizmos.item.AmmoPouchItem;
+import com.maxwell.gunsmiths_gadgetsn_gizmos.item.InfiniteAmmoBagItem;
+import com.maxwell.gunsmiths_gadgetsn_gizmos.item.UnidentifiedCrateItem;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.modifier.*;
 import io.redspace.irons_artifice.modifier.ModifierItem;
 import net.minecraft.world.item.Item;
@@ -52,6 +55,66 @@ public class ModItems {
             "trial_of_greed_modifier",
             properties -> new ModifierItem(properties.stacksTo(1), new TrialOfGreedModifier())
     );
+    public static final DeferredItem<ModifierItem> MASTERCRAFTED_TRIGGER_MODIFIER = ITEMS.registerItem(
+            "mastercrafted_trigger_modifier",
+            properties -> new ModifierItem(properties.stacksTo(1), new MastercraftedTriggerModifier())
+    );
+    public static final DeferredItem<ModifierItem> MERCHANT_BOUNTY_MODIFIER = ITEMS.registerItem(
+            "merchant_bounty_modifier",
+            properties -> new ModifierItem(properties.stacksTo(1), new MerchantBountyModifier())
+    );
+    public static final DeferredItem<Item> UNIDENTIFIED_CRATE = ITEMS.registerItem(
+            "unidentified_crate",
+            UnidentifiedCrateItem::new
+    );
+    public static final DeferredItem<ModifierItem> CRIMSON_SINGULARITY_MODIFIER = ITEMS.registerItem(
+            "crimson_singularity_modifier",
+            properties -> new ModifierItem(properties.stacksTo(1), new CrimsonSingularityModifier())
+    );
+    public static final DeferredItem<ModifierItem> CLOCKWORK_GATLING_MODIFIER = ITEMS.registerItem(
+            "clockwork_gatling_modifier",
+            properties -> new ModifierItem(properties.stacksTo(1), new ClockworkGatlingModifier())
+    );
+    public static final DeferredItem<ModifierItem> REAPERS_TEMPEST_MODIFIER = ITEMS.registerItem(
+            "reapers_tempest_modifier",
+            properties -> new ModifierItem(properties.stacksTo(1), new ReapersTempestModifier())
+    );
+    public static final DeferredItem<ModifierItem> MIDAS_TOUCH_CHAMBER_MODIFIER = ITEMS.registerItem(
+            "midas_touch_chamber_modifier",
+            properties -> new ModifierItem(properties.stacksTo(1), new MidasTouchChamberModifier())
+    );
+    public static final DeferredItem<ModifierItem> ECHOING_SONIC_CORE_MODIFIER = ITEMS.registerItem(
+            "echoing_sonic_core_modifier",
+            properties -> new ModifierItem(properties.stacksTo(1), new EchoingSonicCoreModifier())
+    );
+    public static final DeferredItem<ModifierItem> SCULK_WHISPER_SILENCER_MODIFIER = ITEMS.registerItem(
+            "sculk_whisper_silencer_modifier",
+            properties -> new ModifierItem(properties.stacksTo(1), new SculkWhisperSilencerModifier())
+    );
+    public static final DeferredItem<ModifierItem> SCULK_DEVOURER_MODIFIER = ITEMS.registerItem(
+            "sculk_devourer_modifier",
+            properties -> new ModifierItem(properties.stacksTo(1), new SculkDevourerModifier())
+    );
+    public static final DeferredItem<ModifierItem> SHRIEKING_DREAD_MODIFIER = ITEMS.registerItem(
+            "shrieking_dread_modifier",
+            properties -> new ModifierItem(properties.stacksTo(1), new ShriekingDreadModifier())
+    );
+    public static final DeferredItem<Item> INFINITE_AMMO_BAG = ITEMS.registerItem(
+            "infinite_ammo_bag",
+            InfiniteAmmoBagItem::new
+    );
+    public static final DeferredItem<Item> SILVER_BULLET = ITEMS.registerSimpleItem("silver_bullet");
+    public static final DeferredItem<Item> AP_BULLET = ITEMS.registerSimpleItem("ap_bullet");
+    public static final DeferredItem<Item> AMMO_POUCH = ITEMS.registerItem(
+            "ammo_pouch",
+            AmmoPouchItem::new
+    );
+    public static final DeferredItem<Item> GUNSMITH_CHASSIS_KIT = ITEMS.registerSimpleItem("gunsmith_chassis_kit");
+    public static final DeferredItem<Item> VOID_CASING = ITEMS.registerSimpleItem("void_casing");
+    public static final DeferredItem<Item> SOUL_CINDER = ITEMS.registerSimpleItem("soul_cinder");
+    public static final DeferredItem<Item> CURSED_BRASS_INGOT = ITEMS.registerSimpleItem("cursed_brass_ingot");
+    public static final DeferredItem<Item> COAGULATED_OMEN_BLOOD = ITEMS.registerSimpleItem("coagulated_omen_blood");
+    public static final DeferredItem<Item> FORBIDDEN_BLUEPRINT = ITEMS.registerSimpleItem("forbidden_blueprint");
 
     public static void register(IEventBus bus) {
         ITEMS.register(bus);

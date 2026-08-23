@@ -1,0 +1,13 @@
+{
+  "gives": {
+    "count": 10,
+    "id": "minecraft:emerald"
+  },
+  "max_uses": 4,
+  "reputation_discount": 0.05,
+  "wants": {
+    "count": 1,
+    "id": "minecraft:netherite_scrap"
+  },
+  "xp": 30
+}

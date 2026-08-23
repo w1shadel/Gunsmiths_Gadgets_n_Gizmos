@@ -1,0 +1,13 @@
+{
+  "gives": {
+    "count": 1,
+    "id": "irons_artifice:steel_core_modifier"
+  },
+  "max_uses": 4,
+  "reputation_discount": 0.05,
+  "wants": {
+    "count": 6,
+    "id": "minecraft:emerald"
+  },
+  "xp": 10
+}

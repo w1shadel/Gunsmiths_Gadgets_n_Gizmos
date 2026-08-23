@@ -1,0 +1,10 @@
+{
+  "amount": 2,
+  "trades": [
+    "gunsmiths_gadgetsn_gizmos:gold_to_emerald",
+    "gunsmiths_gadgetsn_gizmos:blaze_powder_to_emerald",
+    "gunsmiths_gadgetsn_gizmos:emerald_to_flare_mod",
+    "gunsmiths_gadgetsn_gizmos:emerald_to_steel_core",
+    "gunsmiths_gadgetsn_gizmos:emerald_to_unidentified_crate"
+  ]
+}

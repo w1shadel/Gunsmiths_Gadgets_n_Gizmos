@@ -1,0 +1,10 @@
+{
+  "amount": 2,
+  "trades": [
+    "gunsmiths_gadgetsn_gizmos:netherite_scrap_to_emerald",
+    "gunsmiths_gadgetsn_gizmos:emerald_to_six_shooter",
+    "gunsmiths_gadgetsn_gizmos:emerald_to_clockwork_parts",
+    "gunsmiths_gadgetsn_gizmos:emerald_to_heavy_core_mod",
+    "gunsmiths_gadgetsn_gizmos:emerald_to_master_trigger"
+  ]
+}

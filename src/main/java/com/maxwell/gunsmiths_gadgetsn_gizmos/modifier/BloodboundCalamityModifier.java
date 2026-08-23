@@ -1,5 +1,6 @@
 package com.maxwell.gunsmiths_gadgetsn_gizmos.modifier;
 
+import com.maxwell.gunsmiths_gadgetsn_gizmos.GunsmithsGadgetsnGizmos;
 import io.redspace.irons_artifice.api.GunShootEvent;
 import io.redspace.irons_artifice.client.particle.ColorTransitionParticleOption;
 import io.redspace.irons_artifice.data.ShotComponentMap;
@@ -15,7 +16,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 
 import java.util.function.Consumer;
 
-@EventBusSubscriber(modid = "gunsmiths_gadgetsn_gizmos")
+@EventBusSubscriber(modid = GunsmithsGadgetsnGizmos.MODID)
 public final class BloodboundCalamityModifier implements GunModifier {
     private static final String MODIFIER_TAG = "gunsmiths_gadgetsn_gizmos:bloodbound_calamity";
 
