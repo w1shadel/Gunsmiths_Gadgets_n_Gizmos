@@ -18,7 +18,9 @@ public class ModMenuTypes {
 
     public static void register(IEventBus bus) {
         MENUS.register(bus);
-    }    public static final DeferredHolder<MenuType<?>, MenuType<CursedAltarMenu>> CURSED_ALTAR_MENU =
+    }
+
+    public static final DeferredHolder<MenuType<?>, MenuType<CursedAltarMenu>> CURSED_ALTAR_MENU =
             MENUS.register("cursed_altar",
                     () -> IMenuTypeExtension.create(CursedAltarMenu::new)
             );
@@ -30,6 +32,5 @@ public class ModMenuTypes {
             MENUS.register("ammo_pouch",
                     () -> new MenuType<>(AmmoPouchMenu::new, FeatureFlags.DEFAULT_FLAGS)
             );
-
 
 }

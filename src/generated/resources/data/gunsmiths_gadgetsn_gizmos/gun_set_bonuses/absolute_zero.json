@@ -1,0 +1,26 @@
+{
+  "bonuses": {
+    "aura_particle": {
+      "type": "minecraft:snowflake"
+    },
+    "bullet_speed_multiplier": 0.2,
+    "damage_multiplier": 0.4,
+    "muzzle_flash_color": "#A8E6FF",
+    "recoil_multiplier": -0.3,
+    "spread_add": -1.0,
+    "trail_color": "#A8E6FF"
+  },
+  "custom_effects": [
+    {
+      "type": "gunsmiths_gadgetsn_gizmos:absolute_zero",
+      "radius": 5.0
+    }
+  ],
+  "description": "gunsmiths_gadgetsn_gizmos.set_bonus.absolute_zero.desc",
+  "name": "gunsmiths_gadgetsn_gizmos.set_bonus.absolute_zero",
+  "required_modifiers": [
+    "irons_artifice:frozen_jacket_modifier",
+    "irons_artifice:singularity_charge_modifier",
+    "irons_artifice:trick_bullet_modifier"
+  ]
+}

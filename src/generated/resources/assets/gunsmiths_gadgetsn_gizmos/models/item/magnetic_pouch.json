@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "gunsmiths_gadgetsn_gizmos:item/magnetic_pouch"
+  }
+}

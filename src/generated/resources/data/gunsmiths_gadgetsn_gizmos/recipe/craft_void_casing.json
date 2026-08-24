@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "irons_artifice:blackpowder"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "O": {
+      "item": "minecraft:crying_obsidian"
+    }
+  },
+  "pattern": [
+    " I ",
+    "IBI",
+    " O "
+  ],
+  "result": {
+    "count": 4,
+    "id": "gunsmiths_gadgetsn_gizmos:void_casing"
+  }
+}

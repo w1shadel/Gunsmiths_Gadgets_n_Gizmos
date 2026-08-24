@@ -1,9 +1,10 @@
 package com.maxwell.gunsmiths_gadgetsn_gizmos.modifier;
 
 import com.maxwell.gunsmiths_gadgetsn_gizmos.GunsmithsGadgetsnGizmos;
+import com.maxwell.gunsmiths_gadgetsn_gizmos.registry.ModItems;
+import com.maxwell.gunsmiths_gadgetsn_gizmos.util.ModifierHelper;
 import io.redspace.irons_artifice.api.GunShootEvent;
 import io.redspace.irons_artifice.client.particle.ColorTransitionParticleOption;
-import io.redspace.irons_artifice.damage.DamageSources;
 import io.redspace.irons_artifice.data.ShotComponentMap;
 import io.redspace.irons_artifice.data.ShotComponents;
 import io.redspace.irons_artifice.modifier.GunModifier;
@@ -31,6 +32,9 @@ import java.util.function.Consumer;
 public final class TrialOfGreedModifier implements GunModifier {
     @SubscribeEvent
     public static void onShoot(GunShootEvent.Post event) {
+        if (!ModifierHelper.hasModifier(event.getShotProfile(), ModItems.TRIAL_OF_GREED_MODIFIER.get())) {
+            return;
+        }
         LivingEntity shooter = event.getEntity();
         if (!(shooter.level() instanceof ServerLevel level)) return;
         AABB enrageArea = shooter.getBoundingBox().inflate(16.0);
@@ -47,16 +51,16 @@ public final class TrialOfGreedModifier implements GunModifier {
 
     @SubscribeEvent
     public static void onMobDrops(LivingDropsEvent event) {
-        if (event.getSource().is(DamageSources.BULLET_DAMAGE_TYPE)) {
-            List<ItemEntity> extraDrops = new ArrayList<>();
-            for (ItemEntity drop : event.getDrops()) {
-                for (int i = 0; i < 3; i++) {
-                    ItemEntity copy = new ItemEntity(drop.level(), drop.getX(), drop.getY(), drop.getZ(),
-                            drop.getItem().copy());
-                    extraDrops.add(copy);
+        if (event.getSource().getDirectEntity() instanceof io.redspace.irons_artifice.entity.Bullet bullet) {
+            if (ModifierHelper.hasModifier(bullet.getProfile().itemStack(), ModItems.TRIAL_OF_GREED_MODIFIER.get())) {
+                List<ItemEntity> extraDrops = new ArrayList<>();
+                for (ItemEntity drop : event.getDrops()) {
+                    for (int i = 0; i < 3; i++) {
+                        extraDrops.add(new ItemEntity(drop.level(), drop.getX(), drop.getY(), drop.getZ(), drop.getItem().copy()));
+                    }
                 }
+                event.getDrops().addAll(extraDrops);
             }
-            event.getDrops().addAll(extraDrops);
         }
     }
 

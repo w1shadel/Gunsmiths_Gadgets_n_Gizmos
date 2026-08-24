@@ -1,8 +1,9 @@
 package com.maxwell.gunsmiths_gadgetsn_gizmos.modifier;
 
 import com.maxwell.gunsmiths_gadgetsn_gizmos.GunsmithsGadgetsnGizmos;
+import com.maxwell.gunsmiths_gadgetsn_gizmos.registry.ModItems;
+import com.maxwell.gunsmiths_gadgetsn_gizmos.util.ModifierHelper;
 import io.redspace.irons_artifice.client.particle.ColorTransitionParticleOption;
-import io.redspace.irons_artifice.damage.DamageSources;
 import io.redspace.irons_artifice.data.ShotComponentMap;
 import io.redspace.irons_artifice.data.ShotComponents;
 import io.redspace.irons_artifice.item.GunItem;
@@ -25,17 +26,21 @@ import java.util.function.Consumer;
 public final class SculkDevourerModifier implements GunModifier {
     @SubscribeEvent
     public static void onKill(LivingDeathEvent event) {
-        if (event.getSource().is(DamageSources.BULLET_DAMAGE_TYPE) && event.getSource().getEntity() instanceof LivingEntity killer) {
-            ItemStack gun = killer.getMainHandItem();
-            if (gun.getItem() instanceof GunItem gunItem) {
-                MagazineContents mag = GunItem.getMagazine(gun);
-                if (mag.count() < gunItem.magazineCapacity()) {
-                    GunItem.setMagazine(gun, mag.with(mag.count() + 1));
-                    killer.level().playSound(null, killer.getX(), killer.getY(), killer.getZ(),
-                            SoundEvents.SCULK_CATALYST_BLOOM, SoundSource.PLAYERS, 1.0F, 1.5F);
-                    event.getEntity().level().addParticle(ParticleTypes.SCULK_SOUL,
-                            event.getEntity().getX(), event.getEntity().getY() + 1.0, event.getEntity().getZ(),
-                            0, 0.05, 0);
+        if (event.getSource().getDirectEntity() instanceof io.redspace.irons_artifice.entity.Bullet bullet) {
+            if (ModifierHelper.hasModifier(bullet.getProfile().itemStack(), ModItems.SCULK_DEVOURER_MODIFIER.get())) {
+                if (event.getSource().getEntity() instanceof LivingEntity killer) {
+                    ItemStack gun = killer.getMainHandItem();
+                    if (gun.getItem() instanceof GunItem gunItem) {
+                        MagazineContents mag = GunItem.getMagazine(gun);
+                        if (mag.count() < gunItem.magazineCapacity()) {
+                            GunItem.setMagazine(gun, mag.with(mag.count() + 1));
+                            killer.level().playSound(null, killer.getX(), killer.getY(), killer.getZ(),
+                                    SoundEvents.SCULK_CATALYST_BLOOM, SoundSource.PLAYERS, 1.0F, 1.5F);
+                            event.getEntity().level().addParticle(ParticleTypes.SCULK_SOUL,
+                                    event.getEntity().getX(), event.getEntity().getY() + 1.0, event.getEntity().getZ(),
+                                    0, 0.05, 0);
+                        }
+                    }
                 }
             }
         }

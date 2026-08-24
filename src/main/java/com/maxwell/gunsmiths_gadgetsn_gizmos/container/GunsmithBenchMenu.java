@@ -28,15 +28,10 @@ public class GunsmithBenchMenu extends AbstractContainerMenu {
     public static final int REQUIRED_PARTS_COUNT = 8;
     private final ContainerLevelAccess access;
     private final ResultContainer resultContainer = new ResultContainer();
+
     public GunsmithBenchMenu(int containerId, Inventory playerInv) {
         this(containerId, playerInv, ContainerLevelAccess.NULL);
-    }    private final SimpleContainer inputContainer = new SimpleContainer(3) {
-        @Override
-        public void setChanged() {
-            super.setChanged();
-            GunsmithBenchMenu.this.slotsChanged(this);
-        }
-    };
+    }
 
     public GunsmithBenchMenu(int containerId, Inventory playerInv, ContainerLevelAccess access) {
         super(ModMenuTypes.GUNSMITH_BENCH_MENU.get(), containerId);
@@ -79,7 +74,13 @@ public class GunsmithBenchMenu extends AbstractContainerMenu {
         });
         addPlayerInventory(playerInv);
         addPlayerHotbar(playerInv);
-    }
+    }    private final SimpleContainer inputContainer = new SimpleContainer(3) {
+        @Override
+        public void setChanged() {
+            super.setChanged();
+            GunsmithBenchMenu.this.slotsChanged(this);
+        }
+    };
 
     @Override
     public void slotsChanged(@NotNull Container container) {

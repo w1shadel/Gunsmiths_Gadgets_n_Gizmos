@@ -1,0 +1,22 @@
+{
+  "bonuses": {
+    "aura_particle": {
+      "type": "minecraft:crimson_spore"
+    },
+    "bullet_speed_multiplier": 0.4,
+    "damage_multiplier": 0.8,
+    "muzzle_flash_color": "#FF0033",
+    "piercing_add": 3,
+    "recoil_multiplier": -0.5,
+    "spread_add": -3.0,
+    "trail_color": "#FF0033"
+  },
+  "description": "gunsmiths_gadgetsn_gizmos.set_bonus.crimson_overlord.desc",
+  "name": "gunsmiths_gadgetsn_gizmos.set_bonus.crimson_overlord",
+  "required_modifiers": [
+    "gunsmiths_gadgetsn_gizmos:bloodbound_calamity_modifier",
+    "gunsmiths_gadgetsn_gizmos:crimson_singularity_modifier",
+    "gunsmiths_gadgetsn_gizmos:heavy_core_impact_modifier",
+    "irons_artifice:steel_core_modifier"
+  ]
+}

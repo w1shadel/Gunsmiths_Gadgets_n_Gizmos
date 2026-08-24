@@ -1,6 +1,8 @@
 package com.maxwell.gunsmiths_gadgetsn_gizmos.modifier;
 
 import com.maxwell.gunsmiths_gadgetsn_gizmos.GunsmithsGadgetsnGizmos;
+import com.maxwell.gunsmiths_gadgetsn_gizmos.registry.ModItems;
+import com.maxwell.gunsmiths_gadgetsn_gizmos.util.ModifierHelper;
 import io.redspace.irons_artifice.api.GunShootEvent;
 import io.redspace.irons_artifice.client.particle.ColorTransitionParticleOption;
 import io.redspace.irons_artifice.data.ShotComponentMap;
@@ -10,7 +12,6 @@ import io.redspace.irons_artifice.modifier.GunModifier;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.LivingEntity;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 
@@ -22,10 +23,8 @@ public final class BloodboundCalamityModifier implements GunModifier {
 
     @SubscribeEvent
     public static void onGunShoot(GunShootEvent.Pre event) {
-        LivingEntity shooter = event.getEntity();
-        if (event.getShotProfile().components().has(ShotComponents.PIERCING)
-                && event.getShotProfile().itemStack().getHoverName().getString() != null) {
-            shooter.hurtServer((ServerLevel) event.getEntity().level(), shooter.damageSources().magic(), 2.0F);
+        if (ModifierHelper.hasModifier(event.getShotProfile(), ModItems.BLOODBOUND_CALAMITY_MODIFIER.get())) {
+            event.getEntity().hurtServer((ServerLevel) event.getEntity().level(), event.getEntity().damageSources().magic(), 2.0F);
         }
     }
 

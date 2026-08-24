@@ -10,9 +10,6 @@ import net.minecraft.world.item.ItemStack;
 import org.jspecify.annotations.Nullable;
 
 public class AmmoManager {
-    /**
-     * 該当ItemStackのAmmoTypeを取得（弾薬でなければnull）
-     */
     public static @Nullable AmmoType findAmmoType(ItemStack stack) {
         if (stack.isEmpty()) return null;
         for (AmmoType type : ModAmmoTypes.REGISTRY) {
@@ -27,9 +24,6 @@ public class AmmoManager {
         return findAmmoType(stack) != null;
     }
 
-    /**
-     * プレイヤーの総残弾数を計算（インベントリ直持ち ＋ 全IAmmoContainer内）
-     */
     public static int countPlayerAmmo(Player player) {
         if (InfiniteAmmoBagItem.hasInfiniteBag(player)) {
             return 9999;
@@ -50,9 +44,6 @@ public class AmmoManager {
         return total;
     }
 
-    /**
-     * 装填優先度に従って弾薬タイプを決定（①オフハンド ➔ ②IAmmoContainer内 ➔ ③インベントリ直持ち ➔ ④通常弾）
-     */
     public static AmmoType getActiveAmmoType(Player player) {
         AmmoType offhand = findAmmoType(player.getOffhandItem());
         if (offhand != null) return offhand;
@@ -73,9 +64,6 @@ public class AmmoManager {
         return ModAmmoTypes.DEFAULT.get();
     }
 
-    /**
-     * 弾薬を優先度順（IAmmoContainer内 ➔ インベントリ直持ち）に消費し、銃に弾種を記録
-     */
     public static void consumeAmmo(Player player, int amount, ItemStack gun) {
         if (InfiniteAmmoBagItem.hasInfiniteBag(player)) {
             return;

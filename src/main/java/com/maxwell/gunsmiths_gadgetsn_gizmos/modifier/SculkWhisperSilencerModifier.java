@@ -1,12 +1,13 @@
 package com.maxwell.gunsmiths_gadgetsn_gizmos.modifier;
 
 import com.maxwell.gunsmiths_gadgetsn_gizmos.GunsmithsGadgetsnGizmos;
+import com.maxwell.gunsmiths_gadgetsn_gizmos.registry.ModItems;
+import com.maxwell.gunsmiths_gadgetsn_gizmos.util.ModifierHelper;
 import io.redspace.irons_artifice.api.ComposeShotEvent;
 import io.redspace.irons_artifice.client.sounds.GunShotSoundSettings;
 import io.redspace.irons_artifice.data.ShotComponentMap;
 import io.redspace.irons_artifice.data.ShotComponents;
 import io.redspace.irons_artifice.data.ValueModifier;
-import io.redspace.irons_artifice.gun.ShotProfile;
 import io.redspace.irons_artifice.modifier.GunModifier;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -22,11 +23,12 @@ public final class SculkWhisperSilencerModifier implements GunModifier {
 
     @SubscribeEvent
     public static void onComposeShot(ComposeShotEvent event) {
-        if (event.getEntity().isCrouching()) {
-            ShotProfile profile = event.getShotProfile();
-            profile.get(ShotComponents.DAMAGE).addModifier(new ValueModifier(
-                    SNEAK_DAMAGE_BONUS, ValueModifier.Operation.MULTIPLY_TOTAL, ValueModifier.Type.BENEFICIAL
-            ));
+        if (ModifierHelper.hasModifier(event.getShotProfile(), ModItems.SCULK_WHISPER_SILENCER_MODIFIER.get())) {
+            if (event.getEntity().isCrouching()) {
+                event.getShotProfile().get(ShotComponents.DAMAGE).addModifier(new ValueModifier(
+                        SNEAK_DAMAGE_BONUS, ValueModifier.Operation.MULTIPLY_TOTAL, ValueModifier.Type.BENEFICIAL
+                ));
+            }
         }
     }
 

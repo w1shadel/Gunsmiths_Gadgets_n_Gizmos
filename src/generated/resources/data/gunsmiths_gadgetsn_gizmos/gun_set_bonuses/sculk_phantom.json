@@ -1,0 +1,21 @@
+{
+  "bonuses": {
+    "aura_particle": {
+      "type": "minecraft:sculk_soul"
+    },
+    "bullet_speed_multiplier": 0.3,
+    "damage_multiplier": 0.5,
+    "muzzle_flash_color": "#00FFFF",
+    "piercing_add": 2,
+    "recoil_multiplier": -0.4,
+    "spread_add": -2.0,
+    "trail_color": "#00FFFF"
+  },
+  "description": "gunsmiths_gadgetsn_gizmos.set_bonus.sculk_phantom.desc",
+  "name": "gunsmiths_gadgetsn_gizmos.set_bonus.sculk_phantom",
+  "required_modifiers": [
+    "gunsmiths_gadgetsn_gizmos:sculk_whisper_silencer_modifier",
+    "gunsmiths_gadgetsn_gizmos:echoing_sonic_core_modifier",
+    "gunsmiths_gadgetsn_gizmos:sculk_devourer_modifier"
+  ]
+}

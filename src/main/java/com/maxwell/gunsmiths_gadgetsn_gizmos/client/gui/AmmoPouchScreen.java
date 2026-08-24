@@ -24,8 +24,7 @@ public class AmmoPouchScreen extends AbstractContainerScreen<AmmoPouchMenu> {
         int xo = (this.width - this.imageWidth) / 2;
         int yo = (this.height - this.imageHeight) / 2;
         graphics.blit(RenderPipelines.GUI_TEXTURED, BG_TEXTURE, xo, yo, 0.0F, 0.0F, this.imageWidth, this.imageHeight, 256, 256);
-        for (int i = 0; i < this.menu.containerSize; i++) {
-            Slot slot = this.menu.slots.get(i);
+        for (Slot slot : this.menu.slots) {
             graphics.blit(
                     RenderPipelines.GUI_TEXTURED,
                     SLOT_TEXTURE,

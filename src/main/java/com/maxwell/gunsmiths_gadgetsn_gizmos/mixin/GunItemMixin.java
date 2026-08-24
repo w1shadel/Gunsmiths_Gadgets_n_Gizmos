@@ -27,5 +27,17 @@ public class GunItemMixin {
                         .withStyle(ChatFormatting.AQUA));
             }
         }
+        var bonuses = com.maxwell.gunsmiths_gadgetsn_gizmos.api.synergy.GunSetBonusManager.getMatchingBonuses(itemStack);
+        if (!bonuses.isEmpty()) {
+            builder.accept(Component.empty());
+            for (var bonus : bonuses) {
+                builder.accept(Component.literal("★ ")
+                        .append(Component.translatable(bonus.nameKey()))
+                        .withStyle(ChatFormatting.GREEN, ChatFormatting.BOLD));
+                builder.accept(Component.literal("  ")
+                        .append(Component.translatable(bonus.descKey()))
+                        .withStyle(ChatFormatting.DARK_GREEN));
+            }
+        }
     }
 }

@@ -20,9 +20,6 @@ public class InfiniteAmmoBagItem extends Item {
         );
     }
 
-    /**
-     * プレイヤーのインベントリにこのバッグが存在するか判定するヘルパー
-     */
     public static boolean hasInfiniteBag(Player player) {
         for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
             ItemStack stack = player.getInventory().getItem(i);

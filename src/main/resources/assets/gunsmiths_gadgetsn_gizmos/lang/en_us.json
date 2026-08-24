@@ -1,7 +1,37 @@
 {
   "itemGroup.gunsmiths_gadgetsn_gizmos": "Gunsmith's Gadgets 'n Gizmos",
 
+  "block.gunsmiths_gadgetsn_gizmos.gunsmith_bench": "Gunsmith Bench",
+  "block.gunsmiths_gadgetsn_gizmos.cursed_altar": "Cursed Gunsmith Altar",
+
+  "container.gunsmiths_gadgetsn_gizmos.gunsmith_bench": "Gunsmith Bench (Slot Expansion)",
+  "container.gunsmiths_gadgetsn_gizmos.cursed_altar": "Cursed Altar",
+  "gui.gunsmiths_gadgetsn_gizmos.cursed_altar": "Cursed Altar Fusion",
+
+  "entity.minecraft.villager.gunsmiths_gadgetsn_gizmos.gunsmith": "Gunsmith",
+  "entity.gunsmiths_gadgetsn_gizmos.villager.gunsmith": "Gunsmith",
+  "entity.minecraft.villager.gunsmiths_gadgetsn_gizmos.cultist": "Occult Gunsmith",
+  "entity.gunsmiths_gadgetsn_gizmos.villager.cultist": "Occult Gunsmith",
+
+  "item.gunsmiths_gadgetsn_gizmos.gunsmith_chassis_kit": "Gunsmith's Chassis Upgrade Kit",
   "item.gunsmiths_gadgetsn_gizmos.ominous_clockwork_core": "Ominous Clockwork Core",
+  "item.gunsmiths_gadgetsn_gizmos.void_casing": "Void Bullet Casing",
+  "item.gunsmiths_gadgetsn_gizmos.soul_cinder": "Soul Cinder",
+  "item.gunsmiths_gadgetsn_gizmos.cursed_brass_ingot": "Cursed Brass Ingot",
+  "item.gunsmiths_gadgetsn_gizmos.coagulated_omen_blood": "Coagulated Omen Blood",
+  "item.gunsmiths_gadgetsn_gizmos.forbidden_blueprint": "Forbidden Gunsmith Blueprint",
+  "item.gunsmiths_gadgetsn_gizmos.unidentified_crate": "Unidentified Gunsmith Crate",
+  "item.gunsmiths_gadgetsn_gizmos.infinite_ammo_bag": "Infinite Ammo Bag",
+
+  "item.gunsmiths_gadgetsn_gizmos.silver_bullet": "Silver Bullet",
+  "item.gunsmiths_gadgetsn_gizmos.ap_bullet": "Armor-Piercing AP Bullet",
+  "ammo.gunsmiths_gadgetsn_gizmos.default": "Standard Bullet",
+  "ammo.gunsmiths_gadgetsn_gizmos.silver": "Silver Bullet",
+  "ammo.gunsmiths_gadgetsn_gizmos.armor_piercing": "Armor-Piercing Bullet",
+
+  "item.gunsmiths_gadgetsn_gizmos.ammo_pouch": "Ammo Pouch",
+  "gunsmiths_gadgetsn_gizmos.tooltip.ammo_pouch": "Tactical Ammo Pocket",
+  "gunsmiths_gadgetsn_gizmos.tooltip.ammo_pouch.desc": "Stores specialized ammunition; automatically reloads priority ammo",
 
   "item.gunsmiths_gadgetsn_gizmos.piston_ramrod_modifier": "Piston Ramrod Modifier",
   "item.gunsmiths_gadgetsn_gizmos.grappling_anchor_modifier": "Grappling Anchor Modifier",
@@ -13,91 +43,113 @@
   "item.gunsmiths_gadgetsn_gizmos.unstable_overclock_modifier": "Unstable Overclock Modifier",
   "item.gunsmiths_gadgetsn_gizmos.reapers_gambit_modifier": "Reaper's Gambit Modifier",
   "item.gunsmiths_gadgetsn_gizmos.trial_of_greed_modifier": "Trial of Greed Modifier",
+  "item.gunsmiths_gadgetsn_gizmos.mastercrafted_trigger_modifier": "Mastercrafted Fine Trigger Modifier",
+  "item.gunsmiths_gadgetsn_gizmos.merchant_bounty_modifier": "Merchant's Bounty Modifier",
 
   "gunsmiths_gadgetsn_gizmos.modifier.grappling_anchor": "Pulls the shooter towards the impacted block",
-
   "gunsmiths_gadgetsn_gizmos.modifier.heavy_core_impact": "+%s Damage per block of distance traveled",
   "gunsmiths_gadgetsn_gizmos.modifier.heavy_core_impact.desc_bonus": "+1.5 Knockback",
   "gunsmiths_gadgetsn_gizmos.modifier.heavy_core_impact.desc_penalty": "-15% Bullet Speed",
-
   "gunsmiths_gadgetsn_gizmos.modifier.breeze_cyclone": "Creates a gust burst on impact, launching targets upwards",
   "gunsmiths_gadgetsn_gizmos.modifier.rocket_jump_capable": "Enables Rocket Jumping when fired in mid-air",
-
   "gunsmiths_gadgetsn_gizmos.modifier.ominous_chamber": "Inflicts random trial afflictions on hit",
   "gunsmiths_gadgetsn_gizmos.modifier.ominous_chamber.bonus": "+25% Damage",
-
   "gunsmiths_gadgetsn_gizmos.modifier.town_bell_flare": "Rings a warning bell on impact: Highlights nearby enemies and orders villagers to take shelter",
-
   "gunsmiths_gadgetsn_gizmos.modifier.bloodbound_calamity": "Calamity Shot: Absolute linear trajectory with +2 Piercing",
   "gunsmiths_gadgetsn_gizmos.modifier.bloodbound_calamity.damage": "+120% Damage",
   "gunsmiths_gadgetsn_gizmos.modifier.bloodbound_calamity.cost": "Consumes 1 Heart of HP on each shot",
-
   "gunsmiths_gadgetsn_gizmos.modifier.unstable_overclock": "Supercharged Mechanism: Extremely high fire rate",
   "gunsmiths_gadgetsn_gizmos.modifier.unstable_overclock.bonus": "+200% Fire Rate (Full-Auto)",
   "gunsmiths_gadgetsn_gizmos.modifier.unstable_overclock.penalty": "+150% Recoil / Massive Spread & Blowback",
-
   "gunsmiths_gadgetsn_gizmos.modifier.reapers_gambit": "Reaper's Curse: Fatal direct hit with soul burst",
   "gunsmiths_gadgetsn_gizmos.modifier.reapers_gambit.bonus": "Direct Hit: +300% Soul Explosion Damage",
   "gunsmiths_gadgetsn_gizmos.modifier.reapers_gambit.curse": "Missing shot inflicts Wither II & Darkness on self",
-
   "gunsmiths_gadgetsn_gizmos.modifier.trial_of_greed": "Ominous Plunder: Greatly multiplies spoils of battle",
   "gunsmiths_gadgetsn_gizmos.modifier.trial_of_greed.bonus": "Slain Mobs drop 4x Loot & EXP",
   "gunsmiths_gadgetsn_gizmos.modifier.trial_of_greed.enrage": "Firing enrages and empowers all nearby monsters",
-
-  "item.gunsmiths_gadgetsn_gizmos.mastercrafted_trigger_modifier": "Mastercrafted Fine Trigger Modifier",
   "gunsmiths_gadgetsn_gizmos.modifier.mastercrafted_trigger": "Masterwork tuning: Drastically improves stability and precision",
-
-  "item.gunsmiths_gadgetsn_gizmos.merchant_bounty_modifier": "Merchant's Bounty Modifier",
   "gunsmiths_gadgetsn_gizmos.modifier.merchant_bounty": "Greed Shot: Slain enemies drop emeralds",
 
-  "item.gunsmiths_gadgetsn_gizmos.unidentified_crate": "Unidentified Gunsmith Crate",
-
-  "block.gunsmiths_gadgetsn_gizmos.cursed_altar": "Cursed Gunsmith Altar",
-
-  "item.gunsmiths_gadgetsn_gizmos.void_casing": "Void Bullet Casing",
-  "item.gunsmiths_gadgetsn_gizmos.soul_cinder": "Soul Cinder",
-  "item.gunsmiths_gadgetsn_gizmos.cursed_brass_ingot": "Cursed Brass Ingot",
-  "item.gunsmiths_gadgetsn_gizmos.coagulated_omen_blood": "Coagulated Omen Blood",
-  "item.gunsmiths_gadgetsn_gizmos.forbidden_blueprint": "Forbidden Gunsmith Blueprint",
+  "item.gunsmiths_gadgetsn_gizmos.echoing_sonic_core_modifier": "Echoing Sonic Core Modifier",
+  "gunsmiths_gadgetsn_gizmos.modifier.echoing_sonic_core": "Sonic Resonance: Emits Warden's Sonic Boom through walls",
+  "gunsmiths_gadgetsn_gizmos.modifier.echoing_sonic_core.desc": "Penetrates solid terrain and blasts enemies behind cover",
+  "item.gunsmiths_gadgetsn_gizmos.sculk_whisper_silencer_modifier": "Sculk Whisper Silencer Modifier",
+  "gunsmiths_gadgetsn_gizmos.modifier.sculk_whisper_silencer": "Sculk Dampener: Completely silences gunfire",
+  "gunsmiths_gadgetsn_gizmos.modifier.sculk_whisper_silencer.desc": "+60% Damage while sneaking without alerting enemies",
+  "item.gunsmiths_gadgetsn_gizmos.sculk_devourer_modifier": "Sculk Devourer Mechanism Modifier",
+  "gunsmiths_gadgetsn_gizmos.modifier.sculk_devourer": "Soul Feast: Devours experience of slain enemies",
+  "gunsmiths_gadgetsn_gizmos.modifier.sculk_devourer.desc": "Directly generates and reloads 1 bullet on kill",
+  "item.gunsmiths_gadgetsn_gizmos.shrieking_dread_modifier": "Shrieking Dread Bullet Modifier",
+  "gunsmiths_gadgetsn_gizmos.modifier.shrieking_dread": "Shrieker's Curse: Echoes a deafening shriek on impact",
+  "gunsmiths_gadgetsn_gizmos.modifier.shrieking_dread.desc": "Afflicts all nearby enemies with Darkness, Slowness II & Weakness II",
 
   "item.gunsmiths_gadgetsn_gizmos.crimson_singularity_modifier": "Crimson Singularity Modifier",
   "gunsmiths_gadgetsn_gizmos.modifier.crimson_singularity": "Refined Calamity: Absolute linear shot with +3 Piercing",
   "gunsmiths_gadgetsn_gizmos.modifier.crimson_singularity.desc": "+1.0 Damage per block of distance / Heals on kill",
   "gunsmiths_gadgetsn_gizmos.modifier.crimson_singularity.cost": "Consumes half a Heart of HP on shot",
-
   "item.gunsmiths_gadgetsn_gizmos.clockwork_gatling_modifier": "Clockwork Gatling Modifier",
   "gunsmiths_gadgetsn_gizmos.modifier.clockwork_gatling": "Stabilized Supercharger: Laser-accurate Gatling fire",
   "gunsmiths_gadgetsn_gizmos.modifier.clockwork_gatling.desc": "+250% Fire Rate (Full-Auto) / Pinpoint Accuracy with Controlled Recoil",
-
   "item.gunsmiths_gadgetsn_gizmos.reapers_tempest_modifier": "Reaper's Tempest Modifier",
   "gunsmiths_gadgetsn_gizmos.modifier.reapers_tempest": "Soul Hurricane: Cataclysmic soul cyclone on direct hit",
   "gunsmiths_gadgetsn_gizmos.modifier.reapers_tempest.desc": "Launches all nearby enemies into the air with +250% Soul Damage",
   "gunsmiths_gadgetsn_gizmos.modifier.reapers_tempest.curse": "Missing shot inflicts a minor 2s Wither curse",
-
   "item.gunsmiths_gadgetsn_gizmos.midas_touch_chamber_modifier": "Midas' Touch Chamber Modifier",
   "gunsmiths_gadgetsn_gizmos.modifier.midas_touch_chamber": "Alchemical Sovereign: Tremendous plunder of riches",
   "gunsmiths_gadgetsn_gizmos.modifier.midas_touch_chamber.desc": "Slain mobs drop 5x Loot & Emeralds / Enrages but severely weakens nearby enemies",
 
-  "item.gunsmiths_gadgetsn_gizmos.echoing_sonic_core_modifier": "Echoing Sonic Core Modifier",
-  "gunsmiths_gadgetsn_gizmos.modifier.echoing_sonic_core": "Sonic Resonance: Emits Warden's Sonic Boom through walls",
-  "gunsmiths_gadgetsn_gizmos.modifier.echoing_sonic_core.desc": "Penetrates solid terrain and blasts enemies behind cover",
+  "item.gunsmiths_gadgetsn_gizmos.rangefinder_monocle": "Clockwork Rangefinder Monocle",
+  "gunsmiths_gadgetsn_gizmos.tooltip.rangefinder_monocle": "Sniper's Monocle",
+  "gunsmiths_gadgetsn_gizmos.tooltip.rangefinder_monocle.desc": "Provides precision aiming assistance and optical zoom",
+  "item.gunsmiths_gadgetsn_gizmos.welder_goggles": "Welder's Anti-Flash Goggles",
+  "gunsmiths_gadgetsn_gizmos.tooltip.welder_goggles": "Blast Protection",
+  "gunsmiths_gadgetsn_gizmos.tooltip.welder_goggles.desc": "Mitigates muzzle flash glare and provides blast resistance",
+  "item.gunsmiths_gadgetsn_gizmos.heavy_bandolier": "Heavy Leather Bandolier",
+  "gunsmiths_gadgetsn_gizmos.tooltip.heavy_bandolier": "6-Slot Ammo Carrier",
+  "gunsmiths_gadgetsn_gizmos.tooltip.heavy_bandolier.desc": "Equippable body harness that automatically supplies specialized ammo",
+  "item.gunsmiths_gadgetsn_gizmos.recoil_harness": "Pneumatic Recoil Harness",
+  "gunsmiths_gadgetsn_gizmos.tooltip.recoil_harness": "Recoil Dampener",
+  "gunsmiths_gadgetsn_gizmos.tooltip.recoil_harness.desc": "Absorbs -40% Camera Recoil using pneumatic back springs",
+  "item.gunsmiths_gadgetsn_gizmos.quick_draw_holster": "Gunslinger's Quick-Draw Holster",
+  "gunsmiths_gadgetsn_gizmos.tooltip.quick_draw_holster": "Instant Ready",
+  "gunsmiths_gadgetsn_gizmos.tooltip.quick_draw_holster.desc": "Eliminates initial fire delay when switching to a firearm",
+  "item.gunsmiths_gadgetsn_gizmos.speedloader_belt": "Cylinder Speedloader Belt",
+  "gunsmiths_gadgetsn_gizmos.tooltip.speedloader_belt": "Swift Reload",
+  "gunsmiths_gadgetsn_gizmos.tooltip.speedloader_belt.desc": "+30% Reload Speed for pistols and revolvers",
+  "item.gunsmiths_gadgetsn_gizmos.magnetic_pouch": "Magnetic Casing Pouch",
+  "gunsmiths_gadgetsn_gizmos.tooltip.magnetic_pouch": "Ammo Scavenger",
+  "gunsmiths_gadgetsn_gizmos.tooltip.magnetic_pouch.desc": "25% chance to recover bullets or casings upon firing",
+  "item.gunsmiths_gadgetsn_gizmos.gunsmiths_gloves": "Gunsmith's Oiled Gloves",
+  "gunsmiths_gadgetsn_gizmos.tooltip.gunsmiths_gloves": "Master Handling",
+  "gunsmiths_gadgetsn_gizmos.tooltip.gunsmiths_gloves.desc": "+15% Reload Speed and enhanced weapon handling",
+  "item.gunsmiths_gadgetsn_gizmos.gamblers_ring": "Gambler's Brass Ring",
+  "gunsmiths_gadgetsn_gizmos.tooltip.gamblers_ring": "High Roller",
+  "gunsmiths_gadgetsn_gizmos.tooltip.gamblers_ring.desc": "15% chance for free ammo / 15% chance for 2x critical damage",
+  "item.gunsmiths_gadgetsn_gizmos.gunslingers_spurs": "Jingle-Jangle Spurs",
+  "gunsmiths_gadgetsn_gizmos.tooltip.gunslingers_spurs": "Steady Stride",
+  "gunsmiths_gadgetsn_gizmos.tooltip.gunslingers_spurs.desc": "Eliminates movement and sprint accuracy penalties while shooting",
 
-  "item.gunsmiths_gadgetsn_gizmos.sculk_whisper_silencer_modifier": "Sculk Whisper Silencer Modifier",
-  "gunsmiths_gadgetsn_gizmos.modifier.sculk_whisper_silencer": "Sculk Dampener: Completely silences gunfire",
-  "gunsmiths_gadgetsn_gizmos.modifier.sculk_whisper_silencer.desc": "+60% Damage while sneaking without alerting enemies",
-
-  "item.gunsmiths_gadgetsn_gizmos.sculk_devourer_modifier": "Sculk Devourer Mechanism Modifier",
-  "gunsmiths_gadgetsn_gizmos.modifier.sculk_devourer": "Soul Feast: Devours experience of slain enemies",
-  "gunsmiths_gadgetsn_gizmos.modifier.sculk_devourer.desc": "Directly generates and reloads 1 bullet on kill",
-
-  "item.gunsmiths_gadgetsn_gizmos.shrieking_dread_modifier": "Shrieking Dread Bullet Modifier",
-  "gunsmiths_gadgetsn_gizmos.modifier.shrieking_dread": "Shrieker's Curse: Echoes a deafening shriek on impact",
-  "gunsmiths_gadgetsn_gizmos.modifier.shrieking_dread.desc": "Afflicts all nearby enemies with Darkness, Slowness II & Weakness II",
-
-  "item.gunsmiths_gadgetsn_gizmos.infinite_ammo_bag": "Infinite Ammo Bag",
+  "gunsmiths_gadgetsn_gizmos.tooltip.extra_slots": "+%s Extra Modifier Slots",
   "gunsmiths_gadgetsn_gizmos.tooltip.infinite_ammo_bag": "Bottomless Ammo Supply",
   "gunsmiths_gadgetsn_gizmos.tooltip.infinite_ammo_bag.desc": "Provides infinite bullets for reloading without consuming inventory ammo",
 
-  "entity.gunsmiths_gadgetsn_gizmos.villager.cultist": "Occult Gunsmith",
-  "entity.gunsmiths_gadgetsn_gizmos.villager.gunsmith": "GunSmith"
+  "gunsmiths_gadgetsn_gizmos.set_bonus.sculk_phantom": "Set Bonus: Sculk Phantom",
+  "gunsmiths_gadgetsn_gizmos.set_bonus.sculk_phantom.desc": "+50% Damage, +30% Speed, +2 Piercing with Silenced Cyan Sonics",
+
+  "gunsmiths_gadgetsn_gizmos.set_bonus.tempest_overclock": "Set Bonus: Tempest Overclock",
+  "gunsmiths_gadgetsn_gizmos.set_bonus.tempest_overclock.desc": "+30% Damage, +50% Speed with Stabilized Gale Trajectory",
+
+  "gunsmiths_gadgetsn_gizmos.set_bonus.crimson_overlord": "Set Bonus: Crimson Overlord",
+  "gunsmiths_gadgetsn_gizmos.set_bonus.crimson_overlord.desc": "+80% Damage, +3 Piercing, Extreme Precision with Blood Singularity",
+
+  "gunsmiths_gadgetsn_gizmos.set_bonus.stormcaller": "Set Bonus: Stormcaller",
+  "gunsmiths_gadgetsn_gizmos.set_bonus.stormcaller.desc": "Summons devastating lightning strikes upon impact with tempestuous wind arcs",
+
+  "gunsmiths_gadgetsn_gizmos.set_bonus.absolute_zero": "Set Bonus: Absolute Zero",
+  "gunsmiths_gadgetsn_gizmos.set_bonus.absolute_zero.desc": "Completely freezes and immobilizes all nearby enemies in ice statues",
+
+  "item.gunsmiths_gadgetsn_gizmos.clunker_rifle": "Overpressurized Clunker Carbine",
+  "gunsmiths_gadgetsn_gizmos.tooltip.clunker_rifle.flavour": "Overclocked pneumatic chamber: Catastrophic single-shot punch with intense blowback",
+
+  "gunsmiths_gadgetsn_gizmos.gui.synergy_near": "Synergy Resonance: 1 Part Remaining..."
 }

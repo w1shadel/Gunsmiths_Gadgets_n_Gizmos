@@ -2,9 +2,10 @@ package com.maxwell.gunsmiths_gadgetsn_gizmos.modifier;
 
 import com.maxwell.gunsmiths_gadgetsn_gizmos.GunsmithsGadgetsnGizmos;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.modifier.on_hit.CrimsonSingularityOnHit;
+import com.maxwell.gunsmiths_gadgetsn_gizmos.registry.ModItems;
+import com.maxwell.gunsmiths_gadgetsn_gizmos.util.ModifierHelper;
 import io.redspace.irons_artifice.api.GunShootEvent;
 import io.redspace.irons_artifice.client.particle.ColorTransitionParticleOption;
-import io.redspace.irons_artifice.damage.DamageSources;
 import io.redspace.irons_artifice.data.ShotComponentMap;
 import io.redspace.irons_artifice.data.ShotComponents;
 import io.redspace.irons_artifice.data.ValueModifier;
@@ -23,15 +24,19 @@ import java.util.function.Consumer;
 public final class CrimsonSingularityModifier implements GunModifier {
     @SubscribeEvent
     public static void onShoot(GunShootEvent.Pre event) {
-        if (event.getShotProfile().components().has(ShotComponents.PIERCING)) {
+        if (ModifierHelper.hasModifier(event.getShotProfile(), ModItems.CRIMSON_SINGULARITY_MODIFIER.get())) {
             event.getEntity().hurtServer((ServerLevel) event.getEntity().level(), event.getEntity().damageSources().magic(), 1.0F);
         }
     }
 
     @SubscribeEvent
     public static void onKill(LivingDeathEvent event) {
-        if (event.getSource().is(DamageSources.BULLET_DAMAGE_TYPE) && event.getSource().getEntity() instanceof LivingEntity killer) {
-            killer.heal(2.0F);
+        if (event.getSource().getDirectEntity() instanceof io.redspace.irons_artifice.entity.Bullet bullet) {
+            if (ModifierHelper.hasModifier(bullet.getProfile().itemStack(), ModItems.CRIMSON_SINGULARITY_MODIFIER.get())) {
+                if (event.getSource().getEntity() instanceof LivingEntity killer) {
+                    killer.heal(2.0F);
+                }
+            }
         }
     }
 

@@ -1,9 +1,10 @@
 package com.maxwell.gunsmiths_gadgetsn_gizmos.modifier;
 
 import com.maxwell.gunsmiths_gadgetsn_gizmos.GunsmithsGadgetsnGizmos;
+import com.maxwell.gunsmiths_gadgetsn_gizmos.registry.ModItems;
+import com.maxwell.gunsmiths_gadgetsn_gizmos.util.ModifierHelper;
 import io.redspace.irons_artifice.api.GunShootEvent;
 import io.redspace.irons_artifice.client.particle.ColorTransitionParticleOption;
-import io.redspace.irons_artifice.damage.DamageSources;
 import io.redspace.irons_artifice.data.ShotComponentMap;
 import io.redspace.irons_artifice.data.ShotComponents;
 import io.redspace.irons_artifice.modifier.GunModifier;
@@ -33,6 +34,9 @@ import java.util.function.Consumer;
 public final class MidasTouchChamberModifier implements GunModifier {
     @SubscribeEvent
     public static void onShoot(GunShootEvent.Post event) {
+        if (!ModifierHelper.hasModifier(event.getShotProfile(), ModItems.MIDAS_TOUCH_CHAMBER_MODIFIER.get())) {
+            return;
+        }
         LivingEntity shooter = event.getEntity();
         if (!(shooter.level() instanceof ServerLevel level)) return;
         AABB area = shooter.getBoundingBox().inflate(16.0);
@@ -46,20 +50,22 @@ public final class MidasTouchChamberModifier implements GunModifier {
 
     @SubscribeEvent
     public static void onMobDrops(LivingDropsEvent event) {
-        if (event.getSource().is(DamageSources.BULLET_DAMAGE_TYPE)) {
-            var entity = event.getEntity();
-            var random = entity.getRandom();
-            List<ItemEntity> extra = new ArrayList<>();
-            for (ItemEntity drop : event.getDrops()) {
-                for (int i = 0; i < 4; i++) {
-                    extra.add(new ItemEntity(drop.level(), drop.getX(), drop.getY(), drop.getZ(), drop.getItem().copy()));
+        if (event.getSource().getDirectEntity() instanceof io.redspace.irons_artifice.entity.Bullet bullet) {
+            if (ModifierHelper.hasModifier(bullet.getProfile().itemStack(), ModItems.MIDAS_TOUCH_CHAMBER_MODIFIER.get())) {
+                var entity = event.getEntity();
+                var random = entity.getRandom();
+                List<ItemEntity> extra = new ArrayList<>();
+                for (ItemEntity drop : event.getDrops()) {
+                    for (int i = 0; i < 4; i++) {
+                        extra.add(new ItemEntity(drop.level(), drop.getX(), drop.getY(), drop.getZ(), drop.getItem().copy()));
+                    }
                 }
+                extra.add(new ItemEntity(entity.level(), entity.getX(), entity.getY(), entity.getZ(),
+                        new ItemStack(Items.EMERALD, random.nextIntBetweenInclusive(3, 6))));
+                event.getDrops().addAll(extra);
+                entity.level().playSound(null, entity.getX(), entity.getY(), entity.getZ(),
+                        SoundEvents.PLAYER_LEVELUP, SoundSource.PLAYERS, 1.0F, 1.5F);
             }
-            extra.add(new ItemEntity(entity.level(), entity.getX(), entity.getY(), entity.getZ(),
-                    new ItemStack(Items.EMERALD, random.nextIntBetweenInclusive(3, 6))));
-            event.getDrops().addAll(extra);
-            entity.level().playSound(null, entity.getX(), entity.getY(), entity.getZ(),
-                    SoundEvents.PLAYER_LEVELUP, SoundSource.PLAYERS, 1.0F, 1.5F);
         }
     }
 

@@ -22,5 +22,6 @@ public class GunsmithsGadgetsnGizmos {
         ModDataComponents.register(modEventBus);
         ModRecipes.register(modEventBus);
         ModAmmoTypes.register(modEventBus);
+        ModSetBonusEffects.register(modEventBus);
     }
 }

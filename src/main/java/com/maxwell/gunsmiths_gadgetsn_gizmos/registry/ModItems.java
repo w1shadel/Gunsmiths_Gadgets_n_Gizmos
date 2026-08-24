@@ -4,7 +4,10 @@ import com.maxwell.gunsmiths_gadgetsn_gizmos.GunsmithsGadgetsnGizmos;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.item.AmmoPouchItem;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.item.InfiniteAmmoBagItem;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.item.UnidentifiedCrateItem;
+import com.maxwell.gunsmiths_gadgetsn_gizmos.item.curios.GunsmithCurioItem;
+import com.maxwell.gunsmiths_gadgetsn_gizmos.item.curios.HeavyBandolierItem;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.modifier.*;
+import io.redspace.irons_artifice.item.GunItem;
 import io.redspace.irons_artifice.modifier.ModifierItem;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
@@ -109,6 +112,31 @@ public class ModItems {
             "ammo_pouch",
             AmmoPouchItem::new
     );
+    // クランクライフル（魔改造レバーアクション銃）
+    public static final DeferredItem<GunItem> CLUNKER_RIFLE = ITEMS.registerItem(
+            "clunker_rifle",
+            properties -> new GunItem(properties, ModGuns.CLUNKER_RIFLE)
+    );
+    public static final DeferredItem<Item> RANGEFINDER_MONOCLE = ITEMS.registerItem("rangefinder_monocle",
+            p -> new GunsmithCurioItem(p, "rangefinder_monocle"));
+    public static final DeferredItem<Item> WELDER_GOGGLES = ITEMS.registerItem("welder_goggles",
+            p -> new GunsmithCurioItem(p, "welder_goggles"));
+    public static final DeferredItem<Item> HEAVY_BANDOLIER = ITEMS.registerItem("heavy_bandolier",
+            HeavyBandolierItem::new);
+    public static final DeferredItem<Item> RECOIL_HARNESS = ITEMS.registerItem("recoil_harness",
+            p -> new GunsmithCurioItem(p, "recoil_harness"));
+    public static final DeferredItem<Item> QUICK_DRAW_HOLSTER = ITEMS.registerItem("quick_draw_holster",
+            p -> new GunsmithCurioItem(p, "quick_draw_holster"));
+    public static final DeferredItem<Item> SPEEDLOADER_BELT = ITEMS.registerItem("speedloader_belt",
+            p -> new GunsmithCurioItem(p, "speedloader_belt"));
+    public static final DeferredItem<Item> MAGNETIC_POUCH = ITEMS.registerItem("magnetic_pouch",
+            p -> new GunsmithCurioItem(p, "magnetic_pouch"));
+    public static final DeferredItem<Item> GUNSMITHS_GLOVES = ITEMS.registerItem("gunsmiths_gloves",
+            p -> new GunsmithCurioItem(p, "gunsmiths_gloves"));
+    public static final DeferredItem<Item> GAMBLERS_RING = ITEMS.registerItem("gamblers_ring",
+            p -> new GunsmithCurioItem(p, "gamblers_ring"));
+    public static final DeferredItem<Item> GUNSLINGERS_SPURS = ITEMS.registerItem("gunslingers_spurs",
+            p -> new GunsmithCurioItem(p, "gunslingers_spurs"));
     public static final DeferredItem<Item> GUNSMITH_CHASSIS_KIT = ITEMS.registerSimpleItem("gunsmith_chassis_kit");
     public static final DeferredItem<Item> VOID_CASING = ITEMS.registerSimpleItem("void_casing");
     public static final DeferredItem<Item> SOUL_CINDER = ITEMS.registerSimpleItem("soul_cinder");

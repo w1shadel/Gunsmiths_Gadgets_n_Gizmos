@@ -1,0 +1,26 @@
+{
+  "bonuses": {
+    "aura_particle": {
+      "type": "minecraft:electric_spark"
+    },
+    "bullet_speed_multiplier": 0.4,
+    "damage_multiplier": 0.3,
+    "muzzle_flash_color": "#00F8FF",
+    "recoil_multiplier": -0.3,
+    "spread_add": -1.0,
+    "trail_color": "#CEF8FF"
+  },
+  "custom_effects": [
+    {
+      "type": "gunsmiths_gadgetsn_gizmos:lightning_strike",
+      "chance": 0.75
+    }
+  ],
+  "description": "gunsmiths_gadgetsn_gizmos.set_bonus.stormcaller.desc",
+  "name": "gunsmiths_gadgetsn_gizmos.set_bonus.stormcaller",
+  "required_modifiers": [
+    "irons_artifice:voltaic_core_modifier",
+    "irons_artifice:chain_shot_modifier",
+    "gunsmiths_gadgetsn_gizmos:breeze_cyclone_modifier"
+  ]
+}

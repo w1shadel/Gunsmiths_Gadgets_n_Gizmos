@@ -78,6 +78,7 @@ dependencies {
     implementation "curse.maven:jade-324717:8651070"
     implementation "curse.maven:geckolib-388172:8327201"
     implementation "curse.maven:irons-artifice-1650193:8700638"
+    implementation "curse.maven:curios-309927:8463519"
 }
 
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {

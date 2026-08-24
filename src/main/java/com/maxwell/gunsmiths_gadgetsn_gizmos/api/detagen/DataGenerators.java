@@ -14,11 +14,21 @@ public final class DataGenerators {
     public static void gatherClientData(GatherDataEvent.Client event) {
         event.createProvider((output, lookup) -> new VillagerTradeDataProvider(output, GunsmithsGadgetsnGizmos.MODID));
         event.createProvider((output, lookup) -> new CursedAltarRecipeDataProvider(output, GunsmithsGadgetsnGizmos.MODID));
+        event.createProvider(CuriosTagDataProvider::new);
+        event.createProvider(CuriosSlotDataProvider::new);
+        event.createProvider((output, lookup) -> new GunSetBonusDataProvider(output, GunsmithsGadgetsnGizmos.MODID));
+        event.createProvider((out, lookup) -> new VanillaCraftingRecipeDataProvider(out, GunsmithsGadgetsnGizmos.MODID));
+        event.createProvider((out, lookup) -> new ModItemModelDataProvider(out, GunsmithsGadgetsnGizmos.MODID));
     }
 
     @SubscribeEvent
     public static void gatherServerData(GatherDataEvent.Server event) {
         event.createProvider((output, lookup) -> new VillagerTradeDataProvider(output, GunsmithsGadgetsnGizmos.MODID));
         event.createProvider((output, lookup) -> new CursedAltarRecipeDataProvider(output, GunsmithsGadgetsnGizmos.MODID));
+        event.createProvider(CuriosTagDataProvider::new);
+        event.createProvider(CuriosSlotDataProvider::new);
+        event.createProvider((output, lookup) -> new GunSetBonusDataProvider(output, GunsmithsGadgetsnGizmos.MODID));
+        event.createProvider((out, lookup) -> new VanillaCraftingRecipeDataProvider(out, GunsmithsGadgetsnGizmos.MODID));
+        event.createProvider((out, lookup) -> new ModItemModelDataProvider(out, GunsmithsGadgetsnGizmos.MODID));
     }
 }

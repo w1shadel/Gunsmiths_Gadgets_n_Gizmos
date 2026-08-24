@@ -31,9 +31,6 @@ public class VillagerTradeDataProvider implements DataProvider {
         this(output, modId);
     }
 
-    /**
-     * ここに取引リストとTradeSetを登録します
-     */
     protected void buildTrades() {
         addTrade("iron_to_emerald", "minecraft:iron_ingot", 4, "minecraft:emerald", 1, 16, 2, 0.05F);
         addTrade("copper_to_emerald", "minecraft:copper_ingot", 6, "minecraft:emerald", 1, 16, 2, 0.05F);

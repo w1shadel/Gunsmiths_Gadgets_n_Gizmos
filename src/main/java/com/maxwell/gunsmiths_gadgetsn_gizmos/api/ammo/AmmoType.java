@@ -18,13 +18,7 @@ public abstract class AmmoType {
         return ammoItem.get();
     }
 
-    /**
-     * 射撃時に銃の ShotProfile にステータスやパーティクルを付与する
-     */
     public abstract void applyToShot(ShotProfile profile, LivingEntity shooter);
 
-    /**
-     * 弾薬の表示名
-     */
     public abstract Component getDisplayName();
 }

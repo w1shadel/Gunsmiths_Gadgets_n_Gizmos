@@ -2,6 +2,7 @@ package com.maxwell.gunsmiths_gadgetsn_gizmos.registry;
 
 import com.maxwell.gunsmiths_gadgetsn_gizmos.GunsmithsGadgetsnGizmos;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.api.ammo.AmmoType;
+import com.maxwell.gunsmiths_gadgetsn_gizmos.modifier.on_hit.SilverBulletPostHit;
 import io.redspace.irons_artifice.client.particle.ColorTransitionParticleOption;
 import io.redspace.irons_artifice.data.ShotComponents;
 import io.redspace.irons_artifice.data.ValueModifier;
@@ -39,6 +40,7 @@ public class ModAmmoTypes {
             () -> new AmmoType(ModItems.SILVER_BULLET) {
                 @Override
                 public void applyToShot(ShotProfile profile, LivingEntity shooter) {
+                    profile.components().getOrCreate(ShotComponents.POST_HIT_EFFECTS).add(new SilverBulletPostHit());
                     profile.components().getOrCreate(ShotComponents.PARTICLE_TRAIL).add(
                             ColorTransitionParticleOption.bulletTrail(0xE8F8FF, 0x90B8CC)
                     );

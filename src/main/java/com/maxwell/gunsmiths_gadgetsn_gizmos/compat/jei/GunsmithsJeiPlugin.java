@@ -17,6 +17,7 @@ import org.jspecify.annotations.NonNull;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("removal")
 @JeiPlugin
 public final class GunsmithsJeiPlugin implements IModPlugin {
     public static final String MODID = "gunsmiths_gadgetsn_gizmos";
