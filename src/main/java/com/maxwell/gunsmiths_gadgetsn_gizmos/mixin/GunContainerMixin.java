@@ -1,6 +1,6 @@
 package com.maxwell.gunsmiths_gadgetsn_gizmos.mixin;
 
-import com.maxwell.gunsmiths_gadgetsn_gizmos.registry.ModDataComponents;
+import com.maxwell.gunsmiths_gadgetsn_gizmos.init.ModDataComponents;
 import io.redspace.irons_artifice.menu.GunContainer;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;

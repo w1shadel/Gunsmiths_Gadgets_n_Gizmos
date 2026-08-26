@@ -2,8 +2,8 @@ package com.maxwell.gunsmiths_gadgetsn_gizmos.events;
 
 import com.maxwell.gunsmiths_gadgetsn_gizmos.GunsmithsGadgetsnGizmos;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.api.ammo.AmmoType;
-import com.maxwell.gunsmiths_gadgetsn_gizmos.registry.ModAmmoTypes;
-import com.maxwell.gunsmiths_gadgetsn_gizmos.registry.ModDataComponents;
+import com.maxwell.gunsmiths_gadgetsn_gizmos.init.ModAmmoTypes;
+import com.maxwell.gunsmiths_gadgetsn_gizmos.init.ModDataComponents;
 import io.redspace.irons_artifice.api.ComposeShotEvent;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;

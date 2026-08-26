@@ -8,10 +8,12 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
-import net.minecraft.network.chat.Component;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -19,95 +21,175 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
-@Mixin(GunModifierScreen.class)
+@Mixin(value = GunModifierScreen.class, remap = false)
 public abstract class GunModifierScreenMixin extends AbstractContainerScreen<GunModifierMenu> {
 
     @Unique
-    private int gunsmiths_gadgetsn_gizmos$lastActiveBonusCount = 0;
+    private int gunsmiths_gadgetsn_gizmos$lastActiveCount = -1; 
 
-    public GunModifierScreenMixin(GunModifierMenu menu, Inventory playerInventory, Component title) {
+    public GunModifierScreenMixin(GunModifierMenu menu, Inventory playerInventory, net.minecraft.network.chat.Component title) {
         super(menu, playerInventory, title, 176, 183);
     }
 
-    @Inject(method = "extractBackground", at = @At("TAIL"), remap = false)
-    private void gunsmiths_gadgetsn_gizmos$renderSetBonusEffects(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float partialTick, CallbackInfo ci) {
-        ItemStack gun = this.menu.gunstack;
+    @Inject(method = "init", at = @At("TAIL"))
+    private void gunsmiths_gadgetsn_gizmos$initBonusCount(CallbackInfo ci) {
+
+        GunModifierMenu gunMenu = (GunModifierMenu) this.menu;
+        gunsmiths_gadgetsn_gizmos$lastActiveCount = gunsmiths_gadgetsn_gizmos$getActiveBonuses(gunMenu).size();
+    }
+
+    @Inject(method = "extractBackground", at = @At("TAIL"))
+    private void gunsmiths_gadgetsn_gizmos$renderVisualSynergyEffects(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float partialTick, CallbackInfo ci) {
+        GunModifierMenu gunMenu = (GunModifierMenu) this.menu;
+        ItemStack gun = gunMenu.gunstack;
         if (gun.isEmpty()) return;
 
-        List<GunSetBonus> activeBonuses = GunSetBonusManager.getMatchingBonuses(gun);
-        int xo = (this.width - this.imageWidth) / 2;
-        int yo = (this.height - this.imageHeight) / 2;
-
-        // =========================================================================
-        // 1. セット効果が発動した瞬間のファンファーレ効果音
-        // =========================================================================
-        if (activeBonuses.size() > gunsmiths_gadgetsn_gizmos$lastActiveBonusCount) {
-            Minecraft.getInstance().getSoundManager().play(
-                    SimpleSoundInstance.forUI(SoundEvents.PLAYER_LEVELUP, 1.8F, 0.7F)
-            );
-        }
-        gunsmiths_gadgetsn_gizmos$lastActiveBonusCount = activeBonuses.size();
-
-        // =========================================================================
-        // 2. 発動中のセット効果のGUI表示 (緑色のカットイン表示)
-        // =========================================================================
-        if (!activeBonuses.isEmpty()) {
-            int textY = yo + 14;
-            for (GunSetBonus bonus : activeBonuses) {
-                Component titleComp = Component.literal("★ ").append(Component.translatable(bonus.nameKey()));
-                int textWidth = this.font.width(titleComp);
-                int textX = xo + (this.imageWidth - textWidth) / 2;
-
-                // ほんのり光る背景バー描画
-                graphics.fill(textX - 4, textY - 2, textX + textWidth + 4, textY + 10, 0x90003311);
-                // テキスト描画 (鮮やかな黄緑色)
-                graphics.text(this.font, titleComp, textX, textY, 0x55FF55, true);
-                textY += 12;
+        List<Slot> modifierSlots = gunMenu.getModifierSlots();
+        List<ItemStack> currentModifiers = new ArrayList<>();
+        for (Slot slot : modifierSlots) {
+            if (slot != null && slot.hasItem()) {
+                currentModifiers.add(slot.getItem());
             }
         }
-        // =========================================================================
-        // 3. リーチ（あと1パーツ）の予兆演出 (紫色の点滅パルス表示)
-        // =========================================================================
-        else {
-            GunSetBonus nearBonus = gunsmiths_gadgetsn_gizmos$findNearBonus(gun);
+
+        int xo = (this.width - this.imageWidth) / 2;
+        int yo = (this.height - this.imageHeight) / 2;
+        float tick = Minecraft.getInstance().player.tickCount + partialTick;
+
+        List<GunSetBonus> activeBonuses = new ArrayList<>();
+        for (GunSetBonus bonus : GunSetBonusManager.getAllBonuses()) {
+            if (bonus.matches(currentModifiers)) {
+                activeBonuses.add(bonus);
+            }
+        }
+
+
+
+        if (gunsmiths_gadgetsn_gizmos$lastActiveCount != -1 && activeBonuses.size() > gunsmiths_gadgetsn_gizmos$lastActiveCount) {
+
+            Minecraft.getInstance().getSoundManager().play(
+                    SimpleSoundInstance.forUI(SoundEvents.AMETHYST_BLOCK_CHIME, 1.0F, 1.2F)
+            );
+            Minecraft.getInstance().getSoundManager().play(
+                    SimpleSoundInstance.forUI(SoundEvents.EXPERIENCE_ORB_PICKUP, 0.8F, 1.5F)
+            );
+        }
+        gunsmiths_gadgetsn_gizmos$lastActiveCount = activeBonuses.size();
+
+
+
+        if (!activeBonuses.isEmpty()) {
+            GunSetBonus topBonus = activeBonuses.get(0);
+            int auraColor = gunsmiths_gadgetsn_gizmos$parseColor(topBonus.bonuses().trailColor().orElse("#00FFFF"));
+
+            float gunCenterX = xo + this.imageWidth / 2.0F;
+            float gunCenterY = yo + 58;
+
+            float pulse = (Mth.sin(tick * 0.08F) + 1.0F) * 0.5F;
+            int ringRadius = (int) (30 + pulse * 4);
+
+            for (int r = ringRadius; r > 10; r -= 5) {
+                float progress = (float) r / ringRadius;
+
+                int alpha = (int) ((1.0F - progress) * 60 * (0.7F + pulse * 0.3F));
+                int layerColor = (alpha << 24) | (auraColor & 0x00FFFFFF);
+
+                graphics.fill((int) (gunCenterX - r), (int) (gunCenterY - r * 0.6F),
+                        (int) (gunCenterX + r), (int) (gunCenterY + r * 0.6F), layerColor);
+            }
+        }
+
+
+
+        Set<Identifier> highlightedItemIds = new HashSet<>();
+        boolean isFullActive = !activeBonuses.isEmpty();
+
+        if (isFullActive) {
+            for (GunSetBonus bonus : activeBonuses) {
+                highlightedItemIds.addAll(bonus.requiredModifiers());
+            }
+        } else {
+            GunSetBonus nearBonus = gunsmiths_gadgetsn_gizmos$findNearBonus(currentModifiers);
             if (nearBonus != null) {
-                float pulse = (Mth.sin(Minecraft.getInstance().player.tickCount * 0.15F) + 1.0F) * 0.5F;
-                int alpha = (int) (100 + pulse * 155);
-                int color = (alpha << 24) | 0xAA00FF; // 紫色の点滅
+                highlightedItemIds.addAll(nearBonus.requiredModifiers());
+            }
+        }
 
-                Component hintComp = Component.literal("⚠️ ").append(Component.translatable("gunsmiths_gadgetsn_gizmos.gui.synergy_near"));
-                int textWidth = this.font.width(hintComp);
-                int textX = xo + (this.imageWidth - textWidth) / 2;
+        if (!highlightedItemIds.isEmpty()) {
+            float slotPulse = (Mth.sin(tick * 0.12F) + 1.0F) * 0.5F;
+            int baseGlow = isFullActive ? 0x55FF55 : 0xBB66FF; 
+            int glowAlpha = (int) ((isFullActive ? 120 : 70) + slotPulse * 75);
+            int glowColor = (glowAlpha << 24) | baseGlow;
 
-                graphics.text(this.font, hintComp, textX, yo + 14, color, true);
+            for (Slot slot : modifierSlots) {
+                if (slot != null && slot.hasItem()) {
+                    Identifier itemId = BuiltInRegistries.ITEM.getKey(slot.getItem().getItem());
+                    if (highlightedItemIds.contains(itemId)) {
+                        int sx = xo + slot.x - 4;
+                        int sy = yo + slot.y - 4;
+
+                        graphics.fill(sx - 1, sy - 1, sx + 25, sy, glowColor);
+                        graphics.fill(sx - 1, sy + 24, sx + 25, sy + 25, glowColor);
+                        graphics.fill(sx - 1, sy, sx, sy + 24, glowColor);
+                        graphics.fill(sx + 24, sy, sx + 25, sy + 24, glowColor);
+
+                        graphics.fill(sx, sy, sx + 24, sy + 24, (25 << 24) | baseGlow);
+                    }
+                }
             }
         }
     }
 
-    /**
-     * あと1つのパーツで揃うセット効果を探索するヘルパー
-     */
     @Unique
-    private GunSetBonus gunsmiths_gadgetsn_gizmos$findNearBonus(ItemStack gun) {
-        var container = new io.redspace.irons_artifice.menu.GunContainer(gun);
-        var installed = container.getItems();
-        for (GunSetBonus bonus : GunSetBonusManager.getMatchingBonuses(ItemStack.EMPTY)) { // 全ボーナスを走査
+    private List<GunSetBonus> gunsmiths_gadgetsn_gizmos$getActiveBonuses(GunModifierMenu gunMenu) {
+        List<ItemStack> currentModifiers = new ArrayList<>();
+        for (Slot slot : gunMenu.getModifierSlots()) {
+            if (slot != null && slot.hasItem()) {
+                currentModifiers.add(slot.getItem());
+            }
+        }
+        List<GunSetBonus> active = new ArrayList<>();
+        for (GunSetBonus bonus : GunSetBonusManager.getAllBonuses()) {
+            if (bonus.matches(currentModifiers)) {
+                active.add(bonus);
+            }
+        }
+        return active;
+    }
+
+    @Unique
+    private GunSetBonus gunsmiths_gadgetsn_gizmos$findNearBonus(List<ItemStack> installed) {
+        Set<Identifier> installedIds = installed.stream()
+                .filter(s -> !s.isEmpty())
+                .map(s -> BuiltInRegistries.ITEM.getKey(s.getItem()))
+                .collect(Collectors.toSet());
+
+        for (GunSetBonus bonus : GunSetBonusManager.getAllBonuses()) {
             int matchCount = 0;
-            for (net.minecraft.resources.Identifier req : bonus.requiredModifiers()) {
-                for (ItemStack slotStack : installed) {
-                    if (!slotStack.isEmpty() && net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(slotStack.getItem()).equals(req)) {
-                        matchCount++;
-                        break;
-                    }
+            for (Identifier req : bonus.requiredModifiers()) {
+                if (installedIds.contains(req)) {
+                    matchCount++;
                 }
             }
-            // 必要な数より「ちょうど1個だけ足りない」状態
-            if (matchCount == bonus.requiredModifiers().size() - 1 && bonus.requiredModifiers().size() >= 3) {
+            if (matchCount == bonus.requiredModifiers().size() - 1 && bonus.requiredModifiers().size() >= 2) {
                 return bonus;
             }
         }
         return null;
+    }
+
+    @Unique
+    private int gunsmiths_gadgetsn_gizmos$parseColor(String hex) {
+        try {
+            return (int) Long.parseLong(hex.replace("#", ""), 16);
+        } catch (Exception e) {
+            return 0x00FFFF;
+        }
     }
 }

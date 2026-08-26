@@ -4,9 +4,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.api.synergy.SetBonusEffect;
-import com.maxwell.gunsmiths_gadgetsn_gizmos.modifier.seteffect.AbsoluteZeroEffect;
-import com.maxwell.gunsmiths_gadgetsn_gizmos.modifier.seteffect.LightningStrikeEffect;
-import com.maxwell.gunsmiths_gadgetsn_gizmos.registry.ModItems;
+import com.maxwell.gunsmiths_gadgetsn_gizmos.modifier.seteffect.*;
+import com.maxwell.gunsmiths_gadgetsn_gizmos.init.ModItems;
 import com.mojang.serialization.JsonOps;
 import io.redspace.irons_artifice.registry.ItemRegistry;
 import net.minecraft.core.HolderLookup;
@@ -42,7 +41,7 @@ public class GunSetBonusDataProvider implements DataProvider {
     }
 
     protected void buildSetBonuses() {
-        // ① ストームコーラー (電気火花オーラ + 落雷エフェクト)
+
         addCustomSetBonus("stormcaller",
                 "gunsmiths_gadgetsn_gizmos.set_bonus.stormcaller",
                 "gunsmiths_gadgetsn_gizmos.set_bonus.stormcaller.desc",
@@ -52,7 +51,6 @@ public class GunSetBonusDataProvider implements DataProvider {
                 List.of(new LightningStrikeEffect(0.75F))
         );
 
-        // ② 絶対零度 (雪の結晶オーラ + 完全凍結エフェクト)
         addCustomSetBonus("absolute_zero",
                 "gunsmiths_gadgetsn_gizmos.set_bonus.absolute_zero",
                 "gunsmiths_gadgetsn_gizmos.set_bonus.absolute_zero.desc",
@@ -62,7 +60,6 @@ public class GunSetBonusDataProvider implements DataProvider {
                 List.of(new AbsoluteZeroEffect(5.0, 20 * 5))
         );
 
-        // ③ スカルク・ファントム (深淵の魂オーラ)
         addSimpleSetBonus("sculk_phantom",
                 "gunsmiths_gadgetsn_gizmos.set_bonus.sculk_phantom",
                 "gunsmiths_gadgetsn_gizmos.set_bonus.sculk_phantom.desc",
@@ -71,7 +68,6 @@ public class GunSetBonusDataProvider implements DataProvider {
                 "#00FFFF", "#00FFFF", ParticleTypes.SCULK_SOUL
         );
 
-        // ④ クリムゾン・オーバーロード (深紅の胞子オーラ)
         addSimpleSetBonus("crimson_overlord",
                 "gunsmiths_gadgetsn_gizmos.set_bonus.crimson_overlord",
                 "gunsmiths_gadgetsn_gizmos.set_bonus.crimson_overlord.desc",
@@ -80,7 +76,6 @@ public class GunSetBonusDataProvider implements DataProvider {
                 "#FF0033", "#FF0033", ParticleTypes.CRIMSON_SPORE
         );
 
-        // ⑤ テンペスト・オーバークロック (水しぶき/突風オーラ)
         addSimpleSetBonus("tempest_overclock",
                 "gunsmiths_gadgetsn_gizmos.set_bonus.tempest_overclock",
                 "gunsmiths_gadgetsn_gizmos.set_bonus.tempest_overclock.desc",
@@ -98,14 +93,144 @@ public class GunSetBonusDataProvider implements DataProvider {
                 "#FFA500",
                 ParticleTypes.SPLASH
         );
+
+
+
+
+        addSimpleSetBonus("recoil_control",
+                "gunsmiths_gadgetsn_gizmos.set_bonus.recoil_control",
+                "gunsmiths_gadgetsn_gizmos.set_bonus.recoil_control.desc",
+                List.of(
+                        ItemRegistry.GAS_VENT.get(),
+                        ItemRegistry.BUFFER_SPRING.get()
+                ),
+                0.0, 0.0, -0.20, -1.0, 0,
+                "#DDDDDD", "#DDDDDD", ParticleTypes.SMOKE
+        );
+
+        addSimpleSetBonus("light_skirmisher",
+                "gunsmiths_gadgetsn_gizmos.set_bonus.light_skirmisher",
+                "gunsmiths_gadgetsn_gizmos.set_bonus.light_skirmisher.desc",
+                List.of(
+                        ItemRegistry.HAIR_TRIGGER.get(),
+                        ItemRegistry.GUN_OIL.get()
+                ),
+                0.0, 0.15, 0.0, 0.0, 0,
+                "#FFD700", "#FFD700", ParticleTypes.CRIT
+        );
+
+        addSimpleSetBonus("heavy_impact",
+                "gunsmiths_gadgetsn_gizmos.set_bonus.heavy_impact",
+                "gunsmiths_gadgetsn_gizmos.set_bonus.heavy_impact.desc",
+                List.of(
+                        ItemRegistry.LEAD_CORE.get(),
+                        ItemRegistry.BREACHING_SHELL.get()
+                ),
+                0.10, 0.15, 0.0, 0.0, 0,
+                "#888888", "#888888", ParticleTypes.POOF
+        );
+
+        addSimpleSetBonus("incendiary_scatter",
+                "gunsmiths_gadgetsn_gizmos.set_bonus.incendiary_scatter",
+                "gunsmiths_gadgetsn_gizmos.set_bonus.incendiary_scatter.desc",
+                List.of(
+                        ItemRegistry.INCENDIARY_TIP_MODIFIER.get(),
+                        ItemRegistry.SCATTERSHOT.get()
+                ),
+                0.10, 0.10, 0.0, 0.0, 0,
+                "#FF6600", "#FF6600", ParticleTypes.FLAME
+        );
+
+        addSimpleSetBonus("aero_ricochet",
+                "gunsmiths_gadgetsn_gizmos.set_bonus.aero_ricochet",
+                "gunsmiths_gadgetsn_gizmos.set_bonus.aero_ricochet.desc",
+                List.of(
+                        ItemRegistry.WIND_CHAMBER.get(),
+                        ItemRegistry.TRICK_BULLET_MODIFIER.get()
+                ),
+                0.0, 0.20, 0.0, -1.0, 0,
+                "#A0E6FF", "#A0E6FF", ParticleTypes.GUST
+        );
+
+        addCustomSetBonus("omega_apocalypse",
+                "gunsmiths_gadgetsn_gizmos.set_bonus.omega_apocalypse",
+                "gunsmiths_gadgetsn_gizmos.set_bonus.omega_apocalypse.desc",
+                List.of(
+                        ModItems.CRIMSON_SINGULARITY_MODIFIER.get(), 
+                        ModItems.CLOCKWORK_GATLING_MODIFIER.get(),   
+                        ItemRegistry.SINGULARITY_CHARGE_MODIFIER.get(), 
+                        ItemRegistry.OVERCHARGED_POWDER.get(),          
+                        ItemRegistry.STEEL_CORE.get()                   
+                ),
+                1.50, 
+                0.80, 
+                -0.60, 
+                -4.0,  
+                5,     
+                "#FF0055", "#FF0055", ParticleTypes.PORTAL,
+                List.of(new GravitationalCollapseEffect(8.0, 15.0F))
+        );
+
+
+
+        addCustomSetBonus("cataclysm_stormruler",
+                "gunsmiths_gadgetsn_gizmos.set_bonus.cataclysm_stormruler",
+                "gunsmiths_gadgetsn_gizmos.set_bonus.cataclysm_stormruler.desc",
+                List.of(
+                        ModItems.REAPERS_TEMPEST_MODIFIER.get(),     
+                        ModItems.ECHOING_SONIC_CORE_MODIFIER.get(),  
+                        ModItems.BREEZE_CYCLONE_MODIFIER.get(),      
+                        ItemRegistry.CHAIN_LIGHTNING.get(),          
+                        ItemRegistry.FROZEN_JACKET.get(),            
+                        ItemRegistry.WIND_CHAMBER.get()              
+                ),
+                1.20, 
+                1.00, 
+                -0.50, 
+                -3.0,
+                3,    
+                "#00FFFF", "#FFFFFF", ParticleTypes.SONIC_BOOM,
+                List.of(
+                        new MultiLightningStrikeEffect(3), 
+                        new AbsoluteZeroEffect(6.0, 20 * 6) 
+                )
+        );
+
+        addCustomSetBonus("soul_of_eternity",
+                "gunsmiths_gadgetsn_gizmos.set_bonus.soul_of_eternity",
+                "gunsmiths_gadgetsn_gizmos.set_bonus.soul_of_eternity.desc",
+                List.of(
+                        ModItems.CRIMSON_SINGULARITY_MODIFIER.get(),     
+                        ModItems.CLOCKWORK_GATLING_MODIFIER.get(),       
+                        ModItems.REAPERS_TEMPEST_MODIFIER.get(),         
+                        ModItems.MIDAS_TOUCH_CHAMBER_MODIFIER.get(),     
+                        ModItems.ECHOING_SONIC_CORE_MODIFIER.get(),      
+                        ModItems.SCULK_DEVOURER_MODIFIER.get(),          
+                        ModItems.MASTERCRAFTED_TRIGGER_MODIFIER.get(),   
+                        ItemRegistry.SINGULARITY_CHARGE_MODIFIER.get(),  
+                        ItemRegistry.CHAIN_LIGHTNING.get(),              
+                        ItemRegistry.ENCHANTED_BULLET_MODIFIER.get()     
+                ),
+                3.00,  
+                1.50,  
+                -0.80, 
+                -5.0,  
+                10,    
+                "#FFFFFF", "#FFD700", ParticleTypes.TOTEM_OF_UNDYING,
+                List.of(
+                        new GravitationalCollapseEffect(12.0, 30.0F), 
+                        new MultiLightningStrikeEffect(5),            
+                        new AbsoluteZeroEffect(8.0, 20 * 10),         
+                        new CorpsePoisonBloomEffect(6.0F, 20 * 10),   
+                        SoulOfEternityEffect.INSTANCE                 
+                )
+        );
     }
 
-    // ★ エフェクトなし用のシンプルなヘルパー（引数12個）
     public void addSimpleSetBonus(String id, String nameKey, String descKey, List<ItemLike> requiredModifiers, double damageMul, double speedMul, double recoilMul, double spreadAdd, int piercingAdd, String trailColor, String muzzleColor, @Nullable ParticleOptions auraParticle) {
         addCustomSetBonus(id, nameKey, descKey, requiredModifiers, damageMul, speedMul, recoilMul, spreadAdd, piercingAdd, trailColor, muzzleColor, auraParticle, List.of());
     }
 
-    // ★ エフェクト付き用の完全ヘルパー（引数13個）
     public void addCustomSetBonus(String id, String nameKey, String descKey, List<ItemLike> requiredModifiers, double damageMul, double speedMul, double recoilMul, double spreadAdd, int piercingAdd, String trailColor, String muzzleColor, @Nullable ParticleOptions auraParticle, List<SetBonusEffect> effects) {
         JsonObject json = new JsonObject();
         json.addProperty("name", nameKey);
@@ -126,14 +251,12 @@ public class GunSetBonusDataProvider implements DataProvider {
         if (trailColor != null) bonuses.addProperty("trail_color", trailColor);
         if (muzzleColor != null) bonuses.addProperty("muzzle_flash_color", muzzleColor);
 
-        // ParticleOptions のエンコード
         if (auraParticle != null) {
             JsonElement particleJson = ParticleTypes.CODEC.encodeStart(JsonOps.INSTANCE, auraParticle).getOrThrow();
             bonuses.add("aura_particle", particleJson);
         }
         json.add("bonuses", bonuses);
 
-        // SetBonusEffect のエンコード
         if (!effects.isEmpty()) {
             JsonArray effectsArray = new JsonArray();
             for (SetBonusEffect effect : effects) {

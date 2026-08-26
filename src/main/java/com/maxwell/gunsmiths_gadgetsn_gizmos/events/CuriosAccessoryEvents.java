@@ -2,7 +2,7 @@ package com.maxwell.gunsmiths_gadgetsn_gizmos.events;
 
 import com.maxwell.gunsmiths_gadgetsn_gizmos.GunsmithsGadgetsnGizmos;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.compat.curios.CuriosCompat;
-import com.maxwell.gunsmiths_gadgetsn_gizmos.registry.ModItems;
+import com.maxwell.gunsmiths_gadgetsn_gizmos.init.ModItems;
 import io.redspace.irons_artifice.api.ComposeShotEvent;
 import io.redspace.irons_artifice.api.ConsumeAmmoEvent;
 import io.redspace.irons_artifice.api.GunShootEvent;

@@ -1,9 +1,7 @@
-package com.maxwell.gunsmiths_gadgetsn_gizmos.registry;
+package com.maxwell.gunsmiths_gadgetsn_gizmos.init;
 
 import com.maxwell.gunsmiths_gadgetsn_gizmos.api.synergy.SetBonusEffect;
-import com.maxwell.gunsmiths_gadgetsn_gizmos.modifier.seteffect.AbsoluteZeroEffect;
-import com.maxwell.gunsmiths_gadgetsn_gizmos.modifier.seteffect.CorpsePoisonBloomEffect;
-import com.maxwell.gunsmiths_gadgetsn_gizmos.modifier.seteffect.LightningStrikeEffect;
+import com.maxwell.gunsmiths_gadgetsn_gizmos.modifier.seteffect.*;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.Identifier;
@@ -25,6 +23,15 @@ public class ModSetBonusEffects {
             EFFECTS.register("absolute_zero", () -> AbsoluteZeroEffect.CODEC);
     public static final DeferredHolder<MapCodec<? extends SetBonusEffect>, MapCodec<CorpsePoisonBloomEffect>> CORPSE_POISON_BLOOM =
             EFFECTS.register("corpse_poison_bloom", () -> CorpsePoisonBloomEffect.CODEC);
+
+    public static final DeferredHolder<MapCodec<? extends SetBonusEffect>, MapCodec<GravitationalCollapseEffect>> GRAVITATIONAL_COLLAPSE =
+            EFFECTS.register("gravitational_collapse", () -> GravitationalCollapseEffect.CODEC);
+
+    public static final DeferredHolder<MapCodec<? extends SetBonusEffect>, MapCodec<MultiLightningStrikeEffect>> MULTI_LIGHTNING =
+            EFFECTS.register("multi_lightning", () -> MultiLightningStrikeEffect.CODEC);
+
+    public static final DeferredHolder<MapCodec<? extends SetBonusEffect>, MapCodec<SoulOfEternityEffect>> SOUL_OF_ETERNITY =
+            EFFECTS.register("soul_of_eternity", () -> SoulOfEternityEffect.CODEC);
 
     public static void register(IEventBus bus) {
         EFFECTS.register(bus);

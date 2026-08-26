@@ -1,0 +1,17 @@
+{
+  "bonuses": {
+    "aura_particle": {
+      "type": "minecraft:smoke"
+    },
+    "muzzle_flash_color": "#DDDDDD",
+    "recoil_multiplier": -0.2,
+    "spread_add": -1.0,
+    "trail_color": "#DDDDDD"
+  },
+  "description": "gunsmiths_gadgetsn_gizmos.set_bonus.recoil_control.desc",
+  "name": "gunsmiths_gadgetsn_gizmos.set_bonus.recoil_control",
+  "required_modifiers": [
+    "irons_artifice:gas_vent_modifier",
+    "irons_artifice:buffer_spring_modifier"
+  ]
+}

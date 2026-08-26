@@ -1,0 +1,28 @@
+{
+  "bonuses": {
+    "aura_particle": {
+      "type": "minecraft:portal"
+    },
+    "bullet_speed_multiplier": 0.8,
+    "damage_multiplier": 1.5,
+    "muzzle_flash_color": "#FF0055",
+    "piercing_add": 5,
+    "recoil_multiplier": -0.6,
+    "spread_add": -4.0,
+    "trail_color": "#FF0055"
+  },
+  "custom_effects": [
+    {
+      "type": "gunsmiths_gadgetsn_gizmos:gravitational_collapse"
+    }
+  ],
+  "description": "gunsmiths_gadgetsn_gizmos.set_bonus.omega_apocalypse.desc",
+  "name": "gunsmiths_gadgetsn_gizmos.set_bonus.omega_apocalypse",
+  "required_modifiers": [
+    "gunsmiths_gadgetsn_gizmos:crimson_singularity_modifier",
+    "gunsmiths_gadgetsn_gizmos:clockwork_gatling_modifier",
+    "irons_artifice:singularity_charge_modifier",
+    "irons_artifice:overcharged_powder_modifier",
+    "irons_artifice:steel_core_modifier"
+  ]
+}

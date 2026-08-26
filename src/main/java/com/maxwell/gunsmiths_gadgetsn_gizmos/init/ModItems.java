@@ -1,4 +1,4 @@
-package com.maxwell.gunsmiths_gadgetsn_gizmos.registry;
+package com.maxwell.gunsmiths_gadgetsn_gizmos.init;
 
 import com.maxwell.gunsmiths_gadgetsn_gizmos.GunsmithsGadgetsnGizmos;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.item.AmmoPouchItem;
@@ -112,10 +112,14 @@ public class ModItems {
             "ammo_pouch",
             AmmoPouchItem::new
     );
-    // クランクライフル（魔改造レバーアクション銃）
+
     public static final DeferredItem<GunItem> CLUNKER_RIFLE = ITEMS.registerItem(
             "clunker_rifle",
             properties -> new GunItem(properties, ModGuns.CLUNKER_RIFLE)
+    );
+    public static final DeferredItem<GunItem> MINIGUN = ITEMS.registerItem(
+            "minigun",
+            properties -> new GunItem(properties, ModGuns.MINIGUN)
     );
     public static final DeferredItem<Item> RANGEFINDER_MONOCLE = ITEMS.registerItem("rangefinder_monocle",
             p -> new GunsmithCurioItem(p, "rangefinder_monocle"));

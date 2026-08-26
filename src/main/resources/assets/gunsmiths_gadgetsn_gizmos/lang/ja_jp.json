@@ -152,5 +152,21 @@
   "item.gunsmiths_gadgetsn_gizmos.clunker_rifle": "オーバーロードライフル",
   "gunsmiths_gadgetsn_gizmos.tooltip.clunker_rifle.flavour": "限界突破の加圧薬室：激しい後退反動と引き換えに絶大な単発火力を放つ",
 
-  "gunsmiths_gadgetsn_gizmos.gui.synergy_near": "シナジーの予兆：あと1パーツで覚醒しそうだ…"
+  "gunsmiths_gadgetsn_gizmos.set_bonus.recoil_control": "セット効果：リコイル・コントロール",
+  "gunsmiths_gadgetsn_gizmos.set_bonus.recoil_control.desc": "反動 -20%, 拡散 -1.0",
+
+  "gunsmiths_gadgetsn_gizmos.set_bonus.light_skirmisher": "セット効果：ライト・スカーミッシャー",
+  "gunsmiths_gadgetsn_gizmos.set_bonus.light_skirmisher.desc": "連射速度 +15%, 弾速 +15%",
+
+  "gunsmiths_gadgetsn_gizmos.set_bonus.heavy_impact": "セット効果：ヘビー・インパクト",
+  "gunsmiths_gadgetsn_gizmos.set_bonus.heavy_impact.desc": "ダメージ +10%, 弾速 +15%",
+
+  "gunsmiths_gadgetsn_gizmos.set_bonus.incendiary_scatter": "セット効果：スプレッド・ブレイズ",
+  "gunsmiths_gadgetsn_gizmos.set_bonus.incendiary_scatter.desc": "ダメージ +10%, 弾速 +10% ＆ 火の粉を散らす散弾",
+
+  "gunsmiths_gadgetsn_gizmos.set_bonus.aero_ricochet": "セット効果：エアロ・リコショット",
+  "gunsmiths_gadgetsn_gizmos.set_bonus.aero_ricochet.desc": "弾速 +20%, 拡散 -1.0 ＆ 風に乗る跳弾",
+
+  "gunsmiths_gadgetsn_gizmos.set_bonus.soul_of_eternity": "セット効果：Soul of Eternity",
+  "gunsmiths_gadgetsn_gizmos.set_bonus.soul_of_eternity.desc": "全知全能の終極：ダメージ+300%, 貫通+10 ＆ 宇宙的特異点吸引 ＋ 5連落雷 ＋ 10秒完全氷結 ＋ 撃破時即座全弾装填"
 }

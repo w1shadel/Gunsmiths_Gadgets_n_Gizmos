@@ -43,7 +43,7 @@ public class ClientGunAuraEvents {
                             .add(0, -0.2, 0);
 
                     for (GunSetBonus bonus : bonuses) {
-                        // ★ ParticleOptions を直接取得（未指定時は ENCHANT）
+
                         ParticleOptions particle = bonus.bonuses().auraParticle().orElse(ParticleTypes.ENCHANT);
 
                         mc.level.addParticle(

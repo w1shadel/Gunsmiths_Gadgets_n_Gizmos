@@ -1,7 +1,9 @@
 package com.maxwell.gunsmiths_gadgetsn_gizmos.mixin;
 
 import com.maxwell.gunsmiths_gadgetsn_gizmos.api.ammo.AmmoManager;
+import com.maxwell.gunsmiths_gadgetsn_gizmos.item.InfiniteAmmoBagItem;
 import io.redspace.irons_artifice.item.GunplayManager;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
@@ -12,6 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(GunplayManager.class)
 public class GunplayManagerMixin {
+
     @Inject(method = "countBullets", at = @At("HEAD"), cancellable = true, remap = false)
     private static void gunsmiths_gadgetsn_gizmos$countAllBullets(Player player, CallbackInfoReturnable<Integer> cir) {
         cir.setReturnValue(AmmoManager.countPlayerAmmo(player));
@@ -23,4 +26,13 @@ public class GunplayManagerMixin {
         AmmoManager.consumeAmmo(player, amount, heldGun);
         ci.cancel();
     }
+
+    @Inject(method = "attemptFinishReload", at = @At("HEAD"), remap = false)
+    private static void gunsmiths_gadgetsn_gizmos$recordLoadedAmmoType(LivingEntity living, ItemStack gun, int roundsToLoad, CallbackInfoReturnable<?> cir) {
+        if (living instanceof Player player && !player.level().isClientSide()) {
+            AmmoManager.applyLoadedAmmoType(player, gun);
+        }
+    }
+
+
 }

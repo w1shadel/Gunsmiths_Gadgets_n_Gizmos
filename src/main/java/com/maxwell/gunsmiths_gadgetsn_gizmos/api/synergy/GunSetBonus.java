@@ -94,7 +94,6 @@ public record GunSetBonus(
         }
     }
 
-    // ★ ParticleOptions を直接保持する BonusStats
     public record BonusStats(
             double damageMultiplier,
             double bulletSpeedMultiplier,
@@ -103,7 +102,7 @@ public record GunSetBonus(
             int piercingAdd,
             Optional<String> trailColor,
             Optional<String> muzzleFlashColor,
-            Optional<ParticleOptions> auraParticle // ★ ParticleOptions 型！
+            Optional<ParticleOptions> auraParticle 
     ) {
         public static final BonusStats EMPTY = new BonusStats(0, 0, 0, 0, 0, Optional.empty(), Optional.empty(), Optional.empty());
 
@@ -115,7 +114,7 @@ public record GunSetBonus(
                 Codec.INT.optionalFieldOf("piercing_add", 0).forGetter(BonusStats::piercingAdd),
                 Codec.STRING.optionalFieldOf("trail_color").forGetter(BonusStats::trailColor),
                 Codec.STRING.optionalFieldOf("muzzle_flash_color").forGetter(BonusStats::muzzleFlashColor),
-                // ★ バニラ公式の ParticleTypes.CODEC を使用
+
                 ParticleTypes.CODEC.optionalFieldOf("aura_particle").forGetter(BonusStats::auraParticle)
         ).apply(builder, BonusStats::new));
     }

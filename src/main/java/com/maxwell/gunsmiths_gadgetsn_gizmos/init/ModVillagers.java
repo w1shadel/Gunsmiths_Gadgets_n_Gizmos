@@ -1,4 +1,4 @@
-package com.maxwell.gunsmiths_gadgetsn_gizmos.registry;
+package com.maxwell.gunsmiths_gadgetsn_gizmos.init;
 
 import com.google.common.collect.ImmutableSet;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;

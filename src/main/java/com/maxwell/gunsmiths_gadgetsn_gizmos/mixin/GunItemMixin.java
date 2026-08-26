@@ -1,6 +1,6 @@
 package com.maxwell.gunsmiths_gadgetsn_gizmos.mixin;
 
-import com.maxwell.gunsmiths_gadgetsn_gizmos.registry.ModDataComponents;
+import com.maxwell.gunsmiths_gadgetsn_gizmos.init.ModDataComponents;
 import io.redspace.irons_artifice.item.GunItem;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;

@@ -1,0 +1,17 @@
+{
+  "bonuses": {
+    "aura_particle": {
+      "type": "minecraft:flame"
+    },
+    "bullet_speed_multiplier": 0.1,
+    "damage_multiplier": 0.1,
+    "muzzle_flash_color": "#FF6600",
+    "trail_color": "#FF6600"
+  },
+  "description": "gunsmiths_gadgetsn_gizmos.set_bonus.incendiary_scatter.desc",
+  "name": "gunsmiths_gadgetsn_gizmos.set_bonus.incendiary_scatter",
+  "required_modifiers": [
+    "irons_artifice:incendiary_tip_modifier",
+    "irons_artifice:scattershot_modifier"
+  ]
+}

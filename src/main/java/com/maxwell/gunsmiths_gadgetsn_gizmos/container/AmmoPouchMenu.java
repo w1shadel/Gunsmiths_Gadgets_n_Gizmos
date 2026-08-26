@@ -1,7 +1,7 @@
 package com.maxwell.gunsmiths_gadgetsn_gizmos.container;
 
 import com.maxwell.gunsmiths_gadgetsn_gizmos.api.ammo.IAmmoContainer;
-import com.maxwell.gunsmiths_gadgetsn_gizmos.registry.ModMenuTypes;
+import com.maxwell.gunsmiths_gadgetsn_gizmos.init.ModMenuTypes;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;

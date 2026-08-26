@@ -1,6 +1,6 @@
 package com.maxwell.gunsmiths_gadgetsn_gizmos.recipe;
 
-import com.maxwell.gunsmiths_gadgetsn_gizmos.registry.ModRecipes;
+import com.maxwell.gunsmiths_gadgetsn_gizmos.init.ModRecipes;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

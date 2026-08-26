@@ -1,7 +1,7 @@
 package com.maxwell.gunsmiths_gadgetsn_gizmos.block.alter;
 
 import com.maxwell.gunsmiths_gadgetsn_gizmos.container.CursedAltarMenu;
-import com.maxwell.gunsmiths_gadgetsn_gizmos.registry.ModBlockEntities;
+import com.maxwell.gunsmiths_gadgetsn_gizmos.init.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;

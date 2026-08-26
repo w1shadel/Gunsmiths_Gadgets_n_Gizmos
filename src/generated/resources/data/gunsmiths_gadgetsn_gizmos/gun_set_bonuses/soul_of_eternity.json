@@ -1,0 +1,52 @@
+{
+  "bonuses": {
+    "aura_particle": {
+      "type": "minecraft:totem_of_undying"
+    },
+    "bullet_speed_multiplier": 1.5,
+    "damage_multiplier": 3.0,
+    "muzzle_flash_color": "#FFD700",
+    "piercing_add": 10,
+    "recoil_multiplier": -0.8,
+    "spread_add": -5.0,
+    "trail_color": "#FFFFFF"
+  },
+  "custom_effects": [
+    {
+      "type": "gunsmiths_gadgetsn_gizmos:gravitational_collapse",
+      "collapse_damage": 30.0,
+      "radius": 12.0
+    },
+    {
+      "type": "gunsmiths_gadgetsn_gizmos:multi_lightning",
+      "strike_count": 5
+    },
+    {
+      "type": "gunsmiths_gadgetsn_gizmos:absolute_zero",
+      "freeze_duration_ticks": 200,
+      "radius": 8.0
+    },
+    {
+      "type": "gunsmiths_gadgetsn_gizmos:corpse_poison_bloom",
+      "duration": 200,
+      "radius": 6.0
+    },
+    {
+      "type": "gunsmiths_gadgetsn_gizmos:soul_of_eternity"
+    }
+  ],
+  "description": "gunsmiths_gadgetsn_gizmos.set_bonus.soul_of_eternity.desc",
+  "name": "gunsmiths_gadgetsn_gizmos.set_bonus.soul_of_eternity",
+  "required_modifiers": [
+    "gunsmiths_gadgetsn_gizmos:crimson_singularity_modifier",
+    "gunsmiths_gadgetsn_gizmos:clockwork_gatling_modifier",
+    "gunsmiths_gadgetsn_gizmos:reapers_tempest_modifier",
+    "gunsmiths_gadgetsn_gizmos:midas_touch_chamber_modifier",
+    "gunsmiths_gadgetsn_gizmos:echoing_sonic_core_modifier",
+    "gunsmiths_gadgetsn_gizmos:sculk_devourer_modifier",
+    "gunsmiths_gadgetsn_gizmos:mastercrafted_trigger_modifier",
+    "irons_artifice:singularity_charge_modifier",
+    "irons_artifice:voltaic_core_modifier",
+    "irons_artifice:enchanted_bullet_modifier"
+  ]
+}

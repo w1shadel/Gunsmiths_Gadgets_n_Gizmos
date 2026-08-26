@@ -1,9 +1,9 @@
 package com.maxwell.gunsmiths_gadgetsn_gizmos.container;
 
-import com.maxwell.gunsmiths_gadgetsn_gizmos.registry.ModBlocks;
-import com.maxwell.gunsmiths_gadgetsn_gizmos.registry.ModDataComponents;
-import com.maxwell.gunsmiths_gadgetsn_gizmos.registry.ModItems;
-import com.maxwell.gunsmiths_gadgetsn_gizmos.registry.ModMenuTypes;
+import com.maxwell.gunsmiths_gadgetsn_gizmos.init.ModBlocks;
+import com.maxwell.gunsmiths_gadgetsn_gizmos.init.ModDataComponents;
+import com.maxwell.gunsmiths_gadgetsn_gizmos.init.ModItems;
+import com.maxwell.gunsmiths_gadgetsn_gizmos.init.ModMenuTypes;
 import io.redspace.irons_artifice.item.GunItem;
 import io.redspace.irons_artifice.registry.ItemRegistry;
 import net.minecraft.sounds.SoundEvents;

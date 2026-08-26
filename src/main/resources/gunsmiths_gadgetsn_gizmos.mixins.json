@@ -7,6 +7,11 @@
     "GunItemMixin",
     "GunplayManagerMixin"
   ],
+  "client": [
+    "client.GunModifierScreenMixin",
+    "client.AmmoCountHudOverlayMixin",
+    "client.ClientHelperMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
   },

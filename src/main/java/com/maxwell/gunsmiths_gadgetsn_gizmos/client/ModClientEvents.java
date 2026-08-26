@@ -8,8 +8,8 @@ import com.maxwell.gunsmiths_gadgetsn_gizmos.GunsmithsGadgetsnGizmos;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.client.gui.AmmoPouchScreen;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.client.gui.CursedAltarScreen;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.client.gui.GunsmithBenchScreen;
-import com.maxwell.gunsmiths_gadgetsn_gizmos.registry.ModItems;
-import com.maxwell.gunsmiths_gadgetsn_gizmos.registry.ModMenuTypes;
+import com.maxwell.gunsmiths_gadgetsn_gizmos.init.ModItems;
+import com.maxwell.gunsmiths_gadgetsn_gizmos.init.ModMenuTypes;
 import io.redspace.irons_artifice.client.gun.GunArmPoses;
 import io.redspace.irons_artifice.client.gun.GunInHandRenderer;
 import io.redspace.irons_artifice.item.GunItem;
@@ -52,9 +52,20 @@ public class ModClientEvents {
                 }
             });
         }
+        if (ModItems.MINIGUN.get() instanceof GunItem gun) {
+            Identifier modelId = BuiltInRegistries.ITEM.getKey(gun);
+            gun.geoRenderProvider.setValue(new GeoRenderProvider() {
+                private final Supplier<GeoItemRenderer<GunItem>> renderer =
+                        Suppliers.memoize(() -> new GunInHandRenderer(new DefaultedItemGeoModel<>(modelId)));
+
+                @Override
+                public @Nullable GeoItemRenderer<GunItem> getGeoItemRenderer() {
+                    return this.renderer.get();
+                }
+            });
+        }
     }
 
-    // 3. ★ ライフル構えポーズの登録
     @SubscribeEvent
     public static void registerClientExtensions(RegisterClientExtensionsEvent event) {
         IClientItemExtensions riflePose = new IClientItemExtensions() {
@@ -65,5 +76,6 @@ public class ModClientEvents {
         };
 
         event.registerItem(riflePose, ModItems.CLUNKER_RIFLE.get());
+        event.registerItem(riflePose, ModItems.MINIGUN.get());
     }
 }

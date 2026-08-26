@@ -1,6 +1,6 @@
 package com.maxwell.gunsmiths_gadgetsn_gizmos.api.detagen;
 
-import com.maxwell.gunsmiths_gadgetsn_gizmos.registry.ModItems;
+import com.maxwell.gunsmiths_gadgetsn_gizmos.init.ModItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;

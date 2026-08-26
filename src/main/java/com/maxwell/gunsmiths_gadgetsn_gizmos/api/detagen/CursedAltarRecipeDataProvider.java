@@ -2,7 +2,7 @@ package com.maxwell.gunsmiths_gadgetsn_gizmos.api.detagen;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.maxwell.gunsmiths_gadgetsn_gizmos.registry.ModItems;
+import com.maxwell.gunsmiths_gadgetsn_gizmos.init.ModItems;
 import io.redspace.irons_artifice.registry.ItemRegistry;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;

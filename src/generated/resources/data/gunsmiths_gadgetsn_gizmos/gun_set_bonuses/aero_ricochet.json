@@ -1,0 +1,17 @@
+{
+  "bonuses": {
+    "aura_particle": {
+      "type": "minecraft:gust"
+    },
+    "bullet_speed_multiplier": 0.2,
+    "muzzle_flash_color": "#A0E6FF",
+    "spread_add": -1.0,
+    "trail_color": "#A0E6FF"
+  },
+  "description": "gunsmiths_gadgetsn_gizmos.set_bonus.aero_ricochet.desc",
+  "name": "gunsmiths_gadgetsn_gizmos.set_bonus.aero_ricochet",
+  "required_modifiers": [
+    "irons_artifice:wind_chamber_modifier",
+    "irons_artifice:trick_bullet_modifier"
+  ]
+}

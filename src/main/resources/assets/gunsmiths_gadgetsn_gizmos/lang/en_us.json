@@ -151,5 +151,22 @@
   "item.gunsmiths_gadgetsn_gizmos.clunker_rifle": "Overpressurized Clunker Carbine",
   "gunsmiths_gadgetsn_gizmos.tooltip.clunker_rifle.flavour": "Overclocked pneumatic chamber: Catastrophic single-shot punch with intense blowback",
 
-  "gunsmiths_gadgetsn_gizmos.gui.synergy_near": "Synergy Resonance: 1 Part Remaining..."
+  "gunsmiths_gadgetsn_gizmos.set_bonus.recoil_control": "Set Bonus: Recoil Control",
+  "gunsmiths_gadgetsn_gizmos.set_bonus.recoil_control.desc": "-20% Recoil, -1.0 Spread for stabilized fire",
+
+  "gunsmiths_gadgetsn_gizmos.set_bonus.light_skirmisher": "Set Bonus: Light Skirmisher",
+  "gunsmiths_gadgetsn_gizmos.set_bonus.light_skirmisher.desc": "+15% Handling & Fire Rate for agile shooting",
+
+  "gunsmiths_gadgetsn_gizmos.set_bonus.heavy_impact": "Set Bonus: Heavy Impact",
+  "gunsmiths_gadgetsn_gizmos.set_bonus.heavy_impact.desc": "+10% Damage, +15% Bullet Speed with crushing force",
+
+  "gunsmiths_gadgetsn_gizmos.set_bonus.incendiary_scatter": "Set Bonus: Incendiary Scatter",
+  "gunsmiths_gadgetsn_gizmos.set_bonus.incendiary_scatter.desc": "+10% Damage, +10% Speed with fiery pellets",
+
+  "gunsmiths_gadgetsn_gizmos.set_bonus.aero_ricochet": "Set Bonus: Aero Ricochet",
+  "gunsmiths_gadgetsn_gizmos.set_bonus.aero_ricochet.desc": "+20% Bullet Speed, -1.0 Spread with gusting bounces",
+
+  "gunsmiths_gadgetsn_gizmos.set_bonus.soul_of_eternity": "Soul of Eternity",
+  "gunsmiths_gadgetsn_gizmos.set_bonus.soul_of_eternity.desc": "Omnipotence of Eternity: +300% Damage, +10 Piercing with Cosmic Singularity, Pentagram Lightning & Absolute Zero"
+
 }

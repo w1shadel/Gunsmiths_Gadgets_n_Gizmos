@@ -1,0 +1,17 @@
+{
+  "bonuses": {
+    "aura_particle": {
+      "type": "minecraft:poof"
+    },
+    "bullet_speed_multiplier": 0.15,
+    "damage_multiplier": 0.1,
+    "muzzle_flash_color": "#888888",
+    "trail_color": "#888888"
+  },
+  "description": "gunsmiths_gadgetsn_gizmos.set_bonus.heavy_impact.desc",
+  "name": "gunsmiths_gadgetsn_gizmos.set_bonus.heavy_impact",
+  "required_modifiers": [
+    "irons_artifice:lead_core_modifier",
+    "irons_artifice:breaching_shell_modifier"
+  ]
+}

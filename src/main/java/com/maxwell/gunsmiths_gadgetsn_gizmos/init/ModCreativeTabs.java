@@ -1,4 +1,4 @@
-package com.maxwell.gunsmiths_gadgetsn_gizmos.registry;
+package com.maxwell.gunsmiths_gadgetsn_gizmos.init;
 
 import com.maxwell.gunsmiths_gadgetsn_gizmos.GunsmithsGadgetsnGizmos;
 import io.redspace.irons_artifice.IronsArtifice;

@@ -1,0 +1,16 @@
+{
+  "bonuses": {
+    "aura_particle": {
+      "type": "minecraft:crit"
+    },
+    "bullet_speed_multiplier": 0.15,
+    "muzzle_flash_color": "#FFD700",
+    "trail_color": "#FFD700"
+  },
+  "description": "gunsmiths_gadgetsn_gizmos.set_bonus.light_skirmisher.desc",
+  "name": "gunsmiths_gadgetsn_gizmos.set_bonus.light_skirmisher",
+  "required_modifiers": [
+    "irons_artifice:hair_trigger_modifier",
+    "irons_artifice:gun_oil_modifier"
+  ]
+}

@@ -35,7 +35,9 @@ public class GunSetBonusManager extends SimplePreparableReloadListener<Map<Ident
         }
         return matched;
     }
-
+    public static java.util.Collection<GunSetBonus> getAllBonuses() {
+        return ACTIVE_BONUSES.values();
+    }
     @Override
     protected @NonNull Map<Identifier, GunSetBonus> prepare(@NonNull ResourceManager resourceManager, @NonNull ProfilerFiller profiler) {
         Map<Identifier, GunSetBonus> map = new HashMap<>();

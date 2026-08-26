@@ -1,7 +1,7 @@
 package com.maxwell.gunsmiths_gadgetsn_gizmos.api.detagen;
 
 import com.google.gson.JsonObject;
-import com.maxwell.gunsmiths_gadgetsn_gizmos.registry.ModItems;
+import com.maxwell.gunsmiths_gadgetsn_gizmos.init.ModItems;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.CachedOutput;
@@ -37,12 +37,10 @@ public class ModItemModelDataProvider implements DataProvider {
             Item item = holder.value();
             Identifier itemId = BuiltInRegistries.ITEM.getKey(item);
 
-            // 銃本体（clunker_rifle）はGeckoLibなのでスキップ
             if (itemId.getPath().equals("clunker_rifle")) {
                 continue;
             }
 
-            // 1. models/item/<name>.json (バニラ標準のフラットアイテムモデル)
             JsonObject modelJson = new JsonObject();
             modelJson.addProperty("parent", "minecraft:item/generated");
             JsonObject textures = new JsonObject();
@@ -56,7 +54,6 @@ public class ModItemModelDataProvider implements DataProvider {
                     .resolve(itemId.getPath() + ".json");
             futures.add(DataProvider.saveStable(output, modelJson, modelPath));
 
-            // 2. items/<name>.json (26.1 / 1.21.2+ バニラアイテム定義)
             JsonObject itemJson = new JsonObject();
             JsonObject modelObj = new JsonObject();
             modelObj.addProperty("type", "minecraft:model");

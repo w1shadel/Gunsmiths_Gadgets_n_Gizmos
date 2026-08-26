@@ -1,6 +1,6 @@
 package com.maxwell.gunsmiths_gadgetsn_gizmos.item;
 
-import com.maxwell.gunsmiths_gadgetsn_gizmos.registry.ModItems;
+import com.maxwell.gunsmiths_gadgetsn_gizmos.init.ModItems;
 import io.redspace.irons_artifice.registry.ItemRegistry;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;

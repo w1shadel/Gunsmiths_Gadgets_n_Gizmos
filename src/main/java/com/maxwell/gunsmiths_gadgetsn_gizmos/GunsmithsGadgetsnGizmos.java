@@ -1,6 +1,6 @@
 package com.maxwell.gunsmiths_gadgetsn_gizmos;
 
-import com.maxwell.gunsmiths_gadgetsn_gizmos.registry.*;
+import com.maxwell.gunsmiths_gadgetsn_gizmos.init.*;
 import com.mojang.logging.LogUtils;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
