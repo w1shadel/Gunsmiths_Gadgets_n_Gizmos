@@ -1,6 +1,5 @@
 package com.maxwell.gunsmiths_gadgetsn_gizmos.modifier.seteffect;
 
-
 import com.maxwell.gunsmiths_gadgetsn_gizmos.api.synergy.SetBonusEffect;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
@@ -34,7 +33,6 @@ public record GravitationalCollapseEffect(double radius, float collapseDamage) i
         Vec3 center = hitResult.getLocation();
         AABB pullArea = AABB.ofSize(center, radius * 2, radius * 2, radius * 2);
         Entity owner = bullet.getOwner();
-
         for (Entity entity : level.getEntities(bullet, pullArea, e -> e instanceof LivingEntity && Utils.canHarm(owner, e))) {
             LivingEntity target = (LivingEntity) entity;
             Vec3 pullVec = center.subtract(target.position());
@@ -42,11 +40,9 @@ public record GravitationalCollapseEffect(double radius, float collapseDamage) i
                 target.setDeltaMovement(pullVec.normalize().scale(1.2));
                 target.hurtMarked = true;
             }
-
             target.hurtServer(level, level.damageSources().wither(), collapseDamage);
             accumulator.add(target);
         }
-
         level.playSound(null, center.x, center.y, center.z,
                 SoundEvents.END_PORTAL_SPAWN, SoundSource.PLAYERS, 2.0F, 1.8F);
         Utils.spawnParticles(level, ParticleTypes.REVERSE_PORTAL, center.x, center.y + 0.5, center.z,

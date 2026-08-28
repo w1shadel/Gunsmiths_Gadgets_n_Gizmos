@@ -1,6 +1,5 @@
 package com.maxwell.gunsmiths_gadgetsn_gizmos.modifier.seteffect;
 
-
 import com.maxwell.gunsmiths_gadgetsn_gizmos.api.synergy.SetBonusEffect;
 import com.mojang.serialization.MapCodec;
 import io.redspace.irons_artifice.entity.Bullet;
@@ -26,7 +25,6 @@ public class SoulOfEternityEffect implements SetBonusEffect {
 
     @Override
     public void onShoot(ServerLevel level, LivingEntity shooter, io.redspace.irons_artifice.gun.ShotProfile profile, net.minecraft.world.phys.Vec3 origin, net.minecraft.world.phys.Vec3 direction) {
-
         shooter.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 20 * 4, 1));
         shooter.addEffect(new MobEffectInstance(MobEffects.RESISTANCE, 20 * 4, 1));
         shooter.addEffect(new MobEffectInstance(MobEffects.SPEED, 20 * 4, 1));
@@ -34,11 +32,9 @@ public class SoulOfEternityEffect implements SetBonusEffect {
 
     @Override
     public void onKill(ServerLevel level, LivingEntity killer, LivingEntity victim, Bullet bullet) {
-
         ItemStack gun = killer.getMainHandItem();
         if (gun.getItem() instanceof GunItem gunItem) {
             GunItem.setMagazine(gun, MagazineContents.get(gun).with(gunItem.magazineCapacity()));
-
             level.playSound(null, killer.getX(), killer.getY(), killer.getZ(),
                     SoundEvents.TOTEM_USE, SoundSource.PLAYERS, 1.2F, 1.2F);
             level.sendParticles(ParticleTypes.TOTEM_OF_UNDYING,

@@ -1,0 +1,37 @@
+{
+  "parent": "gunsmiths_gadgetsn_gizmos:craft_ammo_pouch",
+  "criteria": {
+    "has_special_ammo": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "gunsmiths_gadgetsn_gizmos:silver_bullet",
+              "gunsmiths_gadgetsn_gizmos:ap_bullet",
+              "gunsmiths_gadgetsn_gizmos:glass_bullet",
+              "gunsmiths_gadgetsn_gizmos:tracer_bullet"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.gunsmiths_gadgetsn_gizmos.special_ammo.desc"
+    },
+    "icon": {
+      "id": "gunsmiths_gadgetsn_gizmos:silver_bullet"
+    },
+    "title": {
+      "translate": "advancements.gunsmiths_gadgetsn_gizmos.special_ammo.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_special_ammo"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

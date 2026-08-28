@@ -2,7 +2,9 @@ package com.maxwell.gunsmiths_gadgetsn_gizmos.init;
 
 import com.maxwell.gunsmiths_gadgetsn_gizmos.GunsmithsGadgetsnGizmos;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.api.ammo.AmmoType;
+import com.maxwell.gunsmiths_gadgetsn_gizmos.modifier.on_hit.GlassBulletPostHit;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.modifier.on_hit.SilverBulletPostHit;
+import com.maxwell.gunsmiths_gadgetsn_gizmos.modifier.on_hit.TracerBulletPostHit;
 import io.redspace.irons_artifice.client.particle.ColorTransitionParticleOption;
 import io.redspace.irons_artifice.data.ShotComponents;
 import io.redspace.irons_artifice.data.ValueModifier;
@@ -69,6 +71,49 @@ public class ModAmmoTypes {
                 @Override
                 public Component getDisplayName() {
                     return Component.translatable("ammo.gunsmiths_gadgetsn_gizmos.armor_piercing");
+                }
+            }
+    );
+    public static final DeferredHolder<AmmoType, AmmoType> GLASS = AMMO_TYPES.register("glass",
+            () -> new AmmoType(ModItems.GLASS_BULLET) {
+                @Override
+                public void applyToShot(ShotProfile profile, LivingEntity shooter) {
+                    profile.components().getOrCreate(ShotComponents.PROJECTILE_COUNT)
+                            .addModifier(new ValueModifier(5, ValueModifier.Operation.ADD, ValueModifier.Type.BENEFICIAL));
+                    profile.components().getOrCreate(ShotComponents.DAMAGE)
+                            .addModifier(new ValueModifier(-0.40, ValueModifier.Operation.MULTIPLY_TOTAL, ValueModifier.Type.HARMFUL));
+                    profile.components().getOrCreate(ShotComponents.SPREAD)
+                            .addModifier(new ValueModifier(3.5, ValueModifier.Operation.ADD, ValueModifier.Type.NEUTRAL));
+                    profile.components().getOrCreate(ShotComponents.POST_HIT_EFFECTS).add(new GlassBulletPostHit());
+                    profile.components().getOrCreate(ShotComponents.PARTICLE_TRAIL).add(
+                            ColorTransitionParticleOption.bulletTrail(0xFFFFFF, 0xC8E8EE)
+                    );
+                }
+
+                @Override
+                public Component getDisplayName() {
+                    return Component.translatable("ammo.gunsmiths_gadgetsn_gizmos.glass");
+                }
+            }
+    );
+    public static final DeferredHolder<AmmoType, AmmoType> TRACER = AMMO_TYPES.register("tracer",
+            () -> new AmmoType(ModItems.TRACER_BULLET) {
+                @Override
+                public void applyToShot(ShotProfile profile, LivingEntity shooter) {
+                    profile.components().getOrCreate(ShotComponents.GRAVITY)
+                            .addModifier(new ValueModifier(-1.0, ValueModifier.Operation.MULTIPLY_TOTAL, ValueModifier.Type.BENEFICIAL));
+                    profile.components().getOrCreate(ShotComponents.BULLET_SPEED)
+                            .addModifier(new ValueModifier(0.50, ValueModifier.Operation.MULTIPLY_TOTAL, ValueModifier.Type.BENEFICIAL));
+                    profile.components().getOrCreate(ShotComponents.POST_HIT_EFFECTS).add(new TracerBulletPostHit());
+                    profile.components().getOrCreate(ShotComponents.PARTICLE_TRAIL).add(
+                            ColorTransitionParticleOption.bulletTrail(0xFFFF55, 0xFF8800)
+                    );
+                    profile.components().getOrCreate(ShotComponents.MUZZLE_FLASH).addTint(0xFFFF55);
+                }
+
+                @Override
+                public Component getDisplayName() {
+                    return Component.translatable("ammo.gunsmiths_gadgetsn_gizmos.tracer");
                 }
             }
     );

@@ -23,7 +23,6 @@ public class GunSetBonusManager extends SimplePreparableReloadListener<Map<Ident
     private static final FileToIdConverter CONVERTER = FileToIdConverter.json("gun_set_bonuses");
     private static final Map<Identifier, GunSetBonus> ACTIVE_BONUSES = new HashMap<>();
 
-    
     public static List<GunSetBonus> getMatchingBonuses(ItemStack gun) {
         List<GunSetBonus> matched = new ArrayList<>();
         GunContainer container = new GunContainer(gun);
@@ -35,9 +34,11 @@ public class GunSetBonusManager extends SimplePreparableReloadListener<Map<Ident
         }
         return matched;
     }
+
     public static java.util.Collection<GunSetBonus> getAllBonuses() {
         return ACTIVE_BONUSES.values();
     }
+
     @Override
     protected @NonNull Map<Identifier, GunSetBonus> prepare(@NonNull ResourceManager resourceManager, @NonNull ProfilerFiller profiler) {
         Map<Identifier, GunSetBonus> map = new HashMap<>();

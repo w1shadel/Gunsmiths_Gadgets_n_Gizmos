@@ -1,0 +1,38 @@
+{
+  "parent": "gunsmiths_gadgetsn_gizmos:first_altar_craft",
+  "criteria": {
+    "has_refined_mod": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "gunsmiths_gadgetsn_gizmos:crimson_singularity_modifier",
+              "gunsmiths_gadgetsn_gizmos:clockwork_gatling_modifier",
+              "gunsmiths_gadgetsn_gizmos:reapers_tempest_modifier",
+              "gunsmiths_gadgetsn_gizmos:midas_touch_chamber_modifier"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.gunsmiths_gadgetsn_gizmos.tier3_refined.desc"
+    },
+    "frame": "challenge",
+    "icon": {
+      "id": "gunsmiths_gadgetsn_gizmos:crimson_singularity_modifier"
+    },
+    "title": {
+      "translate": "advancements.gunsmiths_gadgetsn_gizmos.tier3_refined.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_refined_mod"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

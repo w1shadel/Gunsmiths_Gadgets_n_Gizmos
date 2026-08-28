@@ -1,0 +1,37 @@
+{
+  "parent": "gunsmiths_gadgetsn_gizmos:get_omen_core",
+  "criteria": {
+    "has_forbidden_mod": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "gunsmiths_gadgetsn_gizmos:bloodbound_calamity_modifier",
+              "gunsmiths_gadgetsn_gizmos:unstable_overclock_modifier",
+              "gunsmiths_gadgetsn_gizmos:reapers_gambit_modifier",
+              "gunsmiths_gadgetsn_gizmos:trial_of_greed_modifier"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.gunsmiths_gadgetsn_gizmos.altar_craft.desc"
+    },
+    "icon": {
+      "id": "gunsmiths_gadgetsn_gizmos:bloodbound_calamity_modifier"
+    },
+    "title": {
+      "translate": "advancements.gunsmiths_gadgetsn_gizmos.altar_craft.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_forbidden_mod"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

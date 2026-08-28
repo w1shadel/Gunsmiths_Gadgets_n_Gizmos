@@ -1,45 +1,53 @@
 package com.maxwell.gunsmiths_gadgetsn_gizmos.api.gun;
 
-import net.minecraft.client.Camera;
-import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.Vec3;
-import org.joml.Quaternionf;
-import org.joml.Vector3f;
 
-public record MuzzleOffset(double forward, double right, double up) {
-    public static final MuzzleOffset DEFAULT = new MuzzleOffset(1.8, 0.30, -0.20);
+public record MuzzleOffset(double px, double py, double pz) {
+    public static final MuzzleOffset DEFAULT = new MuzzleOffset(0.0, 0.0, -20.0);
 
-    
+    /**
+     * 1人称視点：カメラ回転（ピッチ＆ヨー）に完全固定された手元座標系
+     */
     public Vec3 calculateFirstPersonOffset(LivingEntity shooter) {
-        Camera camera = Minecraft.getInstance().gameRenderer.getMainCamera();
-        Quaternionf camRot = new Quaternionf(camera.rotation());
+        float pitch = shooter.getXRot(); 
+        float yaw = shooter.getYRot();   
 
-        float handSign = shooter.getMainArm() == HumanoidArm.RIGHT ? 1.0F : -1.0F;
+        Vec3 forwardVec = Vec3.directionFromRotation(pitch, yaw);
+        Vec3 rightVec = Vec3.directionFromRotation(0, yaw + 90.0F); 
+        Vec3 upVec = Vec3.directionFromRotation(pitch - 90.0F, yaw); 
 
+        double armDirection = shooter.getMainArm() == HumanoidArm.LEFT ? -1.0 : 1.0;
 
-        Vector3f localPos = new Vector3f(
-                (float) (this.right * handSign),
-                (float) this.up,
-                (float) -this.forward 
-        );
+        double forward = 0.40 + (-this.pz * 0.016);
+        double right = 0.28 + (this.px * 0.012);
+        double up = -0.22 + (this.py * 0.012);
 
-        localPos.rotate(camRot);
-
-        return new Vec3(localPos.x(), localPos.y(), localPos.z());
+        return forwardVec.scale(forward)
+                .add(rightVec.scale(right * armDirection))
+                .add(upVec.scale(up));
     }
 
-    
+    /**
+     * 3人称視点：プレイヤーの体・腕の向きに合わせた実寸スケール
+     */
     public Vec3 calculateThirdPersonOffset(LivingEntity shooter, Vec3 lookDirection) {
+        float pitch = shooter.getXRot();
+        float yaw = shooter.getYRot();
+
         Vec3 forwardVec = lookDirection.normalize();
-        Vec3 rightVec = forwardVec.cross(new Vec3(0, 1, 0)).normalize();
-        Vec3 upVec = rightVec.cross(forwardVec).normalize();
+        Vec3 rightVec = Vec3.directionFromRotation(0, yaw + 90.0F);
+        Vec3 upVec = Vec3.directionFromRotation(pitch - 90.0F, yaw);
 
-        float handSign = shooter.getMainArm() == HumanoidArm.RIGHT ? 1.0F : -1.0F;
+        double armDirection = shooter.getMainArm() == HumanoidArm.LEFT ? -1.0 : 1.0;
 
-        return forwardVec.scale(this.forward)
-                .add(rightVec.scale(this.right * handSign))
-                .add(upVec.scale(this.up));
+        double forward = 0.50 + (-this.pz / 16.0);
+        double right = 0.35 + (this.px / 16.0);
+        double up = -0.15 + (this.py / 16.0);
+
+        return forwardVec.scale(forward)
+                .add(rightVec.scale(right * armDirection))
+                .add(upVec.scale(up));
     }
 }

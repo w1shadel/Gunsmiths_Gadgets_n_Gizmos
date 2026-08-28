@@ -1,0 +1,33 @@
+{
+  "parent": "gunsmiths_gadgetsn_gizmos:craft_gunsmith_bench",
+  "criteria": {
+    "has_kit": {
+      "conditions": {
+        "items": [
+          {
+            "items": "gunsmiths_gadgetsn_gizmos:gunsmith_chassis_kit"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.gunsmiths_gadgetsn_gizmos.expand_chassis.desc"
+    },
+    "frame": "goal",
+    "icon": {
+      "id": "gunsmiths_gadgetsn_gizmos:gunsmith_chassis_kit"
+    },
+    "title": {
+      "translate": "advancements.gunsmiths_gadgetsn_gizmos.expand_chassis.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_kit"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

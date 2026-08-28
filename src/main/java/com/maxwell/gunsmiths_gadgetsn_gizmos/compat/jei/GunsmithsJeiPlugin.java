@@ -1,7 +1,7 @@
 package com.maxwell.gunsmiths_gadgetsn_gizmos.compat.jei;
 
-import com.maxwell.gunsmiths_gadgetsn_gizmos.recipe.CursedAltarRecipe;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.init.ModBlocks;
+import com.maxwell.gunsmiths_gadgetsn_gizmos.recipe.CursedAltarRecipe;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;

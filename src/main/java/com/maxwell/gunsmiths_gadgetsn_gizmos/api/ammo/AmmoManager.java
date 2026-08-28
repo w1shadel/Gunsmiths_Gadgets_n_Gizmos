@@ -1,8 +1,8 @@
 package com.maxwell.gunsmiths_gadgetsn_gizmos.api.ammo;
 
-import com.maxwell.gunsmiths_gadgetsn_gizmos.item.InfiniteAmmoBagItem;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.init.ModAmmoTypes;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.init.ModDataComponents;
+import com.maxwell.gunsmiths_gadgetsn_gizmos.item.InfiniteAmmoBagItem;
 import net.minecraft.core.NonNullList;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Player;
@@ -63,6 +63,7 @@ public class AmmoManager {
         }
         return ModAmmoTypes.DEFAULT.get();
     }
+
     public static void applyLoadedAmmoType(Player player, ItemStack gun) {
         AmmoType activeType = getActiveAmmoType(player);
         Identifier typeId = ModAmmoTypes.REGISTRY.getKey(activeType);
@@ -70,19 +71,17 @@ public class AmmoManager {
             gun.set(ModDataComponents.LOADED_AMMO_TYPE.get(), typeId.toString());
         }
     }
+
     public static void consumeAmmo(Player player, int amount, ItemStack gun) {
         if (InfiniteAmmoBagItem.hasInfiniteBag(player) || player.hasInfiniteMaterials()) {
-            return; 
+            return;
         }
-
         int remaining = amount;
-
         for (int i = 0; i < player.getInventory().getContainerSize() && remaining > 0; i++) {
             ItemStack stack = player.getInventory().getItem(i);
             if (stack.getItem() instanceof IAmmoContainer container) {
                 NonNullList<ItemStack> items = container.getStoredAmmo(stack);
                 boolean changed = false;
-
                 for (ItemStack slotItem : items) {
                     if (isAmmo(slotItem)) {
                         int take = Math.min(remaining, slotItem.getCount());
@@ -92,13 +91,11 @@ public class AmmoManager {
                         if (remaining <= 0) break;
                     }
                 }
-
                 if (changed) {
                     container.setStoredAmmo(stack, items);
                 }
             }
         }
-
         if (remaining > 0) {
             for (int i = 0; i < player.getInventory().getContainerSize() && remaining > 0; i++) {
                 ItemStack stack = player.getInventory().getItem(i);

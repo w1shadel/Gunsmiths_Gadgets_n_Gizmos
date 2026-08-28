@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": "irons_artifice:clockwork_components",
+    "G": "minecraft:gold_ingot",
+    "I": "minecraft:iron_block",
+    "M": "irons_artifice:mechanical_components"
+  },
+  "pattern": [
+    "IMI",
+    "MCM",
+    "IGI"
+  ],
+  "result": {
+    "id": "gunsmiths_gadgetsn_gizmos:gunsmith_chassis_kit"
+  }
+}

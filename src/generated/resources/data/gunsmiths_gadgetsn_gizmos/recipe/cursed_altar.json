@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "B": "gunsmiths_gadgetsn_gizmos:gunsmith_bench",
+    "C": "gunsmiths_gadgetsn_gizmos:ominous_clockwork_core",
+    "O": "minecraft:crying_obsidian",
+    "S": "minecraft:soul_sand"
+  },
+  "pattern": [
+    " C ",
+    "OBO",
+    "SSS"
+  ],
+  "result": {
+    "id": "gunsmiths_gadgetsn_gizmos:cursed_altar"
+  }
+}

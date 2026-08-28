@@ -23,13 +23,10 @@ public class ModSetBonusEffects {
             EFFECTS.register("absolute_zero", () -> AbsoluteZeroEffect.CODEC);
     public static final DeferredHolder<MapCodec<? extends SetBonusEffect>, MapCodec<CorpsePoisonBloomEffect>> CORPSE_POISON_BLOOM =
             EFFECTS.register("corpse_poison_bloom", () -> CorpsePoisonBloomEffect.CODEC);
-
     public static final DeferredHolder<MapCodec<? extends SetBonusEffect>, MapCodec<GravitationalCollapseEffect>> GRAVITATIONAL_COLLAPSE =
             EFFECTS.register("gravitational_collapse", () -> GravitationalCollapseEffect.CODEC);
-
     public static final DeferredHolder<MapCodec<? extends SetBonusEffect>, MapCodec<MultiLightningStrikeEffect>> MULTI_LIGHTNING =
             EFFECTS.register("multi_lightning", () -> MultiLightningStrikeEffect.CODEC);
-
     public static final DeferredHolder<MapCodec<? extends SetBonusEffect>, MapCodec<SoulOfEternityEffect>> SOUL_OF_ETERNITY =
             EFFECTS.register("soul_of_eternity", () -> SoulOfEternityEffect.CODEC);
 

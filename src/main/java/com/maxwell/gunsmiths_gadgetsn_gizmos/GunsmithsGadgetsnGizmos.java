@@ -21,6 +21,9 @@ public class GunsmithsGadgetsnGizmos {
         ModCreativeTabs.register(modEventBus);
         ModDataComponents.register(modEventBus);
         ModRecipes.register(modEventBus);
+        ModMobEffects.register(modEventBus);
+        modEventBus.addListener(ModPayloads::register);
+        ModEntities.register(modEventBus);
         ModAmmoTypes.register(modEventBus);
         ModSetBonusEffects.register(modEventBus);
     }

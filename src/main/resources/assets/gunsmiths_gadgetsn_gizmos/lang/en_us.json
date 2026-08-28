@@ -23,12 +23,6 @@
   "item.gunsmiths_gadgetsn_gizmos.unidentified_crate": "Unidentified Gunsmith Crate",
   "item.gunsmiths_gadgetsn_gizmos.infinite_ammo_bag": "Infinite Ammo Bag",
 
-  "item.gunsmiths_gadgetsn_gizmos.silver_bullet": "Silver Bullet",
-  "item.gunsmiths_gadgetsn_gizmos.ap_bullet": "Armor-Piercing AP Bullet",
-  "ammo.gunsmiths_gadgetsn_gizmos.default": "Standard Bullet",
-  "ammo.gunsmiths_gadgetsn_gizmos.silver": "Silver Bullet",
-  "ammo.gunsmiths_gadgetsn_gizmos.armor_piercing": "Armor-Piercing Bullet",
-
   "item.gunsmiths_gadgetsn_gizmos.ammo_pouch": "Ammo Pouch",
   "gunsmiths_gadgetsn_gizmos.tooltip.ammo_pouch": "Tactical Ammo Pocket",
   "gunsmiths_gadgetsn_gizmos.tooltip.ammo_pouch.desc": "Stores specialized ammunition; automatically reloads priority ammo",
@@ -167,6 +161,75 @@
   "gunsmiths_gadgetsn_gizmos.set_bonus.aero_ricochet.desc": "+20% Bullet Speed, -1.0 Spread with gusting bounces",
 
   "gunsmiths_gadgetsn_gizmos.set_bonus.soul_of_eternity": "Soul of Eternity",
-  "gunsmiths_gadgetsn_gizmos.set_bonus.soul_of_eternity.desc": "Omnipotence of Eternity: +300% Damage, +10 Piercing with Cosmic Singularity, Pentagram Lightning & Absolute Zero"
+  "gunsmiths_gadgetsn_gizmos.set_bonus.soul_of_eternity.desc": "Omnipotence of Eternity: +300% Damage, +10 Piercing with Cosmic Singularity, Pentagram Lightning & Absolute Zero",
+
+
+  "item.gunsmiths_gadgetsn_gizmos.silver_bullet": "Silver Bullet",
+  "item.gunsmiths_gadgetsn_gizmos.ap_bullet": "Armor-Piercing AP Bullet",
+  "item.gunsmiths_gadgetsn_gizmos.glass_bullet": "Glass Shardshell Bullet",
+  "item.gunsmiths_gadgetsn_gizmos.tracer_bullet": "Tracer Bullet",
+
+  "ammo.gunsmiths_gadgetsn_gizmos.default": "Standard Bullet",
+  "ammo.gunsmiths_gadgetsn_gizmos.silver": "Silver Bullet",
+  "ammo.gunsmiths_gadgetsn_gizmos.armor_piercing": "Armor-Piercing Bullet",
+  "ammo.gunsmiths_gadgetsn_gizmos.glass": "Glass Shardshell",
+  "ammo.gunsmiths_gadgetsn_gizmos.tracer": "Tracer Bullet",
+  "item.gunsmiths_gadgetsn_gizmos.geological_tunneler_modifier": "Geological Tunneler Modifier",
+  "gunsmiths_gadgetsn_gizmos.modifier.geological_tunneler": "Terrain Drill: +1500% Block Damage with +8 Piercing",
+  "gunsmiths_gadgetsn_gizmos.modifier.geological_tunneler.desc": "Obliterates terrain in a straight line to carve instant tunnels",
+  "gunsmiths_gadgetsn_gizmos.modifier.geological_tunneler.penalty": "-85% Mob Damage",
+
+  "item.gunsmiths_gadgetsn_gizmos.geometric_prism_modifier": "Geometric Prism Modifier",
+  "gunsmiths_gadgetsn_gizmos.modifier.geometric_prism": "Refraction Prism: Ricocheting activates extreme homing",
+  "gunsmiths_gadgetsn_gizmos.modifier.geometric_prism.desc": "Bouncing bullets off walls/floors makes them sharply steer towards enemy heads",
+
+  "item.gunsmiths_gadgetsn_gizmos.ferromagnetic_marker_modifier": "Ferromagnetic Marker Modifier",
+  "gunsmiths_gadgetsn_gizmos.modifier.ferromagnetic_marker": "Magnetic Tag: Imparts Magnetized status on hit",
+  "gunsmiths_gadgetsn_gizmos.modifier.ferromagnetic_marker.desc": "All subsequent shots (even blind fire/shotgun pellets) violently converge on the tagged target",
+
+  "effect.gunsmiths_gadgetsn_gizmos.magnetized": "Magnetized",
+  "effect.gunsmiths_gadgetsn_gizmos.bleeding": "Bleeding",
+
+  "item.gunsmiths_gadgetsn_gizmos.minigun": "Clockwork Gatling",
+
+  "advancements.gunsmiths_gadgetsn_gizmos.root.title": "The Ash & Brass Chronicles",
+  "advancements.gunsmiths_gadgetsn_gizmos.root.desc": "Begin your journey into the art of firearm engineering and forbidden alchemy",
+
+  "advancements.gunsmiths_gadgetsn_gizmos.craft_bench.title": "Apprentice of the Anvil",
+  "advancements.gunsmiths_gadgetsn_gizmos.craft_bench.desc": "Craft a Gunsmith Bench to begin tailoring and expanding your firearms",
+
+  "advancements.gunsmiths_gadgetsn_gizmos.craft_pouch.title": "Ammunition Protocol",
+  "advancements.gunsmiths_gadgetsn_gizmos.craft_pouch.desc": "Craft an Ammo Pouch to organize and prioritize specialized bullet types",
+
+  "advancements.gunsmiths_gadgetsn_gizmos.special_ammo.title": "Tactical Ballistics",
+  "advancements.gunsmiths_gadgetsn_gizmos.special_ammo.desc": "Acquire any specialized ammunition (Silver, AP, Glass, or Tracer)",
+
+  "advancements.gunsmiths_gadgetsn_gizmos.expand_chassis.title": "Heavy-Duty Chassis",
+  "advancements.gunsmiths_gadgetsn_gizmos.expand_chassis.desc": "Forge an upgrade kit to permanently expand a firearm's modifier capacity",
+
+  "advancements.gunsmiths_gadgetsn_gizmos.find_altar.title": "The Cursed Altar",
+  "advancements.gunsmiths_gadgetsn_gizmos.find_altar.desc": "Construct or discover a Cursed Gunsmith Altar, stepping into forbidden alchemy",
+
+  "advancements.gunsmiths_gadgetsn_gizmos.get_omen_core.title": "Heart of the Omen",
+  "advancements.gunsmiths_gadgetsn_gizmos.get_omen_core.desc": "Obtain an Ominous Clockwork Core from the depths of the trial chambers",
+
+  "advancements.gunsmiths_gadgetsn_gizmos.altar_craft.title": "Forbidden Synthesis",
+  "advancements.gunsmiths_gadgetsn_gizmos.altar_craft.desc": "Synthesize a raw forbidden modifier at the Cursed Altar",
+
+  "advancements.gunsmiths_gadgetsn_gizmos.tier3_refined.title": "Master of the Calamity",
+  "advancements.gunsmiths_gadgetsn_gizmos.tier3_refined.desc": "Transmute guild craftsmanship with occult power to forge a Tier 3 Refined Modifier",
+
+  "advancements.gunsmiths_gadgetsn_gizmos.ruined_end.title": "Echoes of a Forgotten World",
+  "advancements.gunsmiths_gadgetsn_gizmos.ruined_end.desc": "Cross the threshold into the End, where the masterless relics of a lost civilization await...",
+
+  "entity.gunsmiths_gadgetsn_gizmos.apostle_gun": "Apostle",
+
+  "apostle.title.blood_severer": "Blood-Severer",
+  "apostle.title.tempest_torn": "Tempest-Torn",
+  "apostle.title.soundless_echo": "Soundless Echo",
+  "apostle.title.gilded_despoiler": "Gilded Despoiler",
+  "apostle.title.soul_reaper": "Soul Reaper",
+  "apostle.title.annihilation_harbinger": "Annihilation Harbinger",
+  "apostle.title.void_cleft_sovereign": "Void-Cleft Sovereign"
 
 }

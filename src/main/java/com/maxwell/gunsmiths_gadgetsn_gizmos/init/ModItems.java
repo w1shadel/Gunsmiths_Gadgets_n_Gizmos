@@ -108,11 +108,12 @@ public class ModItems {
     );
     public static final DeferredItem<Item> SILVER_BULLET = ITEMS.registerSimpleItem("silver_bullet");
     public static final DeferredItem<Item> AP_BULLET = ITEMS.registerSimpleItem("ap_bullet");
+    public static final DeferredItem<Item> GLASS_BULLET = ITEMS.registerSimpleItem("glass_bullet");
+    public static final DeferredItem<Item> TRACER_BULLET = ITEMS.registerSimpleItem("tracer_bullet");
     public static final DeferredItem<Item> AMMO_POUCH = ITEMS.registerItem(
             "ammo_pouch",
             AmmoPouchItem::new
     );
-
     public static final DeferredItem<GunItem> CLUNKER_RIFLE = ITEMS.registerItem(
             "clunker_rifle",
             properties -> new GunItem(properties, ModGuns.CLUNKER_RIFLE)

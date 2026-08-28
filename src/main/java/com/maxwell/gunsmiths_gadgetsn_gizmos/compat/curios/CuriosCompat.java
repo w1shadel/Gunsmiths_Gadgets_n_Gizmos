@@ -12,7 +12,6 @@ import java.util.function.Predicate;
 public class CuriosCompat {
     public static final boolean IS_CURIOS_LOADED = ModList.get().isLoaded("curios");
 
-    
     public static boolean isEquipped(LivingEntity entity, Item item) {
         return isEquipped(entity, stack -> stack.is(item));
     }

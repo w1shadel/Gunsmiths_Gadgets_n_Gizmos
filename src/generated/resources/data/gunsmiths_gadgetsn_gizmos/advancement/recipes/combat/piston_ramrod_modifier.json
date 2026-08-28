@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_simple_parts": {
+      "conditions": {
+        "items": [
+          {
+            "items": "irons_artifice:simple_mechanical_components"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "gunsmiths_gadgetsn_gizmos:piston_ramrod_modifier"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_simple_parts"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "gunsmiths_gadgetsn_gizmos:piston_ramrod_modifier"
+    ]
+  }
+}

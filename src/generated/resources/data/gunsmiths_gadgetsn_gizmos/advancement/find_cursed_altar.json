@@ -1,0 +1,32 @@
+{
+  "parent": "gunsmiths_gadgetsn_gizmos:root",
+  "criteria": {
+    "has_altar": {
+      "conditions": {
+        "items": [
+          {
+            "items": "gunsmiths_gadgetsn_gizmos:cursed_altar"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.gunsmiths_gadgetsn_gizmos.find_altar.desc"
+    },
+    "icon": {
+      "id": "gunsmiths_gadgetsn_gizmos:cursed_altar"
+    },
+    "title": {
+      "translate": "advancements.gunsmiths_gadgetsn_gizmos.find_altar.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_altar"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

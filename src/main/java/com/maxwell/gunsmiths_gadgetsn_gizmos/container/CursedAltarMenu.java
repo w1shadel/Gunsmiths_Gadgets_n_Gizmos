@@ -1,12 +1,12 @@
 package com.maxwell.gunsmiths_gadgetsn_gizmos.container;
 
 import com.maxwell.gunsmiths_gadgetsn_gizmos.block.alter.CursedAltarBlockEntity;
-import com.maxwell.gunsmiths_gadgetsn_gizmos.recipe.CursedAltarRecipe;
-import com.maxwell.gunsmiths_gadgetsn_gizmos.recipe.CursedAltarRecipeInput;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.init.ModBlocks;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.init.ModItems;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.init.ModMenuTypes;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.init.ModRecipes;
+import com.maxwell.gunsmiths_gadgetsn_gizmos.recipe.CursedAltarRecipe;
+import com.maxwell.gunsmiths_gadgetsn_gizmos.recipe.CursedAltarRecipeInput;
 import io.redspace.irons_artifice.modifier.ModifierItem;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.server.level.ServerLevel;

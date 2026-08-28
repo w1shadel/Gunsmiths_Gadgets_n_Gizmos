@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "A": "minecraft:anvil",
+    "I": "minecraft:iron_block",
+    "L": "#minecraft:logs",
+    "P": "irons_artifice:simple_mechanical_components"
+  },
+  "pattern": [
+    " I ",
+    "PAP",
+    "LLL"
+  ],
+  "result": {
+    "id": "gunsmiths_gadgetsn_gizmos:gunsmith_bench"
+  }
+}

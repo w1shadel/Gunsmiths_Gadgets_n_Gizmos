@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": "irons_artifice:bullet",
+    "I": "minecraft:iron_ingot",
+    "L": "minecraft:leather",
+    "S": "minecraft:string"
+  },
+  "pattern": [
+    "LIL",
+    "S#S",
+    "LLL"
+  ],
+  "result": {
+    "id": "gunsmiths_gadgetsn_gizmos:ammo_pouch"
+  }
+}

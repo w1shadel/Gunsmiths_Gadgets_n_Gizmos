@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "F": "minecraft:firework_star",
+    "G": "minecraft:gold_ingot",
+    "M": "irons_artifice:simple_mechanical_components"
+  },
+  "pattern": [
+    " G ",
+    " F ",
+    " M "
+  ],
+  "result": {
+    "id": "gunsmiths_gadgetsn_gizmos:town_bell_flare_modifier"
+  }
+}

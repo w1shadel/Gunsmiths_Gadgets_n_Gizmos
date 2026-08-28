@@ -6,12 +6,10 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 public class ModifierHelper {
-    
     public static boolean hasModifier(ShotProfile profile, Item modifierItem) {
         return hasModifier(profile.itemStack(), modifierItem);
     }
 
-    
     public static boolean hasModifier(ItemStack gunStack, Item modifierItem) {
         if (gunStack.isEmpty()) return false;
         GunContainer container = new GunContainer(gunStack);

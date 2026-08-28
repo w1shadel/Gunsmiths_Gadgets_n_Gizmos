@@ -1,0 +1,32 @@
+{
+  "parent": "gunsmiths_gadgetsn_gizmos:root",
+  "criteria": {
+    "has_bench": {
+      "conditions": {
+        "items": [
+          {
+            "items": "gunsmiths_gadgetsn_gizmos:gunsmith_bench"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.gunsmiths_gadgetsn_gizmos.craft_bench.desc"
+    },
+    "icon": {
+      "id": "gunsmiths_gadgetsn_gizmos:gunsmith_bench"
+    },
+    "title": {
+      "translate": "advancements.gunsmiths_gadgetsn_gizmos.craft_bench.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_bench"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

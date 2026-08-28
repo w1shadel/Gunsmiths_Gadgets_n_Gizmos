@@ -19,15 +19,15 @@ public interface SetBonusEffect {
 
     MapCodec<? extends SetBonusEffect> codec();
 
-    
-    default void onCompose(ShotProfile profile, LivingEntity shooter) {}
+    default void onCompose(ShotProfile profile, LivingEntity shooter) {
+    }
 
-    
-    default void onShoot(ServerLevel level, LivingEntity shooter, ShotProfile profile, Vec3 origin, Vec3 direction) {}
+    default void onShoot(ServerLevel level, LivingEntity shooter, ShotProfile profile, Vec3 origin, Vec3 direction) {
+    }
 
-    
-    default void onHit(ServerLevel level, Bullet bullet, HitResult hitResult, HitEntityAccumulator accumulator) {}
+    default void onHit(ServerLevel level, Bullet bullet, HitResult hitResult, HitEntityAccumulator accumulator) {
+    }
 
-    
-    default void onKill(ServerLevel level, LivingEntity killer, LivingEntity victim, Bullet bullet) {}
+    default void onKill(ServerLevel level, LivingEntity killer, LivingEntity victim, Bullet bullet) {
+    }
 }

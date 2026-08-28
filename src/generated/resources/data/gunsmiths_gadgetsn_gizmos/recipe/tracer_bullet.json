@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": "irons_artifice:blackpowder",
+    "D": "minecraft:glowstone_dust",
+    "I": "minecraft:iron_ingot"
+  },
+  "pattern": [
+    " D ",
+    " I ",
+    " B "
+  ],
+  "result": {
+    "count": 16,
+    "id": "gunsmiths_gadgetsn_gizmos:tracer_bullet"
+  }
+}

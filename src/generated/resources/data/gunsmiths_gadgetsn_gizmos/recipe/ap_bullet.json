@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": "irons_artifice:blackpowder",
+    "C": "gunsmiths_gadgetsn_gizmos:coagulated_omen_blood",
+    "I": "minecraft:iron_ingot"
+  },
+  "pattern": [
+    " C ",
+    " I ",
+    " B "
+  ],
+  "result": {
+    "count": 16,
+    "id": "gunsmiths_gadgetsn_gizmos:ap_bullet"
+  }
+}

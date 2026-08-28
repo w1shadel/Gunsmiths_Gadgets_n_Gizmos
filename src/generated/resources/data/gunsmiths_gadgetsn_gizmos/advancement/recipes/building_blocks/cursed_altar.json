@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_omen_core": {
+      "conditions": {
+        "items": [
+          {
+            "items": "gunsmiths_gadgetsn_gizmos:ominous_clockwork_core"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "gunsmiths_gadgetsn_gizmos:cursed_altar"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_omen_core"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "gunsmiths_gadgetsn_gizmos:cursed_altar"
+    ]
+  }
+}

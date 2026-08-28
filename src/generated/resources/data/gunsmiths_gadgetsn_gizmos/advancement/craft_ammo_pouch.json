@@ -1,0 +1,32 @@
+{
+  "parent": "gunsmiths_gadgetsn_gizmos:craft_gunsmith_bench",
+  "criteria": {
+    "has_pouch": {
+      "conditions": {
+        "items": [
+          {
+            "items": "gunsmiths_gadgetsn_gizmos:ammo_pouch"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.gunsmiths_gadgetsn_gizmos.craft_pouch.desc"
+    },
+    "icon": {
+      "id": "gunsmiths_gadgetsn_gizmos:ammo_pouch"
+    },
+    "title": {
+      "translate": "advancements.gunsmiths_gadgetsn_gizmos.craft_pouch.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_pouch"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

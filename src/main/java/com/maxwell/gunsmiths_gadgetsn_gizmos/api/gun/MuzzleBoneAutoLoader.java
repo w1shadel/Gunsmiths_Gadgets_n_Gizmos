@@ -17,15 +17,6 @@ import java.util.Map;
 public class MuzzleBoneAutoLoader {
     private static final Map<Identifier, MuzzleOffset> AUTO_OFFSETS = new HashMap<>();
 
-
-
-
-    public static double BASE_HAND_RIGHT = 0.38;
-
-    public static double BASE_HAND_UP = -0.38;
-
-    public static double BASE_HAND_FORWARD = 0.10;
-
     public static MuzzleOffset getOffset(Item gunItem) {
         Identifier itemId = BuiltInRegistries.ITEM.getKey(gunItem);
         return AUTO_OFFSETS.computeIfAbsent(itemId, MuzzleBoneAutoLoader::loadFromModelJson);
@@ -36,7 +27,6 @@ public class MuzzleBoneAutoLoader {
                 itemId.getNamespace(),
                 "geckolib/models/item/" + itemId.getPath() + ".geo.json"
         );
-
         try {
             ResourceManager resourceManager = Minecraft.getInstance().getResourceManager();
             var resourceOpt = resourceManager.getResource(modelLocation);
@@ -51,17 +41,16 @@ public class MuzzleBoneAutoLoader {
                                 JsonObject boneObj = boneEl.getAsJsonObject();
                                 String name = boneObj.get("name").getAsString();
 
-                                if ("muzzle".equalsIgnoreCase(name) || "muzzle_flash".equalsIgnoreCase(name)) {
+                                if ("muzzle".equalsIgnoreCase(name)
+                                        || "muzzle_flash".equalsIgnoreCase(name)
+                                        || "attachment_bayonet".equalsIgnoreCase(name)) {
                                     JsonArray pivot = boneObj.getAsJsonArray("pivot");
                                     if (pivot != null && pivot.size() >= 3) {
                                         double px = pivot.get(0).getAsDouble();
                                         double py = pivot.get(1).getAsDouble();
                                         double pz = pivot.get(2).getAsDouble();
 
-                                        double forward = (-pz / 16.0) + BASE_HAND_FORWARD;
-                                        double right = BASE_HAND_RIGHT + (px / 16.0);
-                                        double up = BASE_HAND_UP + (py / 16.0);
-                                        return new MuzzleOffset(forward, right, up);
+                                        return new MuzzleOffset(px, py, pz);
                                     }
                                 }
                             }
@@ -69,9 +58,7 @@ public class MuzzleBoneAutoLoader {
                     }
                 }
             }
-        } catch (Exception e) {
-        }
-
+        } catch (Exception ignored) {}
         return MuzzleOffset.DEFAULT;
     }
 

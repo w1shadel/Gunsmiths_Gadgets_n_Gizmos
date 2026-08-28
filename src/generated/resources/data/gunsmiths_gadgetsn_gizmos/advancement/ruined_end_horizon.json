@@ -1,0 +1,29 @@
+{
+  "parent": "gunsmiths_gadgetsn_gizmos:craft_tier3_refined",
+  "criteria": {
+    "enter_end": {
+      "conditions": {
+        "to": "minecraft:the_end"
+      },
+      "trigger": "minecraft:changed_dimension"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.gunsmiths_gadgetsn_gizmos.ruined_end.desc"
+    },
+    "frame": "goal",
+    "icon": {
+      "id": "minecraft:dragon_breath"
+    },
+    "title": {
+      "translate": "advancements.gunsmiths_gadgetsn_gizmos.ruined_end.title"
+    }
+  },
+  "requirements": [
+    [
+      "enter_end"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

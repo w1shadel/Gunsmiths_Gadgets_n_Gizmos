@@ -18,7 +18,6 @@ import java.util.List;
 
 @EventBusSubscriber(modid = "gunsmiths_gadgetsn_gizmos")
 public class GunSetBonusEvents {
-
     @SubscribeEvent
     public static void onAddServerReloadListeners(AddServerReloadListenersEvent event) {
         event.addListener(
@@ -31,7 +30,6 @@ public class GunSetBonusEvents {
     public static void onComposeShot(ComposeShotEvent event) {
         ItemStack gun = event.getShotProfile().itemStack();
         List<GunSetBonus> bonuses = GunSetBonusManager.getMatchingBonuses(gun);
-
         for (GunSetBonus bonus : bonuses) {
             bonus.apply(event.getShotProfile(), event.getEntity());
         }
@@ -43,7 +41,6 @@ public class GunSetBonusEvents {
             LivingEntity shooter = event.getEntity();
             ItemStack gun = event.getShotProfile().itemStack();
             List<GunSetBonus> bonuses = GunSetBonusManager.getMatchingBonuses(gun);
-
             for (GunSetBonus bonus : bonuses) {
                 for (SetBonusEffect effect : bonus.customEffects()) {
                     effect.onShoot(level, shooter, event.getShotProfile(), event.getOrigin(), event.getDirection());

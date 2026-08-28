@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": "irons_artifice:blackpowder",
+    "G": "minecraft:glass_pane",
+    "N": "minecraft:iron_nugget"
+  },
+  "pattern": [
+    " G ",
+    " N ",
+    " B "
+  ],
+  "result": {
+    "count": 16,
+    "id": "gunsmiths_gadgetsn_gizmos:glass_bullet"
+  }
+}

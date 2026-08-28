@@ -23,8 +23,8 @@ public class ClientHelperMixin {
 
     @Inject(method = "handleMuzzleFlash", at = @At("HEAD"), cancellable = true)
     private static void gunsmiths_gadgetsn_gizmos$customMuzzleFlashFromBone(ClientboundMuzzleFlashPacket msg, CallbackInfo ci) {
-        ClientLevel level = Minecraft.getInstance().level;
         Minecraft mc = Minecraft.getInstance();
+        ClientLevel level = mc.level;
         if (level == null || mc.player == null) return;
 
         Entity entity = level.getEntity(msg.entityId());
@@ -51,7 +51,6 @@ public class ClientHelperMixin {
                 } else {
                     level.addAlwaysVisibleParticle(msg.particle(), true, pos.x, pos.y, pos.z, motion.x, motion.y, motion.z);
                 }
-
                 ci.cancel();
             }
         }

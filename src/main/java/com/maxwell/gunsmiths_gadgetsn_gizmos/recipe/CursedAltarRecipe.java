@@ -38,9 +38,6 @@ public record CursedAltarRecipe(
         boolean baseMatch = base.test(input.base());
         boolean matMatch = material.test(input.material());
         boolean catMatch = catalyst.test(input.catalyst());
-        System.out.println("[Recipe Match Check] Base: " + baseMatch + " (" + input.base().getItem() + ")"
-                + " | Material: " + matMatch + " (" + input.material().getItem() + " x" + input.material().getCount() + ")"
-                + " | Catalyst: " + catMatch + " (" + input.catalyst().getItem() + " x" + input.catalyst().getCount() + ")");
         return baseMatch && matMatch && catMatch;
     }
 

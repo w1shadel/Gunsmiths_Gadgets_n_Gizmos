@@ -1,0 +1,34 @@
+{
+  "criteria": {
+    "has_bullet": {
+      "conditions": {
+        "items": [
+          {
+            "items": "irons_artifice:bullet"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "background": "minecraft:textures/gui/advancements/backgrounds/stone.png",
+    "description": {
+      "translate": "advancements.gunsmiths_gadgetsn_gizmos.root.desc"
+    },
+    "icon": {
+      "id": "gunsmiths_gadgetsn_gizmos:gunsmith_bench"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancements.gunsmiths_gadgetsn_gizmos.root.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_bullet"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

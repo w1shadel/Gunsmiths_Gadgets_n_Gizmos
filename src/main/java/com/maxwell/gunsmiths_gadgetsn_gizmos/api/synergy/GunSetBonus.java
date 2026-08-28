@@ -1,6 +1,5 @@
 package com.maxwell.gunsmiths_gadgetsn_gizmos.api.synergy;
 
-
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.redspace.irons_artifice.client.particle.ColorTransitionParticleOption;
@@ -39,13 +38,11 @@ public record GunSetBonus(
                 .filter(stack -> !stack.isEmpty())
                 .map(stack -> BuiltInRegistries.ITEM.getKey(stack.getItem()))
                 .collect(Collectors.toSet());
-
         return installedIds.containsAll(requiredModifiers);
     }
 
     public void apply(ShotProfile profile, net.minecraft.world.entity.LivingEntity shooter) {
         ShotComponentMap map = profile.components();
-
         if (bonuses.damageMultiplier != 0) {
             map.getOrCreate(ShotComponents.DAMAGE).addModifier(
                     new ValueModifier(bonuses.damageMultiplier, ValueModifier.Operation.MULTIPLY_TOTAL, ValueModifier.Type.BENEFICIAL)
@@ -71,21 +68,20 @@ public record GunSetBonus(
                     new ValueModifier(bonuses.piercingAdd, ValueModifier.Operation.ADD, ValueModifier.Type.BENEFICIAL)
             );
         }
-
         bonuses.trailColor().ifPresent(colorHex -> {
             try {
                 int color = (int) Long.parseLong(colorHex.replace("#", ""), 16);
                 map.getOrCreate(ShotComponents.PARTICLE_TRAIL).add(ColorTransitionParticleOption.bulletTrail(color, 0x000000));
-            } catch (Exception ignored) {}
+            } catch (Exception ignored) {
+            }
         });
-
         bonuses.muzzleFlashColor().ifPresent(colorHex -> {
             try {
                 int color = (int) Long.parseLong(colorHex.replace("#", ""), 16);
                 map.getOrCreate(ShotComponents.MUZZLE_FLASH).addTint(color);
-            } catch (Exception ignored) {}
+            } catch (Exception ignored) {
+            }
         });
-
         for (SetBonusEffect effect : customEffects) {
             effect.onCompose(profile, shooter);
             map.getOrCreate(ShotComponents.ON_HIT).add((level, bullet, hitResult, accumulator) -> {
@@ -102,10 +98,9 @@ public record GunSetBonus(
             int piercingAdd,
             Optional<String> trailColor,
             Optional<String> muzzleFlashColor,
-            Optional<ParticleOptions> auraParticle 
+            Optional<ParticleOptions> auraParticle
     ) {
         public static final BonusStats EMPTY = new BonusStats(0, 0, 0, 0, 0, Optional.empty(), Optional.empty(), Optional.empty());
-
         public static final Codec<BonusStats> CODEC = RecordCodecBuilder.create(builder -> builder.group(
                 Codec.DOUBLE.optionalFieldOf("damage_multiplier", 0.0).forGetter(BonusStats::damageMultiplier),
                 Codec.DOUBLE.optionalFieldOf("bullet_speed_multiplier", 0.0).forGetter(BonusStats::bulletSpeedMultiplier),
@@ -114,7 +109,6 @@ public record GunSetBonus(
                 Codec.INT.optionalFieldOf("piercing_add", 0).forGetter(BonusStats::piercingAdd),
                 Codec.STRING.optionalFieldOf("trail_color").forGetter(BonusStats::trailColor),
                 Codec.STRING.optionalFieldOf("muzzle_flash_color").forGetter(BonusStats::muzzleFlashColor),
-
                 ParticleTypes.CODEC.optionalFieldOf("aura_particle").forGetter(BonusStats::auraParticle)
         ).apply(builder, BonusStats::new));
     }

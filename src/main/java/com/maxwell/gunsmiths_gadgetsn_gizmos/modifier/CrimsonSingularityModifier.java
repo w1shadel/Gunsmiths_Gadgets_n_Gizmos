@@ -1,8 +1,8 @@
 package com.maxwell.gunsmiths_gadgetsn_gizmos.modifier;
 
 import com.maxwell.gunsmiths_gadgetsn_gizmos.GunsmithsGadgetsnGizmos;
-import com.maxwell.gunsmiths_gadgetsn_gizmos.modifier.on_hit.CrimsonSingularityOnHit;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.init.ModItems;
+import com.maxwell.gunsmiths_gadgetsn_gizmos.modifier.on_hit.CrimsonSingularityOnHit;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.util.ModifierHelper;
 import io.redspace.irons_artifice.api.GunShootEvent;
 import io.redspace.irons_artifice.client.particle.ColorTransitionParticleOption;
