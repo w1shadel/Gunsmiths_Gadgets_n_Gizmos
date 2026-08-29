@@ -107,10 +107,9 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
                         io.redspace.irons_artifice.data.ValueModifier.Type.BENEFICIAL
                 ));
 
-        // ★ 拡散（Spread）を大幅に拡大：一点集中をなくし、映画のような弾幕・ばら撒きにする
         profile.get(io.redspace.irons_artifice.data.ShotComponents.SPREAD)
                 .addModifier(new io.redspace.irons_artifice.data.ValueModifier(
-                        this.isPhase2() ? 5.5 : 3.5, // ミニガン時は大きく散らす
+                        this.isPhase2() ? 5.5 : 3.5, 
                         io.redspace.irons_artifice.data.ValueModifier.Operation.ADD,
                         io.redspace.irons_artifice.data.ValueModifier.Type.NEUTRAL
                 ));
@@ -225,9 +224,8 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
         }
     }
 
-// ==========================================
-    // TICK & 状態管理（リファクタリング版）
-    // ==========================================
+
+
 
     @Override
     public void tick() {
@@ -239,7 +237,6 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
             this.tickBossBar();
             this.tickAshStormPacket();
 
-            // 第2形態移行演出中（移行中は攻撃やテレポートを行わない）
             if (this.tickPhaseTransition(serverLevel)) {
                 return;
             }
@@ -265,7 +262,7 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
 
     
     private boolean tickPhaseTransition(ServerLevel level) {
-        // HP150以下で第2形態トリガー
+
         if (!this.hasTriggeredPhase2 && this.getHealth() <= 150.0F && this.isAlive()) {
             this.hasTriggeredPhase2 = true;
             this.transitionTicksRemaining = PHASE_TRANSITION_DURATION;
@@ -274,7 +271,6 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
                     SoundEvents.WITHER_SPAWN, SoundSource.HOSTILE, 2.0F, 0.6F);
         }
 
-        // 変身中のアニメーションと衝撃波
         if (this.isTransitioning()) {
             this.getNavigation().stop();
             this.setDeltaMovement(0, this.getDeltaMovement().y * 0.5, 0);
@@ -288,7 +284,6 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
                 this.entityData.set(DATA_PHASE_2, true);
                 this.setHealth(300.0F);
 
-                // 衝撃波ノックバック
                 AABB blastArea = this.getBoundingBox().inflate(6.0);
                 for (LivingEntity target : this.level().getEntitiesOfClass(LivingEntity.class, blastArea, e -> e != this)) {
                     Vec3 push = target.position().subtract(this.position()).normalize().scale(1.5);
@@ -315,14 +310,14 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
         float hpRatio = this.getHealth() / this.getMaxHealth();
 
         if (isTheEnd && this.isPhase2()) {
-            // エンド第2形態 & HP 25% 以下: 深淵ノ盟主に完全固定
+
             if (hpRatio <= 0.25F) {
                 if (this.getTitle() != ApostleTitle.ABYSSAL_RULER_OF_ALL_CREATION) {
                     this.setTitle(ApostleTitle.ABYSSAL_RULER_OF_ALL_CREATION);
                     this.level().playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.WITHER_DEATH, SoundSource.HOSTILE, 3.0F, 0.4F);
                 }
             }
-            // エンド第2形態 & HP 50% 以下: 森羅万象なら800tick、他なら200tick
+
             else if (hpRatio <= 0.50F) {
                 if (--this.titleShiftTimer <= 0) {
                     ApostleTitle nextTitle = ApostleTitle.selectRandom(this.getTitle(), true, true, true, this.getRandom());
@@ -331,7 +326,7 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
                     this.level().playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.BELL_BLOCK, SoundSource.HOSTILE, 2.5F, 0.5F);
                 }
             }
-            // エンド第2形態 & HP 50% 超
+
             else {
                 if (--this.titleShiftTimer <= 0) {
                     this.titleShiftTimer = 240;
@@ -341,7 +336,7 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
                 }
             }
         } else {
-            // 通常ディメンション または 第1形態
+
             if (--this.titleShiftTimer <= 0) {
                 this.titleShiftTimer = 240;
                 boolean isLowHp = hpRatio <= 0.40F;
@@ -356,7 +351,6 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
     private void tickTeleportation(ServerLevel level) {
         int currentTimer = this.getTeleportTimer();
 
-        // A. 予兆の開始
         if (currentTimer <= 0 && this.getTarget() != null) {
             if (--this.teleportCooldown <= 0) {
                 this.teleportCooldown = this.getRandom().nextIntBetweenInclusive(240, 320);
@@ -370,11 +364,9 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
             }
         }
 
-        // B. 予兆中の追従 ＆ 発動
         if (currentTimer > 0) {
             this.entityData.set(DATA_TELEPORT_TIMER, currentTimer - 1);
 
-            // リアルタイム追従
             LivingEntity target = this.getTarget();
             Vec3 targetDest;
             if (target != null && target.isAlive()) {
@@ -385,13 +377,11 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
                 targetDest = this.getTeleportTarget();
             }
 
-            // 移動予定地のピラー
             level.sendParticles(ParticleTypes.SQUID_INK, targetDest.x, targetDest.y + 0.2, targetDest.z, 12, 0.4, 0.1, 0.4, 0.04);
             level.sendParticles(ParticleTypes.SOUL_FIRE_FLAME, targetDest.x, targetDest.y + 0.3, targetDest.z, 8, 0.3, 0.6, 0.3, 0.08);
             level.sendParticles(ParticleTypes.REVERSE_PORTAL, targetDest.x, targetDest.y + 1.2, targetDest.z, 15, 0.5, 1.0, 0.5, 0.15);
             level.sendParticles(ParticleTypes.CRIT, this.getX(), this.getY() + 1.2, this.getZ(), 6, 0.3, 0.3, 0.3, 0.1);
 
-            // テレポート発動
             if (currentTimer - 1 == 0) {
                 level.sendParticles(ParticleTypes.SQUID_INK, this.getX(), this.getY() + 1.0, this.getZ(), 60, 0.6, 1.0, 0.6, 0.12);
                 level.sendParticles(ParticleTypes.LARGE_SMOKE, this.getX(), this.getY() + 0.5, this.getZ(), 30, 0.5, 0.8, 0.5, 0.08);
@@ -786,7 +776,6 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
             ApostleGunEntity.this.getMoveControl().strafe(0.0F, 0.0F);
         }
 
-        // --- ApostleCombatGoal の tick() を更新 ---
         @Override
         public void tick() {
             LivingEntity target = ApostleGunEntity.this.getTarget();
@@ -798,11 +787,9 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
             double distSqr = ApostleGunEntity.this.distanceToSqr(target);
             boolean hasLos = ApostleGunEntity.this.getSensing().hasLineOfSight(target);
 
-            // 殲滅モード（ANNIHILATION_HARBINGER または ABYSSAL_RULER_OF_ALL_CREATION）の判定
             boolean isAnnihilation = ApostleGunEntity.this.getTitle() == ApostleTitle.ANNIHILATION_HARBINGER
                     || ApostleGunEntity.this.getTitle() == ApostleTitle.ABYSSAL_RULER_OF_ALL_CREATION;
 
-            // 1. 間合い移動（殲滅状態なら魔法詠唱中だろうと止まらずに追い回す）
             if (!ApostleGunEntity.this.isCastingSpell() || isAnnihilation) {
                 var mode = this.mover.selectKiting(distSqr, hasLos, this.bands);
                 double moveSpeed = ApostleGunEntity.this.isPhase2() ? 1.25 : 1.05;
@@ -813,7 +800,6 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
                 this.burstCooldown--;
             }
 
-            // 2. 射撃処理（★ 殲滅状態なら魔法詠唱中関係なく常時ガトリングを撃ち続ける）
             if (hasLos && distSqr <= 32.0 * 32.0 && (!ApostleGunEntity.this.isCastingSpell() || isAnnihilation) && this.burstCooldown <= 0) {
                 if (GunItem.getMagazine(gun).isEmpty() && !GunItem.isReloading(gun)) {
                     io.redspace.irons_artifice.item.GunplayManager.attemptStartReload(ApostleGunEntity.this, gun);
@@ -832,7 +818,7 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
                         this.burstShotsRemaining--;
 
                         if (this.burstShotsRemaining <= 0) {
-                            // 殲滅状態なら息継ぎなし（0tick）で即座に次の連射へ！
+
                             this.burstCooldown = isAnnihilation ? 0 : (ApostleGunEntity.this.isPhase2() ? 12 : 8);
                             this.burstShotsRemaining = isAnnihilation ? 30 : (ApostleGunEntity.this.isPhase2() ? 10 : 3);
                         }

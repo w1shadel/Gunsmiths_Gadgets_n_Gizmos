@@ -61,7 +61,6 @@ public enum ApostleTitle {
 
             pool = new java.util.ArrayList<>();
 
-            // ★ 森羅万象は「エンドにいる時のみ」プールに追加
             if (isTheEnd) {
                 pool.add(RULER_OF_ALL_CREATION);
             }
@@ -70,7 +69,7 @@ public enum ApostleTitle {
             pool.add(VOID_CLEFT_SOVEREIGN);
             pool.add(shuffledBase.get(0));
             if (!isTheEnd) {
-                pool.add(shuffledBase.get(1)); // エンド以外は基礎から2種入れて4種構成を維持
+                pool.add(shuffledBase.get(1)); 
             }
         } else {
             pool = BASE_TITLES;
