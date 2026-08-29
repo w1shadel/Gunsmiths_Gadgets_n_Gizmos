@@ -25,12 +25,33 @@ import net.neoforged.neoforge.event.entity.living.LivingEquipmentChangeEvent;
 @EventBusSubscriber(modid = GunsmithsGadgetsnGizmos.MODID)
 public class CuriosAccessoryEvents {
     @SubscribeEvent
+    public static void onWelderGogglesHurt(net.neoforged.neoforge.event.entity.living.LivingDamageEvent.Pre event) {
+        if (event.getEntity() instanceof Player player) {
+            if (CuriosCompat.isEquipped(player, ModItems.WELDER_GOGGLES.get())) {
+                if (event.getSource().is(net.minecraft.tags.DamageTypeTags.IS_EXPLOSION)) {
+                    event.setNewDamage(event.getOriginalDamage() * 0.50F);
+                }
+            }
+        }
+    }
+    @SubscribeEvent
     public static void onComposeShot(ComposeShotEvent event) {
         LivingEntity living = event.getEntity();
         ShotProfile profile = event.getShotProfile();
         if (CuriosCompat.isEquipped(living, ModItems.RECOIL_HARNESS.get())) {
             profile.get(ShotComponents.CAMERA_RECOIL_MULTIPLIER).addModifier(
                     new ValueModifier(-0.40, ValueModifier.Operation.MULTIPLY_TOTAL, ValueModifier.Type.BENEFICIAL)
+            );
+        }
+        if (CuriosCompat.isEquipped(living, ModItems.RANGEFINDER_MONOCLE.get())) {
+            profile.get(ShotComponents.SPREAD).addModifier(
+                    new ValueModifier(-1.5, ValueModifier.Operation.ADD, ValueModifier.Type.BENEFICIAL)
+            );
+        }
+
+        if (CuriosCompat.isEquipped(living, ModItems.GUNSLINGERS_SPURS.get())) {
+            profile.get(ShotComponents.IN_AIR_PENALTY).addModifier(
+                    new ValueModifier(-1.0, ValueModifier.Operation.MULTIPLY_TOTAL, ValueModifier.Type.BENEFICIAL)
             );
         }
         if (CuriosCompat.isEquipped(living, ModItems.GUNSMITHS_GLOVES.get())) {

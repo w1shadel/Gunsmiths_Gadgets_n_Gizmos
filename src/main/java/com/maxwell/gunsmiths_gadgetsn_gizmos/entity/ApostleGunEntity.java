@@ -1,6 +1,7 @@
 package com.maxwell.gunsmiths_gadgetsn_gizmos.entity;
 
 import com.maxwell.gunsmiths_gadgetsn_gizmos.entity.boss.ApostleTitle;
+import com.maxwell.gunsmiths_gadgetsn_gizmos.init.ModItems;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.network.ClientboundAshStormPacket;
 import io.redspace.irons_artifice.entity.IGunslingerMob;
 import io.redspace.irons_artifice.entity.Illificer;
@@ -66,6 +67,8 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
             SynchedEntityData.defineId(ApostleGunEntity.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<org.joml.Vector3fc> DATA_TELEPORT_TARGET =
             SynchedEntityData.defineId(ApostleGunEntity.class, EntityDataSerializers.VECTOR3);
+    private static final EntityDataAccessor<Integer> DATA_DEATH_SEQUENCE =
+            SynchedEntityData.defineId(ApostleGunEntity.class, EntityDataSerializers.INT);
     private static final float MAX_DAMAGE_PER_HIT = 25.0F;
     public final AnimationState holdGunAnimationState = new AnimationState();
     public final AnimationState shootAnimationState = new AnimationState();
@@ -127,6 +130,7 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
         builder.define(DATA_PHASE_2, false);
         builder.define(DATA_TELEPORT_TIMER, 0);
         builder.define(DATA_TELEPORT_TARGET, new org.joml.Vector3f());
+        builder.define(DATA_DEATH_SEQUENCE, 0);
     }
 
     @Override
@@ -141,7 +145,13 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
         org.joml.Vector3fc v = this.entityData.get(DATA_TELEPORT_TARGET);
         return new Vec3(v.x(), v.y(), v.z());
     }
+    public int getDeathSequenceTicks() {
+        return this.entityData.get(DATA_DEATH_SEQUENCE);
+    }
 
+    public boolean isCustomDying() {
+        return this.getDeathSequenceTicks() > 0;
+    }
     public ApostleTitle getTitle() {
         int ordinal = this.entityData.get(DATA_TITLE);
         ApostleTitle[] values = ApostleTitle.values();
@@ -186,24 +196,30 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
     }
     @Override
     public boolean hurtServer(@NonNull ServerLevel level, @NonNull DamageSource source, float damage) {
-        if (this.isTransitioning()) {
-            this.playSound(SoundEvents.ANVIL_LAND, 0.5F, 1.8F);
+        if (this.isCustomDying() || this.isTransitioning()) {
             return false;
         }
         if (source.getEntity() != null && source.getEntity().getPersistentData().getBooleanOr("apostle_minion", false)) {
-            return false; 
+            return false;
         }
+
         if (source.is(io.redspace.irons_artifice.damage.DamageSources.BULLET_DAMAGE_TYPE)) {
             damage *= 0.65F;
         }
         damage = Math.min(damage, MAX_DAMAGE_PER_HIT);
+        if (this.getHealth() - damage <= 1.0F) {
+            this.setHealth(1.0F);
+            this.entityData.set(DATA_DEATH_SEQUENCE, 1);
+            this.getNavigation().stop();
+            return false;
+        }
+
         boolean damaged = super.hurtServer(level, source, damage);
         if (damaged && !level.isClientSide() && damage > 10.0F && this.getRandom().nextFloat() < 0.35F) {
             teleportToTacticalPosition(this.getTarget(), this.getRandom().nextBoolean());
         }
         return damaged;
     }
-
     public void teleportToTacticalPosition(@Nullable LivingEntity target, boolean behind) {
         if (target == null || !(this.level() instanceof ServerLevel level)) return;
         Vec3 targetPos = target.position();
@@ -236,13 +252,25 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
 
             this.tickBossBar();
             this.tickAshStormPacket();
-
+            if (this.tickDeathSequence(serverLevel)) {
+                return;
+            }
             if (this.tickPhaseTransition(serverLevel)) {
                 return;
             }
 
             this.tickTitleShift();
             this.tickTeleportation(serverLevel);
+            if (this.getY() < this.level().getMinY() + 4 && !this.isCustomDying()) {
+                LivingEntity target = this.getTarget();
+                if (target != null && target.isAlive()) {
+                    this.setPos(target.getX(), target.getY() + 1.0, target.getZ());
+                    this.setDeltaMovement(0, 0.2, 0);
+                    this.fallDistance = 0.0F;
+                    this.level().playSound(null, this.getX(), this.getY(), this.getZ(),
+                            SoundEvents.ENDERMAN_TELEPORT, SoundSource.HOSTILE, 2.0F, 0.6F);
+                }
+            }
         } else {
             this.updateClientAnimations();
         }
@@ -468,7 +496,9 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
 
     @Override
     protected void populateDefaultEquipmentSlots(@NonNull RandomSource random, @NonNull DifficultyInstance difficulty) {
-        this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(ItemRegistry.CLOCKWORK_RIFLE.get()));
+        ItemStack rifle = new ItemStack(ItemRegistry.CLOCKWORK_RIFLE.get());
+        GunItem.setMagazine(rifle, new io.redspace.irons_artifice.item.MagazineContents(10));
+        this.setItemSlot(EquipmentSlot.MAINHAND, rifle);
         this.setDropChance(EquipmentSlot.MAINHAND, 0.1F);
     }
 
@@ -491,6 +521,100 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
         } else {
             super.handleEntityEvent(id);
         }
+    }
+    @Override
+    public boolean fireImmune() {
+        return true; 
+    }
+    private void dropCustomDeathLoot(ServerLevel level) {
+        boolean isTheEnd = level.dimension() == Level.END;
+
+        this.spawnProtectedDrop(level, new ItemStack(ModItems.OMINOUS_CLOCKWORK_CORE.get(), level.getRandom().nextIntBetweenInclusive(2, 4)));
+        this.spawnProtectedDrop(level, new ItemStack(ModItems.FORBIDDEN_BLUEPRINT.get(), 1));
+        this.spawnProtectedDrop(level, new ItemStack(ModItems.COAGULATED_OMEN_BLOOD.get(), level.getRandom().nextIntBetweenInclusive(3, 6)));
+        this.spawnProtectedDrop(level, new ItemStack(ModItems.UNIDENTIFIED_CRATE.get(), 2));
+
+        if (this.getRandom().nextFloat() < 0.40F) {
+            this.spawnProtectedDrop(level, new ItemStack(ModItems.MASTERCRAFTED_TRIGGER_MODIFIER.get(), 1));
+        }
+
+        if (isTheEnd) {
+            this.spawnProtectedDrop(level, new ItemStack(ModItems.ABYSSAL_SINGULARITY_CORE.get(), 1));
+        }
+    }
+
+    /** 溶岩・炎・爆風で燃え尽きない保護ドロップ生成 */
+    private void spawnProtectedDrop(ServerLevel level, ItemStack stack) {
+        net.minecraft.world.entity.item.ItemEntity itemEntity = this.spawnAtLocation(level, stack);
+        if (itemEntity != null) {
+            itemEntity.setInvulnerable(true); 
+            itemEntity.setUnlimitedLifetime(); 
+        }
+    }
+    private boolean tickDeathSequence(ServerLevel level) {
+        int ticks = this.getDeathSequenceTicks();
+        if (ticks <= 0) return false;
+
+        this.entityData.set(DATA_DEATH_SEQUENCE, ticks + 1);
+        this.getNavigation().stop();
+        this.setNoGravity(true); 
+
+        if (ticks <= 40) {
+            this.setDeltaMovement(0.0, 0.38, 0.0); 
+
+            level.sendParticles(ParticleTypes.EXPLOSION,
+                    this.getX() + (this.getRandom().nextDouble() - 0.5) * 1.2,
+                    this.getY() + this.getRandom().nextDouble() * 1.8,
+                    this.getZ() + (this.getRandom().nextDouble() - 0.5) * 1.2,
+                    1, 0, 0, 0, 0);
+
+            level.sendParticles(ParticleTypes.SOUL_FIRE_FLAME, this.getX(), this.getY() + 0.8, this.getZ(), 8, 0.3, 0.5, 0.3, 0.08);
+
+            if (ticks % 6 == 0) {
+                this.level().playSound(null, this.getX(), this.getY(), this.getZ(),
+                        SoundEvents.GENERIC_EXPLODE.value(), SoundSource.HOSTILE, 1.5F, 1.2F + this.getRandom().nextFloat() * 0.4F);
+            }
+        }
+
+        else if (ticks <= 50) {
+            this.setDeltaMovement(0.0, 0.02, 0.0); 
+
+            level.sendParticles(ParticleTypes.EXPLOSION_EMITTER, this.getX(), this.getY() + 1.0, this.getZ(), 1, 0, 0, 0, 0);
+            level.sendParticles(ParticleTypes.SOUL_FIRE_FLAME, this.getX(), this.getY() + 1.0, this.getZ(), 20, 0.5, 0.5, 0.5, 0.15);
+
+            if (ticks == 41) {
+                this.level().playSound(null, this.getX(), this.getY(), this.getZ(),
+                        SoundEvents.BEACON_DEACTIVATE, SoundSource.HOSTILE, 2.5F, 0.5F);
+            }
+        }
+
+        else {
+            this.setDeltaMovement(0.0, -1.6, 0.0); 
+
+            level.sendParticles(ParticleTypes.SQUID_INK, this.getX(), this.getY() + 1.0, this.getZ(), 35, 0.4, 0.8, 0.4, 0.08);
+            level.sendParticles(ParticleTypes.CAMPFIRE_SIGNAL_SMOKE, this.getX(), this.getY() + 1.5, this.getZ(), 15, 0.3, 0.5, 0.3, 0.05);
+
+            if (this.onGround() || this.verticalCollisionBelow || this.getY() <= level.getMinY() + 2) {
+
+                level.sendParticles(ParticleTypes.EXPLOSION_EMITTER, this.getX(), this.getY() + 1.0, this.getZ(), 3, 0, 0, 0, 0);
+                level.sendParticles(ParticleTypes.SONIC_BOOM, this.getX(), this.getY() + 0.5, this.getZ(), 1, 0, 0, 0, 0);
+                level.sendParticles(ParticleTypes.SQUID_INK, this.getX(), this.getY() + 0.5, this.getZ(), 120, 1.2, 0.6, 1.2, 0.2);
+
+                this.level().playSound(null, this.getX(), this.getY(), this.getZ(),
+                        SoundEvents.GENERIC_EXPLODE.value(), SoundSource.HOSTILE, 3.5F, 0.6F);
+                this.level().playSound(null, this.getX(), this.getY(), this.getZ(),
+                        SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.HOSTILE, 3.0F, 1.0F);
+                this.level().playSound(null, this.getX(), this.getY(), this.getZ(),
+                        SoundEvents.BELL_BLOCK, SoundSource.HOSTILE, 3.0F, 0.3F);
+
+                this.dropCustomDeathLoot(level);
+
+                this.discard();
+                return true;
+            }
+        }
+
+        return true;
     }
 
     @Override

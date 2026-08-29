@@ -1,5 +1,6 @@
 package com.maxwell.gunsmiths_gadgetsn_gizmos.item;
 
+import com.maxwell.gunsmiths_gadgetsn_gizmos.init.ModItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
@@ -21,6 +22,9 @@ public class InfiniteAmmoBagItem extends Item {
     }
 
     public static boolean hasInfiniteBag(Player player) {
+        if (com.maxwell.gunsmiths_gadgetsn_gizmos.compat.curios.CuriosCompat.isEquipped(player, ModItems.INFINITE_AMMO_BAG.get())) {
+            return true;
+        }
         for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
             ItemStack stack = player.getInventory().getItem(i);
             if (stack.getItem() instanceof InfiniteAmmoBagItem) {

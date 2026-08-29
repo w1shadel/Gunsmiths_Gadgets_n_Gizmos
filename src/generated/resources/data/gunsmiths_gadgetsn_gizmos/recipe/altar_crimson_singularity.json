@@ -4,9 +4,9 @@
     "gunsmiths_gadgetsn_gizmos:heavy_core_impact_modifier"
   ],
   "catalyst": {
-    "count": 2,
+    "count": 1,
     "ingredient": [
-      "gunsmiths_gadgetsn_gizmos:coagulated_omen_blood"
+      "gunsmiths_gadgetsn_gizmos:abyssal_singularity_core"
     ]
   },
   "material": {

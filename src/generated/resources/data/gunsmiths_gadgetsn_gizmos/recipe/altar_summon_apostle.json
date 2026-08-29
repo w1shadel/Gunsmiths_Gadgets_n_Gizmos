@@ -1,0 +1,22 @@
+{
+  "type": "gunsmiths_gadgetsn_gizmos:cursed_altar",
+  "base": [
+    "gunsmiths_gadgetsn_gizmos:forbidden_blueprint"
+  ],
+  "catalyst": {
+    "count": 1,
+    "ingredient": [
+      "minecraft:rotten_flesh"
+    ]
+  },
+  "material": {
+    "count": 2,
+    "ingredient": [
+      "gunsmiths_gadgetsn_gizmos:coagulated_omen_blood"
+    ]
+  },
+  "result": {
+    "count": 1,
+    "id": "gunsmiths_gadgetsn_gizmos:apostle_summon_ritual"
+  }
+}

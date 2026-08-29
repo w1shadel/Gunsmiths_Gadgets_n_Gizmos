@@ -144,22 +144,17 @@ public enum ApostleTitle {
             }
             case RULER_OF_ALL_CREATION, ABYSSAL_RULER_OF_ALL_CREATION -> {
 
-                victim.addEffect(new MobEffectInstance(ModMobEffects.BLEEDING, 20 * 6, 0), boss);
-                boss.heal(this == ABYSSAL_RULER_OF_ALL_CREATION ? 4.0F : 2.0F);
+                victim.addEffect(new MobEffectInstance(ModMobEffects.BLEEDING, 20 * 4, 0), boss);
+                boss.heal(this == ABYSSAL_RULER_OF_ALL_CREATION ? 2.5F : 1.5F);
 
-                victim.setDeltaMovement(victim.getDeltaMovement().x, 0.6, victim.getDeltaMovement().z);
-                victim.hurtMarked = true;
+                victim.addEffect(new MobEffectInstance(MobEffects.WITHER, 20 * 3, 0), boss);
 
-                victim.addEffect(new MobEffectInstance(MobEffects.DARKNESS, 20 * 6, 0), boss);
-                victim.addEffect(new MobEffectInstance(MobEffects.WITHER, 20 * 5, 1), boss);
-
-                float voidDmg = (this == ABYSSAL_RULER_OF_ALL_CREATION) ? 6.0F : 4.0F;
+                float voidDmg = (this == ABYSSAL_RULER_OF_ALL_CREATION) ? 4.0F : 2.5F;
                 victim.hurtServer(level, level.damageSources().fellOutOfWorld(), voidDmg);
-                victim.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 20 * 3, 0), boss);
-                victim.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 20 * 3, 2), boss);
+
 
                 level.sendParticles(ParticleTypes.EXPLOSION, victim.getX(), victim.getY() + 0.5, victim.getZ(), 1, 0, 0, 0, 0);
-                level.sendParticles(ParticleTypes.SOUL_FIRE_FLAME, victim.getX(), victim.getY() + 0.5, victim.getZ(), 15, 0.3, 0.3, 0.3, 0.05);
+                level.sendParticles(ParticleTypes.SOUL_FIRE_FLAME, victim.getX(), victim.getY() + 0.5, victim.getZ(), 10, 0.2, 0.2, 0.2, 0.04);
             }
         }
     }

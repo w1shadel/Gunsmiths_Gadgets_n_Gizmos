@@ -1,0 +1,37 @@
+{
+  "parent": "gunsmiths_gadgetsn_gizmos:first_altar_craft",
+  "criteria": {
+    "killed_apostle": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "gunsmiths_gadgetsn_gizmos:apostle_gun"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:player_killed_entity"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.gunsmiths_gadgetsn_gizmos.kill_apostle.desc"
+    },
+    "frame": "goal",
+    "icon": {
+      "id": "irons_artifice:clockwork_rifle"
+    },
+    "title": {
+      "translate": "advancements.gunsmiths_gadgetsn_gizmos.kill_apostle.title"
+    }
+  },
+  "requirements": [
+    [
+      "killed_apostle"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

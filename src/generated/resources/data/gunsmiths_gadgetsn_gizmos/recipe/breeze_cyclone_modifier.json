@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "M": "irons_artifice:simple_mechanical_components",
+    "R": "minecraft:breeze_rod",
+    "W": "irons_artifice:wind_chamber_modifier"
+  },
+  "pattern": [
+    " R ",
+    "RWR",
+    " M "
+  ],
+  "result": {
+    "id": "gunsmiths_gadgetsn_gizmos:breeze_cyclone_modifier"
+  }
+}

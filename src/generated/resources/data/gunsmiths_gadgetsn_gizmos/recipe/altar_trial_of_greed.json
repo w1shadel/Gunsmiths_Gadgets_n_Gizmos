@@ -1,0 +1,22 @@
+{
+  "type": "gunsmiths_gadgetsn_gizmos:cursed_altar",
+  "base": [
+    "gunsmiths_gadgetsn_gizmos:merchant_bounty_modifier"
+  ],
+  "catalyst": {
+    "count": 2,
+    "ingredient": [
+      "gunsmiths_gadgetsn_gizmos:coagulated_omen_blood"
+    ]
+  },
+  "material": {
+    "count": 2,
+    "ingredient": [
+      "minecraft:emerald_block"
+    ]
+  },
+  "result": {
+    "count": 1,
+    "id": "gunsmiths_gadgetsn_gizmos:trial_of_greed_modifier"
+  }
+}

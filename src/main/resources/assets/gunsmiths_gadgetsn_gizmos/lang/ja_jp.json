@@ -1,10 +1,10 @@
 {
-  "itemGroup.gunsmiths_gadgetsn_gizmos": "ガンスミスズ・ガジェット＆ギズモ",
+  "itemGroup.gunsmiths_gadgetsn_gizmos": "Gunsmith's Gadgets 'n Gizmos",
 
   "block.gunsmiths_gadgetsn_gizmos.gunsmith_bench": "ガンスミス作業台",
   "block.gunsmiths_gadgetsn_gizmos.cursed_altar": "呪印の銃工祭壇",
 
-  "container.gunsmiths_gadgetsn_gizmos.gunsmith_bench": "ガンスミス作業台（スロット拡張改造）",
+  "container.gunsmiths_gadgetsn_gizmos.gunsmith_bench": "ガンスミス作業台",
   "container.gunsmiths_gadgetsn_gizmos.cursed_altar": "呪印の祭壇",
   "gui.gunsmiths_gadgetsn_gizmos.cursed_altar": "呪印の祭壇：モディファイア合成",
 
@@ -40,18 +40,18 @@
   "gunsmiths_gadgetsn_gizmos.tooltip.ammo_pouch": "戦術弾薬ポケット",
   "gunsmiths_gadgetsn_gizmos.tooltip.ammo_pouch.desc": "特殊弾薬を収納・携帯可能；銃のリロード時に優先装填される",
 
-  "item.gunsmiths_gadgetsn_gizmos.piston_ramrod_modifier": "ピストン装填ロッド改造モジュール",
-  "item.gunsmiths_gadgetsn_gizmos.grappling_anchor_modifier": "グラップリング・アンカー改造モジュール",
-  "item.gunsmiths_gadgetsn_gizmos.heavy_core_impact_modifier": "ヘビーコア・インパクト改造モジュール",
-  "item.gunsmiths_gadgetsn_gizmos.breeze_cyclone_modifier": "ブリーズ旋風改造モジュール",
-  "item.gunsmiths_gadgetsn_gizmos.ominous_chamber_modifier": "不吉な試練の薬室モジュール",
-  "item.gunsmiths_gadgetsn_gizmos.town_bell_flare_modifier": "警鐘の照明弾モジュール",
-  "item.gunsmiths_gadgetsn_gizmos.bloodbound_calamity_modifier": "禍神の重撃モジュール",
-  "item.gunsmiths_gadgetsn_gizmos.unstable_overclock_modifier": "暴走過給機モジュール",
-  "item.gunsmiths_gadgetsn_gizmos.reapers_gambit_modifier": "断罪のロシアンルーレットモジュール",
-  "item.gunsmiths_gadgetsn_gizmos.trial_of_greed_modifier": "不吉なる狂宴モジュール",
-  "item.gunsmiths_gadgetsn_gizmos.mastercrafted_trigger_modifier": "職人の調整済トリガーモジュール",
-  "item.gunsmiths_gadgetsn_gizmos.merchant_bounty_modifier": "商人の強欲薬莢モジュール",
+  "item.gunsmiths_gadgetsn_gizmos.piston_ramrod_modifier": "ピストン装填ロッド改造モディファイア",
+  "item.gunsmiths_gadgetsn_gizmos.grappling_anchor_modifier": "グラップリング・アンカー改造モディファイア",
+  "item.gunsmiths_gadgetsn_gizmos.heavy_core_impact_modifier": "ヘビーコア・インパクト改造モディファイア",
+  "item.gunsmiths_gadgetsn_gizmos.breeze_cyclone_modifier": "ブリーズ旋風改造モディファイア",
+  "item.gunsmiths_gadgetsn_gizmos.ominous_chamber_modifier": "不吉な試練の薬室モディファイア",
+  "item.gunsmiths_gadgetsn_gizmos.town_bell_flare_modifier": "警鐘の照明弾モディファイア",
+  "item.gunsmiths_gadgetsn_gizmos.bloodbound_calamity_modifier": "禍神の重撃モディファイア",
+  "item.gunsmiths_gadgetsn_gizmos.unstable_overclock_modifier": "暴走過給機モディファイア",
+  "item.gunsmiths_gadgetsn_gizmos.reapers_gambit_modifier": "断罪のロシアンルーレットモディファイア",
+  "item.gunsmiths_gadgetsn_gizmos.trial_of_greed_modifier": "不吉なる狂宴モディファイア",
+  "item.gunsmiths_gadgetsn_gizmos.mastercrafted_trigger_modifier": "職人の調整済トリガーモディファイア",
+  "item.gunsmiths_gadgetsn_gizmos.merchant_bounty_modifier": "商人の強欲薬莢モディファイア",
 
   "gunsmiths_gadgetsn_gizmos.modifier.grappling_anchor": "着弾したブロックに向けて射手を急速に引き寄せる",
   "gunsmiths_gadgetsn_gizmos.modifier.heavy_core_impact": "飛翔距離1ブロックにつき +%s ダメージ増加",
@@ -77,31 +77,31 @@
   "gunsmiths_gadgetsn_gizmos.modifier.mastercrafted_trigger": "名工の手仕上げ：射撃反動と弾丸拡散を大幅に抑制",
   "gunsmiths_gadgetsn_gizmos.modifier.merchant_bounty": "強欲の弾丸：倒した敵がエメラルドを追加ドロップする",
 
-  "item.gunsmiths_gadgetsn_gizmos.echoing_sonic_core_modifier": "残響のソニック共鳴薬室モジュール",
+  "item.gunsmiths_gadgetsn_gizmos.echoing_sonic_core_modifier": "残響のソニック共鳴薬室モディファイア",
   "gunsmiths_gadgetsn_gizmos.modifier.echoing_sonic_core": "超音波共鳴：壁を貫通するウォーデンのソニックブームを放射",
   "gunsmiths_gadgetsn_gizmos.modifier.echoing_sonic_core.desc": "地形・遮蔽物を完全に貫通し、壁の向こうの敵を吹き飛ばす",
-  "item.gunsmiths_gadgetsn_gizmos.sculk_whisper_silencer_modifier": "無響のスカルクサイレンサーモジュール",
+  "item.gunsmiths_gadgetsn_gizmos.sculk_whisper_silencer_modifier": "無響のスカルクサイレンサーモディファイア",
   "gunsmiths_gadgetsn_gizmos.modifier.sculk_whisper_silencer": "深淵の消音：銃声を完全に消去する",
   "gunsmiths_gadgetsn_gizmos.modifier.sculk_whisper_silencer.desc": "スニーク射撃時、敵に気づかれず +60% の暗殺ダメージ",
-  "item.gunsmiths_gadgetsn_gizmos.sculk_devourer_modifier": "スカルク触媒の貪食機構モジュール",
+  "item.gunsmiths_gadgetsn_gizmos.sculk_devourer_modifier": "スカルク触媒の貪食機構モディファイア",
   "gunsmiths_gadgetsn_gizmos.modifier.sculk_devourer": "魂の捕食：倒した敵の経験値を弾丸へ変換",
   "gunsmiths_gadgetsn_gizmos.modifier.sculk_devourer.desc": "敵討伐時にマガジンへ直接1発自動生成・即座装填",
-  "item.gunsmiths_gadgetsn_gizmos.shrieking_dread_modifier": "シュリーカーの呪詛弾頭モジュール",
+  "item.gunsmiths_gadgetsn_gizmos.shrieking_dread_modifier": "シュリーカーの呪詛弾頭モディファイア",
   "gunsmiths_gadgetsn_gizmos.modifier.shrieking_dread": "絶叫の呪縛：着弾時にシュリーカーの絶叫を響かせる",
   "gunsmiths_gadgetsn_gizmos.modifier.shrieking_dread.desc": "周囲の敵全員に「暗闇」＋「移動低下II」＋「弱体化II」を付与",
 
-  "item.gunsmiths_gadgetsn_gizmos.crimson_singularity_modifier": "深紅の特異点モジュール",
+  "item.gunsmiths_gadgetsn_gizmos.crimson_singularity_modifier": "深紅の特異点モディファイア",
   "gunsmiths_gadgetsn_gizmos.modifier.crimson_singularity": "昇華した禍撃：重力の影響を受けず、貫通力 +3 を得る",
   "gunsmiths_gadgetsn_gizmos.modifier.crimson_singularity.desc": "飛翔距離1ブロックにつき +1.0 ダメージ / 敵討伐時にHP回復",
-  "gunsmiths_gadgetsn_gizmos.modifier.crimson_singularity.cost": "射撃ごとに自身のHPをハート半分（1ダメージ）消費",
-  "item.gunsmiths_gadgetsn_gizmos.clockwork_gatling_modifier": "時計仕掛けのガトリング機構モジュール",
+  "gunsmiths_gadgetsn_gizmos.modifier.crimson_singularity.cost": "射撃ごとに自身のHPをハート半分消費",
+  "item.gunsmiths_gadgetsn_gizmos.clockwork_gatling_modifier": "時計仕掛けのガトリング機構モディファイア",
   "gunsmiths_gadgetsn_gizmos.modifier.clockwork_gatling": "安定化過給機構：レーザー精度の超連射ガトリング",
-  "gunsmiths_gadgetsn_gizmos.modifier.clockwork_gatling.desc": "+250% 連射速度（フルオート化）/ 拡散なし・制御された極小反動",
-  "item.gunsmiths_gadgetsn_gizmos.reapers_tempest_modifier": "死神の鎌鼬モジュール",
+  "gunsmiths_gadgetsn_gizmos.modifier.clockwork_gatling.desc": "+250% 連射速度/ 拡散なし・制御された極小反動",
+  "item.gunsmiths_gadgetsn_gizmos.reapers_tempest_modifier": "死神の鎌鼬モディファイア",
   "gunsmiths_gadgetsn_gizmos.modifier.reapers_tempest": "魂風の審判：直撃時に周囲を巻き込むソウル旋風大爆発",
   "gunsmiths_gadgetsn_gizmos.modifier.reapers_tempest.desc": "周囲の敵全員を巻き込んで上空へ打ち上げつつ +250% ソウルダメージ",
-  "gunsmiths_gadgetsn_gizmos.modifier.reapers_tempest.curse": "弾を外すと自身に軽微なウィザー（2秒）が付与される",
-  "item.gunsmiths_gadgetsn_gizmos.midas_touch_chamber_modifier": "ミダスの黄金薬室モジュール",
+  "gunsmiths_gadgetsn_gizmos.modifier.reapers_tempest.curse": "弾を外すと自身に軽微なウィザーが付与される",
+  "item.gunsmiths_gadgetsn_gizmos.midas_touch_chamber_modifier": "ミダスの黄金薬室モディファイア",
   "gunsmiths_gadgetsn_gizmos.modifier.midas_touch_chamber": "錬金の覇道：富と戦利品の極限獲得",
   "gunsmiths_gadgetsn_gizmos.modifier.midas_touch_chamber.desc": "討伐モブのドロップが5倍 ＋ エメラルドを確定ドロップ / 敵を高速化させるが同時に攻撃力を激減",
 
@@ -134,9 +134,9 @@
   "gunsmiths_gadgetsn_gizmos.tooltip.gamblers_ring.desc": "15%で弾薬消費無効 / 15%でダメージ2倍クリティカル",
   "item.gunsmiths_gadgetsn_gizmos.gunslingers_spurs": "チャリンと鳴る拍車",
   "gunsmiths_gadgetsn_gizmos.tooltip.gunslingers_spurs": "軽快な足取り",
-  "gunsmiths_gadgetsn_gizmos.tooltip.gunslingers_spurs.desc": "移動中やダッシュ射撃時の手ブレ（拡散ペナルティ）を完全無効化",
+  "gunsmiths_gadgetsn_gizmos.tooltip.gunslingers_spurs.desc": "移動中やダッシュ射撃時の手ブレを完全無効化",
 
-  "gunsmiths_gadgetsn_gizmos.tooltip.extra_slots": "追加モジュール枠: +%s スロット",
+  "gunsmiths_gadgetsn_gizmos.tooltip.extra_slots": "追加モディファイア枠: +%s スロット",
   "gunsmiths_gadgetsn_gizmos.tooltip.infinite_ammo_bag": "無限の弾薬供給源",
   "gunsmiths_gadgetsn_gizmos.tooltip.infinite_ammo_bag.desc": "所持中、手持ちの弾丸を消費せずに何度でもリロード可能",
 
@@ -157,7 +157,6 @@
   "gunsmiths_gadgetsn_gizmos.set_bonus.absolute_zero.desc": "着弾地点の周囲の敵全員を完全行動不能状態にする",
 
   "item.gunsmiths_gadgetsn_gizmos.clunker_rifle": "オーバーロードライフル",
-  "gunsmiths_gadgetsn_gizmos.tooltip.clunker_rifle.flavour": "限界突破の加圧薬室：激しい後退反動と引き換えに絶大な単発火力を放つ",
 
   "gunsmiths_gadgetsn_gizmos.set_bonus.recoil_control": "セット効果：リコイル・コントロール",
   "gunsmiths_gadgetsn_gizmos.set_bonus.recoil_control.desc": "反動 -20%, 拡散 -1.0",
@@ -176,20 +175,6 @@
 
   "gunsmiths_gadgetsn_gizmos.set_bonus.soul_of_eternity": "セット効果：Soul of Eternity",
   "gunsmiths_gadgetsn_gizmos.set_bonus.soul_of_eternity.desc": "全知全能の終極：ダメージ+300%, 貫通+10 ＆ 宇宙的特異点吸引 ＋ 5連落雷 ＋ 10秒完全氷結 ＋ 撃破時即座全弾装填",
-  "item.gunsmiths_gadgetsn_gizmos.geological_tunneler_modifier": "地質破砕穿孔スラグモジュール",
-  "gunsmiths_gadgetsn_gizmos.modifier.geological_tunneler": "地殻削孔：地形破壊ダメージ +1500% ＋ 貫通力 +8",
-  "gunsmiths_gadgetsn_gizmos.modifier.geological_tunneler.desc": "直線上のブロックを瞬時に粉砕して大穴トンネルを開通",
-  "gunsmiths_gadgetsn_gizmos.modifier.geological_tunneler.penalty": "-85% 生物ダメージ",
-
-  "item.gunsmiths_gadgetsn_gizmos.geometric_prism_modifier": "幾何屈折プリズムモジュール",
-  "gunsmiths_gadgetsn_gizmos.modifier.geometric_prism": "幾何屈折：跳弾（バウンド）時に超誘導ホーミングが覚醒",
-  "gunsmiths_gadgetsn_gizmos.modifier.geometric_prism.desc": "壁や床に跳ね返った弾が直角に曲がり、物陰の敵の頭に吸い込まれる",
-
-  "item.gunsmiths_gadgetsn_gizmos.ferromagnetic_marker_modifier": "フェロマグネティック・マーカーモジュール",
-  "gunsmiths_gadgetsn_gizmos.modifier.ferromagnetic_marker": "磁気刻印：命中した敵に「磁気マーク」を付与",
-  "gunsmiths_gadgetsn_gizmos.modifier.ferromagnetic_marker.desc": "マークされた敵がいる間、あらゆる方向への射撃・散弾がその敵1点へ超ホーミング収束",
-
-  "effect.gunsmiths_gadgetsn_gizmos.magnetized": "磁気刻印",
   "item.gunsmiths_gadgetsn_gizmos.minigun": "クロックワークガトリング",
 
   "advancements.gunsmiths_gadgetsn_gizmos.root.title": "灰と真鍮の年代記",
@@ -202,7 +187,7 @@
   "advancements.gunsmiths_gadgetsn_gizmos.craft_pouch.desc": "弾薬ポーチを作成し、戦況に応じて特殊弾薬を使い分ける",
 
   "advancements.gunsmiths_gadgetsn_gizmos.special_ammo.title": "戦術弾頭工学",
-  "advancements.gunsmiths_gadgetsn_gizmos.special_ammo.desc": "特殊弾薬（銀弾、徹甲弾、ガラス散弾、曳光弾）のいずれかを入手する",
+  "advancements.gunsmiths_gadgetsn_gizmos.special_ammo.desc": "特殊弾薬(銀弾、徹甲弾、ガラス散弾、曳光弾)のいずれかを入手する",
 
   "advancements.gunsmiths_gadgetsn_gizmos.expand_chassis.title": "高負荷シャーシ拡張",
   "advancements.gunsmiths_gadgetsn_gizmos.expand_chassis.desc": "シャーシ拡張フレームを作成し、銃のモディファイア枠を拡張する",
@@ -214,10 +199,10 @@
   "advancements.gunsmiths_gadgetsn_gizmos.get_omen_core.desc": "不吉な試練の深淵から禍ツからくりコアを入手する",
 
   "advancements.gunsmiths_gadgetsn_gizmos.altar_craft.title": "禁忌の錬成",
-  "advancements.gunsmiths_gadgetsn_gizmos.altar_craft.desc": "呪印の祭壇で最初の禁忌モジュールを錬成する",
+  "advancements.gunsmiths_gadgetsn_gizmos.altar_craft.desc": "呪印の祭壇で最初の禁忌モディファイアを錬成する",
 
   "advancements.gunsmiths_gadgetsn_gizmos.tier3_refined.title": "深淵を飼いならす者",
-  "advancements.gunsmiths_gadgetsn_gizmos.tier3_refined.desc": "ギルドの技術と禁忌の力を融合させ、新たな力を持つモジュールを完成させる",
+  "advancements.gunsmiths_gadgetsn_gizmos.tier3_refined.desc": "ギルドの技術と禁忌の力を融合させ、新たな力を持つモディファイアを完成させる",
 
   "advancements.gunsmiths_gadgetsn_gizmos.ruined_end.title": "滅び去りし文明の残響",
   "advancements.gunsmiths_gadgetsn_gizmos.ruined_end.desc": "職人は滅び、遺物のみが眠る最果ての世界「ジ・エンド」へ到達する……",
@@ -232,5 +217,14 @@
   "apostle.title.annihilation_harbinger": "殲滅を告げる者",
   "apostle.title.void_cleft_sovereign": "虚空を穿つ者",
   "apostle.title.ruler_of_all_creation": "森羅万象ヲ統ベル者",
-  "apostle.title.abyssal_ruler_of_all_creation": "深淵ノ盟主・森羅万象タル者"
+  "apostle.title.abyssal_ruler_of_all_creation": "深淵ノ盟主・森羅万象タル者",
+  "item.gunsmiths_gadgetsn_gizmos.abyssal_singularity_core": "アビサルシンギュラリティコア",
+  "entity.gunsmiths_gadgetsn_gizmos.town_marksman": "町のガンマン",
+
+  "advancements.gunsmiths_gadgetsn_gizmos.kill_apostle.title": "堕ちた信徒",
+  "advancements.gunsmiths_gadgetsn_gizmos.kill_apostle.desc": "深淵に呑まれた、反逆の銃職人「アポストル」を倒す",
+
+  "advancements.gunsmiths_gadgetsn_gizmos.kill_abyssal_apostle.title": "深淵の終わり",
+  "advancements.gunsmiths_gadgetsn_gizmos.kill_abyssal_apostle.desc": "ジ・エンドの深淵に潜む深淵ノ盟主を倒し、究極の特異点を手に入れる",
+  "item.gunsmiths_gadgetsn_gizmos.apostle_summon_ritual": "アポストル召喚の儀式"
 }

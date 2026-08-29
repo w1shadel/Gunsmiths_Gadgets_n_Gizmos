@@ -2,20 +2,20 @@ package com.maxwell.gunsmiths_gadgetsn_gizmos.api.detagen;
 
 import com.maxwell.gunsmiths_gadgetsn_gizmos.GunsmithsGadgetsnGizmos;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.init.ModBlocks;
+import com.maxwell.gunsmiths_gadgetsn_gizmos.init.ModEntities;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.init.ModItems;
 import io.redspace.irons_artifice.registry.ItemRegistry;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementType;
-import net.minecraft.advancements.criterion.ChangeDimensionTrigger;
-import net.minecraft.advancements.criterion.InventoryChangeTrigger;
-import net.minecraft.advancements.criterion.ItemPredicate;
+import net.minecraft.advancements.criterion.*;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.advancements.AdvancementSubProvider;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
 import org.jspecify.annotations.NonNull;
 
 import java.util.function.Consumer;
@@ -28,6 +28,7 @@ public class ModAdvancementProvider implements AdvancementSubProvider {
     @Override
     public void generate(HolderLookup.@NonNull Provider registries, @NonNull Consumer<AdvancementHolder> saver) {
         var itemLookup = registries.lookupOrThrow(Registries.ITEM);
+        var entityLookup = registries.lookupOrThrow(Registries.ENTITY_TYPE);
         AdvancementHolder root = Advancement.Builder.advancement()
                 .display(
                         ModBlocks.GUNSMITH_BENCH.get(),
@@ -149,7 +150,7 @@ public class ModAdvancementProvider implements AdvancementSubProvider {
                         )
                 ))
                 .save(saver, id("craft_tier3_refined"));
-        Advancement.Builder.advancement()
+        AdvancementHolder ruinedEnd = Advancement.Builder.advancement()
                 .parent(tier3Refined)
                 .display(
                         Items.DRAGON_BREATH,
@@ -159,7 +160,40 @@ public class ModAdvancementProvider implements AdvancementSubProvider {
                         AdvancementType.GOAL,
                         true, true, false
                 )
-                .addCriterion("enter_end", ChangeDimensionTrigger.TriggerInstance.changedDimensionTo(net.minecraft.world.level.Level.END))
+                .addCriterion("enter_end", ChangeDimensionTrigger.TriggerInstance.changedDimensionTo(Level.END))
                 .save(saver, id("ruined_end_horizon"));
+
+        Advancement.Builder.advancement()
+                .parent(firstAltarCraft)
+                .display(
+                        ItemRegistry.CLOCKWORK_RIFLE.get(),
+                        Component.translatable("advancements.gunsmiths_gadgetsn_gizmos.kill_apostle.title"),
+                        Component.translatable("advancements.gunsmiths_gadgetsn_gizmos.kill_apostle.desc"),
+                        null,
+                        AdvancementType.GOAL,
+                        true, true, false
+                )
+
+                .addCriterion("killed_apostle", KilledTrigger.TriggerInstance.playerKilledEntity(
+                        EntityPredicate.Builder.entity().entityType(EntityTypePredicate.of(entityLookup, ModEntities.APOSTLE_GUN.get()))
+                ))
+                .save(saver, id("kill_apostle"));
+        Advancement.Builder.advancement()
+                .parent(ruinedEnd)
+                .display(
+                        ModItems.ABYSSAL_SINGULARITY_CORE.get(),
+                        Component.translatable("advancements.gunsmiths_gadgetsn_gizmos.kill_abyssal_apostle.title"),
+                        Component.translatable("advancements.gunsmiths_gadgetsn_gizmos.kill_abyssal_apostle.desc"),
+                        null,
+                        AdvancementType.CHALLENGE,
+                        true, true, false
+                )
+
+                .addCriterion("killed_abyssal_apostle", KilledTrigger.TriggerInstance.playerKilledEntity(
+                        EntityPredicate.Builder.entity()
+                                .entityType(EntityTypePredicate.of(entityLookup, ModEntities.APOSTLE_GUN.get()))
+                                .located(LocationPredicate.Builder.inDimension(Level.END))
+                ))
+                .save(saver, id("kill_abyssal_apostle"));
     }
 }

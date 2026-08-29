@@ -1,0 +1,22 @@
+{
+  "type": "gunsmiths_gadgetsn_gizmos:cursed_altar",
+  "base": [
+    "irons_artifice:overcharged_powder_modifier"
+  ],
+  "catalyst": {
+    "count": 1,
+    "ingredient": [
+      "gunsmiths_gadgetsn_gizmos:ominous_clockwork_core"
+    ]
+  },
+  "material": {
+    "count": 2,
+    "ingredient": [
+      "gunsmiths_gadgetsn_gizmos:coagulated_omen_blood"
+    ]
+  },
+  "result": {
+    "count": 1,
+    "id": "gunsmiths_gadgetsn_gizmos:ominous_chamber_modifier"
+  }
+}

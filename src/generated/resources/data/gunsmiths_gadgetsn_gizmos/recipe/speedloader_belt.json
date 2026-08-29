@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "H": "minecraft:hopper",
+    "I": "minecraft:iron_ingot",
+    "L": "minecraft:leather",
+    "M": "irons_artifice:mechanical_components"
+  },
+  "pattern": [
+    "LHL",
+    "LML",
+    "LIL"
+  ],
+  "result": {
+    "id": "gunsmiths_gadgetsn_gizmos:speedloader_belt"
+  }
+}

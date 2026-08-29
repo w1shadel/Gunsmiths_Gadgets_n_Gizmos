@@ -1,7 +1,7 @@
 {
   "amount": 2,
   "trades": [
-    "gunsmiths_gadgetsn_gizmos:emerald_to_trial_of_greed",
-    "gunsmiths_gadgetsn_gizmos:nether_star_to_omen_cores"
+    "gunsmiths_gadgetsn_gizmos:nether_star_to_emerald",
+    "gunsmiths_gadgetsn_gizmos:emerald_to_crate_bulk"
   ]
 }

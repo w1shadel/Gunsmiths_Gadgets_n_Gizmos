@@ -23,14 +23,41 @@ public class AmmoManager {
     public static boolean isAmmo(ItemStack stack) {
         return findAmmoType(stack) != null;
     }
+    public static java.util.List<ItemStack> getAllHeldAndCuriosStacks(Player player) {
+        java.util.List<ItemStack> list = new java.util.ArrayList<>();
+
+        // 1. オフハンド直持ち（最優先で1回だけ追加）
+        ItemStack offhand = player.getOffhandItem();
+        if (!offhand.isEmpty()) {
+            list.add(offhand);
+        }
+
+        // 2. Curios 装備枠
+        if (com.maxwell.gunsmiths_gadgetsn_gizmos.compat.curios.CuriosCompat.IS_CURIOS_LOADED) {
+            top.theillusivec4.curios.api.CuriosApi.getCuriosInventory(player).ifPresent(inv -> {
+                inv.findCurios(stack -> !stack.isEmpty()).forEach(slotResult -> {
+                    list.add(slotResult.stack());
+                });
+            });
+        }
+
+        // 3. 通常インベントリ（★ 0〜35番スロットのメイン枠のみ走査してオフハンド重複を防止）
+        for (int i = 0; i < 36; i++) {
+            ItemStack stack = player.getInventory().getItem(i);
+            if (!stack.isEmpty()) {
+                list.add(stack);
+            }
+        }
+        return list;
+    }
 
     public static int countPlayerAmmo(Player player) {
         if (InfiniteAmmoBagItem.hasInfiniteBag(player)) {
             return 9999;
         }
         int total = 0;
-        for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
-            ItemStack stack = player.getInventory().getItem(i);
+
+        for (ItemStack stack : getAllHeldAndCuriosStacks(player)) {
             if (stack.getItem() instanceof IAmmoContainer container) {
                 for (ItemStack item : container.getStoredAmmo(stack)) {
                     if (isAmmo(item)) {
@@ -43,24 +70,30 @@ public class AmmoManager {
         }
         return total;
     }
-
     public static AmmoType getActiveAmmoType(Player player) {
+
         AmmoType offhand = findAmmoType(player.getOffhandItem());
-        if (offhand != null) return offhand;
-        for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
-            ItemStack stack = player.getInventory().getItem(i);
+        if (offhand != null && offhand != ModAmmoTypes.DEFAULT.get()) return offhand;
+
+        for (ItemStack stack : getAllHeldAndCuriosStacks(player)) {
             if (stack.getItem() instanceof IAmmoContainer container) {
                 for (ItemStack item : container.getStoredAmmo(stack)) {
                     AmmoType type = findAmmoType(item);
-                    if (type != null) return type;
+
+                    if (type != null && type != ModAmmoTypes.DEFAULT.get()) {
+                        return type;
+                    }
                 }
             }
         }
-        for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
-            ItemStack stack = player.getInventory().getItem(i);
+
+        for (ItemStack stack : getAllHeldAndCuriosStacks(player)) {
             AmmoType type = findAmmoType(stack);
-            if (type != null) return type;
+            if (type != null && type != ModAmmoTypes.DEFAULT.get()) {
+                return type;
+            }
         }
+
         return ModAmmoTypes.DEFAULT.get();
     }
 
@@ -77,13 +110,15 @@ public class AmmoManager {
             return;
         }
         int remaining = amount;
-        for (int i = 0; i < player.getInventory().getContainerSize() && remaining > 0; i++) {
-            ItemStack stack = player.getInventory().getItem(i);
+        AmmoType targetType = getActiveAmmoType(player);
+
+        for (ItemStack stack : getAllHeldAndCuriosStacks(player)) {
+            if (remaining <= 0) break;
             if (stack.getItem() instanceof IAmmoContainer container) {
                 NonNullList<ItemStack> items = container.getStoredAmmo(stack);
                 boolean changed = false;
                 for (ItemStack slotItem : items) {
-                    if (isAmmo(slotItem)) {
+                    if (findAmmoType(slotItem) == targetType) {
                         int take = Math.min(remaining, slotItem.getCount());
                         slotItem.shrink(take);
                         remaining -= take;
@@ -97,9 +132,9 @@ public class AmmoManager {
             }
         }
         if (remaining > 0) {
-            for (int i = 0; i < player.getInventory().getContainerSize() && remaining > 0; i++) {
+            for (int i = 0; i < 36 && remaining > 0; i++) {
                 ItemStack stack = player.getInventory().getItem(i);
-                if (isAmmo(stack)) {
+                if (findAmmoType(stack) == targetType) {
                     int take = Math.min(remaining, stack.getCount());
                     stack.shrink(take);
                     remaining -= take;

@@ -39,21 +39,44 @@ public class CursedAltarRecipeDataProvider implements DataProvider {
         addRecipe("altar_crimson_singularity",
                 ModItems.HEAVY_CORE_IMPACT_MODIFIER.get(),
                 ModItems.BLOODBOUND_CALAMITY_MODIFIER.get(), 1,
-                ModItems.COAGULATED_OMEN_BLOOD.get(), 2,
+                ModItems.ABYSSAL_SINGULARITY_CORE.get(), 1, 
                 ModItems.CRIMSON_SINGULARITY_MODIFIER.get(), 1
+        );
+
+        addRecipe("altar_ominous_chamber",
+                ItemRegistry.OVERCHARGED_POWDER.get(),          
+                ModItems.COAGULATED_OMEN_BLOOD.get(), 2,       
+                ModItems.OMINOUS_CLOCKWORK_CORE.get(), 1,      
+                ModItems.OMINOUS_CHAMBER_MODIFIER.get(), 1     
+        );
+
+        addRecipe("altar_reapers_gambit",
+                ModItems.VOID_CASING.get(),                    
+                Items.WITHER_SKELETON_SKULL, 1,                
+                ModItems.SOUL_CINDER.get(), 4,                 
+                ModItems.REAPERS_GAMBIT_MODIFIER.get(), 1      
+        );
+
+        addRecipe("altar_trial_of_greed",
+                ModItems.MERCHANT_BOUNTY_MODIFIER.get(),       
+                Items.EMERALD_BLOCK, 2,                        
+                ModItems.COAGULATED_OMEN_BLOOD.get(), 2,       
+                ModItems.TRIAL_OF_GREED_MODIFIER.get(), 1      
         );
         addRecipe("altar_clockwork_gatling",
                 ModItems.MASTERCRAFTED_TRIGGER_MODIFIER.get(),
                 ModItems.UNSTABLE_OVERCLOCK_MODIFIER.get(), 1,
-                ModItems.CURSED_BRASS_INGOT.get(), 2,
+                ModItems.OMINOUS_CLOCKWORK_CORE.get(), 1,          
                 ModItems.CLOCKWORK_GATLING_MODIFIER.get(), 1
         );
+
         addRecipe("altar_reapers_tempest",
                 ModItems.BREEZE_CYCLONE_MODIFIER.get(),
                 ModItems.REAPERS_GAMBIT_MODIFIER.get(), 1,
-                ModItems.SOUL_CINDER.get(), 4,
+                ModItems.OMINOUS_CLOCKWORK_CORE.get(), 1,          
                 ModItems.REAPERS_TEMPEST_MODIFIER.get(), 1
         );
+
         addRecipe("altar_midas_touch_chamber",
                 ModItems.MERCHANT_BOUNTY_MODIFIER.get(),
                 ModItems.TRIAL_OF_GREED_MODIFIER.get(), 1,
@@ -95,6 +118,12 @@ public class CursedAltarRecipeDataProvider implements DataProvider {
                 Blocks.SCULK_SHRIEKER, 1,
                 ModItems.SOUL_CINDER.get(), 4,
                 ModItems.SHRIEKING_DREAD_MODIFIER.get(), 1
+        );
+        addRecipe("altar_summon_apostle",
+                ModItems.FORBIDDEN_BLUEPRINT.get(),            // Base: 禁忌の設計図
+                ModItems.COAGULATED_OMEN_BLOOD.get(), 2,       // Material: 凝固した不吉の血 x2
+                Items.ROTTEN_FLESH, 1,      // Catalyst: オミノスコア x1
+                ModItems.APOSTLE_SUMMON_RITUAL.get(), 1        // Result: 使徒の降霊符（召喚トリガー）
         );
     }
 

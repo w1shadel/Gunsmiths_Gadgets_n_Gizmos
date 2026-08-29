@@ -4,7 +4,7 @@
   "block.gunsmiths_gadgetsn_gizmos.gunsmith_bench": "Gunsmith Bench",
   "block.gunsmiths_gadgetsn_gizmos.cursed_altar": "Cursed Gunsmith Altar",
 
-  "container.gunsmiths_gadgetsn_gizmos.gunsmith_bench": "Gunsmith Bench (Slot Expansion)",
+  "container.gunsmiths_gadgetsn_gizmos.gunsmith_bench": "Gunsmith Bench",
   "container.gunsmiths_gadgetsn_gizmos.cursed_altar": "Cursed Altar",
   "gui.gunsmiths_gadgetsn_gizmos.cursed_altar": "Cursed Altar Fusion",
 
@@ -53,7 +53,7 @@
   "gunsmiths_gadgetsn_gizmos.modifier.bloodbound_calamity.damage": "+120% Damage",
   "gunsmiths_gadgetsn_gizmos.modifier.bloodbound_calamity.cost": "Consumes 1 Heart of HP on each shot",
   "gunsmiths_gadgetsn_gizmos.modifier.unstable_overclock": "Supercharged Mechanism: Extremely high fire rate",
-  "gunsmiths_gadgetsn_gizmos.modifier.unstable_overclock.bonus": "+200% Fire Rate (Full-Auto)",
+  "gunsmiths_gadgetsn_gizmos.modifier.unstable_overclock.bonus": "+200% Fire Rate",
   "gunsmiths_gadgetsn_gizmos.modifier.unstable_overclock.penalty": "+150% Recoil / Massive Spread & Blowback",
   "gunsmiths_gadgetsn_gizmos.modifier.reapers_gambit": "Reaper's Curse: Fatal direct hit with soul burst",
   "gunsmiths_gadgetsn_gizmos.modifier.reapers_gambit.bonus": "Direct Hit: +300% Soul Explosion Damage",
@@ -83,7 +83,7 @@
   "gunsmiths_gadgetsn_gizmos.modifier.crimson_singularity.cost": "Consumes half a Heart of HP on shot",
   "item.gunsmiths_gadgetsn_gizmos.clockwork_gatling_modifier": "Clockwork Gatling Modifier",
   "gunsmiths_gadgetsn_gizmos.modifier.clockwork_gatling": "Stabilized Supercharger: Laser-accurate Gatling fire",
-  "gunsmiths_gadgetsn_gizmos.modifier.clockwork_gatling.desc": "+250% Fire Rate (Full-Auto) / Pinpoint Accuracy with Controlled Recoil",
+  "gunsmiths_gadgetsn_gizmos.modifier.clockwork_gatling.desc": "+250% Fire Rate / Pinpoint Accuracy with Controlled Recoil",
   "item.gunsmiths_gadgetsn_gizmos.reapers_tempest_modifier": "Reaper's Tempest Modifier",
   "gunsmiths_gadgetsn_gizmos.modifier.reapers_tempest": "Soul Hurricane: Cataclysmic soul cyclone on direct hit",
   "gunsmiths_gadgetsn_gizmos.modifier.reapers_tempest.desc": "Launches all nearby enemies into the air with +250% Soul Damage",
@@ -174,20 +174,7 @@
   "ammo.gunsmiths_gadgetsn_gizmos.armor_piercing": "Armor-Piercing Bullet",
   "ammo.gunsmiths_gadgetsn_gizmos.glass": "Glass Shardshell",
   "ammo.gunsmiths_gadgetsn_gizmos.tracer": "Tracer Bullet",
-  "item.gunsmiths_gadgetsn_gizmos.geological_tunneler_modifier": "Geological Tunneler Modifier",
-  "gunsmiths_gadgetsn_gizmos.modifier.geological_tunneler": "Terrain Drill: +1500% Block Damage with +8 Piercing",
-  "gunsmiths_gadgetsn_gizmos.modifier.geological_tunneler.desc": "Obliterates terrain in a straight line to carve instant tunnels",
-  "gunsmiths_gadgetsn_gizmos.modifier.geological_tunneler.penalty": "-85% Mob Damage",
 
-  "item.gunsmiths_gadgetsn_gizmos.geometric_prism_modifier": "Geometric Prism Modifier",
-  "gunsmiths_gadgetsn_gizmos.modifier.geometric_prism": "Refraction Prism: Ricocheting activates extreme homing",
-  "gunsmiths_gadgetsn_gizmos.modifier.geometric_prism.desc": "Bouncing bullets off walls/floors makes them sharply steer towards enemy heads",
-
-  "item.gunsmiths_gadgetsn_gizmos.ferromagnetic_marker_modifier": "Ferromagnetic Marker Modifier",
-  "gunsmiths_gadgetsn_gizmos.modifier.ferromagnetic_marker": "Magnetic Tag: Imparts Magnetized status on hit",
-  "gunsmiths_gadgetsn_gizmos.modifier.ferromagnetic_marker.desc": "All subsequent shots (even blind fire/shotgun pellets) violently converge on the tagged target",
-
-  "effect.gunsmiths_gadgetsn_gizmos.magnetized": "Magnetized",
   "effect.gunsmiths_gadgetsn_gizmos.bleeding": "Bleeding",
 
   "item.gunsmiths_gadgetsn_gizmos.minigun": "Clockwork Gatling",
@@ -232,5 +219,14 @@
   "apostle.title.annihilation_harbinger": "Annihilation Harbinger",
   "apostle.title.void_cleft_sovereign": "Void-Cleft Sovereign",
   "apostle.title.ruler_of_all_creation": "Ruler of All Creation",
-  "apostle.title.abyssal_ruler_of_all_creation": "Abyssal Sovereign, Ruler of All Creation"
+  "apostle.title.abyssal_ruler_of_all_creation": "Abyssal Sovereign, Ruler of All Creation",
+  "item.gunsmiths_gadgetsn_gizmos.abyssal_singularity_core": "Abyssal Singularity Core",
+  "entity.gunsmiths_gadgetsn_gizmos.town_marksman": "Town Marksman",
+
+  "advancements.gunsmiths_gadgetsn_gizmos.kill_apostle.title": "The Fallen Apostle",
+  "advancements.gunsmiths_gadgetsn_gizmos.kill_apostle.desc": "Defeat the Apostle, the renegade gunsmith consumed by occult machinery",
+
+  "advancements.gunsmiths_gadgetsn_gizmos.kill_abyssal_apostle.title": "End of the Abyss",
+  "advancements.gunsmiths_gadgetsn_gizmos.kill_abyssal_apostle.desc": "Slay the Abyssal Sovereign in the depths of the End, claiming the ultimate singularity",
+  "item.gunsmiths_gadgetsn_gizmos.apostle_summon_ritual": "Ritual of the Apostle"
 }

@@ -1,7 +1,7 @@
 {
   "gives": {
-    "count": 4,
-    "id": "gunsmiths_gadgetsn_gizmos:ominous_clockwork_core"
+    "count": 32,
+    "id": "minecraft:emerald"
   },
   "max_uses": 2,
   "reputation_discount": 0.05,

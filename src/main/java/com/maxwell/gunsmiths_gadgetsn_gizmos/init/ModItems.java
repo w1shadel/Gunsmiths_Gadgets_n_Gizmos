@@ -29,6 +29,7 @@ public class ModItems {
             "breeze_cyclone_modifier",
             properties -> new ModifierItem(properties.stacksTo(1), new BreezeCycloneModifier())
     );
+
     public static final DeferredItem<ModifierItem> OMINOUS_CHAMBER_MODIFIER = ITEMS.registerItem(
             "ominous_chamber_modifier",
             properties -> new ModifierItem(properties.stacksTo(1), new OminousChamberModifier())
@@ -110,6 +111,7 @@ public class ModItems {
     public static final DeferredItem<Item> AP_BULLET = ITEMS.registerSimpleItem("ap_bullet");
     public static final DeferredItem<Item> GLASS_BULLET = ITEMS.registerSimpleItem("glass_bullet");
     public static final DeferredItem<Item> TRACER_BULLET = ITEMS.registerSimpleItem("tracer_bullet");
+    public static final DeferredItem<Item> ABYSSAL_SINGULARITY_CORE = ITEMS.registerSimpleItem("abyssal_singularity_core");
     public static final DeferredItem<Item> AMMO_POUCH = ITEMS.registerItem(
             "ammo_pouch",
             AmmoPouchItem::new
@@ -148,7 +150,10 @@ public class ModItems {
     public static final DeferredItem<Item> CURSED_BRASS_INGOT = ITEMS.registerSimpleItem("cursed_brass_ingot");
     public static final DeferredItem<Item> COAGULATED_OMEN_BLOOD = ITEMS.registerSimpleItem("coagulated_omen_blood");
     public static final DeferredItem<Item> FORBIDDEN_BLUEPRINT = ITEMS.registerSimpleItem("forbidden_blueprint");
-
+    public static final DeferredItem<Item> APOSTLE_SUMMON_RITUAL = ITEMS.registerItem(
+            "apostle_summon_ritual",
+            p -> new Item(p.stacksTo(1).component(net.minecraft.core.component.DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true))
+    );
     public static void register(IEventBus bus) {
         ITEMS.register(bus);
     }

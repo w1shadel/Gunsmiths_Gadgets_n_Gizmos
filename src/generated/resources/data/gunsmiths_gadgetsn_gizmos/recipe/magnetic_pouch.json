@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": "minecraft:copper_ingot",
+    "I": "minecraft:iron_block",
+    "P": "gunsmiths_gadgetsn_gizmos:ammo_pouch",
+    "R": "minecraft:redstone"
+  },
+  "pattern": [
+    " R ",
+    "CPC",
+    " I "
+  ],
+  "result": {
+    "id": "gunsmiths_gadgetsn_gizmos:magnetic_pouch"
+  }
+}

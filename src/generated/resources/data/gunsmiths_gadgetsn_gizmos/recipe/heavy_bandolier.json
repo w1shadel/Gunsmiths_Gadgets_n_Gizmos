@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": "minecraft:iron_chain",
+    "I": "minecraft:iron_ingot",
+    "L": "minecraft:leather",
+    "P": "gunsmiths_gadgetsn_gizmos:ammo_pouch"
+  },
+  "pattern": [
+    "LCL",
+    "LPL",
+    "LIL"
+  ],
+  "result": {
+    "id": "gunsmiths_gadgetsn_gizmos:heavy_bandolier"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "I": "minecraft:iron_block",
+    "L": "irons_artifice:lead_core_modifier",
+    "M": "irons_artifice:mechanical_components"
+  },
+  "pattern": [
+    " I ",
+    "ILI",
+    " M "
+  ],
+  "result": {
+    "id": "gunsmiths_gadgetsn_gizmos:heavy_core_impact_modifier"
+  }
+}

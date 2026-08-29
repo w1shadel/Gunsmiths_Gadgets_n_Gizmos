@@ -90,6 +90,9 @@ public class VillagerTradeDataProvider implements DataProvider {
                 "emerald_to_heavy_core_mod",
                 "emerald_to_master_trigger"
         ));
+
+
+
         addTrade("rotten_flesh_to_emerald", "minecraft:rotten_flesh", 24, "minecraft:emerald", 1, 16, 2, 0.05F);
         addTrade("soul_sand_to_cinder", "minecraft:soul_sand", 8, modId + ":soul_cinder", 2, 12, 2, 0.05F);
         addTrade("emerald_to_void_casing", "minecraft:emerald", 2, modId + ":void_casing", 1, 12, 1, 0.05F);
@@ -98,35 +101,39 @@ public class VillagerTradeDataProvider implements DataProvider {
                 "soul_sand_to_cinder",
                 "emerald_to_void_casing"
         ));
+
         addTrade("glass_bottle_to_emerald", "minecraft:glass_bottle", 8, "minecraft:emerald", 1, 16, 5, 0.05F);
         addTrade("cinder_and_gold_to_brass", modId + ":soul_cinder", 2, "minecraft:gold_ingot", 2, modId + ":cursed_brass_ingot", 1, 8, 5, 0.05F);
-        addTrade("emerald_to_bloodbound_mod", "minecraft:emerald", 6, modId + ":bloodbound_calamity_modifier", 1, 4, 5, 0.05F);
+        addTrade("emerald_to_cinder", "minecraft:emerald", 3, modId + ":soul_cinder", 2, 8, 5, 0.05F);
         addTradeSet("cultist_level_2", 2, List.of(
                 "glass_bottle_to_emerald",
                 "cinder_and_gold_to_brass",
-                "emerald_to_bloodbound_mod"
+                "emerald_to_cinder"
         ));
-        addTrade("ominous_bottle_to_blood", "minecraft:ominous_bottle", 1, modId + ":coagulated_omen_blood", 1, 6, 10, 0.05F);
-        addTrade("emerald_to_ominous_core", "minecraft:emerald", 10, modId + ":ominous_clockwork_core", 1, 4, 10, 0.05F);
-        addTrade("emerald_to_unstable_overclock", "minecraft:emerald", 8, modId + ":unstable_overclock_modifier", 1, 3, 10, 0.05F);
+
+        addTrade("ominous_bottle_to_blood", "minecraft:ominous_bottle", 1, modId + ":coagulated_omen_blood", 2, 6, 10, 0.05F);
+        addTrade("emerald_to_brass", "minecraft:emerald", 6, modId + ":cursed_brass_ingot", 1, 6, 10, 0.05F);
+        addTrade("emerald_to_blood", "minecraft:emerald", 5, modId + ":coagulated_omen_blood", 1, 6, 10, 0.05F);
         addTradeSet("cultist_level_3", 2, List.of(
                 "ominous_bottle_to_blood",
-                "emerald_to_ominous_core",
-                "emerald_to_unstable_overclock"
+                "emerald_to_brass",
+                "emerald_to_blood"
         ));
+
         addTrade("wither_skull_to_emerald", "minecraft:wither_skeleton_skull", 1, "minecraft:emerald", 8, 4, 15, 0.05F);
         addTrade("emerald_to_forbidden_blueprint", "minecraft:emerald", 12, modId + ":forbidden_blueprint", 1, 3, 15, 0.05F);
-        addTrade("emerald_to_reapers_gambit", "minecraft:emerald", 10, modId + ":reapers_gambit_modifier", 1, 2, 15, 0.05F);
+        addTrade("echo_shard_to_emerald", "minecraft:echo_shard", 1, "minecraft:emerald", 6, 6, 15, 0.05F);
         addTradeSet("cultist_level_4", 2, List.of(
                 "wither_skull_to_emerald",
                 "emerald_to_forbidden_blueprint",
-                "emerald_to_reapers_gambit"
+                "echo_shard_to_emerald"
         ));
-        addTrade("emerald_to_trial_of_greed", "minecraft:emerald", 20, modId + ":coagulated_omen_blood", 2, modId + ":trial_of_greed_modifier", 1, 2, 30, 0.05F);
-        addTrade("nether_star_to_omen_cores", "minecraft:nether_star", 1, modId + ":ominous_clockwork_core", 4, 2, 30, 0.05F);
+
+        addTrade("nether_star_to_emerald", "minecraft:nether_star", 1, "minecraft:emerald", 32, 2, 30, 0.05F);
+        addTrade("emerald_to_crate_bulk", "minecraft:emerald", 8, modId + ":unidentified_crate", 2, 4, 30, 0.05F);
         addTradeSet("cultist_level_5", 2, List.of(
-                "emerald_to_trial_of_greed",
-                "nether_star_to_omen_cores"
+                "nether_star_to_emerald",
+                "emerald_to_crate_bulk"
         ));
     }
 

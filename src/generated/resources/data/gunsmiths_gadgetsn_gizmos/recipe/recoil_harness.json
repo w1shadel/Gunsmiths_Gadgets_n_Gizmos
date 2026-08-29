@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "I": "minecraft:iron_ingot",
+    "L": "minecraft:leather",
+    "P": "minecraft:piston",
+    "S": "irons_artifice:buffer_spring_modifier"
+  },
+  "pattern": [
+    "LPL",
+    "LSL",
+    "LIL"
+  ],
+  "result": {
+    "id": "gunsmiths_gadgetsn_gizmos:recoil_harness"
+  }
+}

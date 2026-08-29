@@ -1,0 +1,40 @@
+{
+  "parent": "gunsmiths_gadgetsn_gizmos:ruined_end_horizon",
+  "criteria": {
+    "killed_abyssal_apostle": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "gunsmiths_gadgetsn_gizmos:apostle_gun",
+              "location": {
+                "dimension": "minecraft:the_end"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:player_killed_entity"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.gunsmiths_gadgetsn_gizmos.kill_abyssal_apostle.desc"
+    },
+    "frame": "challenge",
+    "icon": {
+      "id": "gunsmiths_gadgetsn_gizmos:abyssal_singularity_core"
+    },
+    "title": {
+      "translate": "advancements.gunsmiths_gadgetsn_gizmos.kill_abyssal_apostle.title"
+    }
+  },
+  "requirements": [
+    [
+      "killed_abyssal_apostle"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

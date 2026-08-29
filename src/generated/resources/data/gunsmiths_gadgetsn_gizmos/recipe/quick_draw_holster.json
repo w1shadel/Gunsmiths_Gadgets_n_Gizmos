@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "G": "minecraft:gold_ingot",
+    "L": "minecraft:leather",
+    "S": "irons_artifice:simple_mechanical_components"
+  },
+  "pattern": [
+    "LGL",
+    "S S",
+    " L "
+  ],
+  "result": {
+    "id": "gunsmiths_gadgetsn_gizmos:quick_draw_holster"
+  }
+}

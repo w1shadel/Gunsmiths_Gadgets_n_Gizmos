@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "G": "minecraft:gold_ingot",
+    "M": "irons_artifice:simple_mechanical_components",
+    "S": "minecraft:spyglass"
+  },
+  "pattern": [
+    " G",
+    "SM"
+  ],
+  "result": {
+    "id": "gunsmiths_gadgetsn_gizmos:rangefinder_monocle"
+  }
+}

@@ -1,13 +1,13 @@
 {
   "gives": {
-    "count": 1,
-    "id": "gunsmiths_gadgetsn_gizmos:bloodbound_calamity_modifier"
+    "count": 2,
+    "id": "gunsmiths_gadgetsn_gizmos:unidentified_crate"
   },
   "max_uses": 4,
   "reputation_discount": 0.05,
   "wants": {
-    "count": 6,
+    "count": 8,
     "id": "minecraft:emerald"
   },
-  "xp": 5
+  "xp": 30
 }

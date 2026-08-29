@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_pouch": {
+      "conditions": {
+        "items": [
+          {
+            "items": "gunsmiths_gadgetsn_gizmos:ammo_pouch"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "gunsmiths_gadgetsn_gizmos:heavy_bandolier"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_pouch"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "gunsmiths_gadgetsn_gizmos:heavy_bandolier"
+    ]
+  }
+}

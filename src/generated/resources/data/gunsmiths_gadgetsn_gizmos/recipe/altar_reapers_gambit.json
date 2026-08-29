@@ -1,0 +1,22 @@
+{
+  "type": "gunsmiths_gadgetsn_gizmos:cursed_altar",
+  "base": [
+    "gunsmiths_gadgetsn_gizmos:void_casing"
+  ],
+  "catalyst": {
+    "count": 4,
+    "ingredient": [
+      "gunsmiths_gadgetsn_gizmos:soul_cinder"
+    ]
+  },
+  "material": {
+    "count": 1,
+    "ingredient": [
+      "minecraft:wither_skeleton_skull"
+    ]
+  },
+  "result": {
+    "count": 1,
+    "id": "gunsmiths_gadgetsn_gizmos:reapers_gambit_modifier"
+  }
+}
