@@ -96,13 +96,7 @@ public class GunsmithBenchMenu extends AbstractContainerMenu {
             }
         }
         resultContainer.setItem(0, ItemStack.EMPTY);
-    }    private final SimpleContainer inputContainer = new SimpleContainer(3) {
-        @Override
-        public void setChanged() {
-            super.setChanged();
-            GunsmithBenchMenu.this.slotsChanged(this);
-        }
-    };
+    }
 
     @Override
     public @NotNull ItemStack quickMoveStack(@NotNull Player playerIn, int pIndex) {
@@ -131,7 +125,13 @@ public class GunsmithBenchMenu extends AbstractContainerMenu {
         if (sourceStack.isEmpty()) sourceSlot.set(ItemStack.EMPTY);
         else sourceSlot.setChanged();
         return copyOfSourceStack;
-    }
+    }    private final SimpleContainer inputContainer = new SimpleContainer(3) {
+        @Override
+        public void setChanged() {
+            super.setChanged();
+            GunsmithBenchMenu.this.slotsChanged(this);
+        }
+    };
 
     @Override
     public boolean stillValid(@NotNull Player player) {

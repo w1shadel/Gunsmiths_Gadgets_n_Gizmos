@@ -1,0 +1,12 @@
+{
+  "vertex": "minecraft:post/blit",
+  "fragment": "gunsmiths_gadgetsn_gizmos:post/ash_storm",
+  "samplers": [
+    { "name": "InSampler" }
+  ],
+  "uniforms": [
+    { "name": "gunsmiths_gadgetsn_gizmos_Progress", "type": "float", "count": 1, "values": [ 0.0 ] },
+    { "name": "gunsmiths_gadgetsn_gizmos_Time", "type": "float", "count": 1, "values": [ 0.0 ] },
+    { "name": "gunsmiths_gadgetsn_gizmos_SootAmount", "type": "float", "count": 1, "values": [ 0.0 ] }
+  ]
+}

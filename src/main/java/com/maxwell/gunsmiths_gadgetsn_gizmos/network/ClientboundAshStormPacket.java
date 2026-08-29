@@ -11,20 +11,17 @@ import org.jspecify.annotations.NonNull;
 
 public record ClientboundAshStormPacket() implements CustomPacketPayload {
     public static final ClientboundAshStormPacket INSTANCE = new ClientboundAshStormPacket();
-
     public static final Type<ClientboundAshStormPacket> TYPE =
             new Type<>(Identifier.fromNamespaceAndPath(GunsmithsGadgetsnGizmos.MODID, "ash_storm"));
-
     public static final StreamCodec<RegistryFriendlyByteBuf, ClientboundAshStormPacket> STREAM_CODEC =
             StreamCodec.unit(INSTANCE);
+
+    public static void handle(ClientboundAshStormPacket payload, IPayloadContext context) {
+        context.enqueueWork(ClientApostleHandler::handleAshStormPacket);
+    }
 
     @Override
     public @NonNull Type<? extends CustomPacketPayload> type() {
         return TYPE;
-    }
-
-    public static void handle(ClientboundAshStormPacket payload, IPayloadContext context) {
-
-        context.enqueueWork(ClientApostleHandler::handleAshStormPacket);
     }
 }

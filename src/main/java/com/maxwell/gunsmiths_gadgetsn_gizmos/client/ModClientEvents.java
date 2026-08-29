@@ -45,6 +45,11 @@ public class ModClientEvents {
     }
 
     @SubscribeEvent
+    public static void onClientTick(net.neoforged.neoforge.client.event.ClientTickEvent.Post event) {
+        ApostleShaderManager.clientTick();
+    }
+
+    @SubscribeEvent
     public static void registerRenderers(final EntityRenderersEvent.RegisterRenderers event) {
         if (ModItems.CLUNKER_RIFLE.get() instanceof GunItem gun) {
             Identifier modelId = BuiltInRegistries.ITEM.getKey(gun);
@@ -71,16 +76,19 @@ public class ModClientEvents {
             });
         }
     }
+
     @SubscribeEvent
     public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(ModEntities.TOWN_MARKSMAN.get(), TownMarksmanRenderer::new);
         event.registerEntityRenderer(ModEntities.APOSTLE_GUN.get(), ApostleGunRenderer::new);
     }
+
     @SubscribeEvent
     public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(TownMarksmanModel.LAYER_LOCATION, TownMarksmanModel::createBodyLayer);
         event.registerLayerDefinition(ApostleGunModel.LAYER_LOCATION, ApostleGunModel::createBodyLayer);
     }
+
     @SubscribeEvent
     public static void registerClientExtensions(RegisterClientExtensionsEvent event) {
         IClientItemExtensions riflePose = new IClientItemExtensions() {

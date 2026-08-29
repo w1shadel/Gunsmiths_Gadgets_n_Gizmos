@@ -9,7 +9,6 @@ public class ModPayloads {
 
     public static void register(RegisterPayloadHandlersEvent event) {
         PayloadRegistrar registrar = event.registrar(VERSION);
-
         registrar.playToClient(
                 ClientboundAshStormPacket.TYPE,
                 ClientboundAshStormPacket.STREAM_CODEC,

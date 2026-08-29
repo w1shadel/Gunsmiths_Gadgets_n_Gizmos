@@ -17,9 +17,7 @@ public class ApostleGunRenderer extends MobRenderer<ApostleGunEntity, ApostleGun
 
     public ApostleGunRenderer(EntityRendererProvider.Context context) {
         super(context, new ApostleGunModel(context.bakeLayer(ApostleGunModel.LAYER_LOCATION)), 0.5F);
-
         this.addLayer(new ItemInHandLayer<>(this));
-
         this.addLayer(new CigarSmokeLayer(this));
     }
 
@@ -36,29 +34,27 @@ public class ApostleGunRenderer extends MobRenderer<ApostleGunEntity, ApostleGun
     @Override
     public void extractRenderState(@NonNull ApostleGunEntity entity, @NonNull ApostleGunRenderState state, float partialTicks) {
         super.extractRenderState(entity, state, partialTicks);
-
         ArmedEntityRenderState.extractArmedEntityRenderState(entity, state, this.itemModelResolver, partialTicks);
-
         state.headEquipment = entity.getItemBySlot(EquipmentSlot.HEAD);
         state.chestEquipment = entity.getItemBySlot(EquipmentSlot.CHEST);
         state.legsEquipment = entity.getItemBySlot(EquipmentSlot.LEGS);
         state.feetEquipment = entity.getItemBySlot(EquipmentSlot.FEET);
-
         state.isCrouching = entity.isCrouching();
         state.isUsingItem = entity.isUsingItem();
         state.ticksUsingItem = (float) entity.getTicksUsingItem();
         state.useItemHand = entity.getUsedItemHand();
-
         state.isCombatMode = entity.isAggressive() || entity.getTarget() != null;
         state.isCastingSpell = entity.isCastingSpell();
-
         if (!state.isCombatMode || state.isCastingSpell) {
             state.rightHandItemState.clear();
             state.leftHandItemState.clear();
             state.rightHandItemStack = ItemStack.EMPTY;
             state.leftHandItemStack = ItemStack.EMPTY;
         }
-
+        int teleTimer = entity.getTeleportTimer();
+        state.isTelegraphingTeleport = teleTimer > 0;
+        state.teleportDest = entity.getTeleportTarget();
+        state.telegraphProgress = 1.0F - ((float) teleTimer / (float) ApostleGunEntity.TELEPORT_TELEGRAPH_TICKS);
         state.holdGunAnimationState.copyFrom(entity.holdGunAnimationState);
         state.shootAnimationState.copyFrom(entity.shootAnimationState);
         state.reloadPhaseInAnimationState.copyFrom(entity.reloadPhaseInAnimationState);

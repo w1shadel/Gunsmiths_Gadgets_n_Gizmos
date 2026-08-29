@@ -40,7 +40,6 @@ public class MuzzleBoneAutoLoader {
                             for (JsonElement boneEl : bones) {
                                 JsonObject boneObj = boneEl.getAsJsonObject();
                                 String name = boneObj.get("name").getAsString();
-
                                 if ("muzzle".equalsIgnoreCase(name)
                                         || "muzzle_flash".equalsIgnoreCase(name)
                                         || "attachment_bayonet".equalsIgnoreCase(name)) {
@@ -49,7 +48,6 @@ public class MuzzleBoneAutoLoader {
                                         double px = pivot.get(0).getAsDouble();
                                         double py = pivot.get(1).getAsDouble();
                                         double pz = pivot.get(2).getAsDouble();
-
                                         return new MuzzleOffset(px, py, pz);
                                     }
                                 }
@@ -58,7 +56,8 @@ public class MuzzleBoneAutoLoader {
                     }
                 }
             }
-        } catch (Exception ignored) {}
+        } catch (Exception ignored) {
+        }
         return MuzzleOffset.DEFAULT;
     }
 

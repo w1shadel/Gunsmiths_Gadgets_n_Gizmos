@@ -9,7 +9,6 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
@@ -33,7 +32,6 @@ import org.jspecify.annotations.Nullable;
 
 public class TownMarksmanEntity extends PathfinderMob {
     public static final byte EVENT_SHOOT_GUN = 100;
-
     public final AnimationState holdGunAnimationState = new AnimationState();
     public final AnimationState shootAnimationState = new AnimationState();
     public final AnimationState reloadPhaseInAnimationState = new AnimationState();
@@ -59,7 +57,6 @@ public class TownMarksmanEntity extends PathfinderMob {
         this.goalSelector.addGoal(1, new RangedGunAttackGoal<>(this, 24, 15, 35, 30, 60));
         this.goalSelector.addGoal(6, new RandomStrollGoal(this, 0.6));
         this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 8.0F));
-
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(
                 this, Mob.class, 10, true, false,
@@ -67,17 +64,13 @@ public class TownMarksmanEntity extends PathfinderMob {
         ));
     }
 
-
-
     @Override
     protected @NonNull InteractionResult mobInteract(@NonNull Player player, @NonNull InteractionHand hand) {
         ItemStack heldItem = player.getItemInHand(hand);
-
         if (heldItem.is(ItemRegistry.BULLET.get()) || heldItem.is(ItemRegistry.BLACKPOWDER.get())) {
             if (!this.level().isClientSide()) {
                 heldItem.consume(1, player);
-                this.heal(6.0F); 
-
+                this.heal(6.0F);
                 this.playSound(SoundEvents.VILLAGER_YES, 1.0F, this.getVoicePitch());
                 ((ServerLevel) this.level()).sendParticles(ParticleTypes.HAPPY_VILLAGER,
                         this.getX(), this.getY() + 1.2, this.getZ(),
@@ -85,22 +78,17 @@ public class TownMarksmanEntity extends PathfinderMob {
             }
             return InteractionResult.SUCCESS;
         }
-
         if (this.isAlive() && !this.isAggressive()) {
             if (!this.level().isClientSide()) {
                 this.playSound(SoundEvents.VILLAGER_AMBIENT, 1.0F, this.getVoicePitch());
             }
             return InteractionResult.SUCCESS;
         }
-
         return super.mobInteract(player, hand);
     }
 
-
-
     @Override
     protected SoundEvent getAmbientSound() {
-
         return SoundEvents.VILLAGER_AMBIENT;
     }
 
@@ -121,22 +109,17 @@ public class TownMarksmanEntity extends PathfinderMob {
     @Override
     public void tick() {
         super.tick();
-
         if (this.level().isClientSide()) {
             ItemStack gun = this.getMainHandItem();
             boolean isHoldingGun = gun.getItem() instanceof GunItem;
-
             if (isHoldingGun) {
                 boolean reloading = GunItem.isReloading(gun);
                 ReloadState reloadState = ReloadState.get(gun);
-
                 if (reloading && reloadState != null) {
                     this.holdGunAnimationState.stop();
                     this.shootAnimationState.stop();
-
                     double progress = reloadState.progress();
                     double duration = reloadState.duration();
-
                     if (progress < 0.5) {
                         this.reloadPhaseInAnimationState.startIfStopped(this.tickCount);
                         this.reloadLoopAnimationState.stop();
@@ -186,10 +169,8 @@ public class TownMarksmanEntity extends PathfinderMob {
         ItemStack weapon = random.nextFloat() < 0.7F
                 ? new ItemStack(ItemRegistry.MUSKET.get())
                 : new ItemStack(ItemRegistry.FLINTLOCK_PISTOL.get());
-
         this.setItemSlot(EquipmentSlot.MAINHAND, weapon);
         this.setDropChance(EquipmentSlot.MAINHAND, 0.05F);
-
         if (random.nextBoolean()) {
             this.setItemSlot(EquipmentSlot.HEAD, new ItemStack(ItemRegistry.TRICORNE_HAT.get()));
         }

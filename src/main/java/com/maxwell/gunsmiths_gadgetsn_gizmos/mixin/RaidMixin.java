@@ -18,11 +18,7 @@ import java.util.List;
 
 @Mixin(Raid.class)
 public class RaidMixin {
-
-    /**
-     * レイド範囲内の生存チェック：
-     * 「一般村人」または「村の銃士」が生き残っている限り、村の防衛を継続させる
-     */
+    
     @WrapOperation(
             method = "tick",
             at = @At(
@@ -39,20 +35,15 @@ public class RaidMixin {
         if (!isVillage) {
             return false;
         }
-
         AABB raidArea = AABB.ofSize(Vec3.atCenterOf(centerPos), 96 * 2, 96 * 2, 96 * 2);
-
         List<Villager> villagers = level.getEntitiesOfClass(Villager.class, raidArea, LivingEntity::isAlive);
         boolean hasNormalVillager = villagers.stream()
                 .anyMatch(v -> !CultistAllianceEvents.isCultist(v));
-
         List<TownMarksmanEntity> marksmen = level.getEntitiesOfClass(TownMarksmanEntity.class, raidArea, LivingEntity::isAlive);
         boolean hasMarksman = !marksmen.isEmpty();
-
         if (hasNormalVillager || hasMarksman) {
             return true;
         }
-
         return false;
     }
 }

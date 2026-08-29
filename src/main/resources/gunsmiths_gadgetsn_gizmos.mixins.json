@@ -11,7 +11,9 @@
   "client": [
     "client.GunModifierScreenMixin",
     "client.AmmoCountHudOverlayMixin",
-    "client.ClientHelperMixin"
+    "client.ClientHelperMixin",
+    "client.PostChainAccessor",
+    "client.PostPassAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

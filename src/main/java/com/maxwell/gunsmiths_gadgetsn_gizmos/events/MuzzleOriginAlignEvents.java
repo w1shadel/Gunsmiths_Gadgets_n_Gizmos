@@ -25,15 +25,12 @@ public class MuzzleOriginAlignEvents {
         LivingEntity shooter = event.getEntity();
         Vec3 eyePos = shooter.getEyePosition();
         Vec3 lookAngle = event.getDirection().normalize();
-
         Vec3 traceEnd = eyePos.add(lookAngle.scale(MAX_AIM_DISTANCE));
         HitResult blockHit = shooter.level().clip(new ClipContext(
                 eyePos, traceEnd, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, shooter
         ));
-
         Vec3 targetPoint = blockHit.getLocation();
         double closestDist = eyePos.distanceTo(targetPoint);
-
         AABB searchBox = new AABB(eyePos, targetPoint).inflate(1.0);
         for (Entity entity : shooter.level().getEntities(shooter, searchBox, e -> !e.isSpectator() && e.isPickable() && Utils.canHarm(shooter, e))) {
             AABB bb = entity.getBoundingBox().inflate(0.25);
@@ -46,17 +43,14 @@ public class MuzzleOriginAlignEvents {
                 }
             }
         }
-
         MuzzleOffset offsetData = MuzzleBoneAutoLoader.getOffset(event.getShotProfile().itemStack().getItem());
         Vec3 muzzleOffset = offsetData.calculateFirstPersonOffset(shooter);
         Vec3 muzzlePos = eyePos.add(muzzleOffset);
-
         if (closestDist < 1.0) {
             event.setOrigin(eyePos);
             event.setDirection(lookAngle);
             return;
         }
-
         Vec3 convergentDirection = targetPoint.subtract(muzzlePos).normalize();
         event.setOrigin(muzzlePos);
         event.setDirection(convergentDirection);

@@ -20,29 +20,24 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(value = ClientHelper.class, remap = false)
 public class ClientHelperMixin {
-
     @Inject(method = "handleMuzzleFlash", at = @At("HEAD"), cancellable = true)
     private static void gunsmiths_gadgetsn_gizmos$customMuzzleFlashFromBone(ClientboundMuzzleFlashPacket msg, CallbackInfo ci) {
         Minecraft mc = Minecraft.getInstance();
         ClientLevel level = mc.level;
         if (level == null || mc.player == null) return;
-
         Entity entity = level.getEntity(msg.entityId());
         if (entity instanceof LivingEntity shooter) {
             ItemStack heldGun = shooter.getMainHandItem();
             if (heldGun.getItem() instanceof io.redspace.irons_artifice.item.GunItem) {
                 MuzzleOffset offsetData = MuzzleBoneAutoLoader.getOffset(heldGun.getItem());
                 Vec3 calculatedOffset;
-
                 if (shooter == mc.player && mc.options.getCameraType().isFirstPerson()) {
                     calculatedOffset = offsetData.calculateFirstPersonOffset(shooter);
                 } else {
                     calculatedOffset = offsetData.calculateThirdPersonOffset(shooter, shooter.getLookAngle());
                 }
-
                 Vec3 pos = shooter.getEyePosition().add(calculatedOffset);
                 Vec3 motion = msg.entityMotion().scale(0.5);
-
                 if (level.isFluidAtPosition(BlockPos.containing(pos), s -> s.is(FluidTags.WATER))) {
                     for (int i = 0; i < 40; i++) {
                         Vec3 r = new Vec3(level.getRandom().nextDouble() - 0.5, level.getRandom().nextDouble() - 0.5, level.getRandom().nextDouble() - 0.5).scale(3.5);

@@ -16,7 +16,6 @@ import org.joml.Vector4f;
 import org.jspecify.annotations.NonNull;
 
 public class CigarSmokeLayer extends RenderLayer<ApostleGunRenderState, ApostleGunModel> {
-
     private final RandomSource random = RandomSource.create();
 
     public CigarSmokeLayer(RenderLayerParent<ApostleGunRenderState, ApostleGunModel> renderer) {
@@ -28,14 +27,10 @@ public class CigarSmokeLayer extends RenderLayer<ApostleGunRenderState, ApostleG
         Minecraft mc = Minecraft.getInstance();
         ClientLevel level = mc.level;
         if (level == null || mc.isPaused()) return;
-
         if (state.ageInTicks % 2.0F > 0.5F) return;
-
         poseStack.pushPose();
-
         ApostleGunModel model = this.getParentModel();
         model.root().translateAndRotate(poseStack);
-
         if (model.root().hasChild("body")) {
             var body = model.root().getChild("body");
             body.translateAndRotate(poseStack);
@@ -47,31 +42,24 @@ public class CigarSmokeLayer extends RenderLayer<ApostleGunRenderState, ApostleG
                 }
             }
         }
-
         Matrix4f poseMatrix = poseStack.last().pose();
         Vector4f localPos = new Vector4f(0.0F, 0.0F, 0.0F, 1.0F);
         localPos.mul(poseMatrix);
-
         Vec3 cameraPos = mc.gameRenderer.getMainCamera().position();
         double worldX = cameraPos.x + localPos.x();
         double worldY = cameraPos.y + localPos.y();
         double worldZ = cameraPos.z + localPos.z();
-
         poseStack.popPose();
-
-
         level.addParticle(ParticleTypes.SOUL,
                 worldX, worldY, worldZ,
                 (this.random.nextFloat() - 0.5F) * 0.01F,
                 0.03F + this.random.nextFloat() * 0.02F,
                 (this.random.nextFloat() - 0.5F) * 0.01F);
-
         if (this.random.nextFloat() < 0.25F) {
             level.addParticle(ParticleTypes.SOUL_FIRE_FLAME,
                     worldX, worldY, worldZ,
                     0.0F, 0.01F, 0.0F);
         }
-
         if (state.isCastingSpell) {
             level.addParticle(ParticleTypes.SCULK_SOUL,
                     worldX, worldY, worldZ,
