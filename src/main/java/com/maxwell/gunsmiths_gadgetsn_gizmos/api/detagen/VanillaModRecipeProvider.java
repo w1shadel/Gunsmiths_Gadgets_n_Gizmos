@@ -137,7 +137,6 @@ public class VanillaModRecipeProvider extends RecipeProvider {
                 .define('M', ItemRegistry.SIMPLE_MECHANICAL_COMPONENTS.get())
                 .unlockedBy("has_simple_parts", has(ItemRegistry.SIMPLE_MECHANICAL_COMPONENTS.get()))
                 .save(this.output, recipeId("town_bell_flare_modifier"));
-
         ShapedRecipeBuilder.shaped(itemLookup, RecipeCategory.COMBAT, ModItems.BREEZE_CYCLONE_MODIFIER.get())
                 .pattern(" R ")
                 .pattern("RWR")
@@ -147,7 +146,6 @@ public class VanillaModRecipeProvider extends RecipeProvider {
                 .define('M', ItemRegistry.SIMPLE_MECHANICAL_COMPONENTS.get())
                 .unlockedBy("has_breeze_rod", has(Items.BREEZE_ROD))
                 .save(this.output, recipeId("breeze_cyclone_modifier"));
-
         ShapedRecipeBuilder.shaped(itemLookup, RecipeCategory.COMBAT, ModItems.HEAVY_CORE_IMPACT_MODIFIER.get())
                 .pattern(" I ")
                 .pattern("ILI")
@@ -157,35 +155,29 @@ public class VanillaModRecipeProvider extends RecipeProvider {
                 .define('M', ItemRegistry.MECHANICAL_COMPONENTS.get())
                 .unlockedBy("has_lead_core", has(ItemRegistry.LEAD_CORE.get()))
                 .save(this.output, recipeId("heavy_core_impact_modifier"));
-
-
-
         ShapedRecipeBuilder.shaped(itemLookup, RecipeCategory.COMBAT, ModItems.CLUNKER_RIFLE.get())
                 .pattern("PI ")
                 .pattern(" AM")
                 .pattern(" LB")
                 .define('P', Blocks.PISTON)
                 .define('I', Items.IRON_BLOCK)
-                .define('A', ItemRegistry.ARQUEBUS.get()) 
+                .define('A', ItemRegistry.ARQUEBUS.get())
                 .define('M', ItemRegistry.MECHANICAL_COMPONENTS.get())
                 .define('L', ItemTags.LOGS)
                 .define('B', ItemRegistry.BLACKPOWDER.get())
                 .unlockedBy("has_arquebus", has(ItemRegistry.ARQUEBUS.get()))
                 .save(this.output, recipeId("clunker_rifle"));
-
         ShapedRecipeBuilder.shaped(itemLookup, RecipeCategory.COMBAT, ModItems.MINIGUN.get())
                 .pattern("IBI")
                 .pattern("CMC")
                 .pattern(" H ")
                 .define('I', Items.IRON_BLOCK)
-                .define('B', ItemRegistry.CLOCKWORK_RIFLE.get()) 
+                .define('B', ItemRegistry.CLOCKWORK_RIFLE.get())
                 .define('C', Items.COPPER_CHAIN.unaffected())
                 .define('M', ItemRegistry.CLOCKWORK_COMPONENTS.get())
                 .define('H', Items.HOPPER)
                 .unlockedBy("has_clockwork_rifle", has(ItemRegistry.CLOCKWORK_RIFLE.get()))
                 .save(this.output, recipeId("minigun"));
-
-
         ShapedRecipeBuilder.shaped(itemLookup, RecipeCategory.TOOLS, ModItems.RANGEFINDER_MONOCLE.get())
                 .pattern(" G")
                 .pattern("SM")
@@ -194,7 +186,6 @@ public class VanillaModRecipeProvider extends RecipeProvider {
                 .define('M', ItemRegistry.SIMPLE_MECHANICAL_COMPONENTS.get())
                 .unlockedBy("has_spyglass", has(Items.SPYGLASS))
                 .save(this.output, recipeId("rangefinder_monocle"));
-
         ShapedRecipeBuilder.shaped(itemLookup, RecipeCategory.TOOLS, ModItems.WELDER_GOGGLES.get())
                 .pattern("LIL")
                 .pattern("T T")
@@ -203,7 +194,6 @@ public class VanillaModRecipeProvider extends RecipeProvider {
                 .define('T', Blocks.TINTED_GLASS)
                 .unlockedBy("has_tinted_glass", has(Blocks.TINTED_GLASS))
                 .save(this.output, recipeId("welder_goggles"));
-
         ShapedRecipeBuilder.shaped(itemLookup, RecipeCategory.TOOLS, ModItems.HEAVY_BANDOLIER.get())
                 .pattern("LCL")
                 .pattern("LPL")
@@ -214,7 +204,6 @@ public class VanillaModRecipeProvider extends RecipeProvider {
                 .define('I', Items.IRON_INGOT)
                 .unlockedBy("has_pouch", has(ModItems.AMMO_POUCH.get()))
                 .save(this.output, recipeId("heavy_bandolier"));
-
         ShapedRecipeBuilder.shaped(itemLookup, RecipeCategory.TOOLS, ModItems.RECOIL_HARNESS.get())
                 .pattern("LPL")
                 .pattern("LSL")
@@ -225,7 +214,6 @@ public class VanillaModRecipeProvider extends RecipeProvider {
                 .define('I', Items.IRON_INGOT)
                 .unlockedBy("has_buffer_spring", has(ItemRegistry.BUFFER_SPRING.get()))
                 .save(this.output, recipeId("recoil_harness"));
-
         ShapedRecipeBuilder.shaped(itemLookup, RecipeCategory.TOOLS, ModItems.QUICK_DRAW_HOLSTER.get())
                 .pattern("LGL")
                 .pattern("S S")
@@ -235,7 +223,6 @@ public class VanillaModRecipeProvider extends RecipeProvider {
                 .define('S', ItemRegistry.SIMPLE_MECHANICAL_COMPONENTS.get())
                 .unlockedBy("has_leather", has(Items.LEATHER))
                 .save(this.output, recipeId("quick_draw_holster"));
-
         ShapedRecipeBuilder.shaped(itemLookup, RecipeCategory.TOOLS, ModItems.SPEEDLOADER_BELT.get())
                 .pattern("LHL")
                 .pattern("LML")
@@ -246,7 +233,6 @@ public class VanillaModRecipeProvider extends RecipeProvider {
                 .define('I', Items.IRON_INGOT)
                 .unlockedBy("has_hopper", has(Items.HOPPER))
                 .save(this.output, recipeId("speedloader_belt"));
-
         ShapedRecipeBuilder.shaped(itemLookup, RecipeCategory.TOOLS, ModItems.MAGNETIC_POUCH.get())
                 .pattern(" R ")
                 .pattern("CPC")
@@ -257,7 +243,6 @@ public class VanillaModRecipeProvider extends RecipeProvider {
                 .define('I', Items.IRON_BLOCK)
                 .unlockedBy("has_pouch", has(ModItems.AMMO_POUCH.get()))
                 .save(this.output, recipeId("magnetic_pouch"));
-
         ShapedRecipeBuilder.shaped(itemLookup, RecipeCategory.TOOLS, ModItems.GUNSMITHS_GLOVES.get())
                 .pattern(" O ")
                 .pattern("L L")
@@ -266,7 +251,6 @@ public class VanillaModRecipeProvider extends RecipeProvider {
                 .define('L', Items.LEATHER)
                 .unlockedBy("has_gun_oil", has(ItemRegistry.GUN_OIL.get()))
                 .save(this.output, recipeId("gunsmiths_gloves"));
-
         ShapedRecipeBuilder.shaped(itemLookup, RecipeCategory.TOOLS, ModItems.GAMBLERS_RING.get())
                 .pattern(" E ")
                 .pattern("B B")
@@ -275,7 +259,6 @@ public class VanillaModRecipeProvider extends RecipeProvider {
                 .define('B', ModItems.CURSED_BRASS_INGOT.get())
                 .unlockedBy("has_cursed_brass", has(ModItems.CURSED_BRASS_INGOT.get()))
                 .save(this.output, recipeId("gamblers_ring"));
-
         ShapedRecipeBuilder.shaped(itemLookup, RecipeCategory.TOOLS, ModItems.GUNSLINGERS_SPURS.get())
                 .pattern("I I")
                 .pattern("C C")

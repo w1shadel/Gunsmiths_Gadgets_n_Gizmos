@@ -5,7 +5,6 @@ import net.minecraft.client.animation.AnimationDefinition;
 import net.minecraft.client.animation.Keyframe;
 import net.minecraft.client.animation.KeyframeAnimations;
 
-
 public class TownMarksmanAnimation {
     public static final AnimationDefinition hold_gun = AnimationDefinition.Builder.withLength(0.0F)
             .addAnimation("right", new AnimationChannel(AnimationChannel.Targets.ROTATION,

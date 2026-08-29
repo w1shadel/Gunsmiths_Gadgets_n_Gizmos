@@ -23,16 +23,13 @@ public class AmmoManager {
     public static boolean isAmmo(ItemStack stack) {
         return findAmmoType(stack) != null;
     }
+
     public static java.util.List<ItemStack> getAllHeldAndCuriosStacks(Player player) {
         java.util.List<ItemStack> list = new java.util.ArrayList<>();
-
-        // 1. オフハンド直持ち（最優先で1回だけ追加）
         ItemStack offhand = player.getOffhandItem();
         if (!offhand.isEmpty()) {
             list.add(offhand);
         }
-
-        // 2. Curios 装備枠
         if (com.maxwell.gunsmiths_gadgetsn_gizmos.compat.curios.CuriosCompat.IS_CURIOS_LOADED) {
             top.theillusivec4.curios.api.CuriosApi.getCuriosInventory(player).ifPresent(inv -> {
                 inv.findCurios(stack -> !stack.isEmpty()).forEach(slotResult -> {
@@ -40,8 +37,6 @@ public class AmmoManager {
                 });
             });
         }
-
-        // 3. 通常インベントリ（★ 0〜35番スロットのメイン枠のみ走査してオフハンド重複を防止）
         for (int i = 0; i < 36; i++) {
             ItemStack stack = player.getInventory().getItem(i);
             if (!stack.isEmpty()) {
@@ -56,7 +51,6 @@ public class AmmoManager {
             return 9999;
         }
         int total = 0;
-
         for (ItemStack stack : getAllHeldAndCuriosStacks(player)) {
             if (stack.getItem() instanceof IAmmoContainer container) {
                 for (ItemStack item : container.getStoredAmmo(stack)) {
@@ -70,30 +64,26 @@ public class AmmoManager {
         }
         return total;
     }
-    public static AmmoType getActiveAmmoType(Player player) {
 
+    public static AmmoType getActiveAmmoType(Player player) {
         AmmoType offhand = findAmmoType(player.getOffhandItem());
         if (offhand != null && offhand != ModAmmoTypes.DEFAULT.get()) return offhand;
-
         for (ItemStack stack : getAllHeldAndCuriosStacks(player)) {
             if (stack.getItem() instanceof IAmmoContainer container) {
                 for (ItemStack item : container.getStoredAmmo(stack)) {
                     AmmoType type = findAmmoType(item);
-
                     if (type != null && type != ModAmmoTypes.DEFAULT.get()) {
                         return type;
                     }
                 }
             }
         }
-
         for (ItemStack stack : getAllHeldAndCuriosStacks(player)) {
             AmmoType type = findAmmoType(stack);
             if (type != null && type != ModAmmoTypes.DEFAULT.get()) {
                 return type;
             }
         }
-
         return ModAmmoTypes.DEFAULT.get();
     }
 
@@ -111,7 +101,6 @@ public class AmmoManager {
         }
         int remaining = amount;
         AmmoType targetType = getActiveAmmoType(player);
-
         for (ItemStack stack : getAllHeldAndCuriosStacks(player)) {
             if (remaining <= 0) break;
             if (stack.getItem() instanceof IAmmoContainer container) {

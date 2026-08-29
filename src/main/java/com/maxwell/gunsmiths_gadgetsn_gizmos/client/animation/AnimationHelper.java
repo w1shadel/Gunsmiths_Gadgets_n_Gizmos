@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Map;
 
 public class AnimationHelper {
-    
     public static void animate(ModelPart root, AnimationState state, AnimationDefinition animation, float ageInTicks) {
         state.ifStarted(animState -> {
             float elapsedSeconds = (float) animState.getTimeInMillis(ageInTicks) / 1000.0F;

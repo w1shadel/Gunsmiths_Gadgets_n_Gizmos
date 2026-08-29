@@ -33,10 +33,10 @@ public class ApostleShaderManager {
         Player player = mc.player;
         List<ApostleGunEntity> bosses = mc.level.getEntitiesOfClass(
                 ApostleGunEntity.class,
-                player.getBoundingBox().inflate(36.0), 
+                player.getBoundingBox().inflate(36.0),
                 b -> b.isAlive()
                         && (b.isPhase2() || b.isTransitioning())
-                        && (b.getTarget() != null || b.isAggressive()) 
+                        && (b.getTarget() != null || b.isAggressive())
                         && player.distanceToSqr(b) <= 36.0 * 36.0
         );
         boolean shouldBeActive = DEBUG_FORCE_ACTIVE || !bosses.isEmpty();

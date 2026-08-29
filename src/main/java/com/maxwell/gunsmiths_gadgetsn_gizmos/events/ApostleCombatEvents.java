@@ -23,7 +23,7 @@ public class ApostleCombatEvents {
     public static void onMinionChangeTarget(net.neoforged.neoforge.event.entity.living.LivingChangeTargetEvent event) {
         if (event.getEntity().getPersistentData().getBooleanOr("apostle_minion", false)) {
             if (event.getNewAboutToBeSetTarget() instanceof ApostleGunEntity) {
-                event.setCanceled(true); 
+                event.setCanceled(true);
             }
         }
     }
@@ -31,14 +31,14 @@ public class ApostleCombatEvents {
     @SubscribeEvent
     public static void onMinionDrops(net.neoforged.neoforge.event.entity.living.LivingDropsEvent event) {
         if (event.getEntity().getPersistentData().getBooleanOr("apostle_minion", false)) {
-            event.setCanceled(true); 
+            event.setCanceled(true);
         }
     }
 
     @SubscribeEvent
     public static void onMinionExperienceDrop(net.neoforged.neoforge.event.entity.living.LivingExperienceDropEvent event) {
         if (event.getEntity().getPersistentData().getBooleanOr("apostle_minion", false)) {
-            event.setCanceled(true); 
+            event.setCanceled(true);
         }
     }
 }

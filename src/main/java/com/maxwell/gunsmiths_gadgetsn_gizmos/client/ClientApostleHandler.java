@@ -11,7 +11,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.levelgen.Heightmap;
 
 public class ClientApostleHandler {
-    
     public static void handleAshStormPacket() {
         Minecraft mc = Minecraft.getInstance();
         Player player = mc.player;

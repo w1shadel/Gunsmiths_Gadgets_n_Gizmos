@@ -33,7 +33,6 @@ public class CursedAltarMenu extends AbstractContainerMenu {
     public static final int INPUT_SLOT_2 = 1;
     public static final int CATALYST_SLOT = 2;
     public static final int RESULT_SLOT = 3;
-
     public final CursedAltarBlockEntity blockEntity;
     private final Player player;
     private final ResultContainer resultContainer = new ResultContainer();
@@ -47,36 +46,37 @@ public class CursedAltarMenu extends AbstractContainerMenu {
         super(ModMenuTypes.CURSED_ALTAR_MENU.get(), containerId);
         this.blockEntity = (CursedAltarBlockEntity) entity;
         this.player = inv.player;
-
         this.addSlot(new Slot(blockEntity, INPUT_SLOT_1, 27, 47) {
-            @Override public boolean mayPlace(@NotNull ItemStack stack) {
+            @Override
+            public boolean mayPlace(@NotNull ItemStack stack) {
                 return stack.getItem() instanceof ModifierItem || stack.is(ModItems.FORBIDDEN_BLUEPRINT.get());
             }
-            @Override public void setChanged() {
+
+            @Override
+            public void setChanged() {
                 super.setChanged();
-                CursedAltarMenu.this.slotsChanged(this.container); // ★ スロット変更を即座に通知
+                CursedAltarMenu.this.slotsChanged(this.container);
             }
         });
-
-        // スロット2 (Material)
         this.addSlot(new Slot(blockEntity, INPUT_SLOT_2, 76, 47) {
-            @Override public void setChanged() {
+            @Override
+            public void setChanged() {
                 super.setChanged();
-                CursedAltarMenu.this.slotsChanged(this.container); // ★ スロット変更を即座に通知
+                CursedAltarMenu.this.slotsChanged(this.container);
             }
         });
-
-        // スロット3 (Catalyst)
         this.addSlot(new Slot(blockEntity, CATALYST_SLOT, 51, 19) {
-            @Override public void setChanged() {
+            @Override
+            public void setChanged() {
                 super.setChanged();
-                CursedAltarMenu.this.slotsChanged(this.container); // ★ スロット変更を即座に通知
+                CursedAltarMenu.this.slotsChanged(this.container);
             }
         });
-
-        // 完成品スロット
         this.addSlot(new Slot(resultContainer, 0, 134, 47) {
-            @Override public boolean mayPlace(@NotNull ItemStack stack) { return false; }
+            @Override
+            public boolean mayPlace(@NotNull ItemStack stack) {
+                return false;
+            }
 
             @Override
             public void onTake(@NotNull Player player, @NotNull ItemStack stack) {
@@ -89,7 +89,6 @@ public class CursedAltarMenu extends AbstractContainerMenu {
                 super.onTake(player, stack);
             }
         });
-
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
         updateCraftingResult();
@@ -103,33 +102,24 @@ public class CursedAltarMenu extends AbstractContainerMenu {
 
     private void updateCraftingResult() {
         if (!(blockEntity.getLevel() instanceof ServerLevel serverLevel)) return;
-
         ItemStack input1 = blockEntity.getItem(INPUT_SLOT_1);
         ItemStack input2 = blockEntity.getItem(INPUT_SLOT_2);
         ItemStack catalyst = blockEntity.getItem(CATALYST_SLOT);
-
         CursedAltarRecipeInput recipeInput = new CursedAltarRecipeInput(input1, input2, catalyst);
-
         Optional<RecipeHolder<CursedAltarRecipe>> match = serverLevel.recipeAccess()
                 .getRecipeFor(ModRecipes.CURSED_ALTAR_TYPE.get(), recipeInput, serverLevel);
-
-        // ★ デバッグログ：スロットの状態とレシピ照合結果をコンソールに出力
         com.maxwell.gunsmiths_gadgetsn_gizmos.GunsmithsGadgetsnGizmos.LOGGER.info(
                 "[CursedAltar] Slots -> Base(左下): {}, Material(右下): {}, Catalyst(上): {} | Matched: {}",
                 input1, input2, catalyst, match.isPresent() ? match.get().id() : "NONE"
         );
-
         if (match.isPresent()) {
             this.activeRecipe = match.get().value();
             ItemStack result = this.activeRecipe.assemble(recipeInput);
             resultContainer.setItem(0, result);
-
-            // 使徒召喚の儀式レシピの場合
             if (result.is(ModItems.APOSTLE_SUMMON_RITUAL.get())) {
                 consumeIngredients();
                 resultContainer.setItem(0, ItemStack.EMPTY);
                 blockEntity.startRitual();
-
                 if (this.player instanceof ServerPlayer serverPlayer) {
                     serverPlayer.closeContainer();
                 }
@@ -139,8 +129,6 @@ public class CursedAltarMenu extends AbstractContainerMenu {
             this.activeRecipe = null;
             resultContainer.setItem(0, ItemStack.EMPTY);
         }
-
-        // ★ 重要：サーバー側の完成品スロットをクライアント画面へ即時同期
         this.broadcastChanges();
     }
 
@@ -173,7 +161,6 @@ public class CursedAltarMenu extends AbstractContainerMenu {
         if (sourceSlot == null || !sourceSlot.hasItem()) return ItemStack.EMPTY;
         ItemStack sourceStack = sourceSlot.getItem();
         ItemStack copyOfSourceStack = sourceStack.copy();
-
         if (pIndex < 4) {
             if (!moveItemStackTo(sourceStack, 4, slots.size(), true)) return ItemStack.EMPTY;
             if (pIndex == RESULT_SLOT) sourceSlot.onTake(playerIn, sourceStack);
@@ -184,7 +171,6 @@ public class CursedAltarMenu extends AbstractContainerMenu {
                 if (!moveItemStackTo(sourceStack, INPUT_SLOT_2, CATALYST_SLOT + 1, false)) return ItemStack.EMPTY;
             }
         }
-
         if (sourceStack.isEmpty()) sourceSlot.set(ItemStack.EMPTY);
         else sourceSlot.setChanged();
         return copyOfSourceStack;

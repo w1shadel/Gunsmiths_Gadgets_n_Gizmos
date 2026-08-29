@@ -28,10 +28,12 @@ public class CursedAltarBlock extends BaseEntityBlock {
     protected @NonNull MapCodec<? extends BaseEntityBlock> codec() {
         return CODEC;
     }
+
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
         return createTickerHelper(type, ModBlockEntities.CURSED_ALTAR_BE.get(), CursedAltarBlockEntity::tick);
     }
+
     @Override
     protected @NonNull InteractionResult useWithoutItem(@NonNull BlockState state, @NonNull Level level, @NonNull BlockPos pos, @NonNull Player player, @NonNull BlockHitResult hitResult) {
         if (!level.isClientSide() && player instanceof ServerPlayer serverPlayer) {

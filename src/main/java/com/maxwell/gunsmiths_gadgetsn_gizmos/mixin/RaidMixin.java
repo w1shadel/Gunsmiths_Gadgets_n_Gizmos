@@ -18,7 +18,6 @@ import java.util.List;
 
 @Mixin(Raid.class)
 public class RaidMixin {
-    
     @WrapOperation(
             method = "tick",
             at = @At(

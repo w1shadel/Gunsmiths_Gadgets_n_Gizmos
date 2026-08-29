@@ -28,6 +28,7 @@ public class GunplayManagerMixin {
         AmmoManager.consumeAmmo(player, amount, heldGun);
         ci.cancel();
     }
+
     @Inject(method = "getSpreadForEntity", at = @At("RETURN"), cancellable = true, remap = false)
     private static void gunsmiths_gadgetsn_gizmos$cancelMovementSpreadWithSpurs(ShotProfile shotProfile, Entity entity, CallbackInfoReturnable<Float> cir) {
         if (entity instanceof LivingEntity living) {
@@ -40,6 +41,7 @@ public class GunplayManagerMixin {
             }
         }
     }
+
     @Inject(method = "attemptFinishReload", at = @At("HEAD"), remap = false)
     private static void gunsmiths_gadgetsn_gizmos$recordLoadedAmmoType(LivingEntity living, ItemStack gun, int roundsToLoad, CallbackInfoReturnable<?> cir) {
         if (living instanceof Player player && !player.level().isClientSide()) {

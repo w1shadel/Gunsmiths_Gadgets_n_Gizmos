@@ -7,7 +7,6 @@ import net.minecraft.world.phys.Vec3;
 public record MuzzleOffset(double px, double py, double pz) {
     public static final MuzzleOffset DEFAULT = new MuzzleOffset(0.0, 0.0, -20.0);
 
-    
     public Vec3 calculateFirstPersonOffset(LivingEntity shooter) {
         float pitch = shooter.getXRot();
         float yaw = shooter.getYRot();
@@ -23,7 +22,6 @@ public record MuzzleOffset(double px, double py, double pz) {
                 .add(upVec.scale(up));
     }
 
-    
     public Vec3 calculateThirdPersonOffset(LivingEntity shooter, Vec3 lookDirection) {
         float pitch = shooter.getXRot();
         float yaw = shooter.getYRot();

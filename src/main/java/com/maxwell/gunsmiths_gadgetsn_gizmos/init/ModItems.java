@@ -29,7 +29,6 @@ public class ModItems {
             "breeze_cyclone_modifier",
             properties -> new ModifierItem(properties.stacksTo(1), new BreezeCycloneModifier())
     );
-
     public static final DeferredItem<ModifierItem> OMINOUS_CHAMBER_MODIFIER = ITEMS.registerItem(
             "ominous_chamber_modifier",
             properties -> new ModifierItem(properties.stacksTo(1), new OminousChamberModifier())
@@ -154,6 +153,7 @@ public class ModItems {
             "apostle_summon_ritual",
             p -> new Item(p.stacksTo(1).component(net.minecraft.core.component.DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true))
     );
+
     public static void register(IEventBus bus) {
         ITEMS.register(bus);
     }

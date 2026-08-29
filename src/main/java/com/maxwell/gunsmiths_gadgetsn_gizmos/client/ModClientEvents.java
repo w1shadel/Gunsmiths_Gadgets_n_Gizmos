@@ -27,7 +27,6 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.client.event.AddClientReloadListenersEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
@@ -49,6 +48,7 @@ public class ModClientEvents {
     public static void onClientTick(net.neoforged.neoforge.client.event.ClientTickEvent.Post event) {
         ApostleShaderManager.clientTick();
     }
+
     @SubscribeEvent
     public static void onAddClientReloadListeners(net.neoforged.neoforge.client.event.AddClientReloadListenersEvent event) {
         event.addListener(
@@ -56,6 +56,7 @@ public class ModClientEvents {
                 new com.maxwell.gunsmiths_gadgetsn_gizmos.api.synergy.GunSetBonusManager()
         );
     }
+
     @SubscribeEvent
     public static void registerRenderers(final EntityRenderersEvent.RegisterRenderers event) {
         if (ModItems.CLUNKER_RIFLE.get() instanceof GunItem gun) {

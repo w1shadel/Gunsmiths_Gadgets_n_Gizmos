@@ -162,7 +162,6 @@ public class ModAdvancementProvider implements AdvancementSubProvider {
                 )
                 .addCriterion("enter_end", ChangeDimensionTrigger.TriggerInstance.changedDimensionTo(Level.END))
                 .save(saver, id("ruined_end_horizon"));
-
         Advancement.Builder.advancement()
                 .parent(firstAltarCraft)
                 .display(
@@ -173,7 +172,6 @@ public class ModAdvancementProvider implements AdvancementSubProvider {
                         AdvancementType.GOAL,
                         true, true, false
                 )
-
                 .addCriterion("killed_apostle", KilledTrigger.TriggerInstance.playerKilledEntity(
                         EntityPredicate.Builder.entity().entityType(EntityTypePredicate.of(entityLookup, ModEntities.APOSTLE_GUN.get()))
                 ))
@@ -188,7 +186,6 @@ public class ModAdvancementProvider implements AdvancementSubProvider {
                         AdvancementType.CHALLENGE,
                         true, true, false
                 )
-
                 .addCriterion("killed_abyssal_apostle", KilledTrigger.TriggerInstance.playerKilledEntity(
                         EntityPredicate.Builder.entity()
                                 .entityType(EntityTypePredicate.of(entityLookup, ModEntities.APOSTLE_GUN.get()))

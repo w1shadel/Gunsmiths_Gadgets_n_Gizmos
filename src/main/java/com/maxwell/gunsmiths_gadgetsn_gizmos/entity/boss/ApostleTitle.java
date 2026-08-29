@@ -29,7 +29,12 @@ public enum ApostleTitle {
     RULER_OF_ALL_CREATION("ruler_of_all_creation", ChatFormatting.GOLD, ParticleTypes.TOTEM_OF_UNDYING),
     ABYSSAL_RULER_OF_ALL_CREATION("abyssal_ruler_of_all_creation", ChatFormatting.LIGHT_PURPLE, ParticleTypes.DUST_PLUME),
     VOID_CLEFT_SOVEREIGN("void_cleft_sovereign", ChatFormatting.LIGHT_PURPLE, ParticleTypes.FLAME);
-
+    private static final java.util.List<ApostleTitle> BASE_TITLES = java.util.List.of(
+            BLOOD_SEVERER, TEMPEST_TORN, SOUNDLESS_ECHO, GILDED_DESPOILER, SOUL_REAPER
+    );
+    private static final java.util.List<ApostleTitle> SPECIAL_TITLES = java.util.List.of(
+            ANNIHILATION_HARBINGER, VOID_CLEFT_SOVEREIGN
+    );
     private final String id;
     private final ChatFormatting textColor;
     private final ParticleOptions smokeParticle;
@@ -44,43 +49,31 @@ public enum ApostleTitle {
         ApostleTitle[] values = values();
         return values[random.nextInt(values.length)];
     }
-    private static final java.util.List<ApostleTitle> BASE_TITLES = java.util.List.of(
-            BLOOD_SEVERER, TEMPEST_TORN, SOUNDLESS_ECHO, GILDED_DESPOILER, SOUL_REAPER
-    );
-
-    private static final java.util.List<ApostleTitle> SPECIAL_TITLES = java.util.List.of(
-            ANNIHILATION_HARBINGER, VOID_CLEFT_SOVEREIGN
-    );
 
     public static ApostleTitle selectRandom(ApostleTitle current, boolean isPhase2, boolean isLowHp, boolean isTheEnd, RandomSource random) {
         java.util.List<ApostleTitle> pool;
-
         if (isPhase2 && isLowHp) {
             java.util.List<ApostleTitle> shuffledBase = new java.util.ArrayList<>(BASE_TITLES);
             java.util.Collections.shuffle(shuffledBase);
-
             pool = new java.util.ArrayList<>();
-
             if (isTheEnd) {
                 pool.add(RULER_OF_ALL_CREATION);
             }
-
             pool.add(ANNIHILATION_HARBINGER);
             pool.add(VOID_CLEFT_SOVEREIGN);
             pool.add(shuffledBase.get(0));
             if (!isTheEnd) {
-                pool.add(shuffledBase.get(1)); 
+                pool.add(shuffledBase.get(1));
             }
         } else {
             pool = BASE_TITLES;
         }
-
         java.util.List<ApostleTitle> candidates = pool.stream()
                 .filter(t -> t != current)
                 .toList();
-
         return candidates.isEmpty() ? pool.get(0) : candidates.get(random.nextInt(candidates.size()));
     }
+
     public static ApostleTitle randomExcept(ApostleTitle current, RandomSource random) {
         ApostleTitle next;
         do {
@@ -97,7 +90,6 @@ public enum ApostleTitle {
         return smokeParticle;
     }
 
-    
     public void onShift(ApostleGunEntity boss, ServerLevel level) {
         if (this == ANNIHILATION_HARBINGER) {
             boss.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(ModItems.MINIGUN.get()));
@@ -110,7 +102,6 @@ public enum ApostleTitle {
         }
     }
 
-    
     public void onBulletHit(LivingEntity victim, LivingEntity boss, ServerLevel level) {
         switch (this) {
             case BLOOD_SEVERER -> {
@@ -143,16 +134,11 @@ public enum ApostleTitle {
                 victim.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 20 * 3, 2), boss);
             }
             case RULER_OF_ALL_CREATION, ABYSSAL_RULER_OF_ALL_CREATION -> {
-
                 victim.addEffect(new MobEffectInstance(ModMobEffects.BLEEDING, 20 * 4, 0), boss);
                 boss.heal(this == ABYSSAL_RULER_OF_ALL_CREATION ? 2.5F : 1.5F);
-
                 victim.addEffect(new MobEffectInstance(MobEffects.WITHER, 20 * 3, 0), boss);
-
                 float voidDmg = (this == ABYSSAL_RULER_OF_ALL_CREATION) ? 4.0F : 2.5F;
                 victim.hurtServer(level, level.damageSources().fellOutOfWorld(), voidDmg);
-
-
                 level.sendParticles(ParticleTypes.EXPLOSION, victim.getX(), victim.getY() + 0.5, victim.getZ(), 1, 0, 0, 0, 0);
                 level.sendParticles(ParticleTypes.SOUL_FIRE_FLAME, victim.getX(), victim.getY() + 0.5, victim.getZ(), 10, 0.2, 0.2, 0.2, 0.04);
             }

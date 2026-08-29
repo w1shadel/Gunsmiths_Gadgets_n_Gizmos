@@ -34,6 +34,7 @@ public class CuriosAccessoryEvents {
             }
         }
     }
+
     @SubscribeEvent
     public static void onComposeShot(ComposeShotEvent event) {
         LivingEntity living = event.getEntity();
@@ -48,7 +49,6 @@ public class CuriosAccessoryEvents {
                     new ValueModifier(-1.5, ValueModifier.Operation.ADD, ValueModifier.Type.BENEFICIAL)
             );
         }
-
         if (CuriosCompat.isEquipped(living, ModItems.GUNSLINGERS_SPURS.get())) {
             profile.get(ShotComponents.IN_AIR_PENALTY).addModifier(
                     new ValueModifier(-1.0, ValueModifier.Operation.MULTIPLY_TOTAL, ValueModifier.Type.BENEFICIAL)

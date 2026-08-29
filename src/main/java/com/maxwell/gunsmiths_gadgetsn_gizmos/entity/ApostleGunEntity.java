@@ -5,7 +5,6 @@ import com.maxwell.gunsmiths_gadgetsn_gizmos.init.ModItems;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.network.ClientboundAshStormPacket;
 import io.redspace.irons_artifice.entity.IGunslingerMob;
 import io.redspace.irons_artifice.entity.Illificer;
-import io.redspace.irons_artifice.entity.ai.RangedGunAttackGoal;
 import io.redspace.irons_artifice.item.GunItem;
 import io.redspace.irons_artifice.item.ReloadState;
 import io.redspace.irons_artifice.registry.EntityRegistry;
@@ -109,10 +108,9 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
                         io.redspace.irons_artifice.data.ValueModifier.Operation.MULTIPLY_TOTAL,
                         io.redspace.irons_artifice.data.ValueModifier.Type.BENEFICIAL
                 ));
-
         profile.get(io.redspace.irons_artifice.data.ShotComponents.SPREAD)
                 .addModifier(new io.redspace.irons_artifice.data.ValueModifier(
-                        this.isPhase2() ? 5.5 : 3.5, 
+                        this.isPhase2() ? 5.5 : 3.5,
                         io.redspace.irons_artifice.data.ValueModifier.Operation.ADD,
                         io.redspace.irons_artifice.data.ValueModifier.Type.NEUTRAL
                 ));
@@ -145,6 +143,7 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
         org.joml.Vector3fc v = this.entityData.get(DATA_TELEPORT_TARGET);
         return new Vec3(v.x(), v.y(), v.z());
     }
+
     public int getDeathSequenceTicks() {
         return this.entityData.get(DATA_DEATH_SEQUENCE);
     }
@@ -152,6 +151,7 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
     public boolean isCustomDying() {
         return this.getDeathSequenceTicks() > 0;
     }
+
     public ApostleTitle getTitle() {
         int ordinal = this.entityData.get(DATA_TITLE);
         ApostleTitle[] values = ApostleTitle.values();
@@ -182,18 +182,16 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
         super.registerGoals();
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(1, new SpellcasterCastingSpellGoal());
-
         this.goalSelector.addGoal(2, new ApostleSummonMinionsGoal());
         this.goalSelector.addGoal(3, new ApostleVortexSpellGoal());
         this.goalSelector.addGoal(3, new ApostleFangsSpellGoal());
-
         this.goalSelector.addGoal(4, new ApostleCombatGoal());
-
         this.goalSelector.addGoal(7, new RandomStrollGoal(this, 0.6));
         this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 12.0F));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this, Raider.class).setAlertOthers());
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
     }
+
     @Override
     public boolean hurtServer(@NonNull ServerLevel level, @NonNull DamageSource source, float damage) {
         if (this.isCustomDying() || this.isTransitioning()) {
@@ -202,7 +200,6 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
         if (source.getEntity() != null && source.getEntity().getPersistentData().getBooleanOr("apostle_minion", false)) {
             return false;
         }
-
         if (source.is(io.redspace.irons_artifice.damage.DamageSources.BULLET_DAMAGE_TYPE)) {
             damage *= 0.65F;
         }
@@ -213,13 +210,13 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
             this.getNavigation().stop();
             return false;
         }
-
         boolean damaged = super.hurtServer(level, source, damage);
         if (damaged && !level.isClientSide() && damage > 10.0F && this.getRandom().nextFloat() < 0.35F) {
             teleportToTacticalPosition(this.getTarget(), this.getRandom().nextBoolean());
         }
         return damaged;
     }
+
     public void teleportToTacticalPosition(@Nullable LivingEntity target, boolean behind) {
         if (target == null || !(this.level() instanceof ServerLevel level)) return;
         Vec3 targetPos = target.position();
@@ -240,16 +237,11 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
         }
     }
 
-
-
-
     @Override
     public void tick() {
         super.tick();
-
         if (!this.level().isClientSide()) {
             ServerLevel serverLevel = (ServerLevel) this.level();
-
             this.tickBossBar();
             this.tickAshStormPacket();
             if (this.tickDeathSequence(serverLevel)) {
@@ -258,7 +250,6 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
             if (this.tickPhaseTransition(serverLevel)) {
                 return;
             }
-
             this.tickTitleShift();
             this.tickTeleportation(serverLevel);
             if (this.getY() < this.level().getMinY() + 4 && !this.isCustomDying()) {
@@ -276,21 +267,17 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
         }
     }
 
-    
     private void tickBossBar() {
         this.bossEvent.setProgress(this.getHealth() / this.getMaxHealth());
     }
 
-    
     private void tickAshStormPacket() {
         if (this.isPhase2() && this.isAlive()) {
             PacketDistributor.sendToPlayersTrackingEntity(this, ClientboundAshStormPacket.INSTANCE);
         }
     }
 
-    
     private boolean tickPhaseTransition(ServerLevel level) {
-
         if (!this.hasTriggeredPhase2 && this.getHealth() <= 150.0F && this.isAlive()) {
             this.hasTriggeredPhase2 = true;
             this.transitionTicksRemaining = PHASE_TRANSITION_DURATION;
@@ -298,31 +285,25 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
             this.level().playSound(null, this.getX(), this.getY(), this.getZ(),
                     SoundEvents.WITHER_SPAWN, SoundSource.HOSTILE, 2.0F, 0.6F);
         }
-
         if (this.isTransitioning()) {
             this.getNavigation().stop();
             this.setDeltaMovement(0, this.getDeltaMovement().y * 0.5, 0);
             this.heal(150.0F / (float) PHASE_TRANSITION_DURATION);
-
             level.sendParticles(ParticleTypes.PORTAL, this.getX(), this.getY() + 1.0, this.getZ(), 15, 0.5, 0.8, 0.5, 0.1);
             level.sendParticles(ParticleTypes.SOUL_FIRE_FLAME, this.getX(), this.getY() + 0.5, this.getZ(), 8, 0.4, 0.4, 0.4, 0.05);
-
             if (--this.transitionTicksRemaining <= 0) {
                 this.entityData.set(DATA_TRANSITIONING, false);
                 this.entityData.set(DATA_PHASE_2, true);
                 this.setHealth(300.0F);
-
                 AABB blastArea = this.getBoundingBox().inflate(6.0);
                 for (LivingEntity target : this.level().getEntitiesOfClass(LivingEntity.class, blastArea, e -> e != this)) {
                     Vec3 push = target.position().subtract(this.position()).normalize().scale(1.5);
                     target.setDeltaMovement(push.x, 0.5, push.z);
                     target.hurtMarked = true;
                 }
-
                 this.level().playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.GENERIC_EXPLODE.value(), SoundSource.HOSTILE, 3.0F, 0.8F);
                 this.level().playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.HOSTILE, 2.5F, 1.0F);
                 level.sendParticles(ParticleTypes.EXPLOSION_EMITTER, this.getX(), this.getY() + 1.0, this.getZ(), 1, 0, 0, 0, 0);
-
                 this.setTitle(ApostleTitle.selectRandom(this.getTitle(), true, false, this.level().dimension() == Level.END, this.getRandom()));
             }
             return true;
@@ -330,32 +311,24 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
         return false;
     }
 
-    
     private void tickTitleShift() {
         if (this.getTarget() == null || !this.isAlive()) return;
-
         boolean isTheEnd = this.level().dimension() == Level.END;
         float hpRatio = this.getHealth() / this.getMaxHealth();
-
         if (isTheEnd && this.isPhase2()) {
-
             if (hpRatio <= 0.25F) {
                 if (this.getTitle() != ApostleTitle.ABYSSAL_RULER_OF_ALL_CREATION) {
                     this.setTitle(ApostleTitle.ABYSSAL_RULER_OF_ALL_CREATION);
                     this.level().playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.WITHER_DEATH, SoundSource.HOSTILE, 3.0F, 0.4F);
                 }
-            }
-
-            else if (hpRatio <= 0.50F) {
+            } else if (hpRatio <= 0.50F) {
                 if (--this.titleShiftTimer <= 0) {
                     ApostleTitle nextTitle = ApostleTitle.selectRandom(this.getTitle(), true, true, true, this.getRandom());
                     this.setTitle(nextTitle);
                     this.titleShiftTimer = (nextTitle == ApostleTitle.RULER_OF_ALL_CREATION) ? 800 : 200;
                     this.level().playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.BELL_BLOCK, SoundSource.HOSTILE, 2.5F, 0.5F);
                 }
-            }
-
-            else {
+            } else {
                 if (--this.titleShiftTimer <= 0) {
                     this.titleShiftTimer = 240;
                     ApostleTitle nextTitle = ApostleTitle.selectRandom(this.getTitle(), true, false, true, this.getRandom());
@@ -364,7 +337,6 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
                 }
             }
         } else {
-
             if (--this.titleShiftTimer <= 0) {
                 this.titleShiftTimer = 240;
                 boolean isLowHp = hpRatio <= 0.40F;
@@ -375,26 +347,21 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
         }
     }
 
-    
     private void tickTeleportation(ServerLevel level) {
         int currentTimer = this.getTeleportTimer();
-
         if (currentTimer <= 0 && this.getTarget() != null) {
             if (--this.teleportCooldown <= 0) {
                 this.teleportCooldown = this.getRandom().nextIntBetweenInclusive(240, 320);
                 LivingEntity target = this.getTarget();
                 Vec3 look = target.getLookAngle();
                 Vec3 dest = target.position().subtract(look.x * 5.0, 0, look.z * 5.0);
-
                 this.entityData.set(DATA_TELEPORT_TARGET, new org.joml.Vector3f((float) dest.x, (float) dest.y, (float) dest.z));
                 this.entityData.set(DATA_TELEPORT_TIMER, TELEPORT_TELEGRAPH_TICKS);
                 this.level().playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.PORTAL_TRIGGER, SoundSource.HOSTILE, 1.2F, 1.8F);
             }
         }
-
         if (currentTimer > 0) {
             this.entityData.set(DATA_TELEPORT_TIMER, currentTimer - 1);
-
             LivingEntity target = this.getTarget();
             Vec3 targetDest;
             if (target != null && target.isAlive()) {
@@ -404,27 +371,21 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
             } else {
                 targetDest = this.getTeleportTarget();
             }
-
             level.sendParticles(ParticleTypes.SQUID_INK, targetDest.x, targetDest.y + 0.2, targetDest.z, 12, 0.4, 0.1, 0.4, 0.04);
             level.sendParticles(ParticleTypes.SOUL_FIRE_FLAME, targetDest.x, targetDest.y + 0.3, targetDest.z, 8, 0.3, 0.6, 0.3, 0.08);
             level.sendParticles(ParticleTypes.REVERSE_PORTAL, targetDest.x, targetDest.y + 1.2, targetDest.z, 15, 0.5, 1.0, 0.5, 0.15);
             level.sendParticles(ParticleTypes.CRIT, this.getX(), this.getY() + 1.2, this.getZ(), 6, 0.3, 0.3, 0.3, 0.1);
-
             if (currentTimer - 1 == 0) {
                 level.sendParticles(ParticleTypes.SQUID_INK, this.getX(), this.getY() + 1.0, this.getZ(), 60, 0.6, 1.0, 0.6, 0.12);
                 level.sendParticles(ParticleTypes.LARGE_SMOKE, this.getX(), this.getY() + 0.5, this.getZ(), 30, 0.5, 0.8, 0.5, 0.08);
                 this.level().playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.BEACON_DEACTIVATE, SoundSource.HOSTILE, 2.0F, 0.6F);
-
                 this.setPos(targetDest.x, targetDest.y, targetDest.z);
-
                 level.sendParticles(ParticleTypes.SONIC_BOOM, targetDest.x, targetDest.y + 1.0, targetDest.z, 1, 0, 0, 0, 0);
                 level.sendParticles(ParticleTypes.SQUID_INK, targetDest.x, targetDest.y + 1.0, targetDest.z, 80, 0.8, 1.2, 0.8, 0.15);
                 level.sendParticles(ParticleTypes.SOUL_FIRE_FLAME, targetDest.x, targetDest.y + 0.5, targetDest.z, 40, 0.6, 0.8, 0.6, 0.1);
                 level.sendParticles(ParticleTypes.EXPLOSION_EMITTER, targetDest.x, targetDest.y + 1.0, targetDest.z, 1, 0, 0, 0, 0);
-
                 this.level().playSound(null, targetDest.x, targetDest.y, targetDest.z, SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.HOSTILE, 2.5F, 1.4F);
                 this.level().playSound(null, targetDest.x, targetDest.y, targetDest.z, SoundEvents.ENDERMAN_TELEPORT, SoundSource.HOSTILE, 2.0F, 0.7F);
-
                 if (target != null && target.isAlive()) {
                     this.lookAt(target, 180.0F, 180.0F);
                     Vec3 aim = target.getEyePosition().subtract(this.getEyePosition()).normalize();
@@ -522,98 +483,79 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
             super.handleEntityEvent(id);
         }
     }
+
     @Override
     public boolean fireImmune() {
-        return true; 
+        return true;
     }
+
     private void dropCustomDeathLoot(ServerLevel level) {
         boolean isTheEnd = level.dimension() == Level.END;
-
         this.spawnProtectedDrop(level, new ItemStack(ModItems.OMINOUS_CLOCKWORK_CORE.get(), level.getRandom().nextIntBetweenInclusive(2, 4)));
         this.spawnProtectedDrop(level, new ItemStack(ModItems.FORBIDDEN_BLUEPRINT.get(), 1));
         this.spawnProtectedDrop(level, new ItemStack(ModItems.COAGULATED_OMEN_BLOOD.get(), level.getRandom().nextIntBetweenInclusive(3, 6)));
         this.spawnProtectedDrop(level, new ItemStack(ModItems.UNIDENTIFIED_CRATE.get(), 2));
-
         if (this.getRandom().nextFloat() < 0.40F) {
             this.spawnProtectedDrop(level, new ItemStack(ModItems.MASTERCRAFTED_TRIGGER_MODIFIER.get(), 1));
         }
-
         if (isTheEnd) {
             this.spawnProtectedDrop(level, new ItemStack(ModItems.ABYSSAL_SINGULARITY_CORE.get(), 1));
         }
     }
 
-    /** 溶岩・炎・爆風で燃え尽きない保護ドロップ生成 */
     private void spawnProtectedDrop(ServerLevel level, ItemStack stack) {
         net.minecraft.world.entity.item.ItemEntity itemEntity = this.spawnAtLocation(level, stack);
         if (itemEntity != null) {
-            itemEntity.setInvulnerable(true); 
-            itemEntity.setUnlimitedLifetime(); 
+            itemEntity.setInvulnerable(true);
+            itemEntity.setUnlimitedLifetime();
         }
     }
+
     private boolean tickDeathSequence(ServerLevel level) {
         int ticks = this.getDeathSequenceTicks();
         if (ticks <= 0) return false;
-
         this.entityData.set(DATA_DEATH_SEQUENCE, ticks + 1);
         this.getNavigation().stop();
-        this.setNoGravity(true); 
-
+        this.setNoGravity(true);
         if (ticks <= 40) {
-            this.setDeltaMovement(0.0, 0.38, 0.0); 
-
+            this.setDeltaMovement(0.0, 0.38, 0.0);
             level.sendParticles(ParticleTypes.EXPLOSION,
                     this.getX() + (this.getRandom().nextDouble() - 0.5) * 1.2,
                     this.getY() + this.getRandom().nextDouble() * 1.8,
                     this.getZ() + (this.getRandom().nextDouble() - 0.5) * 1.2,
                     1, 0, 0, 0, 0);
-
             level.sendParticles(ParticleTypes.SOUL_FIRE_FLAME, this.getX(), this.getY() + 0.8, this.getZ(), 8, 0.3, 0.5, 0.3, 0.08);
-
             if (ticks % 6 == 0) {
                 this.level().playSound(null, this.getX(), this.getY(), this.getZ(),
                         SoundEvents.GENERIC_EXPLODE.value(), SoundSource.HOSTILE, 1.5F, 1.2F + this.getRandom().nextFloat() * 0.4F);
             }
-        }
-
-        else if (ticks <= 50) {
-            this.setDeltaMovement(0.0, 0.02, 0.0); 
-
+        } else if (ticks <= 50) {
+            this.setDeltaMovement(0.0, 0.02, 0.0);
             level.sendParticles(ParticleTypes.EXPLOSION_EMITTER, this.getX(), this.getY() + 1.0, this.getZ(), 1, 0, 0, 0, 0);
             level.sendParticles(ParticleTypes.SOUL_FIRE_FLAME, this.getX(), this.getY() + 1.0, this.getZ(), 20, 0.5, 0.5, 0.5, 0.15);
-
             if (ticks == 41) {
                 this.level().playSound(null, this.getX(), this.getY(), this.getZ(),
                         SoundEvents.BEACON_DEACTIVATE, SoundSource.HOSTILE, 2.5F, 0.5F);
             }
-        }
-
-        else {
-            this.setDeltaMovement(0.0, -1.6, 0.0); 
-
+        } else {
+            this.setDeltaMovement(0.0, -1.6, 0.0);
             level.sendParticles(ParticleTypes.SQUID_INK, this.getX(), this.getY() + 1.0, this.getZ(), 35, 0.4, 0.8, 0.4, 0.08);
             level.sendParticles(ParticleTypes.CAMPFIRE_SIGNAL_SMOKE, this.getX(), this.getY() + 1.5, this.getZ(), 15, 0.3, 0.5, 0.3, 0.05);
-
             if (this.onGround() || this.verticalCollisionBelow || this.getY() <= level.getMinY() + 2) {
-
                 level.sendParticles(ParticleTypes.EXPLOSION_EMITTER, this.getX(), this.getY() + 1.0, this.getZ(), 3, 0, 0, 0, 0);
                 level.sendParticles(ParticleTypes.SONIC_BOOM, this.getX(), this.getY() + 0.5, this.getZ(), 1, 0, 0, 0, 0);
                 level.sendParticles(ParticleTypes.SQUID_INK, this.getX(), this.getY() + 0.5, this.getZ(), 120, 1.2, 0.6, 1.2, 0.2);
-
                 this.level().playSound(null, this.getX(), this.getY(), this.getZ(),
                         SoundEvents.GENERIC_EXPLODE.value(), SoundSource.HOSTILE, 3.5F, 0.6F);
                 this.level().playSound(null, this.getX(), this.getY(), this.getZ(),
                         SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.HOSTILE, 3.0F, 1.0F);
                 this.level().playSound(null, this.getX(), this.getY(), this.getZ(),
                         SoundEvents.BELL_BLOCK, SoundSource.HOSTILE, 3.0F, 0.3F);
-
                 this.dropCustomDeathLoot(level);
-
                 this.discard();
                 return true;
             }
         }
-
         return true;
     }
 
@@ -688,13 +630,11 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
         @Override
         public boolean canUse() {
             if (!super.canUse()) return false;
-
             int aliveMinions = ApostleGunEntity.this.level().getEntitiesOfClass(
                     Monster.class,
                     ApostleGunEntity.this.getBoundingBox().inflate(32.0),
                     e -> e.isAlive() && e.getPersistentData().getBooleanOr("apostle_minion", false)
             ).size();
-
             return aliveMinions == 0;
         }
 
@@ -702,16 +642,12 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
         protected void performSpellCasting() {
             ServerLevel level = (ServerLevel) ApostleGunEntity.this.level();
             boolean isTheEnd = level.dimension() == net.minecraft.world.level.Level.END;
-
             if (isTheEnd) {
-
                 if (ApostleGunEntity.this.isPhase2()) {
-
                     for (int i = 0; i < 2; i++) {
                         double spawnX = ApostleGunEntity.this.getX() + (ApostleGunEntity.this.getRandom().nextDouble() - 0.5) * 6.0;
                         double spawnZ = ApostleGunEntity.this.getZ() + (ApostleGunEntity.this.getRandom().nextDouble() - 0.5) * 6.0;
                         double spawnY = ApostleGunEntity.this.getY();
-
                         Illificer illificer = EntityRegistry.ILLIFICER.get().create(level, EntitySpawnReason.MOB_SUMMONED);
                         if (illificer != null) {
                             illificer.setPos(spawnX, spawnY, spawnZ);
@@ -725,12 +661,10 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
                         level.sendParticles(ParticleTypes.ASH, spawnX, spawnY + 0.5, spawnZ, 25, 0.3, 0.5, 0.3, 0.05);
                     }
                 } else {
-
                     for (int i = 0; i < 2; i++) {
                         double spawnX = ApostleGunEntity.this.getX() + (ApostleGunEntity.this.getRandom().nextDouble() - 0.5) * 6.0;
                         double spawnZ = ApostleGunEntity.this.getZ() + (ApostleGunEntity.this.getRandom().nextDouble() - 0.5) * 6.0;
                         double spawnY = ApostleGunEntity.this.getY();
-
                         Illificer illificer = EntityRegistry.ILLIFICER.get().create(level, EntitySpawnReason.MOB_SUMMONED);
                         if (illificer != null) {
                             illificer.setPos(spawnX, spawnY, spawnZ);
@@ -745,7 +679,6 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
                     }
                 }
             } else {
-
                 if (ApostleGunEntity.this.isPhase2()) {
                     for (int i = 0; i < 2; i++) {
                         double spawnX = ApostleGunEntity.this.getX() + (ApostleGunEntity.this.getRandom().nextDouble() - 0.5) * 6.0;
@@ -796,7 +729,6 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
                     }
                 }
             }
-
             level.playSound(null, ApostleGunEntity.this.getX(), ApostleGunEntity.this.getY(), ApostleGunEntity.this.getZ(),
                     SoundEvents.EVOKER_PREPARE_SUMMON, SoundSource.HOSTILE, 1.5F, 1.0F);
         }
@@ -866,10 +798,10 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
             return IllagerSpell.BLINDNESS;
         }
     }
+
     class ApostleCombatGoal extends net.minecraft.world.entity.ai.goal.Goal {
         private final io.redspace.irons_artifice.entity.ai.GunCombatMoveControl mover = new io.redspace.irons_artifice.entity.ai.GunCombatMoveControl();
         private final io.redspace.irons_artifice.entity.ai.AiGunRange bands = new io.redspace.irons_artifice.entity.ai.AiGunRange(28.0F);
-
         private int burstShotsRemaining = 0;
         private int burstCooldown = 0;
 
@@ -904,26 +836,20 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
         public void tick() {
             LivingEntity target = ApostleGunEntity.this.getTarget();
             if (target == null || !target.isAlive()) return;
-
             ItemStack gun = ApostleGunEntity.this.getMainHandItem();
             ApostleGunEntity.this.getLookControl().setLookAt(target, 30.0F, 30.0F);
-
             double distSqr = ApostleGunEntity.this.distanceToSqr(target);
             boolean hasLos = ApostleGunEntity.this.getSensing().hasLineOfSight(target);
-
             boolean isAnnihilation = ApostleGunEntity.this.getTitle() == ApostleTitle.ANNIHILATION_HARBINGER
                     || ApostleGunEntity.this.getTitle() == ApostleTitle.ABYSSAL_RULER_OF_ALL_CREATION;
-
             if (!ApostleGunEntity.this.isCastingSpell() || isAnnihilation) {
                 var mode = this.mover.selectKiting(distSqr, hasLos, this.bands);
                 double moveSpeed = ApostleGunEntity.this.isPhase2() ? 1.25 : 1.05;
                 this.mover.tick(ApostleGunEntity.this, target, this.bands, mode, moveSpeed);
             }
-
             if (this.burstCooldown > 0) {
                 this.burstCooldown--;
             }
-
             if (hasLos && distSqr <= 32.0 * 32.0 && (!ApostleGunEntity.this.isCastingSpell() || isAnnihilation) && this.burstCooldown <= 0) {
                 if (GunItem.getMagazine(gun).isEmpty() && !GunItem.isReloading(gun)) {
                     io.redspace.irons_artifice.item.GunplayManager.attemptStartReload(ApostleGunEntity.this, gun);
@@ -936,13 +862,10 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
                             (ApostleGunEntity.this.getRandom().nextDouble() - 0.5) * 2.4
                     );
                     Vec3 aim = targetCenter.add(inaccuracy).subtract(ApostleGunEntity.this.getEyePosition()).normalize();
-
                     if (io.redspace.irons_artifice.item.GunplayManager.tryFire(ApostleGunEntity.this, aim)) {
                         ApostleGunEntity.this.level().broadcastEntityEvent(ApostleGunEntity.this, EVENT_SHOOT_GUN);
                         this.burstShotsRemaining--;
-
                         if (this.burstShotsRemaining <= 0) {
-
                             this.burstCooldown = isAnnihilation ? 0 : (ApostleGunEntity.this.isPhase2() ? 12 : 8);
                             this.burstShotsRemaining = isAnnihilation ? 30 : (ApostleGunEntity.this.isPhase2() ? 10 : 3);
                         }
