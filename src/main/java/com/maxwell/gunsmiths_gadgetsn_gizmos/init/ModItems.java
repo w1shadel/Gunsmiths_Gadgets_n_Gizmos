@@ -2,6 +2,7 @@ package com.maxwell.gunsmiths_gadgetsn_gizmos.init;
 
 import com.maxwell.gunsmiths_gadgetsn_gizmos.GunsmithsGadgetsnGizmos;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.item.AmmoPouchItem;
+import com.maxwell.gunsmiths_gadgetsn_gizmos.item.ApostleItem;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.item.InfiniteAmmoBagItem;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.item.UnidentifiedCrateItem;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.item.curios.GunsmithCurioItem;
@@ -10,6 +11,7 @@ import com.maxwell.gunsmiths_gadgetsn_gizmos.modifier.*;
 import io.redspace.irons_artifice.item.GunItem;
 import io.redspace.irons_artifice.modifier.ModifierItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.SpawnEggItem;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -149,9 +151,14 @@ public class ModItems {
     public static final DeferredItem<Item> CURSED_BRASS_INGOT = ITEMS.registerSimpleItem("cursed_brass_ingot");
     public static final DeferredItem<Item> COAGULATED_OMEN_BLOOD = ITEMS.registerSimpleItem("coagulated_omen_blood");
     public static final DeferredItem<Item> FORBIDDEN_BLUEPRINT = ITEMS.registerSimpleItem("forbidden_blueprint");
-    public static final DeferredItem<Item> APOSTLE_SUMMON_RITUAL = ITEMS.registerItem(
-            "apostle_summon_ritual",
-            p -> new Item(p.stacksTo(1).component(net.minecraft.core.component.DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true))
+    public static final DeferredItem<Item> APOSTLE_SUMMON_RITUAL = ITEMS.registerItem("apostle_summon_ritual", ApostleItem::new);
+    public static final DeferredItem<SpawnEggItem> TOWN_MARKSMAN_SPAWN_EGG = ITEMS.registerItem(
+            "town_marksman_spawn_egg",
+            properties -> new SpawnEggItem(properties.spawnEgg(ModEntities.TOWN_MARKSMAN.get()))
+    );
+    public static final DeferredItem<SpawnEggItem> APOSTLE_GUN_SPAWN_EGG = ITEMS.registerItem(
+            "apostle_gun_spawn_egg",
+            properties -> new SpawnEggItem(properties.spawnEgg(ModEntities.APOSTLE_GUN.get()))
     );
 
     public static void register(IEventBus bus) {

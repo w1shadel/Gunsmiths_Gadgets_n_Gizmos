@@ -1,0 +1,10 @@
+{
+  "parent": "minecraft:block/orientable_with_bottom",
+  "textures": {
+    "bottom": "gunsmiths_gadgetsn_gizmos:block/gunsmith_bench_bottom",
+    "front": "gunsmiths_gadgetsn_gizmos:block/gunsmith_bench_front",
+    "particle": "gunsmiths_gadgetsn_gizmos:block/gunsmith_bench_front",
+    "side": "gunsmiths_gadgetsn_gizmos:block/gunsmith_bench_side",
+    "top": "gunsmiths_gadgetsn_gizmos:block/gunsmith_bench_top"
+  }
+}

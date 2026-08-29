@@ -25,7 +25,9 @@ public final class CrimsonSingularityModifier implements GunModifier {
     @SubscribeEvent
     public static void onShoot(GunShootEvent.Pre event) {
         if (ModifierHelper.hasModifier(event.getShotProfile(), ModItems.CRIMSON_SINGULARITY_MODIFIER.get())) {
-            event.getEntity().hurtServer((ServerLevel) event.getEntity().level(), event.getEntity().damageSources().magic(), 1.0F);
+            if (event.getEntity().level() instanceof ServerLevel serverLevel) {
+                event.getEntity().hurtServer(serverLevel, event.getEntity().damageSources().magic(), 1.0F);
+            }
         }
     }
 

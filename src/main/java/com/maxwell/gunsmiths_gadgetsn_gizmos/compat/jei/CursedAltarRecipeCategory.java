@@ -14,15 +14,14 @@ import mezz.jei.api.recipe.category.IRecipeCategory;
 import mezz.jei.api.recipe.types.IRecipeType;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.Items;
 import org.jspecify.annotations.NonNull;
 
-@SuppressWarnings("removal")
-public final class CursedAltarRecipeCategory implements IRecipeCategory<RecipeHolder<CursedAltarRecipe>> {
+import java.util.List;
+
+public final class CursedAltarRecipeCategory implements IRecipeCategory<CursedAltarRecipe> {
     public static final String MODID = "gunsmiths_gadgetsn_gizmos";
-    private static final Identifier BACKGROUND_LOC = Identifier.fromNamespaceAndPath(MODID, "textures/gui/cursed_altar.png");
     private final IDrawable background;
     private final IDrawable icon;
     private final IDrawableStatic slotBackground;
@@ -34,7 +33,7 @@ public final class CursedAltarRecipeCategory implements IRecipeCategory<RecipeHo
     }
 
     @Override
-    public @NonNull IRecipeType<RecipeHolder<CursedAltarRecipe>> getRecipeType() {
+    public @NonNull IRecipeType<CursedAltarRecipe> getRecipeType() {
         return JeiRecipeTypes.CURSED_ALTAR;
     }
 
@@ -59,24 +58,43 @@ public final class CursedAltarRecipeCategory implements IRecipeCategory<RecipeHo
     }
 
     @Override
-    public void setRecipe(IRecipeLayoutBuilder builder, RecipeHolder<CursedAltarRecipe> holder, @NonNull IFocusGroup focuses) {
-        CursedAltarRecipe recipe = holder.value();
-        builder.addSlot(RecipeIngredientRole.INPUT, 15, 25)
-                .addIngredients(recipe.base())
-                .setBackground(slotBackground, -1, -1);
-        builder.addSlot(RecipeIngredientRole.INPUT, 45, 25)
-                .addIngredients(recipe.material().ingredient())
-                .setBackground(slotBackground, -1, -1);
-        builder.addSlot(RecipeIngredientRole.INPUT, 75, 25)
-                .addIngredients(recipe.catalyst().ingredient())
-                .setBackground(slotBackground, -1, -1);
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 125, 25)
-                .addItemStack(recipe.result())
-                .setBackground(slotBackground, -1, -1);
+    public void setRecipe(IRecipeLayoutBuilder builder, CursedAltarRecipe recipe, @NonNull IFocusGroup focuses) {
+        List<ItemStack> baseStacks = recipe.baseItems().stream()
+                .filter(item -> item != null && item != Items.AIR)
+                .map(ItemStack::new)
+                .toList();
+        if (!baseStacks.isEmpty()) {
+            builder.addSlot(RecipeIngredientRole.INPUT, 15, 35)
+                    .addItemStacks(baseStacks)
+                    .setBackground(slotBackground, -1, -1);
+        }
+        List<ItemStack> matStacks = recipe.materialItems().stream()
+                .filter(item -> item != null && item != Items.AIR)
+                .map(item -> new ItemStack(item, recipe.materialCount()))
+                .toList();
+        if (!matStacks.isEmpty()) {
+            builder.addSlot(RecipeIngredientRole.INPUT, 55, 35)
+                    .addItemStacks(matStacks)
+                    .setBackground(slotBackground, -1, -1);
+        }
+        List<ItemStack> catStacks = recipe.catalystItems().stream()
+                .filter(item -> item != null && item != Items.AIR)
+                .map(item -> new ItemStack(item, recipe.catalystCount()))
+                .toList();
+        if (!catStacks.isEmpty()) {
+            builder.addSlot(RecipeIngredientRole.INPUT, 35, 10)
+                    .addItemStacks(catStacks)
+                    .setBackground(slotBackground, -1, -1);
+        }
+        if (!recipe.result().isEmpty()) {
+            builder.addSlot(RecipeIngredientRole.OUTPUT, 120, 23)
+                    .addItemStack(recipe.result())
+                    .setBackground(slotBackground, -1, -1);
+        }
     }
 
     @Override
-    public void draw(@NonNull RecipeHolder<CursedAltarRecipe> recipe, @NonNull IRecipeSlotsView recipeSlotsView, @NonNull GuiGraphicsExtractor guiGraphics, double mouseX, double mouseY) {
+    public void draw(@NonNull CursedAltarRecipe recipe, @NonNull IRecipeSlotsView recipeSlotsView, @NonNull GuiGraphicsExtractor guiGraphics, double mouseX, double mouseY) {
         background.draw(guiGraphics);
     }
 }

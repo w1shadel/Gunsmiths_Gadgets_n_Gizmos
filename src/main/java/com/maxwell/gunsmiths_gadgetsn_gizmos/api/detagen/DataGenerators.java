@@ -21,8 +21,11 @@ public final class DataGenerators {
         event.createProvider(CuriosSlotDataProvider::new);
         event.createProvider((output, lookup) -> new GunSetBonusDataProvider(output, GunsmithsGadgetsnGizmos.MODID));
         event.createProvider(VanillaModRecipeProvider.Runner::new);
+        event.createProvider((out, lookup) -> new ModBlockStateDataProvider(out, GunsmithsGadgetsnGizmos.MODID));
         event.createProvider((out, lookup) -> new ModItemModelDataProvider(out, GunsmithsGadgetsnGizmos.MODID));
         event.createProvider((output, lookup) -> new AdvancementProvider(output, lookup, List.of(new ModAdvancementProvider())));
+        event.createProvider(ModLootTableProvider::create);
+        event.createProvider(ModBlockTagsProvider::new);
     }
 
     @SubscribeEvent
@@ -33,7 +36,10 @@ public final class DataGenerators {
         event.createProvider(CuriosSlotDataProvider::new);
         event.createProvider((output, lookup) -> new GunSetBonusDataProvider(output, GunsmithsGadgetsnGizmos.MODID));
         event.createProvider(VanillaModRecipeProvider.Runner::new);
+        event.createProvider((out, lookup) -> new ModBlockStateDataProvider(out, GunsmithsGadgetsnGizmos.MODID));
         event.createProvider((out, lookup) -> new ModItemModelDataProvider(out, GunsmithsGadgetsnGizmos.MODID));
         event.createProvider((output, lookup) -> new AdvancementProvider(output, lookup, List.of(new ModAdvancementProvider())));
+        event.createProvider(ModLootTableProvider::create);
+        event.createProvider(ModBlockTagsProvider::new);
     }
 }

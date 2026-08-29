@@ -1,6 +1,7 @@
 package com.maxwell.gunsmiths_gadgetsn_gizmos.modifier;
 
 import com.maxwell.gunsmiths_gadgetsn_gizmos.GunsmithsGadgetsnGizmos;
+import com.maxwell.gunsmiths_gadgetsn_gizmos.init.GunsmithConfig;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.init.ModItems;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.util.ModifierHelper;
 import io.redspace.irons_artifice.api.GunShootEvent;
@@ -19,12 +20,15 @@ import java.util.function.Consumer;
 
 @EventBusSubscriber(modid = GunsmithsGadgetsnGizmos.MODID)
 public final class BloodboundCalamityModifier implements GunModifier {
-    private static final String MODIFIER_TAG = "gunsmiths_gadgetsn_gizmos:bloodbound_calamity";
-
     @SubscribeEvent
     public static void onGunShoot(GunShootEvent.Pre event) {
         if (ModifierHelper.hasModifier(event.getShotProfile(), ModItems.BLOODBOUND_CALAMITY_MODIFIER.get())) {
-            event.getEntity().hurtServer((ServerLevel) event.getEntity().level(), event.getEntity().damageSources().magic(), 2.0F);
+            if (event.getEntity().level() instanceof ServerLevel serverLevel) {
+                float cost = GunsmithConfig.COMMON.bloodboundHpCost.get().floatValue();
+                if (cost > 0.0F) {
+                    event.getEntity().hurtServer(serverLevel, event.getEntity().damageSources().magic(), cost);
+                }
+            }
         }
     }
 

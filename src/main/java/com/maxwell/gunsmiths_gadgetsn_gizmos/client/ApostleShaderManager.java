@@ -2,6 +2,7 @@ package com.maxwell.gunsmiths_gadgetsn_gizmos.client;
 
 import com.maxwell.gunsmiths_gadgetsn_gizmos.GunsmithsGadgetsnGizmos;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.entity.ApostleGunEntity;
+import com.maxwell.gunsmiths_gadgetsn_gizmos.init.GunsmithConfig;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.mixin.client.PostChainAccessor;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.mixin.client.PostPassAccessor;
 import com.mojang.blaze3d.buffers.GpuBuffer;
@@ -30,6 +31,16 @@ public class ApostleShaderManager {
     public static void clientTick() {
         Minecraft mc = Minecraft.getInstance();
         if (mc.isPaused() || mc.level == null || mc.player == null) return;
+        if (!GunsmithConfig.CLIENT.enableAshStormShader.get()) {
+            if (active) {
+                if (SHADER_ID.equals(mc.gameRenderer.currentPostEffect())) {
+                    mc.gameRenderer.clearPostEffect();
+                }
+                active = false;
+                progress = 0.0F;
+            }
+            return;
+        }
         Player player = mc.player;
         List<ApostleGunEntity> bosses = mc.level.getEntitiesOfClass(
                 ApostleGunEntity.class,

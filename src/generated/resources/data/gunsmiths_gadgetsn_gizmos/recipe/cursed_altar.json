@@ -3,7 +3,7 @@
   "category": "building",
   "key": {
     "B": "gunsmiths_gadgetsn_gizmos:gunsmith_bench",
-    "C": "gunsmiths_gadgetsn_gizmos:ominous_clockwork_core",
+    "C": "minecraft:bone",
     "O": "minecraft:crying_obsidian",
     "S": "minecraft:soul_sand"
   },

@@ -55,6 +55,10 @@ public class ModClientEvents {
                 net.minecraft.resources.Identifier.fromNamespaceAndPath(GunsmithsGadgetsnGizmos.MODID, "gun_set_bonuses"),
                 new com.maxwell.gunsmiths_gadgetsn_gizmos.api.synergy.GunSetBonusManager()
         );
+        event.addListener(
+                net.minecraft.resources.Identifier.fromNamespaceAndPath(GunsmithsGadgetsnGizmos.MODID, "cursed_altar_recipes"),
+                new com.maxwell.gunsmiths_gadgetsn_gizmos.recipe.CursedAltarRecipeManager()
+        );
     }
 
     @SubscribeEvent

@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_omen_core": {
+    "has_bone": {
       "conditions": {
         "items": [
           {
-            "items": "gunsmiths_gadgetsn_gizmos:ominous_clockwork_core"
+            "items": "minecraft:bone"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_omen_core"
+      "has_bone"
     ]
   ],
   "rewards": {

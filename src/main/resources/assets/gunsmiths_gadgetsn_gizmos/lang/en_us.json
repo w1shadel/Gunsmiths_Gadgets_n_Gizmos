@@ -228,5 +228,8 @@
 
   "advancements.gunsmiths_gadgetsn_gizmos.kill_abyssal_apostle.title": "End of the Abyss",
   "advancements.gunsmiths_gadgetsn_gizmos.kill_abyssal_apostle.desc": "Slay the Abyssal Sovereign in the depths of the End, claiming the ultimate singularity",
-  "item.gunsmiths_gadgetsn_gizmos.apostle_summon_ritual": "Ritual of the Apostle"
+  "item.gunsmiths_gadgetsn_gizmos.apostle_summon_ritual": "Ritual of the Apostle",
+  "gunsmiths_gadgetsn_gizmos.tooltip.apostleitem": "No items are obtained during this ritual.",
+  "item.gunsmiths_gadgetsn_gizmos.town_marksman_spawn_egg": "Town Marksman Spawn Egg",
+  "item.gunsmiths_gadgetsn_gizmos.apostle_gun_spawn_egg": "Apostle Spawn Egg"
 }

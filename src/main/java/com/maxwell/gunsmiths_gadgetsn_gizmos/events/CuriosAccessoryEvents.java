@@ -2,6 +2,7 @@ package com.maxwell.gunsmiths_gadgetsn_gizmos.events;
 
 import com.maxwell.gunsmiths_gadgetsn_gizmos.GunsmithsGadgetsnGizmos;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.compat.curios.CuriosCompat;
+import com.maxwell.gunsmiths_gadgetsn_gizmos.init.GunsmithConfig;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.init.ModItems;
 import io.redspace.irons_artifice.api.ComposeShotEvent;
 import io.redspace.irons_artifice.api.ConsumeAmmoEvent;
@@ -65,7 +66,8 @@ public class CuriosAccessoryEvents {
             );
         }
         if (CuriosCompat.isEquipped(living, ModItems.GAMBLERS_RING.get())) {
-            if (living.getRandom().nextFloat() < 0.15F) {
+            float procChance = GunsmithConfig.COMMON.gamblersRingChance.get().floatValue();
+            if (living.getRandom().nextFloat() < procChance) {
                 profile.get(ShotComponents.DAMAGE).addModifier(
                         new ValueModifier(1.0, ValueModifier.Operation.MULTIPLY_TOTAL, ValueModifier.Type.BENEFICIAL)
                 );
@@ -76,7 +78,8 @@ public class CuriosAccessoryEvents {
     @SubscribeEvent
     public static void onConsumeAmmo(ConsumeAmmoEvent event) {
         if (CuriosCompat.isEquipped(event.getEntity(), ModItems.GAMBLERS_RING.get())) {
-            if (event.getEntity().getRandom().nextFloat() < 0.15F) {
+            float procChance = GunsmithConfig.COMMON.gamblersRingChance.get().floatValue();
+            if (event.getEntity().getRandom().nextFloat() < procChance) {
                 event.setAmmoToConsume(0);
                 event.getEntity().level().playSound(null, event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(),
                         SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.PLAYERS, 0.8F, 1.8F);
@@ -88,8 +91,9 @@ public class CuriosAccessoryEvents {
     public static void onGunShoot(GunShootEvent.Post event) {
         if (event.getEntity() instanceof Player player && !player.level().isClientSide()) {
             if (CuriosCompat.isEquipped(player, ModItems.MAGNETIC_POUCH.get())) {
+                float recoveryChance = GunsmithConfig.COMMON.magneticPouchChance.get().floatValue();
                 RandomSource random = player.getRandom();
-                if (random.nextFloat() < 0.25F) {
+                if (random.nextFloat() < recoveryChance) {
                     ItemStack recovered = random.nextBoolean()
                             ? new ItemStack(ItemRegistry.BULLET.get(), 1)
                             : new ItemStack(ModItems.VOID_CASING.get(), 1);

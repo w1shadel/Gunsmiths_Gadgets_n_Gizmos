@@ -1,5 +1,6 @@
 package com.maxwell.gunsmiths_gadgetsn_gizmos.events;
 
+import com.maxwell.gunsmiths_gadgetsn_gizmos.GunsmithsGadgetsnGizmos;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.api.synergy.GunSetBonus;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.api.synergy.GunSetBonusManager;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.api.synergy.SetBonusEffect;
@@ -16,13 +17,17 @@ import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 
 import java.util.List;
 
-@EventBusSubscriber(modid = "gunsmiths_gadgetsn_gizmos")
+@EventBusSubscriber(modid = GunsmithsGadgetsnGizmos.MODID)
 public class GunSetBonusEvents {
     @SubscribeEvent
     public static void onAddServerReloadListeners(AddServerReloadListenersEvent event) {
         event.addListener(
                 Identifier.fromNamespaceAndPath("gunsmiths_gadgetsn_gizmos", "gun_set_bonuses"),
                 new GunSetBonusManager()
+        );
+        event.addListener(
+                Identifier.fromNamespaceAndPath("gunsmiths_gadgetsn_gizmos", "cursed_altar_recipes"),
+                new com.maxwell.gunsmiths_gadgetsn_gizmos.recipe.CursedAltarRecipeManager()
         );
     }
 

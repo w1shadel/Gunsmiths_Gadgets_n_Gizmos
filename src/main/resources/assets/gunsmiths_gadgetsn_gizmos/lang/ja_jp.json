@@ -226,5 +226,8 @@
 
   "advancements.gunsmiths_gadgetsn_gizmos.kill_abyssal_apostle.title": "深淵の終わり",
   "advancements.gunsmiths_gadgetsn_gizmos.kill_abyssal_apostle.desc": "ジ・エンドの深淵に潜む深淵ノ盟主を倒し、究極の特異点を手に入れる",
-  "item.gunsmiths_gadgetsn_gizmos.apostle_summon_ritual": "アポストル召喚の儀式"
+  "item.gunsmiths_gadgetsn_gizmos.apostle_summon_ritual": "アポストル召喚の儀式",
+  "gunsmiths_gadgetsn_gizmos.tooltip.apostleitem": "この儀式ではアイテムは発生しません。",
+  "item.gunsmiths_gadgetsn_gizmos.town_marksman_spawn_egg": "町のガンマンのスポーンエッグ",
+  "item.gunsmiths_gadgetsn_gizmos.apostle_gun_spawn_egg": "アポストルのスポーンエッグ"
 }

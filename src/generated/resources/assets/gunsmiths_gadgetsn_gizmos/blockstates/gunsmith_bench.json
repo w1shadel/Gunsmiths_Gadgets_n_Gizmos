@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "gunsmiths_gadgetsn_gizmos:block/gunsmith_bench",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "gunsmiths_gadgetsn_gizmos:block/gunsmith_bench"
+    },
+    "facing=south": {
+      "model": "gunsmiths_gadgetsn_gizmos:block/gunsmith_bench",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "gunsmiths_gadgetsn_gizmos:block/gunsmith_bench",
+      "y": 270
+    }
+  }
+}

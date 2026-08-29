@@ -3,6 +3,7 @@ package com.maxwell.gunsmiths_gadgetsn_gizmos.client;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.GunsmithsGadgetsnGizmos;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.api.synergy.GunSetBonus;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.api.synergy.GunSetBonusManager;
+import com.maxwell.gunsmiths_gadgetsn_gizmos.init.GunsmithConfig;
 import io.redspace.irons_artifice.item.GunItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.particles.ParticleOptions;
@@ -22,6 +23,7 @@ import java.util.List;
 public class ClientGunAuraEvents {
     @SubscribeEvent
     public static void onClientTick(ClientTickEvent.Post event) {
+        if (!GunsmithConfig.CLIENT.enableGunAuraParticles.get()) return;
         Minecraft mc = Minecraft.getInstance();
         if (mc.isPaused() || mc.level == null || mc.player == null) return;
         Player player = mc.player;

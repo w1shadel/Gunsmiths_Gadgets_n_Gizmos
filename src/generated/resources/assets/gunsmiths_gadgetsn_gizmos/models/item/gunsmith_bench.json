@@ -1,6 +1,3 @@
 {
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "gunsmiths_gadgetsn_gizmos:item/gunsmith_bench"
-  }
+  "parent": "gunsmiths_gadgetsn_gizmos:block/gunsmith_bench"
 }

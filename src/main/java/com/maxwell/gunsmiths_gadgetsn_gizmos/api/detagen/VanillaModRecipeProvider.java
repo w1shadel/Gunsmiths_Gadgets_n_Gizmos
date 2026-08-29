@@ -50,8 +50,8 @@ public class VanillaModRecipeProvider extends RecipeProvider {
                 .define('B', ModBlocks.GUNSMITH_BENCH.get())
                 .define('O', Blocks.CRYING_OBSIDIAN)
                 .define('S', Blocks.SOUL_SAND)
-                .define('C', ModItems.OMINOUS_CLOCKWORK_CORE.get())
-                .unlockedBy("has_omen_core", has(ModItems.OMINOUS_CLOCKWORK_CORE.get()))
+                .define('C', Items.BONE)
+                .unlockedBy("has_bone", has(Items.BONE))
                 .save(this.output, recipeId("cursed_altar"));
         ShapedRecipeBuilder.shaped(itemLookup, RecipeCategory.TOOLS, ModItems.AMMO_POUCH.get())
                 .pattern("LIL")

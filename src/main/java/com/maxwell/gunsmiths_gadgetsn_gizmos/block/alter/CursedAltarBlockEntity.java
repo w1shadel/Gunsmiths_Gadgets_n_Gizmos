@@ -13,6 +13,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.player.Inventory;
@@ -24,8 +25,8 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
-import org.jspecify.annotations.NonNull;
-import org.jspecify.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class CursedAltarBlockEntity extends BlockEntity implements MenuProvider, Container {
     public static final int SLOT_COUNT = 4;
@@ -73,6 +74,21 @@ public class CursedAltarBlockEntity extends BlockEntity implements MenuProvider,
                 serverLevel.playSound(null, pos, SoundEvents.GENERIC_EXPLODE.value(), SoundSource.HOSTILE, 3.0F, 0.6F);
                 serverLevel.playSound(null, pos, SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.HOSTILE, 3.0F, 0.8F);
                 serverLevel.playSound(null, pos, SoundEvents.BELL_BLOCK, SoundSource.HOSTILE, 3.0F, 0.3F);
+            }
+        }
+    }
+
+    @Override
+    public void preRemoveSideEffects(BlockPos pos, BlockState state) {
+        super.preRemoveSideEffects(pos, state);
+        this.drops();
+    }
+
+    public void drops() {
+        if (this.level == null) return;
+        for (ItemStack stack : this.items) {
+            if (!stack.isEmpty()) {
+                Containers.dropItemStack(this.level, this.worldPosition.getX(), this.worldPosition.getY(), this.worldPosition.getZ(), stack);
             }
         }
     }
@@ -127,12 +143,13 @@ public class CursedAltarBlockEntity extends BlockEntity implements MenuProvider,
     }
 
     @Override
-    public @NonNull Component getDisplayName() {
+    public @NotNull Component getDisplayName() {
         return Component.translatable("block.gunsmiths_gadgetsn_gizmos.cursed_altar");
     }
 
+    @Nullable
     @Override
-    public @Nullable AbstractContainerMenu createMenu(int containerId, @NonNull Inventory playerInventory, @NonNull Player player) {
+    public AbstractContainerMenu createMenu(int containerId, @NotNull Inventory playerInventory, @NotNull Player player) {
         return new CursedAltarMenu(containerId, playerInventory, this);
     }
 

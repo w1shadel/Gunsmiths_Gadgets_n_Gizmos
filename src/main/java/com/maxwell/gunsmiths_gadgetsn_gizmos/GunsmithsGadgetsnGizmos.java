@@ -13,6 +13,8 @@ public class GunsmithsGadgetsnGizmos {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public GunsmithsGadgetsnGizmos(IEventBus modEventBus, ModContainer modContainer) {
+        modContainer.registerConfig(net.neoforged.fml.config.ModConfig.Type.COMMON, GunsmithConfig.COMMON_SPEC);
+        modContainer.registerConfig(net.neoforged.fml.config.ModConfig.Type.CLIENT, GunsmithConfig.CLIENT_SPEC);
         ModBlocks.register(modEventBus);
         ModItems.register(modEventBus);
         ModMenuTypes.register(modEventBus);
@@ -20,7 +22,6 @@ public class GunsmithsGadgetsnGizmos {
         ModVillagers.register(modEventBus);
         ModCreativeTabs.register(modEventBus);
         ModDataComponents.register(modEventBus);
-        ModRecipes.register(modEventBus);
         ModMobEffects.register(modEventBus);
         modEventBus.addListener(ModPayloads::register);
         ModEntities.register(modEventBus);

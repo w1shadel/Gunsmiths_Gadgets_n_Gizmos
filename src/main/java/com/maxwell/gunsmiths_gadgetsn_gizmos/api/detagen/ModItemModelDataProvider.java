@@ -35,12 +35,10 @@ public class ModItemModelDataProvider implements DataProvider {
         for (Holder<Item> holder : ModItems.ITEMS.getEntries()) {
             Item item = holder.value();
             Identifier itemId = BuiltInRegistries.ITEM.getKey(item);
-            if (itemId.getPath().equals("clunker_rifle")) {
-                continue;
-            }
-            if (itemId.getPath().equals("minigun")) {
-                continue;
-            }
+            if (itemId.getPath().equals("clunker_rifle")) continue;
+            if (itemId.getPath().equals("minigun")) continue;
+            if (itemId.getPath().equals("gunsmith_bench")) continue;
+            if (itemId.getPath().equals("cursed_altar")) continue;
             JsonObject modelJson = new JsonObject();
             modelJson.addProperty("parent", "minecraft:item/generated");
             JsonObject textures = new JsonObject();

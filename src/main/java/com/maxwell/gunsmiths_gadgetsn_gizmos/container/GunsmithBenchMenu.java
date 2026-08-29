@@ -1,9 +1,6 @@
 package com.maxwell.gunsmiths_gadgetsn_gizmos.container;
 
-import com.maxwell.gunsmiths_gadgetsn_gizmos.init.ModBlocks;
-import com.maxwell.gunsmiths_gadgetsn_gizmos.init.ModDataComponents;
-import com.maxwell.gunsmiths_gadgetsn_gizmos.init.ModItems;
-import com.maxwell.gunsmiths_gadgetsn_gizmos.init.ModMenuTypes;
+import com.maxwell.gunsmiths_gadgetsn_gizmos.init.*;
 import io.redspace.irons_artifice.item.GunItem;
 import io.redspace.irons_artifice.registry.ItemRegistry;
 import net.minecraft.sounds.SoundEvents;
@@ -88,7 +85,8 @@ public class GunsmithBenchMenu extends AbstractContainerMenu {
         ItemStack parts = inputContainer.getItem(PARTS_SLOT);
         if (gun.getItem() instanceof GunItem && kit.is(ModItems.GUNSMITH_CHASSIS_KIT.get()) && parts.getCount() >= REQUIRED_PARTS_COUNT) {
             int currentExtra = gun.getOrDefault(ModDataComponents.EXTRA_MODIFIER_SLOTS.get(), 0);
-            if (currentExtra < MAX_EXTRA_SLOTS) {
+            int maxExtra = GunsmithConfig.COMMON.maxExtraModifierSlots.get();
+            if (currentExtra < maxExtra) {
                 ItemStack upgradedGun = gun.copy();
                 upgradedGun.set(ModDataComponents.EXTRA_MODIFIER_SLOTS.get(), currentExtra + 1);
                 resultContainer.setItem(0, upgradedGun);
@@ -136,13 +134,7 @@ public class GunsmithBenchMenu extends AbstractContainerMenu {
     public void removed(@NotNull Player player) {
         super.removed(player);
         this.clearContainer(player, inputContainer);
-    }    private final SimpleContainer inputContainer = new SimpleContainer(3) {
-        @Override
-        public void setChanged() {
-            super.setChanged();
-            GunsmithBenchMenu.this.slotsChanged(this);
-        }
-    };
+    }
 
     private void addPlayerInventory(Inventory playerInventory) {
         for (int i = 0; i < 3; ++i) {
@@ -150,7 +142,13 @@ public class GunsmithBenchMenu extends AbstractContainerMenu {
                 this.addSlot(new Slot(playerInventory, l + i * 9 + 9, 8 + l * 18, 84 + i * 18));
             }
         }
-    }
+    }    private final SimpleContainer inputContainer = new SimpleContainer(3) {
+        @Override
+        public void setChanged() {
+            super.setChanged();
+            GunsmithBenchMenu.this.slotsChanged(this);
+        }
+    };
 
     private void addPlayerHotbar(Inventory playerInventory) {
         for (int i = 0; i < 9; ++i) {
