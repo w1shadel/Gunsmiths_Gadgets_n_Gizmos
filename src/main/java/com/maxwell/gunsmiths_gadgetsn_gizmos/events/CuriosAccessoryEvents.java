@@ -4,8 +4,8 @@ import com.maxwell.gunsmiths_gadgetsn_gizmos.GunsmithsGadgetsnGizmos;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.compat.curios.CuriosCompat;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.init.GunsmithConfig;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.init.ModItems;
+import io.redspace.irons_artifice.api.AmmoEvent;
 import io.redspace.irons_artifice.api.ComposeShotEvent;
-import io.redspace.irons_artifice.api.ConsumeAmmoEvent;
 import io.redspace.irons_artifice.api.GunShootEvent;
 import io.redspace.irons_artifice.data.ShotComponents;
 import io.redspace.irons_artifice.data.ValueModifier;
@@ -76,11 +76,10 @@ public class CuriosAccessoryEvents {
     }
 
     @SubscribeEvent
-    public static void onConsumeAmmo(ConsumeAmmoEvent event) {
+    public static void onAmmoAmount(AmmoEvent.Amount event) {
         if (CuriosCompat.isEquipped(event.getEntity(), ModItems.GAMBLERS_RING.get())) {
-            float procChance = GunsmithConfig.COMMON.gamblersRingChance.get().floatValue();
-            if (event.getEntity().getRandom().nextFloat() < procChance) {
-                event.setAmmoToConsume(0);
+            if (event.getEntity().getRandom().nextFloat() < 0.15F) {
+                event.setAmmoToConsume(0); // 消費弾数を0に変更
                 event.getEntity().level().playSound(null, event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(),
                         SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.PLAYERS, 0.8F, 1.8F);
             }
