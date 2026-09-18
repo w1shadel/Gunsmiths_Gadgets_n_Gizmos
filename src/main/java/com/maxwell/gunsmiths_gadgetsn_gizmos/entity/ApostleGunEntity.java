@@ -102,18 +102,21 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
 
     @Override
     public void customizeMobShot(Mob mob, io.redspace.irons_artifice.gun.ShotProfile profile) {
-        profile.get(io.redspace.irons_artifice.data.ShotComponents.DAMAGE)
-                .addModifier(new io.redspace.irons_artifice.data.ValueModifier(
-                        this.isPhase2() ? 0.10 : 0.0,
+        profile.modifyValue(io.redspace.irons_artifice.data.ShotComponents.DAMAGE,
+                new io.redspace.irons_artifice.data.ValueModifier(
+                        this.isPhase2() ? 0.35 : 0.15,
                         io.redspace.irons_artifice.data.ValueModifier.Operation.MULTIPLY_TOTAL,
                         io.redspace.irons_artifice.data.ValueModifier.Type.BENEFICIAL
                 ));
-        profile.get(io.redspace.irons_artifice.data.ShotComponents.SPREAD)
-                .addModifier(new io.redspace.irons_artifice.data.ValueModifier(
-                        this.isPhase2() ? 5.5 : 3.5,
-                        io.redspace.irons_artifice.data.ValueModifier.Operation.ADD,
-                        io.redspace.irons_artifice.data.ValueModifier.Type.NEUTRAL
-                ));
+
+        if (this.isPhase2()) {
+            profile.modifyValue(io.redspace.irons_artifice.data.ShotComponents.SPREAD,
+                    new io.redspace.irons_artifice.data.ValueModifier(
+                            -2.0,
+                            io.redspace.irons_artifice.data.ValueModifier.Operation.ADD,
+                            io.redspace.irons_artifice.data.ValueModifier.Type.BENEFICIAL
+                    ));
+        }
     }
 
     public boolean isPhase2() {
@@ -850,11 +853,17 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
             if (this.burstCooldown > 0) {
                 this.burstCooldown--;
             }
+
             if (hasLos && distSqr <= 32.0 * 32.0 && (!ApostleGunEntity.this.isCastingSpell() || isAnnihilation) && this.burstCooldown <= 0) {
+
                 if (GunItem.getMagazine(gun).isEmpty() && !GunItem.isReloading(gun)) {
                     io.redspace.irons_artifice.item.GunplayManager.attemptStartReload(ApostleGunEntity.this, gun);
                     this.burstShotsRemaining = isAnnihilation ? 30 : (ApostleGunEntity.this.isPhase2() ? 12 : 3);
-                } else if (!io.redspace.irons_artifice.item.FireDelayState.isActive(gun) && !GunItem.isReloading(gun)) {
+                }
+
+
+                else if (!io.redspace.irons_artifice.item.FireDelayState.isActive(ApostleGunEntity.this, gun) && !GunItem.isReloading(gun)) {
+
                     Vec3 targetCenter = target.getBoundingBox().getCenter();
                     Vec3 inaccuracy = new Vec3(
                             (ApostleGunEntity.this.getRandom().nextDouble() - 0.5) * 2.4,
@@ -862,10 +871,13 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
                             (ApostleGunEntity.this.getRandom().nextDouble() - 0.5) * 2.4
                     );
                     Vec3 aim = targetCenter.add(inaccuracy).subtract(ApostleGunEntity.this.getEyePosition()).normalize();
-                    if (io.redspace.irons_artifice.item.GunplayManager.tryFire(ApostleGunEntity.this, aim)) {
+
+                    if (io.redspace.irons_artifice.item.GunplayManager.tryFire(ApostleGunEntity.this, aim).fired()) {
                         ApostleGunEntity.this.level().broadcastEntityEvent(ApostleGunEntity.this, EVENT_SHOOT_GUN);
+
                         this.burstShotsRemaining--;
                         if (this.burstShotsRemaining <= 0) {
+
                             this.burstCooldown = isAnnihilation ? 0 : (ApostleGunEntity.this.isPhase2() ? 12 : 8);
                             this.burstShotsRemaining = isAnnihilation ? 30 : (ApostleGunEntity.this.isPhase2() ? 10 : 3);
                         }

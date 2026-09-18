@@ -42,11 +42,9 @@ public class ModAmmoTypes {
             () -> new AmmoType(ModItems.SILVER_BULLET) {
                 @Override
                 public void applyToShot(ShotProfile profile, LivingEntity shooter) {
-                    profile.components().getOrCreate(ShotComponents.POST_HIT_EFFECTS).add(new SilverBulletPostHit());
-                    profile.components().getOrCreate(ShotComponents.PARTICLE_TRAIL).add(
-                            ColorTransitionParticleOption.bulletTrail(0xE8F8FF, 0x90B8CC)
-                    );
-                    profile.components().getOrCreate(ShotComponents.MUZZLE_FLASH).addTint(0xE8F8FF);
+                    profile.modify(ShotComponents.POST_HIT_EFFECTS, effects -> effects.add(new SilverBulletPostHit()));
+                    profile.modify(ShotComponents.PARTICLE_TRAIL, trail -> trail.add(ColorTransitionParticleOption.bulletTrail(0xE8F8FF, 0x90B8CC)));
+                    profile.modify(ShotComponents.MUZZLE_FLASH, flash -> flash.addTint(0xE8F8FF));
                 }
 
                 @Override
@@ -59,13 +57,9 @@ public class ModAmmoTypes {
             () -> new AmmoType(ModItems.AP_BULLET) {
                 @Override
                 public void applyToShot(ShotProfile profile, LivingEntity shooter) {
-                    profile.components().getOrCreate(ShotComponents.PIERCING)
-                            .addModifier(new ValueModifier(2, ValueModifier.Operation.ADD, ValueModifier.Type.BENEFICIAL));
-                    profile.components().getOrCreate(ShotComponents.BULLET_SPEED)
-                            .addModifier(new ValueModifier(0.30, ValueModifier.Operation.MULTIPLY_TOTAL, ValueModifier.Type.BENEFICIAL));
-                    profile.components().getOrCreate(ShotComponents.PARTICLE_TRAIL).add(
-                            ColorTransitionParticleOption.bulletTrail(0xFFA500, 0x8B4500)
-                    );
+                    profile.modifyValue(ShotComponents.PIERCING, new ValueModifier(2, ValueModifier.Operation.ADD, ValueModifier.Type.BENEFICIAL));
+                    profile.modifyValue(ShotComponents.BULLET_SPEED, new ValueModifier(0.30, ValueModifier.Operation.MULTIPLY_TOTAL, ValueModifier.Type.BENEFICIAL));
+                    profile.modify(ShotComponents.PARTICLE_TRAIL, trail -> trail.add(ColorTransitionParticleOption.bulletTrail(0xFFA500, 0x8B4500)));
                 }
 
                 @Override
@@ -78,16 +72,11 @@ public class ModAmmoTypes {
             () -> new AmmoType(ModItems.GLASS_BULLET) {
                 @Override
                 public void applyToShot(ShotProfile profile, LivingEntity shooter) {
-                    profile.components().getOrCreate(ShotComponents.PROJECTILE_COUNT)
-                            .addModifier(new ValueModifier(5, ValueModifier.Operation.ADD, ValueModifier.Type.BENEFICIAL));
-                    profile.components().getOrCreate(ShotComponents.DAMAGE)
-                            .addModifier(new ValueModifier(-0.40, ValueModifier.Operation.MULTIPLY_TOTAL, ValueModifier.Type.HARMFUL));
-                    profile.components().getOrCreate(ShotComponents.SPREAD)
-                            .addModifier(new ValueModifier(3.5, ValueModifier.Operation.ADD, ValueModifier.Type.NEUTRAL));
-                    profile.components().getOrCreate(ShotComponents.POST_HIT_EFFECTS).add(new GlassBulletPostHit());
-                    profile.components().getOrCreate(ShotComponents.PARTICLE_TRAIL).add(
-                            ColorTransitionParticleOption.bulletTrail(0xFFFFFF, 0xC8E8EE)
-                    );
+                    profile.modifyValue(ShotComponents.PROJECTILE_COUNT, new ValueModifier(5, ValueModifier.Operation.ADD, ValueModifier.Type.BENEFICIAL));
+                    profile.modifyValue(ShotComponents.DAMAGE, new ValueModifier(-0.40, ValueModifier.Operation.MULTIPLY_TOTAL, ValueModifier.Type.HARMFUL));
+                    profile.modifyValue(ShotComponents.SPREAD, new ValueModifier(3.5, ValueModifier.Operation.ADD, ValueModifier.Type.NEUTRAL));
+                    profile.modify(ShotComponents.POST_HIT_EFFECTS, effects -> effects.add(new GlassBulletPostHit()));
+                    profile.modify(ShotComponents.PARTICLE_TRAIL, trail -> trail.add(ColorTransitionParticleOption.bulletTrail(0xFFFFFF, 0xC8E8EE)));
                 }
 
                 @Override
@@ -100,15 +89,11 @@ public class ModAmmoTypes {
             () -> new AmmoType(ModItems.TRACER_BULLET) {
                 @Override
                 public void applyToShot(ShotProfile profile, LivingEntity shooter) {
-                    profile.components().getOrCreate(ShotComponents.GRAVITY)
-                            .addModifier(new ValueModifier(-1.0, ValueModifier.Operation.MULTIPLY_TOTAL, ValueModifier.Type.BENEFICIAL));
-                    profile.components().getOrCreate(ShotComponents.BULLET_SPEED)
-                            .addModifier(new ValueModifier(0.50, ValueModifier.Operation.MULTIPLY_TOTAL, ValueModifier.Type.BENEFICIAL));
-                    profile.components().getOrCreate(ShotComponents.POST_HIT_EFFECTS).add(new TracerBulletPostHit());
-                    profile.components().getOrCreate(ShotComponents.PARTICLE_TRAIL).add(
-                            ColorTransitionParticleOption.bulletTrail(0xFFFF55, 0xFF8800)
-                    );
-                    profile.components().getOrCreate(ShotComponents.MUZZLE_FLASH).addTint(0xFFFF55);
+                    profile.modifyValue(ShotComponents.GRAVITY, new ValueModifier(-1.0, ValueModifier.Operation.MULTIPLY_TOTAL, ValueModifier.Type.BENEFICIAL));
+                    profile.modifyValue(ShotComponents.BULLET_SPEED, new ValueModifier(0.50, ValueModifier.Operation.MULTIPLY_TOTAL, ValueModifier.Type.BENEFICIAL));
+                    profile.modify(ShotComponents.POST_HIT_EFFECTS, effects -> effects.add(new TracerBulletPostHit()));
+                    profile.modify(ShotComponents.PARTICLE_TRAIL, trail -> trail.add(ColorTransitionParticleOption.bulletTrail(0xFFFF55, 0xFF8800)));
+                    profile.modify(ShotComponents.MUZZLE_FLASH, flash -> flash.addTint(0xFFFF55));
                 }
 
                 @Override

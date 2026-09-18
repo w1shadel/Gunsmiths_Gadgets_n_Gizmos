@@ -41,36 +41,24 @@ public class CuriosAccessoryEvents {
         LivingEntity living = event.getEntity();
         ShotProfile profile = event.getShotProfile();
         if (CuriosCompat.isEquipped(living, ModItems.RECOIL_HARNESS.get())) {
-            profile.get(ShotComponents.CAMERA_RECOIL_MULTIPLIER).addModifier(
-                    new ValueModifier(-0.40, ValueModifier.Operation.MULTIPLY_TOTAL, ValueModifier.Type.BENEFICIAL)
-            );
+            profile.modifyValue(ShotComponents.CAMERA_RECOIL_MULTIPLIER,  new ValueModifier(-0.40, ValueModifier.Operation.MULTIPLY_TOTAL, ValueModifier.Type.BENEFICIAL));
         }
         if (CuriosCompat.isEquipped(living, ModItems.RANGEFINDER_MONOCLE.get())) {
-            profile.get(ShotComponents.SPREAD).addModifier(
-                    new ValueModifier(-1.5, ValueModifier.Operation.ADD, ValueModifier.Type.BENEFICIAL)
-            );
+            profile.modifyValue(ShotComponents.SPREAD,new ValueModifier(-1.5, ValueModifier.Operation.ADD, ValueModifier.Type.BENEFICIAL));
         }
         if (CuriosCompat.isEquipped(living, ModItems.GUNSLINGERS_SPURS.get())) {
-            profile.get(ShotComponents.IN_AIR_PENALTY).addModifier(
-                    new ValueModifier(-1.0, ValueModifier.Operation.MULTIPLY_TOTAL, ValueModifier.Type.BENEFICIAL)
-            );
+            profile.modifyValue(ShotComponents.IN_AIR_PENALTY,new ValueModifier(-1.0, ValueModifier.Operation.MULTIPLY_TOTAL, ValueModifier.Type.BENEFICIAL));
         }
         if (CuriosCompat.isEquipped(living, ModItems.GUNSMITHS_GLOVES.get())) {
-            profile.get(ShotComponents.RELOAD_SPEED_MULTIPLIER).addModifier(
-                    new ValueModifier(0.15, ValueModifier.Operation.MULTIPLY_TOTAL, ValueModifier.Type.BENEFICIAL)
-            );
+            profile.modifyValue(ShotComponents.RELOAD_SPEED_MULTIPLIER, new ValueModifier(0.15, ValueModifier.Operation.MULTIPLY_TOTAL, ValueModifier.Type.BENEFICIAL));
         }
         if (CuriosCompat.isEquipped(living, ModItems.SPEEDLOADER_BELT.get()) && profile.gun().armPoseKind() == ArmPoseKind.PISTOL) {
-            profile.get(ShotComponents.RELOAD_SPEED_MULTIPLIER).addModifier(
-                    new ValueModifier(0.30, ValueModifier.Operation.MULTIPLY_TOTAL, ValueModifier.Type.BENEFICIAL)
-            );
+            profile.modifyValue(ShotComponents.RELOAD_SPEED_MULTIPLIER,new ValueModifier(0.30, ValueModifier.Operation.MULTIPLY_TOTAL, ValueModifier.Type.BENEFICIAL));
         }
         if (CuriosCompat.isEquipped(living, ModItems.GAMBLERS_RING.get())) {
             float procChance = GunsmithConfig.COMMON.gamblersRingChance.get().floatValue();
             if (living.getRandom().nextFloat() < procChance) {
-                profile.get(ShotComponents.DAMAGE).addModifier(
-                        new ValueModifier(1.0, ValueModifier.Operation.MULTIPLY_TOTAL, ValueModifier.Type.BENEFICIAL)
-                );
+                profile.modifyValue(ShotComponents.DAMAGE, new ValueModifier(1.0, ValueModifier.Operation.MULTIPLY_TOTAL, ValueModifier.Type.BENEFICIAL));
             }
         }
     }
@@ -79,7 +67,7 @@ public class CuriosAccessoryEvents {
     public static void onAmmoAmount(AmmoEvent.Amount event) {
         if (CuriosCompat.isEquipped(event.getEntity(), ModItems.GAMBLERS_RING.get())) {
             if (event.getEntity().getRandom().nextFloat() < 0.15F) {
-                event.setAmmoToConsume(0); // 消費弾数を0に変更
+                event.setAmmoToConsume(0); 
                 event.getEntity().level().playSound(null, event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(),
                         SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.PLAYERS, 0.8F, 1.8F);
             }
@@ -112,7 +100,7 @@ public class CuriosAccessoryEvents {
             if (CuriosCompat.isEquipped(player, ModItems.QUICK_DRAW_HOLSTER.get())) {
                 ItemStack newStack = event.getTo();
                 if (newStack.getItem() instanceof io.redspace.irons_artifice.item.GunItem) {
-                    FireDelayState.remove(newStack);
+                    io.redspace.irons_artifice.item.FireDelayState.clear(player);
                     player.level().playSound(null, player.getX(), player.getY(), player.getZ(),
                             SoundEvents.ARMOR_EQUIP_LEATHER, SoundSource.PLAYERS, 0.8F, 1.6F);
                 }

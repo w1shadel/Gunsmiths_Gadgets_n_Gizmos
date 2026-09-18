@@ -42,51 +42,45 @@ public record GunSetBonus(
     }
 
     public void apply(ShotProfile profile, net.minecraft.world.entity.LivingEntity shooter) {
-        ShotComponentMap map = profile.components();
-        if (bonuses.damageMultiplier != 0) {
-            map.getOrCreate(ShotComponents.DAMAGE).addModifier(
-                    new ValueModifier(bonuses.damageMultiplier, ValueModifier.Operation.MULTIPLY_TOTAL, ValueModifier.Type.BENEFICIAL)
-            );
+        if (bonuses.damageMultiplier() != 0) {
+            profile.modifyValue(ShotComponents.DAMAGE,
+                    new ValueModifier(bonuses.damageMultiplier(), ValueModifier.Operation.MULTIPLY_TOTAL, ValueModifier.Type.BENEFICIAL));
         }
-        if (bonuses.bulletSpeedMultiplier != 0) {
-            map.getOrCreate(ShotComponents.BULLET_SPEED).addModifier(
-                    new ValueModifier(bonuses.bulletSpeedMultiplier, ValueModifier.Operation.MULTIPLY_TOTAL, ValueModifier.Type.BENEFICIAL)
-            );
+        if (bonuses.bulletSpeedMultiplier() != 0) {
+            profile.modifyValue(ShotComponents.BULLET_SPEED,
+                    new ValueModifier(bonuses.bulletSpeedMultiplier(), ValueModifier.Operation.MULTIPLY_TOTAL, ValueModifier.Type.BENEFICIAL));
         }
-        if (bonuses.recoilMultiplier != 0) {
-            map.getOrCreate(ShotComponents.CAMERA_RECOIL_MULTIPLIER).addModifier(
-                    new ValueModifier(bonuses.recoilMultiplier, ValueModifier.Operation.MULTIPLY_TOTAL, ValueModifier.Type.BENEFICIAL)
-            );
+        if (bonuses.recoilMultiplier() != 0) {
+            profile.modifyValue(ShotComponents.CAMERA_RECOIL_MULTIPLIER,
+                    new ValueModifier(bonuses.recoilMultiplier(), ValueModifier.Operation.MULTIPLY_TOTAL, ValueModifier.Type.BENEFICIAL));
         }
-        if (bonuses.spreadAdd != 0) {
-            map.getOrCreate(ShotComponents.SPREAD).addModifier(
-                    new ValueModifier(bonuses.spreadAdd, ValueModifier.Operation.ADD, ValueModifier.Type.BENEFICIAL)
-            );
+        if (bonuses.spreadAdd() != 0) {
+            profile.modifyValue(ShotComponents.SPREAD,
+                    new ValueModifier(bonuses.spreadAdd(), ValueModifier.Operation.ADD, ValueModifier.Type.BENEFICIAL));
         }
-        if (bonuses.piercingAdd != 0) {
-            map.getOrCreate(ShotComponents.PIERCING).addModifier(
-                    new ValueModifier(bonuses.piercingAdd, ValueModifier.Operation.ADD, ValueModifier.Type.BENEFICIAL)
-            );
+        if (bonuses.piercingAdd() != 0) {
+            profile.modifyValue(ShotComponents.PIERCING,
+                    new ValueModifier(bonuses.piercingAdd(), ValueModifier.Operation.ADD, ValueModifier.Type.BENEFICIAL));
         }
+
         bonuses.trailColor().ifPresent(colorHex -> {
             try {
                 int color = (int) Long.parseLong(colorHex.replace("#", ""), 16);
-                map.getOrCreate(ShotComponents.PARTICLE_TRAIL).add(ColorTransitionParticleOption.bulletTrail(color, 0x000000));
-            } catch (Exception ignored) {
-            }
+                profile.modify(ShotComponents.PARTICLE_TRAIL, trail ->
+                        trail.add(ColorTransitionParticleOption.bulletTrail(color, 0x000000)));
+            } catch (Exception ignored) {}
         });
+
         bonuses.muzzleFlashColor().ifPresent(colorHex -> {
             try {
                 int color = (int) Long.parseLong(colorHex.replace("#", ""), 16);
-                map.getOrCreate(ShotComponents.MUZZLE_FLASH).addTint(color);
-            } catch (Exception ignored) {
-            }
+                profile.modify(ShotComponents.MUZZLE_FLASH, flash -> flash.addTint(color));
+            } catch (Exception ignored) {}
         });
+
         for (SetBonusEffect effect : customEffects) {
             effect.onCompose(profile, shooter);
-            map.getOrCreate(ShotComponents.ON_HIT).add((level, bullet, hitResult, accumulator) -> {
-                effect.onHit(level, bullet, hitResult, accumulator);
-            });
+            profile.modify(ShotComponents.ON_HIT, onHit -> onHit.add(effect::onHit));
         }
     }
 

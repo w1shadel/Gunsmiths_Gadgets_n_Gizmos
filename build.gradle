@@ -77,7 +77,7 @@ dependencies {
     implementation "curse.maven:jei-238222:8676045"
     implementation "curse.maven:jade-324717:8651070"
     implementation "curse.maven:geckolib-388172:8327201"
-    implementation "curse.maven:irons-artifice-1650193:8772049"
+    implementation "curse.maven:irons-artifice-1650193:8911931"
     implementation "curse.maven:curios-309927:8463519"
 }
 

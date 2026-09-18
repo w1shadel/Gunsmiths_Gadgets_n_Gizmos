@@ -25,26 +25,38 @@ public class ClientHelperMixin {
         Minecraft mc = Minecraft.getInstance();
         ClientLevel level = mc.level;
         if (level == null || mc.player == null) return;
+
         Entity entity = level.getEntity(msg.entityId());
         if (entity instanceof LivingEntity shooter) {
             ItemStack heldGun = shooter.getMainHandItem();
             if (heldGun.getItem() instanceof io.redspace.irons_artifice.item.GunItem) {
                 MuzzleOffset offsetData = MuzzleBoneAutoLoader.getOffset(heldGun.getItem());
                 Vec3 calculatedOffset;
+
                 if (shooter == mc.player && mc.options.getCameraType().isFirstPerson()) {
                     calculatedOffset = offsetData.calculateFirstPersonOffset(shooter);
                 } else {
                     calculatedOffset = offsetData.calculateThirdPersonOffset(shooter, shooter.getLookAngle());
                 }
+
                 Vec3 pos = shooter.getEyePosition().add(calculatedOffset);
                 Vec3 motion = msg.entityMotion().scale(0.5);
-                if (level.isFluidAtPosition(BlockPos.containing(pos), s -> s.is(FluidTags.WATER))) {
+
+                boolean inWater = level.isFluidAtPosition(BlockPos.containing(pos), s -> s.is(FluidTags.WATER));
+
+                if (inWater) {
+
                     for (int i = 0; i < 40; i++) {
                         Vec3 r = new Vec3(level.getRandom().nextDouble() - 0.5, level.getRandom().nextDouble() - 0.5, level.getRandom().nextDouble() - 0.5).scale(3.5);
                         level.addAlwaysVisibleParticle(ParticleTypes.BUBBLE, false, pos.x, pos.y, pos.z, r.x, r.y, r.z);
                     }
                 } else {
-                    level.addAlwaysVisibleParticle(msg.particle(), true, pos.x, pos.y, pos.z, motion.x, motion.y, motion.z);
+
+                    if (msg.visuals() != null) {
+                        msg.visuals().flash().ifPresent(particle ->
+                                level.addAlwaysVisibleParticle(particle, true, pos.x, pos.y, pos.z, motion.x, motion.y, motion.z)
+                        );
+                    }
                 }
                 ci.cancel();
             }

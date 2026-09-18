@@ -100,16 +100,4 @@ public class ModClientEvents {
         event.registerLayerDefinition(TownMarksmanModel.LAYER_LOCATION, TownMarksmanModel::createBodyLayer);
         event.registerLayerDefinition(ApostleGunModel.LAYER_LOCATION, ApostleGunModel::createBodyLayer);
     }
-
-    @SubscribeEvent
-    public static void registerClientExtensions(RegisterClientExtensionsEvent event) {
-        IClientItemExtensions riflePose = new IClientItemExtensions() {
-            @Override
-            public HumanoidModel.ArmPose getArmPose(LivingEntity entityLiving, InteractionHand hand, ItemStack itemStack) {
-                return GunArmPoses.RIFLE.getValue();
-            }
-        };
-        event.registerItem(riflePose, ModItems.CLUNKER_RIFLE.get());
-        event.registerItem(riflePose, ModItems.MINIGUN.get());
-    }
 }
