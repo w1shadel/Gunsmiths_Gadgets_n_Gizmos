@@ -85,12 +85,4 @@ public class ModClientEvents {
         event.registerLayerDefinition(TownMarksmanModel.LAYER_LOCATION, TownMarksmanModel::createBodyLayer);
         event.registerLayerDefinition(ApostleGunModel.LAYER_LOCATION, ApostleGunModel::createBodyLayer);
     }
-
-    @EventBusSubscriber(modid = GunsmithsGadgetsnGizmos.MODID, bus = EventBusSubscriber.Bus.GAME, value = Dist.CLIENT)
-    public static class GameBusEvents {
-        @SubscribeEvent
-        public static void onClientTick(ClientTickEvent.Post event) {
-            ApostleShaderManager.clientTick();
-        }
-    }
 }
