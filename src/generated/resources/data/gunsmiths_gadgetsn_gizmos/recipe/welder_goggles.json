@@ -2,15 +2,22 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "I": "minecraft:iron_ingot",
-    "L": "minecraft:leather",
-    "T": "minecraft:tinted_glass"
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "L": {
+      "item": "minecraft:leather"
+    },
+    "T": {
+      "item": "minecraft:tinted_glass"
+    }
   },
   "pattern": [
     "LIL",
     "T T"
   ],
   "result": {
+    "count": 1,
     "id": "gunsmiths_gadgetsn_gizmos:welder_goggles"
   }
 }

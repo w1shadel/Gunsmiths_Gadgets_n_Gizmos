@@ -8,9 +8,9 @@ import com.maxwell.gunsmiths_gadgetsn_gizmos.init.ModEntities;
 import io.redspace.irons_artifice.entity.Bullet;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.npc.villager.AbstractVillager;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.phys.AABB;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -80,10 +80,10 @@ public class MarksmanVillageSpawnerEvents {
                         int spawnY = level.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, spawnX, spawnZ);
                         BlockPos spawnPos = new BlockPos(spawnX, spawnY, spawnZ);
                         if (level.getBlockState(spawnPos.below()).isSolid()) {
-                            TownMarksmanEntity marksman = ModEntities.TOWN_MARKSMAN.get().create(level, EntitySpawnReason.EVENT);
+                            TownMarksmanEntity marksman = ModEntities.TOWN_MARKSMAN.get().spawn(level, spawnPos, MobSpawnType.EVENT);
                             if (marksman != null) {
                                 marksman.setPos(spawnPos.getX() + 0.5, spawnPos.getY(), spawnPos.getZ() + 0.5);
-                                marksman.finalizeSpawn(level, level.getCurrentDifficultyAt(spawnPos), EntitySpawnReason.EVENT, null);
+                                marksman.finalizeSpawn(level, level.getCurrentDifficultyAt(spawnPos), MobSpawnType.EVENT, null);
                                 level.addFreshEntity(marksman);
                             }
                         }

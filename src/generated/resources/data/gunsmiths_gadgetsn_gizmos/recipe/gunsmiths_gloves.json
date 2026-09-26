@@ -2,8 +2,12 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "L": "minecraft:leather",
-    "O": "irons_artifice:gun_oil_modifier"
+    "L": {
+      "item": "minecraft:leather"
+    },
+    "O": {
+      "item": "irons_artifice:gun_oil_modifier"
+    }
   },
   "pattern": [
     " O ",
@@ -11,6 +15,7 @@
     "L L"
   ],
   "result": {
+    "count": 1,
     "id": "gunsmiths_gadgetsn_gizmos:gunsmiths_gloves"
   }
 }

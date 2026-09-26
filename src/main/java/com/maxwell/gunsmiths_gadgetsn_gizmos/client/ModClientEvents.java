@@ -1,8 +1,5 @@
 package com.maxwell.gunsmiths_gadgetsn_gizmos.client;
 
-import com.geckolib.animatable.client.GeoRenderProvider;
-import com.geckolib.model.DefaultedItemGeoModel;
-import com.geckolib.renderer.GeoItemRenderer;
 import com.google.common.base.Suppliers;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.GunsmithsGadgetsnGizmos;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.client.gui.AmmoPouchScreen;
@@ -15,27 +12,26 @@ import com.maxwell.gunsmiths_gadgetsn_gizmos.client.renderer.TownMarksmanRendere
 import com.maxwell.gunsmiths_gadgetsn_gizmos.init.ModEntities;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.init.ModItems;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.init.ModMenuTypes;
-import io.redspace.irons_artifice.client.gun.GunArmPoses;
 import io.redspace.irons_artifice.client.gun.GunInHandRenderer;
 import io.redspace.irons_artifice.item.GunItem;
-import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
-import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
-import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
+import net.neoforged.neoforge.event.AddReloadListenerEvent;
+import software.bernie.geckolib.animatable.client.GeoRenderProvider;
+import software.bernie.geckolib.model.DefaultedItemGeoModel;
+import software.bernie.geckolib.renderer.GeoItemRenderer;
 
 import javax.annotation.Nullable;
 import java.util.function.Supplier;
 
-@EventBusSubscriber(modid = GunsmithsGadgetsnGizmos.MODID, value = Dist.CLIENT)
+@SuppressWarnings("removal")
+@EventBusSubscriber(modid = GunsmithsGadgetsnGizmos.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ModClientEvents {
     @SubscribeEvent
     public static void registerMenuScreens(RegisterMenuScreensEvent event) {
@@ -45,23 +41,39 @@ public class ModClientEvents {
     }
 
     @SubscribeEvent
-    public static void onClientTick(net.neoforged.neoforge.client.event.ClientTickEvent.Post event) {
-        ApostleShaderManager.clientTick();
-    }
-
-    @SubscribeEvent
-    public static void onAddClientReloadListeners(net.neoforged.neoforge.client.event.AddClientReloadListenersEvent event) {
+    public static void onAddClientReloadListeners(AddReloadListenerEvent event) {
         event.addListener(
-                net.minecraft.resources.ResourceLocation.fromNamespaceAndPath(GunsmithsGadgetsnGizmos.MODID, "gun_set_bonuses"),
                 new com.maxwell.gunsmiths_gadgetsn_gizmos.api.synergy.GunSetBonusManager()
         );
-        event.addListener(
-                net.minecraft.resources.ResourceLocation.fromNamespaceAndPath(GunsmithsGadgetsnGizmos.MODID, "cursed_altar_recipes"),
-                new com.maxwell.gunsmiths_gadgetsn_gizmos.recipe.CursedAltarRecipeManager()
-        );
+
     }
+    @SubscribeEvent
+    public static void registerRenderers(final EntityRenderersEvent.RegisterRenderers event) {
+        if (ModItems.CLUNKER_RIFLE.get() instanceof GunItem gun) {
+            ResourceLocation modelId = BuiltInRegistries.ITEM.getKey(gun);
+            gun.geoRenderProvider.setValue(new GeoRenderProvider() {
+                private final Supplier<GeoItemRenderer<GunItem>> renderer =
+                        Suppliers.memoize(() -> new GunInHandRenderer(new DefaultedItemGeoModel<>(modelId)));
 
+                @Override
+                public @Nullable GeoItemRenderer<GunItem> getGeoItemRenderer() {
+                    return this.renderer.get();
+                }
+            });
+        }
+        if (ModItems.MINIGUN.get() instanceof GunItem gun) {
+            ResourceLocation modelId = BuiltInRegistries.ITEM.getKey(gun);
+            gun.geoRenderProvider.setValue(new GeoRenderProvider() {
+                private final Supplier<GeoItemRenderer<GunItem>> renderer =
+                        Suppliers.memoize(() -> new GunInHandRenderer(new DefaultedItemGeoModel<>(modelId)));
 
+                @Override
+                public @Nullable GeoItemRenderer<GunItem> getGeoItemRenderer() {
+                    return this.renderer.get();
+                }
+            });
+        }
+    }
     @SubscribeEvent
     public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(ModEntities.TOWN_MARKSMAN.get(), TownMarksmanRenderer::new);
@@ -72,5 +84,13 @@ public class ModClientEvents {
     public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(TownMarksmanModel.LAYER_LOCATION, TownMarksmanModel::createBodyLayer);
         event.registerLayerDefinition(ApostleGunModel.LAYER_LOCATION, ApostleGunModel::createBodyLayer);
+    }
+
+    @EventBusSubscriber(modid = GunsmithsGadgetsnGizmos.MODID, bus = EventBusSubscriber.Bus.GAME, value = Dist.CLIENT)
+    public static class GameBusEvents {
+        @SubscribeEvent
+        public static void onClientTick(ClientTickEvent.Post event) {
+            ApostleShaderManager.clientTick();
+        }
     }
 }

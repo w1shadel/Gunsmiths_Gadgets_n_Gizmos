@@ -3,7 +3,6 @@ package com.maxwell.gunsmiths_gadgetsn_gizmos.api.synergy;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.redspace.irons_artifice.client.particle.ColorTransitionParticleOption;
-import io.redspace.irons_artifice.data.ShotComponentMap;
 import io.redspace.irons_artifice.data.ShotComponents;
 import io.redspace.irons_artifice.data.ValueModifier;
 import io.redspace.irons_artifice.gun.ShotProfile;
@@ -62,22 +61,21 @@ public record GunSetBonus(
             profile.modifyValue(ShotComponents.PIERCING,
                     new ValueModifier(bonuses.piercingAdd(), ValueModifier.Operation.ADD, ValueModifier.Type.BENEFICIAL));
         }
-
         bonuses.trailColor().ifPresent(colorHex -> {
             try {
                 int color = (int) Long.parseLong(colorHex.replace("#", ""), 16);
                 profile.modify(ShotComponents.PARTICLE_TRAIL, trail ->
                         trail.add(ColorTransitionParticleOption.bulletTrail(color, 0x000000)));
-            } catch (Exception ignored) {}
+            } catch (Exception ignored) {
+            }
         });
-
         bonuses.muzzleFlashColor().ifPresent(colorHex -> {
             try {
                 int color = (int) Long.parseLong(colorHex.replace("#", ""), 16);
                 profile.modify(ShotComponents.MUZZLE_FLASH, flash -> flash.addTint(color));
-            } catch (Exception ignored) {}
+            } catch (Exception ignored) {
+            }
         });
-
         for (SetBonusEffect effect : customEffects) {
             effect.onCompose(profile, shooter);
             profile.modify(ShotComponents.ON_HIT, onHit -> onHit.add(effect::onHit));

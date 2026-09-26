@@ -129,16 +129,16 @@ public enum ApostleTitle {
                 level.sendParticles(ParticleTypes.EXPLOSION, victim.getX(), victim.getY() + 0.5, victim.getZ(), 1, 0, 0, 0, 0);
             }
             case VOID_CLEFT_SOVEREIGN -> {
-                victim.hurtServer(level, level.damageSources().fellOutOfWorld(), 4.0F);
+                victim.hurt(level.damageSources().fellOutOfWorld(), 4.0F);
                 victim.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 20 * 3, 0), boss);
-                victim.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 20 * 3, 2), boss);
+                victim.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20 * 3, 2), boss);
             }
             case RULER_OF_ALL_CREATION, ABYSSAL_RULER_OF_ALL_CREATION -> {
                 victim.addEffect(new MobEffectInstance(ModMobEffects.BLEEDING, 20 * 4, 0), boss);
                 boss.heal(this == ABYSSAL_RULER_OF_ALL_CREATION ? 2.5F : 1.5F);
                 victim.addEffect(new MobEffectInstance(MobEffects.WITHER, 20 * 3, 0), boss);
                 float voidDmg = (this == ABYSSAL_RULER_OF_ALL_CREATION) ? 4.0F : 2.5F;
-                victim.hurtServer(level, level.damageSources().fellOutOfWorld(), voidDmg);
+                victim.hurt(level.damageSources().fellOutOfWorld(), voidDmg);
                 level.sendParticles(ParticleTypes.EXPLOSION, victim.getX(), victim.getY() + 0.5, victim.getZ(), 1, 0, 0, 0, 0);
                 level.sendParticles(ParticleTypes.SOUL_FIRE_FLAME, victim.getX(), victim.getY() + 0.5, victim.getZ(), 10, 0.2, 0.2, 0.2, 0.04);
             }

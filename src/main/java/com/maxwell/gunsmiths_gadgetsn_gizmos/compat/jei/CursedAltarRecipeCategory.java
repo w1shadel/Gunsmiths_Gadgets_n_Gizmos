@@ -10,9 +10,9 @@ import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
+import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import mezz.jei.api.recipe.types.IRecipeType;
-import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -33,7 +33,7 @@ public final class CursedAltarRecipeCategory implements IRecipeCategory<CursedAl
     }
 
     @Override
-    public @NonNull IRecipeType<CursedAltarRecipe> getRecipeType() {
+    public @NonNull RecipeType<CursedAltarRecipe> getRecipeType() {
         return JeiRecipeTypes.CURSED_ALTAR;
     }
 
@@ -94,7 +94,7 @@ public final class CursedAltarRecipeCategory implements IRecipeCategory<CursedAl
     }
 
     @Override
-    public void draw(@NonNull CursedAltarRecipe recipe, @NonNull IRecipeSlotsView recipeSlotsView, @NonNull GuiGraphicsExtractor guiGraphics, double mouseX, double mouseY) {
+    public void draw(@NonNull CursedAltarRecipe recipe, @NonNull IRecipeSlotsView recipeSlotsView, @NonNull GuiGraphics guiGraphics, double mouseX, double mouseY) {
         background.draw(guiGraphics);
     }
 }

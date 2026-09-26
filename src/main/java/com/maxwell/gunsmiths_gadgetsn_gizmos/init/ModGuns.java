@@ -9,13 +9,11 @@ import io.redspace.irons_artifice.item.animation_adjuster.AnimationAdjuster;
 import io.redspace.irons_artifice.registry.SoundRegistry;
 import net.minecraft.sounds.SoundEvents;
 
-import java.util.Map;
-
 public class ModGuns {
     public static final GunProfile CLUNKER_RIFLE = GunProfile.builder(
-                    1, // 装弾数
-                    8, // スロット数
-                    70, // リロードTick
+                    1, 
+                    8, 
+                    70, 
                     FireMode.SEMI,
                     ArmPoseKind.RIFLE,
                     () -> {
@@ -48,11 +46,10 @@ public class ModGuns {
             .equipSound(PlayableSound.of(SoundRegistry.ARQUEBUS_EQUIP, 0.8F, 0.8F, 1.0F))
             .animationAdjusters(AnimationAdjuster.LOWER_HAMMER)
             .build();
-
     public static final GunProfile MINIGUN = GunProfile.builder(
-                    100, // 装弾数
-                    4,   // スロット数
-                    90,  // リロードTick
+                    100, 
+                    4,   
+                    90,  
                     FireMode.AUTO,
                     ArmPoseKind.RIFLE,
                     () -> {

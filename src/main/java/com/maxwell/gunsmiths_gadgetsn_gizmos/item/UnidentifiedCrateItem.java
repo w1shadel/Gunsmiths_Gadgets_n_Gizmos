@@ -8,7 +8,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -36,7 +36,7 @@ public class UnidentifiedCrateItem extends Item {
     }
 
     @Override
-    public @NonNull InteractionResult use(@NonNull Level level, @NonNull Player player, @NonNull InteractionHand hand) {
+    public InteractionResultHolder<ItemStack> use(@NonNull Level level, @NonNull Player player, @NonNull InteractionHand hand) {
         ItemStack held = player.getItemInHand(hand);
         if (!level.isClientSide() && level instanceof ServerLevel serverLevel) {
             RandomSource random = level.getRandom();
@@ -50,11 +50,11 @@ public class UnidentifiedCrateItem extends Item {
             }
             serverLevel.playSound(null, player.getX(), player.getY(), player.getZ(),
                     SoundEvents.BARREL_OPEN, SoundSource.PLAYERS, 1.0F, 1.2F);
-            serverLevel.sendParticles(ParticleTypes.CRIT,
-                    player.getX(), player.getY() + 1.0, player.getZ(),
+           serverLevel.sendParticles(ParticleTypes.CRIT,
+                   player.getX(), player.getY() + 1.0, player.getZ(),
                     15, 0.3, 0.3, 0.3, 0.1);
         }
         held.consume(1, player);
-        return InteractionResult.SUCCESS;
+        return InteractionResultHolder.sidedSuccess(held, level.isClientSide());
     }
 }

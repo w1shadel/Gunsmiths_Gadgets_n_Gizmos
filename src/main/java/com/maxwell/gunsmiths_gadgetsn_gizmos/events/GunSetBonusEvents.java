@@ -6,13 +6,12 @@ import com.maxwell.gunsmiths_gadgetsn_gizmos.api.synergy.GunSetBonusManager;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.api.synergy.SetBonusEffect;
 import io.redspace.irons_artifice.api.ComposeShotEvent;
 import io.redspace.irons_artifice.api.GunShootEvent;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.AddServerReloadListenersEvent;
+import net.neoforged.neoforge.event.AddReloadListenerEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 
 import java.util.List;
@@ -20,13 +19,11 @@ import java.util.List;
 @EventBusSubscriber(modid = GunsmithsGadgetsnGizmos.MODID)
 public class GunSetBonusEvents {
     @SubscribeEvent
-    public static void onAddServerReloadListeners(AddServerReloadListenersEvent event) {
+    public static void onAddServerReloadListeners(AddReloadListenerEvent event) {
         event.addListener(
-                ResourceLocation.fromNamespaceAndPath("gunsmiths_gadgetsn_gizmos", "gun_set_bonuses"),
                 new GunSetBonusManager()
         );
         event.addListener(
-                ResourceLocation.fromNamespaceAndPath("gunsmiths_gadgetsn_gizmos", "cursed_altar_recipes"),
                 new com.maxwell.gunsmiths_gadgetsn_gizmos.recipe.CursedAltarRecipeManager()
         );
     }

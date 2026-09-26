@@ -1,7 +1,7 @@
 {
   "required": true,
   "package": "com.maxwell.gunsmiths_gadgetsn_gizmos.mixin",
-  "compatibilityLevel": "JAVA_25",
+  "compatibilityLevel": "JAVA_21",
   "mixins": [
     "GunContainerMixin",
     "GunItemMixin",
@@ -13,7 +13,6 @@
     "client.AmmoCountHudOverlayMixin",
     "client.ClientHelperMixin",
     "client.PostChainAccessor",
-    "client.PostPassAccessor",
     "client.GameRendererMixin"
   ],
   "injectors": {

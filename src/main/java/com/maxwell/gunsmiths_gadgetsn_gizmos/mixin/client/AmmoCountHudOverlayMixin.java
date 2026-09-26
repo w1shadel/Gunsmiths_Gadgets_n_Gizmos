@@ -1,5 +1,6 @@
 package com.maxwell.gunsmiths_gadgetsn_gizmos.mixin.client;
 
+import com.maxwell.gunsmiths_gadgetsn_gizmos.GunsmithsGadgetsnGizmos;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.api.ammo.AmmoType;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.init.ModAmmoTypes;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.init.ModDataComponents;
@@ -11,8 +12,7 @@ import io.redspace.irons_artifice.item.MagazineContents;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphicsExtractor;
-import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
@@ -27,7 +27,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(value = AmmoCountHudOverlay.class, remap = false)
 public class AmmoCountHudOverlayMixin {
-    private static final ResourceLocation EMPTY_ICON = ResourceLocation.fromNamespaceAndPath("gunsmiths_gadgetsn_gizmos", "textures/gui/empty.png");
+    private static final ResourceLocation EMPTY_ICON = ResourceLocation.fromNamespaceAndPath(GunsmithsGadgetsnGizmos.MODID, "textures/gui/empty.png");
     @Unique
     private static final int[][] OUTLINE_OFFSETS = {
             {-1, 0}, {1, 0}, {0, -1}, {0, 1},
@@ -54,7 +54,7 @@ public class AmmoCountHudOverlayMixin {
     }
 
     @Inject(method = "render", at = @At("TAIL"))
-    private static void gunsmiths_gadgetsn_gizmos$renderLoadedAmmoItemOverlay(GuiGraphicsExtractor graphics, DeltaTracker deltaTracker, CallbackInfo ci) {
+    private static void gunsmiths_gadgetsn_gizmos$renderLoadedAmmoItemOverlay(GuiGraphics guiGraphics, DeltaTracker deltaTracker, CallbackInfo ci) {
         if (!ClientConfig.ENABLED.get() || !ClientConfig.SHOW_ICON.get()) return;
         Minecraft minecraft = Minecraft.getInstance();
         if (minecraft.options.hideGui) return;
@@ -66,7 +66,7 @@ public class AmmoCountHudOverlayMixin {
         if (ammoId == null) return;
         ResourceLocation id = ResourceLocation.tryParse(ammoId);
         if (id == null) return;
-        AmmoType type = ModAmmoTypes.REGISTRY.getValue(id);
+        AmmoType type = ModAmmoTypes.REGISTRY.get(id);
         if (type == null) return;
         Item ammoItem = type.getAmmoItem();
         if (ammoItem == null) return;
@@ -97,8 +97,8 @@ public class AmmoCountHudOverlayMixin {
         float totalHeight = Math.max(iconSize, magazineHeight + gapBetweenRows + reserveHeight);
         int ox = ClientConfig.OFFSET_X.get();
         int oy = ClientConfig.OFFSET_Y.get();
-        int guiWidth = graphics.guiWidth();
-        int guiHeight = graphics.guiHeight();
+        int guiWidth = guiGraphics.guiWidth();
+        int guiHeight = guiGraphics.guiHeight();
         float left = switch (ClientConfig.ANCHOR.get()) {
             case BOTTOM_RIGHT -> guiWidth - ox - totalWidth;
             case BOTTOM_LEFT -> ox;
@@ -118,18 +118,20 @@ public class AmmoCountHudOverlayMixin {
                 itemId.getNamespace(),
                 "textures/item/" + itemId.getPath() + ".png"
         );
+
+        guiGraphics.setColor(0.0F, 0.0F, 0.0F, 1.0F);
         for (int[] offset : OUTLINE_OFFSETS) {
-            graphics.blit(
-                    RenderPipelines.GUI_TEXTURED,
+            guiGraphics.blit(
                     textureLocation,
                     iconX + offset[0],
                     iconY + offset[1],
                     0.0F, 0.0F,
                     16, 16,
-                    16, 16,
-                    0xFF000000
+                    16, 16
             );
         }
-        graphics.item(new ItemStack(ammoItem), iconX, iconY);
+        guiGraphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
+
+        guiGraphics.renderItem(new ItemStack(ammoItem), iconX, iconY);
     }
 }

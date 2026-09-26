@@ -19,7 +19,7 @@ public class ModAmmoEvents {
         if (ammoId != null) {
             ResourceLocation id = ResourceLocation.tryParse(ammoId);
             if (id != null) {
-                AmmoType type = ModAmmoTypes.REGISTRY.getValue(id);
+                AmmoType type = ModAmmoTypes.REGISTRY.get(id);
                 if (type != null) {
                     type.applyToShot(event.getShotProfile(), event.getEntity());
                 }

@@ -24,7 +24,7 @@ public class ReapersGambitOnHit implements OnHitEffect {
         Entity owner = bullet.getOwner();
         if (hitResult instanceof EntityHitResult entityHit && entityHit.getEntity() instanceof LivingEntity target) {
             float fatalDamage = bullet.resolveDamage() * 3.0F;
-            target.hurtServer(level, level.damageSources().wither(), fatalDamage);
+            target.hurt(level.damageSources().wither(), fatalDamage);
             accumulator.add(target);
             level.playSound(null, hitPos.x, hitPos.y, hitPos.z,
                     SoundEvents.WITHER_SHOOT, SoundSource.PLAYERS, 2.0F, 1.2F);

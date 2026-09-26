@@ -36,17 +36,10 @@ public class CursedAltarMenu extends AbstractContainerMenu {
     private final ResultContainer resultContainer = new ResultContainer();
     private @Nullable CursedAltarRecipe activeRecipe = null;
     private boolean isCrafting = false;
+
     public CursedAltarMenu(int containerId, Inventory inv, RegistryFriendlyByteBuf extraData) {
         this(containerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()));
-    }    private final SimpleContainer inputContainer = new SimpleContainer(3) {
-        @Override
-        public void setChanged() {
-            super.setChanged();
-            if (!isCrafting) {
-                CursedAltarMenu.this.slotsChanged(this);
-            }
-        }
-    };
+    }
 
     public CursedAltarMenu(int containerId, Inventory inv, BlockEntity entity) {
         super(ModMenuTypes.CURSED_ALTAR_MENU.get(), containerId);
@@ -80,7 +73,15 @@ public class CursedAltarMenu extends AbstractContainerMenu {
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
         updateCraftingResult();
-    }
+    }    private final SimpleContainer inputContainer = new SimpleContainer(3) {
+        @Override
+        public void setChanged() {
+            super.setChanged();
+            if (!isCrafting) {
+                CursedAltarMenu.this.slotsChanged(this);
+            }
+        }
+    };
 
     @Override
     public void slotsChanged(@NotNull Container container) {
@@ -207,6 +208,7 @@ public class CursedAltarMenu extends AbstractContainerMenu {
             this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));
         }
     }
+
 
 
 }

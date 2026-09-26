@@ -26,7 +26,7 @@ public class ReapersTempestOnHit implements OnHitEffect {
             float blastDamage = bullet.resolveDamage() * 2.5F;
             for (Entity entity : level.getEntities(bullet, area, e -> e instanceof LivingEntity && Utils.canHarm(owner, e))) {
                 LivingEntity target = (LivingEntity) entity;
-                target.hurtServer(level, level.damageSources().wither(), blastDamage);
+                target.hurt(level.damageSources().wither(), blastDamage);
                 target.setDeltaMovement(target.getDeltaMovement().x * 0.3, 0.7, target.getDeltaMovement().z * 0.3);
                 target.hurtMarked = true;
                 accumulator.add(target);

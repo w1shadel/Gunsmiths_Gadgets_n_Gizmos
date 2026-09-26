@@ -19,8 +19,12 @@ import java.util.*;
 import java.util.stream.Stream;
 
 public class CursedAltarRecipeManager extends SimplePreparableReloadListener<Map<ResourceLocation, CursedAltarRecipe>> {
-    private static final FileToIdConverter RECIPE_CONVERTER = FileToIdConverter.json("recipe");
-    private static final FileToIdConverter RECIPES_CONVERTER = FileToIdConverter.json("recipes");
+    private static final List<FileToIdConverter> CONVERTERS = List.of(
+            FileToIdConverter.json("recipe"),
+            FileToIdConverter.json("recipes"),
+            FileToIdConverter.json("cursed_altar"),
+            FileToIdConverter.json("cursed_altar_recipes")
+    );
     private static final Map<ResourceLocation, CursedAltarRecipe> RECIPES = new LinkedHashMap<>();
 
     public static Optional<CursedAltarRecipe> findMatchingRecipe(ItemStack base, ItemStack material, ItemStack catalyst) {
@@ -39,8 +43,9 @@ public class CursedAltarRecipeManager extends SimplePreparableReloadListener<Map
     @Override
     protected @NonNull Map<ResourceLocation, CursedAltarRecipe> prepare(@NonNull ResourceManager resourceManager, @NonNull ProfilerFiller profiler) {
         Map<ResourceLocation, CursedAltarRecipe> map = new LinkedHashMap<>();
-        scanResources(resourceManager, RECIPE_CONVERTER, map);
-        scanResources(resourceManager, RECIPES_CONVERTER, map);
+        for (FileToIdConverter converter : CONVERTERS) {
+            scanResources(resourceManager, converter, map);
+        }
         scanGeneratedFolder(map);
         return map;
     }
@@ -68,10 +73,6 @@ public class CursedAltarRecipeManager extends SimplePreparableReloadListener<Map
                 try (Stream<Path> stream = Files.walk(root)) {
                     stream.filter(Files::isRegularFile)
                             .filter(p -> p.toString().endsWith(".json"))
-                            .filter(p -> {
-                                String normalized = p.toString().replace('\\', '/');
-                                return normalized.contains("/recipe/") || normalized.contains("/recipes/");
-                            })
                             .forEach(path -> {
                                 try (Reader reader = Files.newBufferedReader(path)) {
                                     Path rel = root.relativize(path);
@@ -101,13 +102,16 @@ public class CursedAltarRecipeManager extends SimplePreparableReloadListener<Map
     }
 
     private boolean isCursedAltarType(String typeStr) {
-        return typeStr.equals(GunsmithsGadgetsnGizmos.MODID + ":cursed_altar") || typeStr.endsWith(":cursed_altar");
+        return typeStr.equals(GunsmithsGadgetsnGizmos.MODID + ":cursed_altar")
+                || typeStr.equals(GunsmithsGadgetsnGizmos.MODID + ":cursed_altar_recipe")
+                || typeStr.endsWith(":cursed_altar")
+                || typeStr.endsWith(":cursed_altar_recipe");
     }
 
     @Override
     protected void apply(@NonNull Map<ResourceLocation, CursedAltarRecipe> map, @NonNull ResourceManager resourceManager, @NonNull ProfilerFiller profiler) {
         RECIPES.clear();
         RECIPES.putAll(map);
-        GunsmithsGadgetsnGizmos.LOGGER.info("[CursedAltar] Successfully loaded {} Altar Recipes (from datapacks, other mods & generated resources)!", RECIPES.size());
+        GunsmithsGadgetsnGizmos.LOGGER.info("[CursedAltar] Successfully loaded {} Altar Recipes!", RECIPES.size());
     }
 }

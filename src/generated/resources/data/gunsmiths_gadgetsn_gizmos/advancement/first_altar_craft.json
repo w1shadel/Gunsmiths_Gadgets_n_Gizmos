@@ -22,6 +22,7 @@
       "translate": "advancements.gunsmiths_gadgetsn_gizmos.altar_craft.desc"
     },
     "icon": {
+      "count": 1,
       "id": "gunsmiths_gadgetsn_gizmos:bloodbound_calamity_modifier"
     },
     "title": {

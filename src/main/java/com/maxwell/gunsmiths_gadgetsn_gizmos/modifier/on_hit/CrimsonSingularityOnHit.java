@@ -27,7 +27,7 @@ public class CrimsonSingularityOnHit implements OnHitEffect {
             Entity target = entityHit.getEntity();
             if (target instanceof LivingEntity livingTarget && Utils.canHarm(owner, target)) {
                 float bonusDamage = (float) ((distance - 3.0) * DAMAGE_PER_BLOCK);
-                target.hurtServer(level, DamageSources.bullet(level, bullet, owner), bonusDamage);
+                target.hurt( DamageSources.bullet(level, bullet, owner), bonusDamage);
                 accumulator.add(target);
             }
         }

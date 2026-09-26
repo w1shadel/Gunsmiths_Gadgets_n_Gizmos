@@ -26,7 +26,7 @@ public final class BloodboundCalamityModifier implements GunModifier {
             if (event.getEntity().level() instanceof ServerLevel serverLevel) {
                 float cost = GunsmithConfig.COMMON.bloodboundHpCost.get().floatValue();
                 if (cost > 0.0F) {
-                    event.getEntity().hurtServer(serverLevel, event.getEntity().damageSources().magic(), cost);
+                    event.getEntity().hurt( event.getEntity().damageSources().magic(), cost);
                 }
             }
         }

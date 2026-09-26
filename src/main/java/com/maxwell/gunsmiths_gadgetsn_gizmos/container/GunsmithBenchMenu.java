@@ -142,6 +142,12 @@ public class GunsmithBenchMenu extends AbstractContainerMenu {
                 this.addSlot(new Slot(playerInventory, l + i * 9 + 9, 8 + l * 18, 84 + i * 18));
             }
         }
+    }
+
+    private void addPlayerHotbar(Inventory playerInventory) {
+        for (int i = 0; i < 9; ++i) {
+            this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));
+        }
     }    private final SimpleContainer inputContainer = new SimpleContainer(3) {
         @Override
         public void setChanged() {
@@ -149,12 +155,6 @@ public class GunsmithBenchMenu extends AbstractContainerMenu {
             GunsmithBenchMenu.this.slotsChanged(this);
         }
     };
-
-    private void addPlayerHotbar(Inventory playerInventory) {
-        for (int i = 0; i < 9; ++i) {
-            this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));
-        }
-    }
 
 
 

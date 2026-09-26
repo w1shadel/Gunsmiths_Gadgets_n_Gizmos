@@ -31,7 +31,7 @@ public class HeavyCoreImpactOnHit implements OnHitEffect {
                 Entity target = entityHit.getEntity();
                 if (target instanceof LivingEntity livingTarget && Utils.canHarm(owner, target)) {
                     DamageSource source = DamageSources.bullet(level, bullet, owner);
-                    target.hurtServer(level, source, bonusDamage);
+                    target.hurt(source, bonusDamage);
                     accumulator.add(target);
                 }
             }

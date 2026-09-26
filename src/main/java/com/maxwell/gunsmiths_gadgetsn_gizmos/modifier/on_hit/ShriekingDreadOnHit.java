@@ -27,7 +27,7 @@ public class ShriekingDreadOnHit implements OnHitEffect {
         for (Entity entity : level.getEntities(bullet, area, e -> e instanceof LivingEntity && Utils.canHarm(owner, e))) {
             LivingEntity target = (LivingEntity) entity;
             target.addEffect(new MobEffectInstance(MobEffects.DARKNESS, 20 * 5, 0));
-            target.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 20 * 5, 1));
+            target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20 * 5, 1));
             target.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 20 * 5, 1));
             accumulator.add(target);
         }

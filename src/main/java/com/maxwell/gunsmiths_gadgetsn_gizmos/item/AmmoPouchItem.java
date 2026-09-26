@@ -9,18 +9,17 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.ItemContainerContents;
-import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.Level;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-import java.util.function.Consumer;
+import java.util.List;
 
 public class AmmoPouchItem extends Item implements IAmmoContainer {
     protected final int slots;
@@ -43,7 +42,7 @@ public class AmmoPouchItem extends Item implements IAmmoContainer {
     }
 
     @Override
-    public @NonNull InteractionResult use(@NonNull Level level, @NonNull Player player, @NonNull InteractionHand hand) {
+    public InteractionResultHolder<ItemStack> use(@NonNull Level level, @NonNull Player player, @NonNull InteractionHand hand) {
         ItemStack held = player.getItemInHand(hand);
         if (!level.isClientSide() && player instanceof ServerPlayer serverPlayer) {
             serverPlayer.openMenu(new SimpleMenuProvider(
@@ -51,15 +50,15 @@ public class AmmoPouchItem extends Item implements IAmmoContainer {
                     Component.translatable("item.gunsmiths_gadgetsn_gizmos.ammo_pouch")
             ));
             level.playSound(null, player.getX(), player.getY(), player.getZ(),
-                    SoundEvents.ARMOR_EQUIP_LEATHER, SoundSource.PLAYERS, 1.0F, 1.2F);
+                    SoundEvents.ARMOR_EQUIP_LEATHER.value(), SoundSource.PLAYERS, 1.0F, 1.2F);
         }
-        return InteractionResult.SUCCESS;
+        return InteractionResultHolder.sidedSuccess(held, level.isClientSide());
     }
 
     @Override
-    public void appendHoverText(@NonNull ItemStack itemStack, @NonNull TooltipContext context, @NonNull TooltipDisplay display, @NonNull Consumer<Component> builder, @NonNull TooltipFlag tooltipFlag) {
-        super.appendHoverText(itemStack, context, display, builder, tooltipFlag);
-        builder.accept(Component.translatable("gunsmiths_gadgetsn_gizmos.tooltip.ammo_pouch").withStyle(ChatFormatting.GOLD));
-        builder.accept(Component.translatable("gunsmiths_gadgetsn_gizmos.tooltip.ammo_pouch.desc").withStyle(ChatFormatting.GRAY));
+    public void appendHoverText(@NonNull ItemStack itemStack, @NonNull TooltipContext context, @NonNull List<Component> tooltipComponents, @NonNull TooltipFlag tooltipFlag) {
+        super.appendHoverText(itemStack, context, tooltipComponents, tooltipFlag);
+        tooltipComponents.add(Component.translatable("gunsmiths_gadgetsn_gizmos.tooltip.ammo_pouch").withStyle(ChatFormatting.GOLD));
+        tooltipComponents.add(Component.translatable("gunsmiths_gadgetsn_gizmos.tooltip.ammo_pouch.desc").withStyle(ChatFormatting.GRAY));
     }
 }

@@ -99,7 +99,7 @@ public class CursedAltarRecipe {
                 ResourceLocation tagId = ResourceLocation.tryParse(str.substring(1));
                 if (tagId != null) {
                     TagKey<Item> tagKey = TagKey.create(Registries.ITEM, tagId);
-                    BuiltInRegistries.ITEM.get(tagKey).ifPresent(holders -> {
+                    BuiltInRegistries.ITEM.getTag(tagKey).ifPresent(holders -> {
                         for (Holder<Item> holder : holders) {
                             list.add(holder.value());
                         }
@@ -152,7 +152,7 @@ public class CursedAltarRecipe {
         if (resultItemId == null || resultItemId.isEmpty()) return ItemStack.EMPTY;
         ResourceLocation resId = ResourceLocation.tryParse(resultItemId);
         if (resId == null) return ItemStack.EMPTY;
-        Item item = BuiltInRegistries.ITEM.getValue(resId);
+        Item item = BuiltInRegistries.ITEM.getOptional(resId).orElse(Items.AIR);
         if (item == Items.AIR) return ItemStack.EMPTY;
         return new ItemStack(item, resultCount);
     }
@@ -167,7 +167,7 @@ public class CursedAltarRecipe {
         boolean matOk = matList.contains(mat.getItem()) && mat.getCount() >= materialCount;
         boolean catOk = catList.contains(cat.getItem()) && cat.getCount() >= catalystCount;
         boolean swappedMatOk = matList.contains(cat.getItem()) && cat.getCount() >= materialCount;
-        boolean swappedCatOk = catList.contains(mat.getItem()) && mat.getCount() >= catalystCount;
+        boolean swappedCatOk = catList.contains(mat.getItem()) && cat.getCount() >= catalystCount;
         return baseOk && ((matOk && catOk) || (swappedMatOk && swappedCatOk));
     }
 }

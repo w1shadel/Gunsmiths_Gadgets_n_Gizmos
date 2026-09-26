@@ -11,7 +11,6 @@ import io.redspace.irons_artifice.data.ShotComponents;
 import io.redspace.irons_artifice.data.ValueModifier;
 import io.redspace.irons_artifice.gun.ArmPoseKind;
 import io.redspace.irons_artifice.gun.ShotProfile;
-import io.redspace.irons_artifice.item.FireDelayState;
 import io.redspace.irons_artifice.registry.ItemRegistry;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -41,19 +40,19 @@ public class CuriosAccessoryEvents {
         LivingEntity living = event.getEntity();
         ShotProfile profile = event.getShotProfile();
         if (CuriosCompat.isEquipped(living, ModItems.RECOIL_HARNESS.get())) {
-            profile.modifyValue(ShotComponents.CAMERA_RECOIL_MULTIPLIER,  new ValueModifier(-0.40, ValueModifier.Operation.MULTIPLY_TOTAL, ValueModifier.Type.BENEFICIAL));
+            profile.modifyValue(ShotComponents.CAMERA_RECOIL_MULTIPLIER, new ValueModifier(-0.40, ValueModifier.Operation.MULTIPLY_TOTAL, ValueModifier.Type.BENEFICIAL));
         }
         if (CuriosCompat.isEquipped(living, ModItems.RANGEFINDER_MONOCLE.get())) {
-            profile.modifyValue(ShotComponents.SPREAD,new ValueModifier(-1.5, ValueModifier.Operation.ADD, ValueModifier.Type.BENEFICIAL));
+            profile.modifyValue(ShotComponents.SPREAD, new ValueModifier(-1.5, ValueModifier.Operation.ADD, ValueModifier.Type.BENEFICIAL));
         }
         if (CuriosCompat.isEquipped(living, ModItems.GUNSLINGERS_SPURS.get())) {
-            profile.modifyValue(ShotComponents.IN_AIR_PENALTY,new ValueModifier(-1.0, ValueModifier.Operation.MULTIPLY_TOTAL, ValueModifier.Type.BENEFICIAL));
+            profile.modifyValue(ShotComponents.IN_AIR_PENALTY, new ValueModifier(-1.0, ValueModifier.Operation.MULTIPLY_TOTAL, ValueModifier.Type.BENEFICIAL));
         }
         if (CuriosCompat.isEquipped(living, ModItems.GUNSMITHS_GLOVES.get())) {
             profile.modifyValue(ShotComponents.RELOAD_SPEED_MULTIPLIER, new ValueModifier(0.15, ValueModifier.Operation.MULTIPLY_TOTAL, ValueModifier.Type.BENEFICIAL));
         }
         if (CuriosCompat.isEquipped(living, ModItems.SPEEDLOADER_BELT.get()) && profile.gun().armPoseKind() == ArmPoseKind.PISTOL) {
-            profile.modifyValue(ShotComponents.RELOAD_SPEED_MULTIPLIER,new ValueModifier(0.30, ValueModifier.Operation.MULTIPLY_TOTAL, ValueModifier.Type.BENEFICIAL));
+            profile.modifyValue(ShotComponents.RELOAD_SPEED_MULTIPLIER, new ValueModifier(0.30, ValueModifier.Operation.MULTIPLY_TOTAL, ValueModifier.Type.BENEFICIAL));
         }
         if (CuriosCompat.isEquipped(living, ModItems.GAMBLERS_RING.get())) {
             float procChance = GunsmithConfig.COMMON.gamblersRingChance.get().floatValue();
@@ -67,7 +66,7 @@ public class CuriosAccessoryEvents {
     public static void onAmmoAmount(AmmoEvent.Amount event) {
         if (CuriosCompat.isEquipped(event.getEntity(), ModItems.GAMBLERS_RING.get())) {
             if (event.getEntity().getRandom().nextFloat() < 0.15F) {
-                event.setAmmoToConsume(0); 
+                event.setAmmoToConsume(0);
                 event.getEntity().level().playSound(null, event.getEntity().getX(), event.getEntity().getY(), event.getEntity().getZ(),
                         SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.PLAYERS, 0.8F, 1.8F);
             }

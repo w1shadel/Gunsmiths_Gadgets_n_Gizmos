@@ -28,7 +28,7 @@ public class EchoingSonicCoreOnHit implements OnHitEffect {
         float sonicDamage = bullet.resolveDamage() * 1.5F;
         for (Entity entity : level.getEntities(bullet, scanArea, e -> e instanceof LivingEntity && Utils.canHarm(owner, e))) {
             LivingEntity living = (LivingEntity) entity;
-            living.hurtServer(level, DamageSources.bullet(level, bullet, owner), sonicDamage);
+            living.hurt( DamageSources.bullet(level, bullet, owner), sonicDamage);
             living.knockback(1.2, -direction.x, -direction.z);
             accumulator.add(living);
         }

@@ -2,9 +2,15 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "B": "irons_artifice:blackpowder",
-    "D": "minecraft:glowstone_dust",
-    "I": "minecraft:iron_ingot"
+    "B": {
+      "item": "irons_artifice:blackpowder"
+    },
+    "D": {
+      "item": "minecraft:glowstone_dust"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    }
   },
   "pattern": [
     " D ",

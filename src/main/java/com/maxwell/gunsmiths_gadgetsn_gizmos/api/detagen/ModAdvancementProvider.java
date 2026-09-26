@@ -10,7 +10,6 @@ import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementType;
 import net.minecraft.advancements.critereon.*;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.data.advancements.AdvancementSubProvider;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -27,8 +26,6 @@ public class ModAdvancementProvider implements AdvancementSubProvider {
 
     @Override
     public void generate(HolderLookup.@NonNull Provider registries, @NonNull Consumer<AdvancementHolder> saver) {
-        var itemLookup = registries.lookupOrThrow(Registries.ITEM);
-        var entityLookup = registries.lookupOrThrow(Registries.ENTITY_TYPE);
         AdvancementHolder root = Advancement.Builder.advancement()
                 .display(
                         ModBlocks.GUNSMITH_BENCH.get(),
@@ -40,6 +37,7 @@ public class ModAdvancementProvider implements AdvancementSubProvider {
                 )
                 .addCriterion("has_bullet", InventoryChangeTrigger.TriggerInstance.hasItems(ItemRegistry.BULLET.get()))
                 .save(saver, id("root"));
+
         AdvancementHolder craftBench = Advancement.Builder.advancement()
                 .parent(root)
                 .display(
@@ -52,6 +50,7 @@ public class ModAdvancementProvider implements AdvancementSubProvider {
                 )
                 .addCriterion("has_bench", InventoryChangeTrigger.TriggerInstance.hasItems(ModBlocks.GUNSMITH_BENCH.get()))
                 .save(saver, id("craft_gunsmith_bench"));
+
         AdvancementHolder craftPouch = Advancement.Builder.advancement()
                 .parent(craftBench)
                 .display(
@@ -64,6 +63,7 @@ public class ModAdvancementProvider implements AdvancementSubProvider {
                 )
                 .addCriterion("has_pouch", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.AMMO_POUCH.get()))
                 .save(saver, id("craft_ammo_pouch"));
+
         AdvancementHolder specialAmmo = Advancement.Builder.advancement()
                 .parent(craftPouch)
                 .display(
@@ -75,11 +75,12 @@ public class ModAdvancementProvider implements AdvancementSubProvider {
                         true, true, false
                 )
                 .addCriterion("has_special_ammo", InventoryChangeTrigger.TriggerInstance.hasItems(
-                        ItemPredicate.Builder.item().of(itemLookup,
+                        ItemPredicate.Builder.item().of(
                                 ModItems.SILVER_BULLET.get(), ModItems.AP_BULLET.get(), ModItems.GLASS_BULLET.get(), ModItems.TRACER_BULLET.get()
                         )
                 ))
                 .save(saver, id("special_ammo"));
+
         AdvancementHolder expandChassis = Advancement.Builder.advancement()
                 .parent(craftBench)
                 .display(
@@ -92,6 +93,7 @@ public class ModAdvancementProvider implements AdvancementSubProvider {
                 )
                 .addCriterion("has_kit", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.GUNSMITH_CHASSIS_KIT.get()))
                 .save(saver, id("expand_chassis"));
+
         AdvancementHolder findAltar = Advancement.Builder.advancement()
                 .parent(root)
                 .display(
@@ -104,6 +106,7 @@ public class ModAdvancementProvider implements AdvancementSubProvider {
                 )
                 .addCriterion("has_altar", InventoryChangeTrigger.TriggerInstance.hasItems(ModBlocks.CURSED_ALTAR.get()))
                 .save(saver, id("find_cursed_altar"));
+
         AdvancementHolder getOmenCore = Advancement.Builder.advancement()
                 .parent(findAltar)
                 .display(
@@ -116,6 +119,7 @@ public class ModAdvancementProvider implements AdvancementSubProvider {
                 )
                 .addCriterion("has_core", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.OMINOUS_CLOCKWORK_CORE.get()))
                 .save(saver, id("get_omen_core"));
+
         AdvancementHolder firstAltarCraft = Advancement.Builder.advancement()
                 .parent(getOmenCore)
                 .display(
@@ -127,12 +131,13 @@ public class ModAdvancementProvider implements AdvancementSubProvider {
                         true, true, false
                 )
                 .addCriterion("has_forbidden_mod", InventoryChangeTrigger.TriggerInstance.hasItems(
-                        ItemPredicate.Builder.item().of(itemLookup,
+                        ItemPredicate.Builder.item().of(
                                 ModItems.BLOODBOUND_CALAMITY_MODIFIER.get(), ModItems.UNSTABLE_OVERCLOCK_MODIFIER.get(),
                                 ModItems.REAPERS_GAMBIT_MODIFIER.get(), ModItems.TRIAL_OF_GREED_MODIFIER.get()
                         )
                 ))
                 .save(saver, id("first_altar_craft"));
+
         AdvancementHolder tier3Refined = Advancement.Builder.advancement()
                 .parent(firstAltarCraft)
                 .display(
@@ -144,12 +149,13 @@ public class ModAdvancementProvider implements AdvancementSubProvider {
                         true, true, false
                 )
                 .addCriterion("has_refined_mod", InventoryChangeTrigger.TriggerInstance.hasItems(
-                        ItemPredicate.Builder.item().of(itemLookup,
+                        ItemPredicate.Builder.item().of(
                                 ModItems.CRIMSON_SINGULARITY_MODIFIER.get(), ModItems.CLOCKWORK_GATLING_MODIFIER.get(),
                                 ModItems.REAPERS_TEMPEST_MODIFIER.get(), ModItems.MIDAS_TOUCH_CHAMBER_MODIFIER.get()
                         )
                 ))
                 .save(saver, id("craft_tier3_refined"));
+
         AdvancementHolder ruinedEnd = Advancement.Builder.advancement()
                 .parent(tier3Refined)
                 .display(
@@ -162,6 +168,7 @@ public class ModAdvancementProvider implements AdvancementSubProvider {
                 )
                 .addCriterion("enter_end", ChangeDimensionTrigger.TriggerInstance.changedDimensionTo(Level.END))
                 .save(saver, id("ruined_end_horizon"));
+
         Advancement.Builder.advancement()
                 .parent(firstAltarCraft)
                 .display(
@@ -173,9 +180,10 @@ public class ModAdvancementProvider implements AdvancementSubProvider {
                         true, true, false
                 )
                 .addCriterion("killed_apostle", KilledTrigger.TriggerInstance.playerKilledEntity(
-                        EntityPredicate.Builder.entity().entityType(EntityTypePredicate.of(entityLookup, ModEntities.APOSTLE_GUN.get()))
+                        EntityPredicate.Builder.entity().entityType(EntityTypePredicate.of(ModEntities.APOSTLE_GUN.get()))
                 ))
                 .save(saver, id("kill_apostle"));
+
         Advancement.Builder.advancement()
                 .parent(ruinedEnd)
                 .display(
@@ -188,7 +196,7 @@ public class ModAdvancementProvider implements AdvancementSubProvider {
                 )
                 .addCriterion("killed_abyssal_apostle", KilledTrigger.TriggerInstance.playerKilledEntity(
                         EntityPredicate.Builder.entity()
-                                .entityType(EntityTypePredicate.of(entityLookup, ModEntities.APOSTLE_GUN.get()))
+                                .entityType(EntityTypePredicate.of(ModEntities.APOSTLE_GUN.get()))
                                 .located(LocationPredicate.Builder.inDimension(Level.END))
                 ))
                 .save(saver, id("kill_abyssal_apostle"));

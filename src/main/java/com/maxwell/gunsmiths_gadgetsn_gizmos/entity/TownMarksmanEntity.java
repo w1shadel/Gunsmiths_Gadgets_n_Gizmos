@@ -28,15 +28,15 @@ import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
-import net.minecraft.world.entity.animal.golem.IronGolem;
+import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.monster.Enemy;
-import net.minecraft.world.entity.npc.villager.AbstractVillager;
+import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import org.checkerframework.checker.nullness.qual.NonNull;
-import org.jspecify.annotations.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Comparator;
 import java.util.EnumSet;
@@ -96,7 +96,7 @@ public class TownMarksmanEntity extends PathfinderMob {
         });
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(
                 this, Mob.class, 10, true, false,
-                (entity, level) -> entity instanceof Enemy && !CultistAllianceEvents.isCultist(entity) && !isFriendly(entity)
+                entity -> entity instanceof Enemy && !CultistAllianceEvents.isCultist(entity) && !isFriendly(entity)
         ));
     }
 
@@ -227,9 +227,9 @@ public class TownMarksmanEntity extends PathfinderMob {
     }
 
     @Override
-    public @Nullable SpawnGroupData finalizeSpawn(@NonNull ServerLevelAccessor level, @NonNull DifficultyInstance difficulty, @NonNull EntitySpawnReason spawnReason, @Nullable SpawnGroupData spawnGroupData) {
+    public @Nullable SpawnGroupData finalizeSpawn(@NonNull ServerLevelAccessor level, @NonNull DifficultyInstance difficulty, @NonNull MobSpawnType spawnType, @Nullable SpawnGroupData spawnGroupData) {
         this.populateDefaultEquipmentSlots(level.getRandom(), difficulty);
-        return super.finalizeSpawn(level, difficulty, spawnReason, spawnGroupData);
+        return super.finalizeSpawn(level, difficulty, spawnType, spawnGroupData);
     }
 
     @Override

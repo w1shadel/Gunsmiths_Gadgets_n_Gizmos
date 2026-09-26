@@ -3,7 +3,7 @@ package com.maxwell.gunsmiths_gadgetsn_gizmos.events;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.GunsmithsGadgetsnGizmos;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.init.ModVillagers;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.npc.villager.Villager;
+import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.raid.Raider;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -13,7 +13,7 @@ import net.neoforged.neoforge.event.entity.living.LivingChangeTargetEvent;
 public class CultistAllianceEvents {
     public static boolean isCultist(LivingEntity entity) {
         if (entity instanceof Villager villager) {
-            return villager.getVillagerData().profession().is(ModVillagers.CULTIST.getKey());
+            return villager.getVillagerData().getProfession().equals(ModVillagers.CULTIST.getKey());
         }
         return false;
     }

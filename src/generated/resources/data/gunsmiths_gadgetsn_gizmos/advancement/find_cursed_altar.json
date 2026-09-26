@@ -17,6 +17,7 @@
       "translate": "advancements.gunsmiths_gadgetsn_gizmos.find_altar.desc"
     },
     "icon": {
+      "count": 1,
       "id": "gunsmiths_gadgetsn_gizmos:cursed_altar"
     },
     "title": {

@@ -2,10 +2,18 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "A": "minecraft:arrow",
-    "C": "minecraft:iron_chain",
-    "M": "irons_artifice:simple_mechanical_components",
-    "S": "minecraft:slime_ball"
+    "A": {
+      "item": "minecraft:arrow"
+    },
+    "C": {
+      "item": "minecraft:chain"
+    },
+    "M": {
+      "item": "irons_artifice:simple_mechanical_components"
+    },
+    "S": {
+      "item": "minecraft:slime_ball"
+    }
   },
   "pattern": [
     " A ",
@@ -13,6 +21,7 @@
     " M "
   ],
   "result": {
+    "count": 1,
     "id": "gunsmiths_gadgetsn_gizmos:grappling_anchor_modifier"
   }
 }

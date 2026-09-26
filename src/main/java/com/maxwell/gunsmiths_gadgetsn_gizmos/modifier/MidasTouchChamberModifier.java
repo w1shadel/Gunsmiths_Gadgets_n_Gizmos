@@ -42,7 +42,7 @@ public final class MidasTouchChamberModifier implements GunModifier {
         AABB area = shooter.getBoundingBox().inflate(16.0);
         for (Entity entity : level.getEntities(shooter, area, e -> e instanceof Mob)) {
             Mob mob = (Mob) entity;
-            mob.addEffect(new MobEffectInstance(MobEffects.SPEED, 20 * 8, 1));
+            mob.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 20 * 8, 1));
             mob.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 20 * 8, 1));
             mob.setTarget(shooter);
         }

@@ -40,9 +40,9 @@ public final class TrialOfGreedModifier implements GunModifier {
         AABB enrageArea = shooter.getBoundingBox().inflate(16.0);
         for (Entity entity : level.getEntities(shooter, enrageArea, e -> e instanceof Mob)) {
             Mob mob = (Mob) entity;
-            mob.addEffect(new MobEffectInstance(MobEffects.SPEED, 20 * 10, 1));
-            mob.addEffect(new MobEffectInstance(MobEffects.STRENGTH, 20 * 10, 0));
-            mob.addEffect(new MobEffectInstance(MobEffects.RESISTANCE, 20 * 10, 0));
+            mob.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 20 * 10, 1));
+            mob.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 20 * 10, 0));
+            mob.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 20 * 10, 0));
             mob.setTarget(shooter);
         }
         level.playSound(null, shooter.getX(), shooter.getY(), shooter.getZ(),

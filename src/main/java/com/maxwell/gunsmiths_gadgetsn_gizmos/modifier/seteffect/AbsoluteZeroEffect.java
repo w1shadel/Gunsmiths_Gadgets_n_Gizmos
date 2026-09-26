@@ -38,8 +38,8 @@ public record AbsoluteZeroEffect(double radius, int freezeDurationTicks) impleme
         for (Entity entity : level.getEntities(bullet, area, e -> e instanceof LivingEntity && Utils.canHarm(owner, e))) {
             LivingEntity target = (LivingEntity) entity;
             target.setTicksFrozen(target.getTicksRequiredToFreeze() * 4);
-            target.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, freezeDurationTicks, 3));
-            target.addEffect(new MobEffectInstance(MobEffects.MINING_FATIGUE, freezeDurationTicks, 3));
+            target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, freezeDurationTicks, 3));
+            target.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, freezeDurationTicks, 3));
             accumulator.add(target);
         }
         level.playSound(null, pos.x, pos.y, pos.z,

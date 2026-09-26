@@ -2,11 +2,21 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "B": "irons_artifice:clockwork_rifle",
-    "C": "minecraft:copper_chain",
-    "H": "minecraft:hopper",
-    "I": "minecraft:iron_block",
-    "M": "irons_artifice:clockwork_components"
+    "B": {
+      "item": "irons_artifice:clockwork_rifle"
+    },
+    "C": {
+      "item": "minecraft:chain"
+    },
+    "H": {
+      "item": "minecraft:hopper"
+    },
+    "I": {
+      "item": "minecraft:iron_block"
+    },
+    "M": {
+      "item": "irons_artifice:clockwork_components"
+    }
   },
   "pattern": [
     "IBI",
@@ -14,6 +24,7 @@
     " H "
   ],
   "result": {
+    "count": 1,
     "id": "gunsmiths_gadgetsn_gizmos:minigun"
   }
 }

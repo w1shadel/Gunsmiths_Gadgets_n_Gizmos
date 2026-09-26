@@ -229,5 +229,7 @@
   "item.gunsmiths_gadgetsn_gizmos.apostle_summon_ritual": "アポストル召喚の儀式",
   "gunsmiths_gadgetsn_gizmos.tooltip.apostleitem": "この儀式ではアイテムは発生しません。",
   "item.gunsmiths_gadgetsn_gizmos.town_marksman_spawn_egg": "町のガンマンのスポーンエッグ",
-  "item.gunsmiths_gadgetsn_gizmos.apostle_gun_spawn_egg": "アポストルのスポーンエッグ"
+  "item.gunsmiths_gadgetsn_gizmos.apostle_gun_spawn_egg": "アポストルのスポーンエッグ",
+
+  "emi.category.gunsmiths_gadgetsn_gizmos.cursed_altar": "呪印の祭壇：モディファイア合成"
 }

@@ -1,0 +1,29 @@
+modLoader="javafml"
+loaderVersion="[1,)"
+license="MIT"
+
+[[mods]]
+modId="gunsmiths_gadgetsn_gizmos"
+version="1.21.1-1.0.0"
+displayName="Gunsmith's Gadgets 'n Gizmos"
+authors="maxwell"
+description='''
+Gunsmith's Gadgets 'n Gizmos
+'''
+
+[[mixins]]
+config="gunsmiths_gadgetsn_gizmos.mixins.json"
+
+[[dependencies.gunsmiths_gadgetsn_gizmos]]
+modId="neoforge"
+type="required"
+versionRange="[21.1,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.gunsmiths_gadgetsn_gizmos]]
+modId="minecraft"
+type="required"
+versionRange="[1.21.1]"
+ordering="NONE"
+side="BOTH"

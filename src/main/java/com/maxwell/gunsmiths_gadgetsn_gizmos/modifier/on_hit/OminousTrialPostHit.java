@@ -19,7 +19,7 @@ import java.util.List;
 
 public class OminousTrialPostHit implements PostHitEffect {
     private static final List<Holder<MobEffect>> OMINOUS_EFFECTS = List.of(
-            MobEffects.SLOWNESS,
+            MobEffects.MOVEMENT_SLOWDOWN,
             MobEffects.POISON,
             MobEffects.WEAKNESS,
             MobEffects.LEVITATION

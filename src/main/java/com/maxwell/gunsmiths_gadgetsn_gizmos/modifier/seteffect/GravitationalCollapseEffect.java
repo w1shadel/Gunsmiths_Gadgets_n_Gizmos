@@ -40,7 +40,7 @@ public record GravitationalCollapseEffect(double radius, float collapseDamage) i
                 target.setDeltaMovement(pullVec.normalize().scale(1.2));
                 target.hurtMarked = true;
             }
-            target.hurtServer(level, level.damageSources().wither(), collapseDamage);
+            target.hurt(level.damageSources().wither(), collapseDamage);
             accumulator.add(target);
         }
         level.playSound(null, center.x, center.y, center.z,

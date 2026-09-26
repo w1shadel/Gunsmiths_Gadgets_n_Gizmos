@@ -72,7 +72,7 @@ public class CursedAltarBlockEntity extends BlockEntity implements MenuProvider,
                 serverLevel.sendParticles(ParticleTypes.SONIC_BOOM, cx, cy + 0.5, cz, 1, 0, 0, 0, 0);
                 serverLevel.sendParticles(ParticleTypes.SQUID_INK, cx, cy + 1.0, cz, 80, 0.8, 1.2, 0.8, 0.15);
                 serverLevel.playSound(null, pos, SoundEvents.GENERIC_EXPLODE.value(), SoundSource.HOSTILE, 3.0F, 0.6F);
-                serverLevel.playSound(null, pos, SoundEvents.LIGHTNING_BOLT_THUNDER.value(), SoundSource.HOSTILE, 3.0F, 0.8F);
+                serverLevel.playSound(null, pos, SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.HOSTILE, 3.0F, 0.8F);
                 serverLevel.playSound(null, pos, SoundEvents.BELL_BLOCK, SoundSource.HOSTILE, 3.0F, 0.3F);
             }
         }

@@ -17,6 +17,7 @@
       "translate": "advancements.gunsmiths_gadgetsn_gizmos.get_omen_core.desc"
     },
     "icon": {
+      "count": 1,
       "id": "gunsmiths_gadgetsn_gizmos:ominous_clockwork_core"
     },
     "title": {

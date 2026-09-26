@@ -2,9 +2,15 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "I": "minecraft:iron_ingot",
-    "M": "irons_artifice:simple_mechanical_components",
-    "P": "minecraft:piston"
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "M": {
+      "item": "irons_artifice:simple_mechanical_components"
+    },
+    "P": {
+      "item": "minecraft:piston"
+    }
   },
   "pattern": [
     " P ",
@@ -12,6 +18,7 @@
     " M "
   ],
   "result": {
+    "count": 1,
     "id": "gunsmiths_gadgetsn_gizmos:piston_ramrod_modifier"
   }
 }

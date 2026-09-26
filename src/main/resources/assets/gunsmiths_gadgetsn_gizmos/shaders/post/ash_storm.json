@@ -1,12 +1,23 @@
 {
-  "vertex": "minecraft:post/blit",
-  "fragment": "gunsmiths_gadgetsn_gizmos:post/ash_storm",
+  "blend": {
+    "func": "add",
+    "srcrgb": "one",
+    "dstrgb": "zero"
+  },
+  "vertex": "blit",
+  "fragment": "gunsmiths_gadgetsn_gizmos:ash_storm",
+  "attributes": [
+    "Position"
+  ],
   "samplers": [
-    { "name": "InSampler" }
+    { "name": "DiffuseSampler" }
   ],
   "uniforms": [
-    { "name": "gunsmiths_gadgetsn_gizmos_Progress", "type": "float", "count": 1, "values": [ 0.0 ] },
-    { "name": "gunsmiths_gadgetsn_gizmos_Time", "type": "float", "count": 1, "values": [ 0.0 ] },
-    { "name": "gunsmiths_gadgetsn_gizmos_SootAmount", "type": "float", "count": 1, "values": [ 0.0 ] }
+    { "name": "ProjMat", "type": "matrix4x4", "count": 16, "values": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ] },
+    { "name": "InSize", "type": "float", "count": 2, "values": [ 1.0, 1.0 ] },
+    { "name": "OutSize", "type": "float", "count": 2, "values": [ 1.0, 1.0 ] },
+    { "name": "Progress", "type": "float", "count": 1, "values": [ 0.0 ] },
+    { "name": "Time", "type": "float", "count": 1, "values": [ 0.0 ] },
+    { "name": "SootAmount", "type": "float", "count": 1, "values": [ 0.0 ] }
   ]
 }

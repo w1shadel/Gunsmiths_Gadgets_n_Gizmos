@@ -2,12 +2,24 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "A": "irons_artifice:arquebus",
-    "B": "irons_artifice:blackpowder",
-    "I": "minecraft:iron_block",
-    "L": "#minecraft:logs",
-    "M": "irons_artifice:mechanical_components",
-    "P": "minecraft:piston"
+    "A": {
+      "item": "irons_artifice:arquebus"
+    },
+    "B": {
+      "item": "irons_artifice:blackpowder"
+    },
+    "I": {
+      "item": "minecraft:iron_block"
+    },
+    "L": {
+      "tag": "minecraft:logs"
+    },
+    "M": {
+      "item": "irons_artifice:mechanical_components"
+    },
+    "P": {
+      "item": "minecraft:piston"
+    }
   },
   "pattern": [
     "PI ",
@@ -15,6 +27,7 @@
     " LB"
   ],
   "result": {
+    "count": 1,
     "id": "gunsmiths_gadgetsn_gizmos:clunker_rifle"
   }
 }

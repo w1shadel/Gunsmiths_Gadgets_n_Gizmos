@@ -2,10 +2,18 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "B": "gunsmiths_gadgetsn_gizmos:gunsmith_bench",
-    "C": "minecraft:bone",
-    "O": "minecraft:crying_obsidian",
-    "S": "minecraft:soul_sand"
+    "B": {
+      "item": "gunsmiths_gadgetsn_gizmos:gunsmith_bench"
+    },
+    "C": {
+      "item": "minecraft:bone"
+    },
+    "O": {
+      "item": "minecraft:crying_obsidian"
+    },
+    "S": {
+      "item": "minecraft:soul_sand"
+    }
   },
   "pattern": [
     " C ",
@@ -13,6 +21,7 @@
     "SSS"
   ],
   "result": {
+    "count": 1,
     "id": "gunsmiths_gadgetsn_gizmos:cursed_altar"
   }
 }

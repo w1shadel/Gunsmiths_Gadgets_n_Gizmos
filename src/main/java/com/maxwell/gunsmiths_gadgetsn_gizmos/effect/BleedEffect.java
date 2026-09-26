@@ -13,12 +13,15 @@ public class BleedEffect extends MobEffect {
     }
 
     @Override
-    public boolean applyEffectTick(ServerLevel level, @NonNull LivingEntity living, int amplifier) {
+    public boolean applyEffectTick(@NonNull LivingEntity living, int amplifier) {
         float bleedDamage = 1.5F + (amplifier * 0.75F);
-        living.hurtServer(level, level.damageSources().generic(), bleedDamage);
-        level.sendParticles(ParticleTypes.CRIMSON_SPORE,
-                living.getX(), living.getY() + living.getBbHeight() * 0.5, living.getZ(),
-                8, 0.2, 0.3, 0.2, 0.05);
+        living.hurt(living.damageSources().generic(), bleedDamage);
+
+        if (living.level() instanceof ServerLevel serverLevel) {
+            serverLevel.sendParticles(ParticleTypes.CRIMSON_SPORE,
+                    living.getX(), living.getY() + living.getBbHeight() * 0.5, living.getZ(),
+                    8, 0.2, 0.3, 0.2, 0.05);
+        }
         return true;
     }
 

@@ -13,12 +13,14 @@ import io.redspace.irons_artifice.modifier.ModifierItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SpawnEggItem;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.common.DeferredSpawnEggItem;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class ModItems {
     public static final DeferredRegister.Items ITEMS =
             DeferredRegister.createItems(GunsmithsGadgetsnGizmos.MODID);
+
     public static final DeferredItem<ModifierItem> PISTON_RAMROD_MODIFIER = ITEMS.registerItem(
             "piston_ramrod_modifier",
             properties -> new ModifierItem(properties.stacksTo(1), new PistonRamrodModifier())
@@ -152,13 +154,14 @@ public class ModItems {
     public static final DeferredItem<Item> COAGULATED_OMEN_BLOOD = ITEMS.registerSimpleItem("coagulated_omen_blood");
     public static final DeferredItem<Item> FORBIDDEN_BLUEPRINT = ITEMS.registerSimpleItem("forbidden_blueprint");
     public static final DeferredItem<Item> APOSTLE_SUMMON_RITUAL = ITEMS.registerItem("apostle_summon_ritual", ApostleItem::new);
+
     public static final DeferredItem<SpawnEggItem> TOWN_MARKSMAN_SPAWN_EGG = ITEMS.registerItem(
             "town_marksman_spawn_egg",
-            properties -> new SpawnEggItem(properties.spawnEgg(ModEntities.TOWN_MARKSMAN.get()))
+            properties -> new DeferredSpawnEggItem(ModEntities.TOWN_MARKSMAN, 0xBD8B72, 0x3C3024, properties)
     );
     public static final DeferredItem<SpawnEggItem> APOSTLE_GUN_SPAWN_EGG = ITEMS.registerItem(
             "apostle_gun_spawn_egg",
-            properties -> new SpawnEggItem(properties.spawnEgg(ModEntities.APOSTLE_GUN.get()))
+            properties -> new DeferredSpawnEggItem(ModEntities.APOSTLE_GUN, 0x1B122C, 0x7E1B3E, properties)
     );
 
     public static void register(IEventBus bus) {

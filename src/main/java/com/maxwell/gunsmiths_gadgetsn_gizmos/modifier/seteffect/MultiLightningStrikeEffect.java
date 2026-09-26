@@ -28,7 +28,7 @@ public record MultiLightningStrikeEffect(int strikeCount) implements SetBonusEff
         for (int i = 0; i < strikeCount; i++) {
             double offsetX = (level.getRandom().nextDouble() - 0.5) * 2.0;
             double offsetZ = (level.getRandom().nextDouble() - 0.5) * 2.0;
-            LightningBolt bolt = EntityType.LIGHTNING_BOLT.create(level, net.minecraft.world.entity.EntitySpawnReason.TRIGGERED);
+            LightningBolt bolt = EntityType.LIGHTNING_BOLT.create(level);
             if (bolt != null) {
                 bolt.setPos(pos.x + offsetX, pos.y, pos.z + offsetZ);
                 level.addFreshEntity(bolt);

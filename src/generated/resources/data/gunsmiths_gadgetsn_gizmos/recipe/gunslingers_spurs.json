@@ -2,9 +2,15 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "C": "minecraft:copper_chain",
-    "I": "minecraft:iron_ingot",
-    "M": "irons_artifice:simple_mechanical_components"
+    "C": {
+      "item": "minecraft:chain"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "M": {
+      "item": "irons_artifice:simple_mechanical_components"
+    }
   },
   "pattern": [
     "I I",
@@ -12,6 +18,7 @@
     "M M"
   ],
   "result": {
+    "count": 1,
     "id": "gunsmiths_gadgetsn_gizmos:gunslingers_spurs"
   }
 }

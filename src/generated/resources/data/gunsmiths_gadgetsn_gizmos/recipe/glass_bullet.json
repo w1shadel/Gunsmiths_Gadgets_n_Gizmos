@@ -2,9 +2,15 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "B": "irons_artifice:blackpowder",
-    "G": "minecraft:glass_pane",
-    "N": "minecraft:iron_nugget"
+    "B": {
+      "item": "irons_artifice:blackpowder"
+    },
+    "G": {
+      "item": "minecraft:glass_pane"
+    },
+    "N": {
+      "item": "minecraft:iron_nugget"
+    }
   },
   "pattern": [
     " G ",

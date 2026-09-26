@@ -23,7 +23,7 @@ public class SilverBulletPostHit implements PostHitEffect {
                     || target instanceof Monster;
             if (isUndeadOrMonster) {
                 float extraDamage = bullet.resolveDamage();
-                target.hurtServer(level, DamageSources.bullet(level, bullet, bullet.getOwner()), extraDamage);
+                target.hurt(DamageSources.bullet(level, bullet, bullet.getOwner()), extraDamage);
                 level.playSound(null, target.getX(), target.getY(), target.getZ(),
                         SoundEvents.PLAYER_ATTACK_CRIT, SoundSource.PLAYERS, 1.0F, 1.5F);
                 Utils.spawnParticles(level, ParticleTypes.END_ROD,

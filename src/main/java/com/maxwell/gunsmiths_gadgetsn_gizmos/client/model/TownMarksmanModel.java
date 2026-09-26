@@ -3,22 +3,21 @@ package com.maxwell.gunsmiths_gadgetsn_gizmos.client.model;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.GunsmithsGadgetsnGizmos;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.client.animation.AnimationHelper;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.client.animation.TownMarksmanAnimation;
-import com.maxwell.gunsmiths_gadgetsn_gizmos.client.renderer.TownMarksmanRenderState;
+import com.maxwell.gunsmiths_gadgetsn_gizmos.entity.TownMarksmanEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.model.ArmedModel;
-import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HeadedModel;
+import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.client.renderer.entity.state.EntityRenderState;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.HumanoidArm;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-public class TownMarksmanModel extends EntityModel<TownMarksmanRenderState> implements HeadedModel, ArmedModel {
+public class TownMarksmanModel extends HierarchicalModel<TownMarksmanEntity> implements HeadedModel, ArmedModel {
     public static final ModelLayerLocation LAYER_LOCATION =
             new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(GunsmithsGadgetsnGizmos.MODID, "town_marksman"), "main");
     private final ModelPart root;
@@ -35,7 +34,6 @@ public class TownMarksmanModel extends EntityModel<TownMarksmanRenderState> impl
     private final ModelPart leg1;
 
     public TownMarksmanModel(ModelPart root) {
-        super(root);
         this.root = root;
         this.body = root.getChild("body");
         this.head = this.body.getChild("head");
@@ -74,29 +72,30 @@ public class TownMarksmanModel extends EntityModel<TownMarksmanRenderState> impl
     }
 
     @Override
-    public void setupAnim(@NonNull TownMarksmanRenderState state) {
-        super.setupAnim(state);
-        this.head.yRot = state.yRot * Mth.DEG_TO_RAD;
-        this.head.xRot = state.xRot * Mth.DEG_TO_RAD;
-        this.leg0.xRot = Mth.cos(state.walkAnimationPos * 0.6662F) * 1.4F * state.walkAnimationSpeed * 0.5F;
-        this.leg1.xRot = Mth.cos(state.walkAnimationPos * 0.6662F + (float) Math.PI) * 1.4F * state.walkAnimationSpeed * 0.5F;
-        if (state.isCrouching) {
+    public void setupAnim(@NonNull TownMarksmanEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+        this.root().getAllParts().forEach(ModelPart::resetPose);
+        this.head.yRot = netHeadYaw * Mth.DEG_TO_RAD;
+        this.head.xRot = headPitch * Mth.DEG_TO_RAD;
+        this.leg0.xRot = Mth.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount * 0.5F;
+        this.leg1.xRot = Mth.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount * 0.5F;
+        if (entity.isCrouching()) {
             this.body.xRot = 0.5F;
             this.head.y += 3.2F;
         } else {
             this.body.xRot = 0.0F;
         }
-        boolean isAiming = state.isCombatMode && !state.getMainHandItemStack().isEmpty();
+        boolean isCombatMode = entity.isAggressive() || entity.getTarget() != null;
+        boolean isAiming = isCombatMode && !entity.getMainHandItem().isEmpty();
         this.arms.visible = !isAiming;
         this.normal_arms.visible = isAiming;
         if (isAiming) {
-            AnimationHelper.animate(this.normal_arms, state.reloadPhaseInAnimationState, TownMarksmanAnimation.reload_phasein, state.ageInTicks);
-            AnimationHelper.animate(this.normal_arms, state.reloadLoopAnimationState, TownMarksmanAnimation.reloading_loop, state.ageInTicks);
-            AnimationHelper.animate(this.normal_arms, state.reloadEndAnimationState, TownMarksmanAnimation.reload_end, state.ageInTicks);
-            if (state.shootAnimationState.isStarted()) {
-                AnimationHelper.animate(this.normal_arms, state.shootAnimationState, TownMarksmanAnimation.shoot_gun, state.ageInTicks);
+            AnimationHelper.animate(this.normal_arms, entity.reloadPhaseInAnimationState, TownMarksmanAnimation.reload_phasein, ageInTicks);
+            AnimationHelper.animate(this.normal_arms, entity.reloadLoopAnimationState, TownMarksmanAnimation.reloading_loop, ageInTicks);
+            AnimationHelper.animate(this.normal_arms, entity.reloadEndAnimationState, TownMarksmanAnimation.reload_end, ageInTicks);
+            if (entity.shootAnimationState.isStarted()) {
+                AnimationHelper.animate(this.normal_arms, entity.shootAnimationState, TownMarksmanAnimation.shoot_gun, ageInTicks);
             } else {
-                AnimationHelper.animate(this.normal_arms, state.holdGunAnimationState, TownMarksmanAnimation.hold_gun, state.ageInTicks);
+                AnimationHelper.animate(this.normal_arms, entity.holdGunAnimationState, TownMarksmanAnimation.hold_gun, ageInTicks);
             }
             this.normal_arms.xRot = this.head.xRot;
             this.normal_arms.yRot = this.head.yRot;
@@ -104,7 +103,7 @@ public class TownMarksmanModel extends EntityModel<TownMarksmanRenderState> impl
     }
 
     @Override
-    public void translateToHand(EntityRenderState entityRenderState, HumanoidArm humanoidArm, PoseStack poseStack) {
+    public void translateToHand(HumanoidArm humanoidArm, PoseStack poseStack) {
         this.root.translateAndRotate(poseStack);
         this.body.translateAndRotate(poseStack);
         this.normal_arms.translateAndRotate(poseStack);
@@ -118,5 +117,10 @@ public class TownMarksmanModel extends EntityModel<TownMarksmanRenderState> impl
     @Override
     public @NonNull ModelPart getHead() {
         return this.head;
+    }
+
+    @Override
+    public @NonNull ModelPart root() {
+        return this.root;
     }
 }

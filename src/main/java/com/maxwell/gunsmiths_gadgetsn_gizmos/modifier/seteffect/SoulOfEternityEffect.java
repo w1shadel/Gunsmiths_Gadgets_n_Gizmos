@@ -26,8 +26,8 @@ public class SoulOfEternityEffect implements SetBonusEffect {
     @Override
     public void onShoot(ServerLevel level, LivingEntity shooter, io.redspace.irons_artifice.gun.ShotProfile profile, net.minecraft.world.phys.Vec3 origin, net.minecraft.world.phys.Vec3 direction) {
         shooter.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 20 * 4, 1));
-        shooter.addEffect(new MobEffectInstance(MobEffects.RESISTANCE, 20 * 4, 1));
-        shooter.addEffect(new MobEffectInstance(MobEffects.SPEED, 20 * 4, 1));
+        shooter.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 20 * 4, 1));
+        shooter.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 20 * 4, 1));
     }
 
     @Override

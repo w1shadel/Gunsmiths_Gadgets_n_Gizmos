@@ -1,17 +1,15 @@
-#version 330
+#version 150
 
-uniform sampler2D InSampler;
+uniform sampler2D DiffuseSampler;
 
-layout(std140) uniform AshStormConfig {
-    float Progress;
-    float Time;
-    float SootAmount;
-};
+uniform float Progress;
+uniform float Time;
+uniform float SootAmount;
 
 in vec2 texCoord;
 out vec4 fragColor;
 
-// --- 1. Dave Hoskins 高品質ハッシュ関数（モアレ・周期性の完全排除） ---
+// --- 1. Dave Hoskins 高品質ハッシュ関数 ---
 vec3 N13(float p) {
     vec3 p3 = fract(vec3(p) * vec3(.1031, .11369, .13787));
     p3 += dot(p3, p3.yzx + 19.19);
@@ -40,13 +38,12 @@ float sootFbm(vec2 uv) {
     return n;
 }
 
-// --- 2. 【新機能】熱気・暴風による空間屈折ベクトル（陽炎効果） ---
+// --- 2. 熱気・暴風による空間屈折ベクトル（陽炎効果） ---
 vec2 getHeatRefraction(vec2 uv, float time, float amount) {
     vec2 windUv = vec2(uv.x * 1.777 + uv.y * 0.5, uv.y - uv.x * 0.5);
     vec2 streakPos = vec2(windUv.x * 16.0, windUv.y * 2.2 + time * 0.12);
 
     float n = noise(streakPos);
-    // 微分勾配による屈折法線ベクトル
     vec2 normal = vec2(
     noise(streakPos + vec2(0.06, 0.0)) - n,
     noise(streakPos + vec2(0.0, 0.06)) - n
@@ -70,15 +67,13 @@ void getFlyingStreaks(vec2 uv, float time, float amount, out vec3 streakColor, o
     streakMask = line * amount;
 }
 
-// --- 4. レンズ付着灰＆煤汚れ（N13ハッシュによる完全不揃い配置） ---
+// --- 4. レンズ付着灰＆煤汚れ ---
 void getAshFlakes(vec2 uv, float time, float amount, out float outFlake, out vec3 outEmber) {
     vec2 aspectUv = vec2(uv.x * 1.777, uv.y);
 
-    // レンズ表面の擦れ汚れ
     vec2 smearUv = aspectUv * 4.5 + vec2(time * 0.002, time * 0.001);
     float smear = smoothstep(0.62, 0.95, sootFbm(smearUv)) * 0.35;
 
-    // 灰の粉塵クラスタ
     vec2 p = aspectUv * 12.0;
     vec2 id = floor(p);
     vec2 gv = fract(p) - vec2(0.5);
@@ -97,7 +92,6 @@ void getAshFlakes(vec2 uv, float time, float amount, out float outFlake, out vec
                 vec2 center = (rand3.yz - vec2(0.5)) * 0.65;
                 vec2 dVec = gv - offset - center;
 
-                // 風圧による斜め擦れ
                 float windAngle = 0.45;
                 vec2 rotatedVec = vec2(
                 dVec.x * cos(windAngle) - dVec.y * sin(windAngle),
@@ -139,9 +133,9 @@ void main() {
     vec2 aberrationOffset = uv * pow(dist, 1.8) * 0.015 * Progress;
     vec2 sampleUv = texCoord + heatRefraction;
 
-    float r = texture(InSampler, sampleUv - aberrationOffset).r;
-    float g = texture(InSampler, sampleUv).g;
-    float b = texture(InSampler, sampleUv + aberrationOffset).b;
+    float r = texture(DiffuseSampler, sampleUv - aberrationOffset).r;
+    float g = texture(DiffuseSampler, sampleUv).g;
+    float b = texture(DiffuseSampler, sampleUv + aberrationOffset).b;
     vec3 sceneColor = vec3(r, g, b);
 
     // 【2】彩度低下 ＋ シネマティックトーンマッピング
@@ -180,5 +174,6 @@ void main() {
     vec3 flakeColor = vec3(0.015, 0.012, 0.015) + emberColor * 1.6;
     vec3 finalRgb = mix(baseRgb, flakeColor, clamp(flakeAlpha * 0.80, 0.0, 0.90));
 
-    fragColor = vec4(finalRgb, texture(InSampler, texCoord).a);
+    fragColor = vec4(finalRgb, texture(DiffuseSampler, texCoord).a);
+
 }

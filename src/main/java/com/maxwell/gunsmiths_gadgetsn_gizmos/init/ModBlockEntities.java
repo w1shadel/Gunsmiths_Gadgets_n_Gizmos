@@ -12,13 +12,12 @@ public class ModBlockEntities {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
             DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, GunsmithsGadgetsnGizmos.MODID);
 
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<CursedAltarBlockEntity>> CURSED_ALTAR_BE =
+            BLOCK_ENTITIES.register("cursed_altar",
+                    () -> BlockEntityType.Builder.of(CursedAltarBlockEntity::new, ModBlocks.CURSED_ALTAR.get()).build(null)
+            );
+
     public static void register(IEventBus bus) {
         BLOCK_ENTITIES.register(bus);
     }
-
-    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<CursedAltarBlockEntity>> CURSED_ALTAR_BE =
-            BLOCK_ENTITIES.register("cursed_altar",
-                    () -> new BlockEntityType<>(CursedAltarBlockEntity::new, ModBlocks.CURSED_ALTAR.get())
-            );
-
 }

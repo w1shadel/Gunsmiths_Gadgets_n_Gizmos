@@ -10,6 +10,7 @@ import io.redspace.irons_artifice.item.ReloadState;
 import io.redspace.irons_artifice.registry.EntityRegistry;
 import io.redspace.irons_artifice.registry.ItemRegistry;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -33,23 +34,24 @@ import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.entity.monster.illager.Pillager;
-import net.minecraft.world.entity.monster.illager.SpellcasterIllager;
+import net.minecraft.world.entity.monster.Pillager;
+import net.minecraft.world.entity.monster.SpellcasterIllager;
+import net.minecraft.world.entity.monster.Vex;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.EvokerFangs;
 import net.minecraft.world.entity.raid.Raider;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraft.world.level.storage.ValueInput;
-import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.checkerframework.checker.nullness.qual.NonNull;
-import org.jspecify.annotations.Nullable;
-
-import java.util.UUID;
+import org.jetbrains.annotations.Nullable;
+import org.joml.Vector3f;
 
 public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerMob {
     public static final byte EVENT_SHOOT_GUN = 100;
@@ -64,7 +66,7 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
             SynchedEntityData.defineId(ApostleGunEntity.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Integer> DATA_TELEPORT_TIMER =
             SynchedEntityData.defineId(ApostleGunEntity.class, EntityDataSerializers.INT);
-    private static final EntityDataAccessor<org.joml.Vector3fc> DATA_TELEPORT_TARGET =
+    private static final EntityDataAccessor<Vector3f> DATA_TELEPORT_TARGET =
             SynchedEntityData.defineId(ApostleGunEntity.class, EntityDataSerializers.VECTOR3);
     private static final EntityDataAccessor<Integer> DATA_DEATH_SEQUENCE =
             SynchedEntityData.defineId(ApostleGunEntity.class, EntityDataSerializers.INT);
@@ -75,7 +77,6 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
     public final AnimationState reloadLoopAnimationState = new AnimationState();
     public final AnimationState reloadEndAnimationState = new AnimationState();
     private final ServerBossEvent bossEvent = (ServerBossEvent) new ServerBossEvent(
-            UUID.randomUUID(),
             this.getDisplayName(),
             BossEvent.BossBarColor.PURPLE,
             BossEvent.BossBarOverlay.NOTCHED_10
@@ -108,7 +109,6 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
                         io.redspace.irons_artifice.data.ValueModifier.Operation.MULTIPLY_TOTAL,
                         io.redspace.irons_artifice.data.ValueModifier.Type.BENEFICIAL
                 ));
-
         if (this.isPhase2()) {
             profile.modifyValue(io.redspace.irons_artifice.data.ShotComponents.SPREAD,
                     new io.redspace.irons_artifice.data.ValueModifier(
@@ -196,11 +196,11 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
     }
 
     @Override
-    public boolean hurtServer(@NonNull ServerLevel level, @NonNull DamageSource source, float damage) {
+    public boolean hurt(@NonNull DamageSource source, float damage) {
         if (this.isCustomDying() || this.isTransitioning()) {
             return false;
         }
-        if (source.getEntity() != null && source.getEntity().getPersistentData().getBooleanOr("apostle_minion", false)) {
+        if (source.getEntity() != null && source.getEntity().getPersistentData().getBoolean("apostle_minion")) {
             return false;
         }
         if (source.is(io.redspace.irons_artifice.damage.DamageSources.BULLET_DAMAGE_TYPE)) {
@@ -213,8 +213,8 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
             this.getNavigation().stop();
             return false;
         }
-        boolean damaged = super.hurtServer(level, source, damage);
-        if (damaged && !level.isClientSide() && damage > 10.0F && this.getRandom().nextFloat() < 0.35F) {
+        boolean damaged = super.hurt(source, damage);
+        if (damaged && !this.level().isClientSide() && damage > 10.0F && this.getRandom().nextFloat() < 0.35F) {
             teleportToTacticalPosition(this.getTarget(), this.getRandom().nextBoolean());
         }
         return damaged;
@@ -255,12 +255,12 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
             }
             this.tickTitleShift();
             this.tickTeleportation(serverLevel);
-            if (this.getY() < this.level().getMinY() + 4 && !this.isCustomDying()) {
+            if (this.getY() < this.level().getMinBuildHeight() + 4 && !this.isCustomDying()) {
                 LivingEntity target = this.getTarget();
                 if (target != null && target.isAlive()) {
                     this.setPos(target.getX(), target.getY() + 1.0, target.getZ());
                     this.setDeltaMovement(0, 0.2, 0);
-                    this.fallDistance = 0.0F;
+                    this.resetFallDistance();
                     this.level().playSound(null, this.getX(), this.getY(), this.getZ(),
                             SoundEvents.ENDERMAN_TELEPORT, SoundSource.HOSTILE, 2.0F, 0.6F);
                 }
@@ -446,7 +446,7 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
     }
 
     @Override
-    public @Nullable SpawnGroupData finalizeSpawn(@NonNull ServerLevelAccessor level, @NonNull DifficultyInstance difficulty, @NonNull EntitySpawnReason spawnReason, @Nullable SpawnGroupData spawnGroupData) {
+    public @Nullable SpawnGroupData finalizeSpawn(@NonNull ServerLevelAccessor level, @NonNull DifficultyInstance difficulty, @NonNull MobSpawnType spawnReason, @Nullable SpawnGroupData spawnGroupData) {
         boolean isTheEnd = this.level().dimension() == Level.END;
         this.setTitle(ApostleTitle.selectRandom(null, false, false, isTheEnd, level.getRandom()));
         this.populateDefaultEquipmentSlots(level.getRandom(), difficulty);
@@ -507,7 +507,7 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
     }
 
     private void spawnProtectedDrop(ServerLevel level, ItemStack stack) {
-        net.minecraft.world.entity.item.ItemEntity itemEntity = this.spawnAtLocation(level, stack);
+        ItemEntity itemEntity = this.spawnAtLocation(stack);
         if (itemEntity != null) {
             itemEntity.setInvulnerable(true);
             itemEntity.setUnlimitedLifetime();
@@ -544,7 +544,7 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
             this.setDeltaMovement(0.0, -1.6, 0.0);
             level.sendParticles(ParticleTypes.SQUID_INK, this.getX(), this.getY() + 1.0, this.getZ(), 35, 0.4, 0.8, 0.4, 0.08);
             level.sendParticles(ParticleTypes.CAMPFIRE_SIGNAL_SMOKE, this.getX(), this.getY() + 1.5, this.getZ(), 15, 0.3, 0.5, 0.3, 0.05);
-            if (this.onGround() || this.verticalCollisionBelow || this.getY() <= level.getMinY() + 2) {
+            if (this.onGround() || this.verticalCollisionBelow || this.getY() <= level.getMinBuildHeight() + 2) {
                 level.sendParticles(ParticleTypes.EXPLOSION_EMITTER, this.getX(), this.getY() + 1.0, this.getZ(), 3, 0, 0, 0, 0);
                 level.sendParticles(ParticleTypes.SONIC_BOOM, this.getX(), this.getY() + 0.5, this.getZ(), 1, 0, 0, 0, 0);
                 level.sendParticles(ParticleTypes.SQUID_INK, this.getX(), this.getY() + 0.5, this.getZ(), 120, 1.2, 0.6, 1.2, 0.2);
@@ -563,19 +563,19 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
     }
 
     @Override
-    protected void addAdditionalSaveData(@NonNull ValueOutput output) {
-        super.addAdditionalSaveData(output);
-        output.putInt("ApostleTitle", this.entityData.get(DATA_TITLE));
-        output.putBoolean("HasTriggeredPhase2", this.hasTriggeredPhase2);
-        output.putBoolean("IsPhase2", this.isPhase2());
+    public void addAdditionalSaveData(@NonNull CompoundTag compound) {
+        super.addAdditionalSaveData(compound);
+        compound.putInt("ApostleTitle", this.entityData.get(DATA_TITLE));
+        compound.putBoolean("HasTriggeredPhase2", this.hasTriggeredPhase2);
+        compound.putBoolean("IsPhase2", this.isPhase2());
     }
 
     @Override
-    protected void readAdditionalSaveData(@NonNull ValueInput input) {
-        super.readAdditionalSaveData(input);
-        this.entityData.set(DATA_TITLE, input.getIntOr("ApostleTitle", 0));
-        this.hasTriggeredPhase2 = input.getBooleanOr("HasTriggeredPhase2", false);
-        this.entityData.set(DATA_PHASE_2, input.getBooleanOr("IsPhase2", false));
+    public void readAdditionalSaveData(@NonNull CompoundTag compound) {
+        super.readAdditionalSaveData(compound);
+        this.entityData.set(DATA_TITLE, compound.getInt("ApostleTitle"));
+        this.hasTriggeredPhase2 = compound.getBoolean("HasTriggeredPhase2");
+        this.entityData.set(DATA_PHASE_2, compound.getBoolean("IsPhase2"));
         this.setTitle(this.getTitle());
     }
 
@@ -602,7 +602,7 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
                 double step = 1.0 + (double) i * 1.0;
                 double fx = startX + (double) Mth.cos(angle) * step;
                 double fz = startZ + (double) Mth.sin(angle) * step;
-                level.addFreshEntity(new net.minecraft.world.entity.projectile.EvokerFangs(
+                level.addFreshEntity(new EvokerFangs(
                         level, fx, target.getY(), fz, angle, i * 2, ApostleGunEntity.this
                 ));
             }
@@ -636,7 +636,7 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
             int aliveMinions = ApostleGunEntity.this.level().getEntitiesOfClass(
                     Monster.class,
                     ApostleGunEntity.this.getBoundingBox().inflate(32.0),
-                    e -> e.isAlive() && e.getPersistentData().getBooleanOr("apostle_minion", false)
+                    e -> e.isAlive() && e.getPersistentData().getBoolean("apostle_minion")
             ).size();
             return aliveMinions == 0;
         }
@@ -644,14 +644,14 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
         @Override
         protected void performSpellCasting() {
             ServerLevel level = (ServerLevel) ApostleGunEntity.this.level();
-            boolean isTheEnd = level.dimension() == net.minecraft.world.level.Level.END;
+            boolean isTheEnd = level.dimension() == Level.END;
             if (isTheEnd) {
                 if (ApostleGunEntity.this.isPhase2()) {
                     for (int i = 0; i < 2; i++) {
                         double spawnX = ApostleGunEntity.this.getX() + (ApostleGunEntity.this.getRandom().nextDouble() - 0.5) * 6.0;
                         double spawnZ = ApostleGunEntity.this.getZ() + (ApostleGunEntity.this.getRandom().nextDouble() - 0.5) * 6.0;
                         double spawnY = ApostleGunEntity.this.getY();
-                        Illificer illificer = EntityRegistry.ILLIFICER.get().create(level, EntitySpawnReason.MOB_SUMMONED);
+                        Illificer illificer = EntityRegistry.ILLIFICER.get().create(level);
                         if (illificer != null) {
                             illificer.setPos(spawnX, spawnY, spawnZ);
                             illificer.getAttribute(Attributes.MAX_HEALTH).setBaseValue(35.0);
@@ -668,7 +668,7 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
                         double spawnX = ApostleGunEntity.this.getX() + (ApostleGunEntity.this.getRandom().nextDouble() - 0.5) * 6.0;
                         double spawnZ = ApostleGunEntity.this.getZ() + (ApostleGunEntity.this.getRandom().nextDouble() - 0.5) * 6.0;
                         double spawnY = ApostleGunEntity.this.getY();
-                        Illificer illificer = EntityRegistry.ILLIFICER.get().create(level, EntitySpawnReason.MOB_SUMMONED);
+                        Illificer illificer = EntityRegistry.ILLIFICER.get().create(level);
                         if (illificer != null) {
                             illificer.setPos(spawnX, spawnY, spawnZ);
                             illificer.getAttribute(Attributes.MAX_HEALTH).setBaseValue(18.0);
@@ -687,7 +687,7 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
                         double spawnX = ApostleGunEntity.this.getX() + (ApostleGunEntity.this.getRandom().nextDouble() - 0.5) * 6.0;
                         double spawnZ = ApostleGunEntity.this.getZ() + (ApostleGunEntity.this.getRandom().nextDouble() - 0.5) * 6.0;
                         double spawnY = ApostleGunEntity.this.getY();
-                        Illificer illificer = EntityRegistry.ILLIFICER.get().create(level, EntitySpawnReason.MOB_SUMMONED);
+                        Illificer illificer = EntityRegistry.ILLIFICER.get().create(level);
                         if (illificer != null) {
                             illificer.setPos(spawnX, spawnY, spawnZ);
                             illificer.getAttribute(Attributes.MAX_HEALTH).setBaseValue(15.0);
@@ -704,12 +704,12 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
                         double spawnX = ApostleGunEntity.this.getX() + (ApostleGunEntity.this.getRandom().nextDouble() - 0.5) * 6.0;
                         double spawnZ = ApostleGunEntity.this.getZ() + (ApostleGunEntity.this.getRandom().nextDouble() - 0.5) * 6.0;
                         double spawnY = ApostleGunEntity.this.getY();
-                        Pillager minion = EntityType.PILLAGER.create(level, EntitySpawnReason.MOB_SUMMONED);
+                        Pillager minion = EntityType.PILLAGER.create(level);
                         if (minion != null) {
                             minion.setPos(spawnX, spawnY, spawnZ);
                             minion.getAttribute(Attributes.MAX_HEALTH).setBaseValue(12.0);
                             minion.setHealth(12.0F);
-                            minion.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(net.minecraft.world.item.Items.CROSSBOW));
+                            minion.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.CROSSBOW));
                             minion.getPersistentData().putBoolean("apostle_minion", true);
                             minion.setDropChance(EquipmentSlot.MAINHAND, 0.0F);
                             level.addFreshEntity(minion);
@@ -720,7 +720,7 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
                         double spawnX = ApostleGunEntity.this.getX() + (ApostleGunEntity.this.getRandom().nextDouble() - 0.5) * 4.0;
                         double spawnZ = ApostleGunEntity.this.getZ() + (ApostleGunEntity.this.getRandom().nextDouble() - 0.5) * 4.0;
                         double spawnY = ApostleGunEntity.this.getY() + 1.0;
-                        net.minecraft.world.entity.monster.Vex vex = EntityType.VEX.create(level, EntitySpawnReason.MOB_SUMMONED);
+                        Vex vex = EntityType.VEX.create(level);
                         if (vex != null) {
                             vex.setPos(spawnX, spawnY, spawnZ);
                             vex.setBoundOrigin(ApostleGunEntity.this.blockPosition());
@@ -853,17 +853,11 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
             if (this.burstCooldown > 0) {
                 this.burstCooldown--;
             }
-
             if (hasLos && distSqr <= 32.0 * 32.0 && (!ApostleGunEntity.this.isCastingSpell() || isAnnihilation) && this.burstCooldown <= 0) {
-
                 if (GunItem.getMagazine(gun).isEmpty() && !GunItem.isReloading(gun)) {
                     io.redspace.irons_artifice.item.GunplayManager.attemptStartReload(ApostleGunEntity.this, gun);
                     this.burstShotsRemaining = isAnnihilation ? 30 : (ApostleGunEntity.this.isPhase2() ? 12 : 3);
-                }
-
-
-                else if (!io.redspace.irons_artifice.item.FireDelayState.isActive(ApostleGunEntity.this, gun) && !GunItem.isReloading(gun)) {
-
+                } else if (!io.redspace.irons_artifice.item.FireDelayState.isActive(ApostleGunEntity.this, gun) && !GunItem.isReloading(gun)) {
                     Vec3 targetCenter = target.getBoundingBox().getCenter();
                     Vec3 inaccuracy = new Vec3(
                             (ApostleGunEntity.this.getRandom().nextDouble() - 0.5) * 2.4,
@@ -871,13 +865,10 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
                             (ApostleGunEntity.this.getRandom().nextDouble() - 0.5) * 2.4
                     );
                     Vec3 aim = targetCenter.add(inaccuracy).subtract(ApostleGunEntity.this.getEyePosition()).normalize();
-
                     if (io.redspace.irons_artifice.item.GunplayManager.tryFire(ApostleGunEntity.this, aim).fired()) {
                         ApostleGunEntity.this.level().broadcastEntityEvent(ApostleGunEntity.this, EVENT_SHOOT_GUN);
-
                         this.burstShotsRemaining--;
                         if (this.burstShotsRemaining <= 0) {
-
                             this.burstCooldown = isAnnihilation ? 0 : (ApostleGunEntity.this.isPhase2() ? 12 : 8);
                             this.burstShotsRemaining = isAnnihilation ? 30 : (ApostleGunEntity.this.isPhase2() ? 10 : 3);
                         }
@@ -886,5 +877,4 @@ public class ApostleGunEntity extends SpellcasterIllager implements IGunslingerM
             }
         }
     }
-
 }

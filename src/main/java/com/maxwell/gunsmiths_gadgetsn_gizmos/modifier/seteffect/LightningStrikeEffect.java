@@ -26,7 +26,7 @@ public record LightningStrikeEffect(float chance) implements SetBonusEffect {
     public void onHit(ServerLevel level, Bullet bullet, HitResult hitResult, HitEntityAccumulator accumulator) {
         if (level.getRandom().nextFloat() < chance) {
             Vec3 pos = hitResult.getLocation();
-            LightningBolt lightning = EntityType.LIGHTNING_BOLT.create(level, net.minecraft.world.entity.EntitySpawnReason.TRIGGERED);
+            LightningBolt lightning = EntityType.LIGHTNING_BOLT.create(level);
             if (lightning != null) {
                 lightning.setPos(pos);
                 level.addFreshEntity(lightning);
