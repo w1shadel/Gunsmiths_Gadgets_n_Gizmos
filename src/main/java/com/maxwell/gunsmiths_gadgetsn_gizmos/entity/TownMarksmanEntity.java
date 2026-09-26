@@ -7,7 +7,7 @@ import io.redspace.irons_artifice.item.GunItem;
 import io.redspace.irons_artifice.item.ReloadState;
 import io.redspace.irons_artifice.registry.ItemRegistry;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -35,7 +35,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
-import org.jspecify.annotations.NonNull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.jspecify.annotations.Nullable;
 
 import java.util.Comparator;
@@ -44,7 +44,7 @@ import java.util.List;
 
 public class TownMarksmanEntity extends PathfinderMob {
     public static final byte EVENT_SHOOT_GUN = 100;
-    private static final Identifier SPEED_BOOST_MODIFIER_ID = Identifier.fromNamespaceAndPath(GunsmithsGadgetsnGizmos.MODID, "town_marksman_speed_boost");
+    private static final ResourceLocation SPEED_BOOST_MODIFIER_ID = ResourceLocation.fromNamespaceAndPath(GunsmithsGadgetsnGizmos.MODID, "town_marksman_speed_boost");
     public final AnimationState holdGunAnimationState = new AnimationState();
     public final AnimationState shootAnimationState = new AnimationState();
     public final AnimationState reloadPhaseInAnimationState = new AnimationState();

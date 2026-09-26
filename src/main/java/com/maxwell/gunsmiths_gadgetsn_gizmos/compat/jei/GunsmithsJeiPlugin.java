@@ -8,9 +8,9 @@ import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import org.jspecify.annotations.NonNull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,10 +18,10 @@ import java.util.List;
 @JeiPlugin
 public final class GunsmithsJeiPlugin implements IModPlugin {
     public static final String MODID = "gunsmiths_gadgetsn_gizmos";
-    private static final Identifier PLUGIN_UID = Identifier.fromNamespaceAndPath(MODID, "jei_plugin");
+    private static final ResourceLocation PLUGIN_UID = ResourceLocation.fromNamespaceAndPath(MODID, "jei_plugin");
 
     @Override
-    public @NonNull Identifier getPluginUid() {
+    public @NonNull ResourceLocation getPluginUid() {
         return PLUGIN_UID;
     }
 

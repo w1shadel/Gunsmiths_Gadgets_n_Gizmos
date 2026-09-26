@@ -1,0 +1,11 @@
+// 26.1.2	2026-08-24T01:21:19.0512009	Curios Slots & Entity Settings: gunsmiths_gadgetsn_gizmos
+a8e9bc217a3ed478276dedb696d3287e31a2f8ee data/curios/curios/entities/default.json
+809bea30adcf3a4f380d4c2319f387c0ee9219f5 data/curios/curios/slots/back.json
+01c15ef7294ea422988e043707ccc75056fd1f9d data/curios/curios/slots/belt.json
+a19b2940f4f830c828f8136b6c93faef2cd0336b data/curios/curios/slots/body.json
+868dea989438642a827bbb064317e846c3b94359 data/curios/curios/slots/charm.json
+388a4c8e633c1909496f0eaa6f7063e5290473b6 data/curios/curios/slots/curio.json
+d98efcf951aa5a67dee1390da004406b768b6432 data/curios/curios/slots/feet.json
+e6636e29aa8cf71c871d42cffe95d28627594b47 data/curios/curios/slots/hands.json
+52af6cc9a96fcc5f5a30678f6905afb655b64686 data/curios/curios/slots/head.json
+530c3a72e42f993ebe8cdd02e1ccb508254f92f8 data/curios/curios/slots/ring.json

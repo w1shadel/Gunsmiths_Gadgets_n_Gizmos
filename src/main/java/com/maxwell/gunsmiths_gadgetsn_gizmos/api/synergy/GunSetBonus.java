@@ -10,7 +10,7 @@ import io.redspace.irons_artifice.gun.ShotProfile;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
@@ -21,20 +21,20 @@ import java.util.stream.Collectors;
 public record GunSetBonus(
         String nameKey,
         String descKey,
-        List<Identifier> requiredModifiers,
+        List<ResourceLocation> requiredModifiers,
         BonusStats bonuses,
         List<SetBonusEffect> customEffects
 ) {
     public static final Codec<GunSetBonus> CODEC = RecordCodecBuilder.create(builder -> builder.group(
             Codec.STRING.fieldOf("name").forGetter(GunSetBonus::nameKey),
             Codec.STRING.fieldOf("description").forGetter(GunSetBonus::descKey),
-            Identifier.CODEC.listOf().fieldOf("required_modifiers").forGetter(GunSetBonus::requiredModifiers),
+            ResourceLocation.CODEC.listOf().fieldOf("required_modifiers").forGetter(GunSetBonus::requiredModifiers),
             BonusStats.CODEC.optionalFieldOf("bonuses", BonusStats.EMPTY).forGetter(GunSetBonus::bonuses),
             SetBonusEffect.CODEC.listOf().optionalFieldOf("custom_effects", List.of()).forGetter(GunSetBonus::customEffects)
     ).apply(builder, GunSetBonus::new));
 
     public boolean matches(List<ItemStack> installedModifiers) {
-        Set<Identifier> installedIds = installedModifiers.stream()
+        Set<ResourceLocation> installedIds = installedModifiers.stream()
                 .filter(stack -> !stack.isEmpty())
                 .map(stack -> BuiltInRegistries.ITEM.getKey(stack.getItem()))
                 .collect(Collectors.toSet());

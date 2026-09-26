@@ -12,7 +12,7 @@ import io.redspace.irons_artifice.gun.ShotProfile;
 import io.redspace.irons_artifice.registry.ItemRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.LivingEntity;
 import net.neoforged.bus.api.IEventBus;
@@ -21,7 +21,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class ModAmmoTypes {
     public static final ResourceKey<Registry<AmmoType>> REGISTRY_KEY =
-            ResourceKey.createRegistryKey(Identifier.fromNamespaceAndPath(GunsmithsGadgetsnGizmos.MODID, "ammo_type"));
+            ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(GunsmithsGadgetsnGizmos.MODID, "ammo_type"));
     public static final DeferredRegister<AmmoType> AMMO_TYPES =
             DeferredRegister.create(REGISTRY_KEY, GunsmithsGadgetsnGizmos.MODID);
     public static final Registry<AmmoType> REGISTRY = AMMO_TYPES.makeRegistry(builder -> {

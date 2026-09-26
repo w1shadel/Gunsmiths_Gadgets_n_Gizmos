@@ -5,8 +5,10 @@ import com.maxwell.gunsmiths_gadgetsn_gizmos.entity.ApostleGunEntity;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.init.ModBlockEntities;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.init.ModEntities;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -15,7 +17,7 @@ import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
-import net.minecraft.world.entity.EntitySpawnReason;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -23,8 +25,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.storage.ValueInput;
-import net.minecraft.world.level.storage.ValueOutput;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -62,26 +62,20 @@ public class CursedAltarBlockEntity extends BlockEntity implements MenuProvider,
                 serverLevel.playSound(null, pos, SoundEvents.SOUL_ESCAPE.value(), SoundSource.BLOCKS, 1.2F, 1.2F);
             }
             if (altar.ritualTimer == 0) {
-                ApostleGunEntity apostle = ModEntities.APOSTLE_GUN.get().create(serverLevel, EntitySpawnReason.TRIGGERED);
+                ApostleGunEntity apostle = ModEntities.APOSTLE_GUN.get().create(serverLevel);
                 if (apostle != null) {
                     apostle.setPos(cx, cy + 0.5, cz);
-                    apostle.finalizeSpawn(serverLevel, serverLevel.getCurrentDifficultyAt(pos), EntitySpawnReason.TRIGGERED, null);
+                    apostle.finalizeSpawn(serverLevel, serverLevel.getCurrentDifficultyAt(pos), MobSpawnType.TRIGGERED, null);
                     serverLevel.addFreshEntity(apostle);
                 }
                 serverLevel.sendParticles(ParticleTypes.EXPLOSION_EMITTER, cx, cy + 1.0, cz, 3, 0, 0, 0, 0);
                 serverLevel.sendParticles(ParticleTypes.SONIC_BOOM, cx, cy + 0.5, cz, 1, 0, 0, 0, 0);
                 serverLevel.sendParticles(ParticleTypes.SQUID_INK, cx, cy + 1.0, cz, 80, 0.8, 1.2, 0.8, 0.15);
                 serverLevel.playSound(null, pos, SoundEvents.GENERIC_EXPLODE.value(), SoundSource.HOSTILE, 3.0F, 0.6F);
-                serverLevel.playSound(null, pos, SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.HOSTILE, 3.0F, 0.8F);
+                serverLevel.playSound(null, pos, SoundEvents.LIGHTNING_BOLT_THUNDER.value(), SoundSource.HOSTILE, 3.0F, 0.8F);
                 serverLevel.playSound(null, pos, SoundEvents.BELL_BLOCK, SoundSource.HOSTILE, 3.0F, 0.3F);
             }
         }
-    }
-
-    @Override
-    public void preRemoveSideEffects(BlockPos pos, BlockState state) {
-        super.preRemoveSideEffects(pos, state);
-        this.drops();
     }
 
     public void drops() {
@@ -154,17 +148,17 @@ public class CursedAltarBlockEntity extends BlockEntity implements MenuProvider,
     }
 
     @Override
-    protected void loadAdditional(ValueInput input) {
-        super.loadAdditional(input);
+    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+        super.loadAdditional(tag, registries);
         this.items.clear();
-        ContainerHelper.loadAllItems(input, this.items);
-        this.ritualTimer = input.getIntOr("RitualTimer", 0);
+        ContainerHelper.loadAllItems(tag, this.items, registries);
+        this.ritualTimer = tag.getInt("RitualTimer");
     }
 
     @Override
-    protected void saveAdditional(ValueOutput output) {
-        super.saveAdditional(output);
-        ContainerHelper.saveAllItems(output, this.items);
-        output.putInt("RitualTimer", this.ritualTimer);
+    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+        super.saveAdditional(tag, registries);
+        ContainerHelper.saveAllItems(tag, this.items, registries);
+        tag.putInt("RitualTimer", this.ritualTimer);
     }
 }

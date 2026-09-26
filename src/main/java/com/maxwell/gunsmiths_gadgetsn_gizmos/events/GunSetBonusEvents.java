@@ -6,7 +6,7 @@ import com.maxwell.gunsmiths_gadgetsn_gizmos.api.synergy.GunSetBonusManager;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.api.synergy.SetBonusEffect;
 import io.redspace.irons_artifice.api.ComposeShotEvent;
 import io.redspace.irons_artifice.api.GunShootEvent;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -22,11 +22,11 @@ public class GunSetBonusEvents {
     @SubscribeEvent
     public static void onAddServerReloadListeners(AddServerReloadListenersEvent event) {
         event.addListener(
-                Identifier.fromNamespaceAndPath("gunsmiths_gadgetsn_gizmos", "gun_set_bonuses"),
+                ResourceLocation.fromNamespaceAndPath("gunsmiths_gadgetsn_gizmos", "gun_set_bonuses"),
                 new GunSetBonusManager()
         );
         event.addListener(
-                Identifier.fromNamespaceAndPath("gunsmiths_gadgetsn_gizmos", "cursed_altar_recipes"),
+                ResourceLocation.fromNamespaceAndPath("gunsmiths_gadgetsn_gizmos", "cursed_altar_recipes"),
                 new com.maxwell.gunsmiths_gadgetsn_gizmos.recipe.CursedAltarRecipeManager()
         );
     }

@@ -4,7 +4,7 @@ import com.maxwell.gunsmiths_gadgetsn_gizmos.api.synergy.SetBonusEffect;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.modifier.seteffect.*;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.Registry;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.resources.ResourceKey;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -12,7 +12,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class ModSetBonusEffects {
     public static final ResourceKey<Registry<MapCodec<? extends SetBonusEffect>>> REGISTRY_KEY =
-            ResourceKey.createRegistryKey(Identifier.fromNamespaceAndPath("gunsmiths_gadgetsn_gizmos", "set_bonus_effect"));
+            ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath("gunsmiths_gadgetsn_gizmos", "set_bonus_effect"));
     public static final DeferredRegister<MapCodec<? extends SetBonusEffect>> EFFECTS =
             DeferredRegister.create(REGISTRY_KEY, "gunsmiths_gadgetsn_gizmos");
     public static final Registry<MapCodec<? extends SetBonusEffect>> REGISTRY = EFFECTS.makeRegistry(builder -> {

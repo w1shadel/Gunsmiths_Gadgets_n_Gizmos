@@ -5,7 +5,7 @@ import com.google.gson.JsonObject;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CursedAltarRecipe {
-    private final Identifier id;
+    private final ResourceLocation id;
     private final List<String> baseRawList;
     private final List<String> materialRawList;
     private final int materialCount;
@@ -27,7 +27,7 @@ public class CursedAltarRecipe {
     private List<Item> resolvedMaterialItems = null;
     private List<Item> resolvedCatalystItems = null;
 
-    public CursedAltarRecipe(Identifier id, List<String> baseRawList, List<String> materialRawList, int materialCount, List<String> catalystRawList, int catalystCount, String resultItemId, int resultCount) {
+    public CursedAltarRecipe(ResourceLocation id, List<String> baseRawList, List<String> materialRawList, int materialCount, List<String> catalystRawList, int catalystCount, String resultItemId, int resultCount) {
         this.id = id;
         this.baseRawList = baseRawList;
         this.materialRawList = materialRawList;
@@ -38,7 +38,7 @@ public class CursedAltarRecipe {
         this.resultCount = resultCount;
     }
 
-    public static CursedAltarRecipe fromJson(Identifier id, JsonObject json) {
+    public static CursedAltarRecipe fromJson(ResourceLocation id, JsonObject json) {
         List<String> baseList = parseRawList(json.get("base"));
         List<String> matList = new ArrayList<>();
         int matCount = 1;
@@ -96,7 +96,7 @@ public class CursedAltarRecipe {
         List<Item> list = new ArrayList<>();
         for (String str : rawList) {
             if (str.startsWith("#")) {
-                Identifier tagId = Identifier.tryParse(str.substring(1));
+                ResourceLocation tagId = ResourceLocation.tryParse(str.substring(1));
                 if (tagId != null) {
                     TagKey<Item> tagKey = TagKey.create(Registries.ITEM, tagId);
                     BuiltInRegistries.ITEM.get(tagKey).ifPresent(holders -> {
@@ -106,7 +106,7 @@ public class CursedAltarRecipe {
                     });
                 }
             } else {
-                Identifier itemId = Identifier.tryParse(str);
+                ResourceLocation itemId = ResourceLocation.tryParse(str);
                 if (itemId != null) {
                     BuiltInRegistries.ITEM.getOptional(itemId).ifPresent(list::add);
                 }
@@ -115,7 +115,7 @@ public class CursedAltarRecipe {
         return list;
     }
 
-    public Identifier id() {
+    public ResourceLocation id() {
         return id;
     }
 
@@ -150,7 +150,7 @@ public class CursedAltarRecipe {
 
     public ItemStack result() {
         if (resultItemId == null || resultItemId.isEmpty()) return ItemStack.EMPTY;
-        Identifier resId = Identifier.tryParse(resultItemId);
+        ResourceLocation resId = ResourceLocation.tryParse(resultItemId);
         if (resId == null) return ItemStack.EMPTY;
         Item item = BuiltInRegistries.ITEM.getValue(resId);
         if (item == Items.AIR) return ItemStack.EMPTY;

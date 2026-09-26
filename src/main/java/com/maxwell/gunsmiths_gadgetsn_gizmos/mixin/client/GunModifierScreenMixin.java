@@ -9,7 +9,7 @@ import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
@@ -87,7 +87,7 @@ public abstract class GunModifierScreenMixin extends AbstractContainerScreen<Gun
                         (int) (gunCenterX + r), (int) (gunCenterY + r * 0.6F), layerColor);
             }
         }
-        Set<Identifier> highlightedItemIds = new HashSet<>();
+        Set<ResourceLocation> highlightedItemIds = new HashSet<>();
         boolean isFullActive = !activeBonuses.isEmpty();
         if (isFullActive) {
             for (GunSetBonus bonus : activeBonuses) {
@@ -106,7 +106,7 @@ public abstract class GunModifierScreenMixin extends AbstractContainerScreen<Gun
             int glowColor = (glowAlpha << 24) | baseGlow;
             for (Slot slot : modifierSlots) {
                 if (slot != null && slot.hasItem()) {
-                    Identifier itemId = BuiltInRegistries.ITEM.getKey(slot.getItem().getItem());
+                    ResourceLocation itemId = BuiltInRegistries.ITEM.getKey(slot.getItem().getItem());
                     if (highlightedItemIds.contains(itemId)) {
                         int sx = xo + slot.x - 4;
                         int sy = yo + slot.y - 4;
@@ -140,13 +140,13 @@ public abstract class GunModifierScreenMixin extends AbstractContainerScreen<Gun
 
     @Unique
     private GunSetBonus gunsmiths_gadgetsn_gizmos$findNearBonus(List<ItemStack> installed) {
-        Set<Identifier> installedIds = installed.stream()
+        Set<ResourceLocation> installedIds = installed.stream()
                 .filter(s -> !s.isEmpty())
                 .map(s -> BuiltInRegistries.ITEM.getKey(s.getItem()))
                 .collect(Collectors.toSet());
         for (GunSetBonus bonus : GunSetBonusManager.getAllBonuses()) {
             int matchCount = 0;
-            for (Identifier req : bonus.requiredModifiers()) {
+            for (ResourceLocation req : bonus.requiredModifiers()) {
                 if (installedIds.contains(req)) {
                     matchCount++;
                 }

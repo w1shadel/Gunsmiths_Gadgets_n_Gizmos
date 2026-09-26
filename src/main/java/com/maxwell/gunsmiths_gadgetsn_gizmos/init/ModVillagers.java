@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableSet;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
@@ -78,7 +78,7 @@ public class ModVillagers {
     );
 
     private static ResourceKey<TradeSet> tradeSetKey(String name) {
-        return ResourceKey.create(Registries.TRADE_SET, Identifier.fromNamespaceAndPath(MODID, name));
+        return ResourceKey.create(Registries.TRADE_SET, ResourceLocation.fromNamespaceAndPath(MODID, name));
     }
 
     public static void register(IEventBus bus) {

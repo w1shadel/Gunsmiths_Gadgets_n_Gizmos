@@ -6,13 +6,13 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.renderer.entity.layers.ItemInHandLayer;
 import net.minecraft.client.renderer.entity.state.ArmedEntityRenderState;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
-import org.jspecify.annotations.NonNull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 public class TownMarksmanRenderer extends MobRenderer<TownMarksmanEntity, TownMarksmanRenderState, TownMarksmanModel> {
-    private static final Identifier TEXTURE = Identifier.fromNamespaceAndPath("gunsmiths_gadgetsn_gizmos", "textures/entity/town_marksman.png");
+    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath("gunsmiths_gadgetsn_gizmos", "textures/entity/town_marksman.png");
 
     public TownMarksmanRenderer(EntityRendererProvider.Context context) {
         super(context, new TownMarksmanModel(context.bakeLayer(TownMarksmanModel.LAYER_LOCATION)), 0.5F);
@@ -20,7 +20,7 @@ public class TownMarksmanRenderer extends MobRenderer<TownMarksmanEntity, TownMa
     }
 
     @Override
-    public @NonNull Identifier getTextureLocation(@NonNull TownMarksmanRenderState state) {
+    public @NonNull ResourceLocation getTextureLocation(@NonNull TownMarksmanRenderState state) {
         return TEXTURE;
     }
 

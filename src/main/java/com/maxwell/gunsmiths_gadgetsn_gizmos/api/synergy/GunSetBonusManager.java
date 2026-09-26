@@ -6,12 +6,12 @@ import com.mojang.serialization.DataResult;
 import com.mojang.serialization.JsonOps;
 import io.redspace.irons_artifice.menu.GunContainer;
 import net.minecraft.resources.FileToIdConverter;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimplePreparableReloadListener;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.item.ItemStack;
-import org.jspecify.annotations.NonNull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.io.Reader;
 import java.util.ArrayList;
@@ -19,9 +19,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class GunSetBonusManager extends SimplePreparableReloadListener<Map<Identifier, GunSetBonus>> {
+public class GunSetBonusManager extends SimplePreparableReloadListener<Map<ResourceLocation, GunSetBonus>> {
     private static final FileToIdConverter CONVERTER = FileToIdConverter.json("gun_set_bonuses");
-    private static final Map<Identifier, GunSetBonus> ACTIVE_BONUSES = new HashMap<>();
+    private static final Map<ResourceLocation, GunSetBonus> ACTIVE_BONUSES = new HashMap<>();
 
     public static List<GunSetBonus> getMatchingBonuses(ItemStack gun) {
         List<GunSetBonus> matched = new ArrayList<>();
@@ -40,11 +40,11 @@ public class GunSetBonusManager extends SimplePreparableReloadListener<Map<Ident
     }
 
     @Override
-    protected @NonNull Map<Identifier, GunSetBonus> prepare(@NonNull ResourceManager resourceManager, @NonNull ProfilerFiller profiler) {
-        Map<Identifier, GunSetBonus> map = new HashMap<>();
+    protected @NonNull Map<ResourceLocation, GunSetBonus> prepare(@NonNull ResourceManager resourceManager, @NonNull ProfilerFiller profiler) {
+        Map<ResourceLocation, GunSetBonus> map = new HashMap<>();
         for (var entry : CONVERTER.listMatchingResources(resourceManager).entrySet()) {
-            Identifier fullPath = entry.getKey();
-            Identifier id = CONVERTER.fileToId(fullPath);
+            ResourceLocation fullPath = entry.getKey();
+            ResourceLocation id = CONVERTER.fileToId(fullPath);
             try (Reader reader = entry.getValue().openAsReader()) {
                 JsonElement json = JsonParser.parseReader(reader);
                 DataResult<GunSetBonus> result = GunSetBonus.CODEC.parse(JsonOps.INSTANCE, json);
@@ -59,7 +59,7 @@ public class GunSetBonusManager extends SimplePreparableReloadListener<Map<Ident
     }
 
     @Override
-    protected void apply(@NonNull Map<Identifier, GunSetBonus> map, @NonNull ResourceManager resourceManager, @NonNull ProfilerFiller profiler) {
+    protected void apply(@NonNull Map<ResourceLocation, GunSetBonus> map, @NonNull ResourceManager resourceManager, @NonNull ProfilerFiller profiler) {
         ACTIVE_BONUSES.clear();
         ACTIVE_BONUSES.putAll(map);
         System.out.println("[Gunsmiths SetBonus] Successfully Loaded " + ACTIVE_BONUSES.size() + " Gun Set Bonuses from datapacks!");

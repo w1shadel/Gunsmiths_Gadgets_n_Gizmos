@@ -20,7 +20,7 @@ import io.redspace.irons_artifice.client.gun.GunInHandRenderer;
 import io.redspace.irons_artifice.item.GunItem;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -52,42 +52,15 @@ public class ModClientEvents {
     @SubscribeEvent
     public static void onAddClientReloadListeners(net.neoforged.neoforge.client.event.AddClientReloadListenersEvent event) {
         event.addListener(
-                net.minecraft.resources.Identifier.fromNamespaceAndPath(GunsmithsGadgetsnGizmos.MODID, "gun_set_bonuses"),
+                net.minecraft.resources.ResourceLocation.fromNamespaceAndPath(GunsmithsGadgetsnGizmos.MODID, "gun_set_bonuses"),
                 new com.maxwell.gunsmiths_gadgetsn_gizmos.api.synergy.GunSetBonusManager()
         );
         event.addListener(
-                net.minecraft.resources.Identifier.fromNamespaceAndPath(GunsmithsGadgetsnGizmos.MODID, "cursed_altar_recipes"),
+                net.minecraft.resources.ResourceLocation.fromNamespaceAndPath(GunsmithsGadgetsnGizmos.MODID, "cursed_altar_recipes"),
                 new com.maxwell.gunsmiths_gadgetsn_gizmos.recipe.CursedAltarRecipeManager()
         );
     }
 
-    @SubscribeEvent
-    public static void registerRenderers(final EntityRenderersEvent.RegisterRenderers event) {
-        if (ModItems.CLUNKER_RIFLE.get() instanceof GunItem gun) {
-            Identifier modelId = BuiltInRegistries.ITEM.getKey(gun);
-            gun.geoRenderProvider.setValue(new GeoRenderProvider() {
-                private final Supplier<GeoItemRenderer<GunItem>> renderer =
-                        Suppliers.memoize(() -> new GunInHandRenderer(new DefaultedItemGeoModel<>(modelId)));
-
-                @Override
-                public @Nullable GeoItemRenderer<GunItem> getGeoItemRenderer() {
-                    return this.renderer.get();
-                }
-            });
-        }
-        if (ModItems.MINIGUN.get() instanceof GunItem gun) {
-            Identifier modelId = BuiltInRegistries.ITEM.getKey(gun);
-            gun.geoRenderProvider.setValue(new GeoRenderProvider() {
-                private final Supplier<GeoItemRenderer<GunItem>> renderer =
-                        Suppliers.memoize(() -> new GunInHandRenderer(new DefaultedItemGeoModel<>(modelId)));
-
-                @Override
-                public @Nullable GeoItemRenderer<GunItem> getGeoItemRenderer() {
-                    return this.renderer.get();
-                }
-            });
-        }
-    }
 
     @SubscribeEvent
     public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {

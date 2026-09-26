@@ -7,9 +7,9 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
-import org.jspecify.annotations.NonNull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -34,7 +34,7 @@ public class ModItemModelDataProvider implements DataProvider {
         List<CompletableFuture<?>> futures = new ArrayList<>();
         for (Holder<Item> holder : ModItems.ITEMS.getEntries()) {
             Item item = holder.value();
-            Identifier itemId = BuiltInRegistries.ITEM.getKey(item);
+            ResourceLocation itemId = BuiltInRegistries.ITEM.getKey(item);
             if (itemId.getPath().equals("clunker_rifle")) continue;
             if (itemId.getPath().equals("minigun")) continue;
             if (itemId.getPath().equals("gunsmith_bench")) continue;

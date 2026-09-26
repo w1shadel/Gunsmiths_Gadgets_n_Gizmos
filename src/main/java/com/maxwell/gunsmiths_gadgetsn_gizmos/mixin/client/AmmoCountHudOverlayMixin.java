@@ -14,7 +14,7 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -27,7 +27,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(value = AmmoCountHudOverlay.class, remap = false)
 public class AmmoCountHudOverlayMixin {
-    private static final Identifier EMPTY_ICON = Identifier.fromNamespaceAndPath("gunsmiths_gadgetsn_gizmos", "textures/gui/empty.png");
+    private static final ResourceLocation EMPTY_ICON = ResourceLocation.fromNamespaceAndPath("gunsmiths_gadgetsn_gizmos", "textures/gui/empty.png");
     @Unique
     private static final int[][] OUTLINE_OFFSETS = {
             {-1, 0}, {1, 0}, {0, -1}, {0, 1},
@@ -38,11 +38,11 @@ public class AmmoCountHudOverlayMixin {
             method = "render",
             at = @At(
                     value = "FIELD",
-                    target = "Lio/redspace/irons_artifice/client/gui/AmmoCountHudOverlay;BULLET_ICON:Lnet/minecraft/resources/Identifier;",
+                    target = "Lio/redspace/irons_artifice/client/gui/AmmoCountHudOverlay;BULLET_ICON:Lnet/minecraft/resources/ResourceLocation;",
                     opcode = org.objectweb.asm.Opcodes.GETSTATIC
             )
     )
-    private static Identifier gunsmiths_gadgetsn_gizmos$suppressDefaultBulletIcon() {
+    private static ResourceLocation gunsmiths_gadgetsn_gizmos$suppressDefaultBulletIcon() {
         Player player = Minecraft.getInstance().player;
         if (player != null) {
             ItemStack heldGun = player.getMainHandItem();
@@ -64,7 +64,7 @@ public class AmmoCountHudOverlayMixin {
         if (!(heldGun.getItem() instanceof GunItem gunItem)) return;
         String ammoId = heldGun.get(ModDataComponents.LOADED_AMMO_TYPE.get());
         if (ammoId == null) return;
-        Identifier id = Identifier.tryParse(ammoId);
+        ResourceLocation id = ResourceLocation.tryParse(ammoId);
         if (id == null) return;
         AmmoType type = ModAmmoTypes.REGISTRY.getValue(id);
         if (type == null) return;
@@ -113,8 +113,8 @@ public class AmmoCountHudOverlayMixin {
         };
         int iconX = Math.round(left);
         int iconY = Math.round(top + (totalHeight - iconSize) * 0.5F);
-        Identifier itemId = BuiltInRegistries.ITEM.getKey(ammoItem);
-        Identifier textureLocation = Identifier.fromNamespaceAndPath(
+        ResourceLocation itemId = BuiltInRegistries.ITEM.getKey(ammoItem);
+        ResourceLocation textureLocation = ResourceLocation.fromNamespaceAndPath(
                 itemId.getNamespace(),
                 "textures/item/" + itemId.getPath() + ".png"
         );

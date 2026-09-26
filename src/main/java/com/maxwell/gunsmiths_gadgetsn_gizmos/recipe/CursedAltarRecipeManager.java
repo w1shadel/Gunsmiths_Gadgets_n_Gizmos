@@ -5,12 +5,12 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.GunsmithsGadgetsnGizmos;
 import net.minecraft.resources.FileToIdConverter;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimplePreparableReloadListener;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.item.ItemStack;
-import org.jspecify.annotations.NonNull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.io.Reader;
 import java.nio.file.Files;
@@ -18,10 +18,10 @@ import java.nio.file.Path;
 import java.util.*;
 import java.util.stream.Stream;
 
-public class CursedAltarRecipeManager extends SimplePreparableReloadListener<Map<Identifier, CursedAltarRecipe>> {
+public class CursedAltarRecipeManager extends SimplePreparableReloadListener<Map<ResourceLocation, CursedAltarRecipe>> {
     private static final FileToIdConverter RECIPE_CONVERTER = FileToIdConverter.json("recipe");
     private static final FileToIdConverter RECIPES_CONVERTER = FileToIdConverter.json("recipes");
-    private static final Map<Identifier, CursedAltarRecipe> RECIPES = new LinkedHashMap<>();
+    private static final Map<ResourceLocation, CursedAltarRecipe> RECIPES = new LinkedHashMap<>();
 
     public static Optional<CursedAltarRecipe> findMatchingRecipe(ItemStack base, ItemStack material, ItemStack catalyst) {
         for (CursedAltarRecipe recipe : RECIPES.values()) {
@@ -37,18 +37,18 @@ public class CursedAltarRecipeManager extends SimplePreparableReloadListener<Map
     }
 
     @Override
-    protected @NonNull Map<Identifier, CursedAltarRecipe> prepare(@NonNull ResourceManager resourceManager, @NonNull ProfilerFiller profiler) {
-        Map<Identifier, CursedAltarRecipe> map = new LinkedHashMap<>();
+    protected @NonNull Map<ResourceLocation, CursedAltarRecipe> prepare(@NonNull ResourceManager resourceManager, @NonNull ProfilerFiller profiler) {
+        Map<ResourceLocation, CursedAltarRecipe> map = new LinkedHashMap<>();
         scanResources(resourceManager, RECIPE_CONVERTER, map);
         scanResources(resourceManager, RECIPES_CONVERTER, map);
         scanGeneratedFolder(map);
         return map;
     }
 
-    private void scanResources(ResourceManager resourceManager, FileToIdConverter converter, Map<Identifier, CursedAltarRecipe> map) {
+    private void scanResources(ResourceManager resourceManager, FileToIdConverter converter, Map<ResourceLocation, CursedAltarRecipe> map) {
         for (var entry : converter.listMatchingResources(resourceManager).entrySet()) {
-            Identifier fullPath = entry.getKey();
-            Identifier recipeId = converter.fileToId(fullPath);
+            ResourceLocation fullPath = entry.getKey();
+            ResourceLocation recipeId = converter.fileToId(fullPath);
             try (Reader reader = entry.getValue().openAsReader()) {
                 parseAndAdd(recipeId, reader, map);
             } catch (Exception e) {
@@ -57,7 +57,7 @@ public class CursedAltarRecipeManager extends SimplePreparableReloadListener<Map
         }
     }
 
-    private void scanGeneratedFolder(Map<Identifier, CursedAltarRecipe> map) {
+    private void scanGeneratedFolder(Map<ResourceLocation, CursedAltarRecipe> map) {
         List<Path> potentialRoots = List.of(
                 Path.of("src/generated/resources/data"),
                 Path.of("../src/generated/resources/data"),
@@ -77,7 +77,7 @@ public class CursedAltarRecipeManager extends SimplePreparableReloadListener<Map
                                     Path rel = root.relativize(path);
                                     String namespace = rel.getName(0).toString();
                                     String fileName = path.getFileName().toString().replace(".json", "");
-                                    Identifier recipeId = Identifier.fromNamespaceAndPath(namespace, fileName);
+                                    ResourceLocation recipeId = ResourceLocation.fromNamespaceAndPath(namespace, fileName);
                                     parseAndAdd(recipeId, reader, map);
                                 } catch (Exception e) {
                                     GunsmithsGadgetsnGizmos.LOGGER.error("[CursedAltar] Error reading generated JSON at {}: {}", path, e.getMessage());
@@ -89,7 +89,7 @@ public class CursedAltarRecipeManager extends SimplePreparableReloadListener<Map
         }
     }
 
-    private void parseAndAdd(Identifier recipeId, Reader reader, Map<Identifier, CursedAltarRecipe> map) {
+    private void parseAndAdd(ResourceLocation recipeId, Reader reader, Map<ResourceLocation, CursedAltarRecipe> map) {
         JsonElement element = JsonParser.parseReader(reader);
         if (element.isJsonObject()) {
             JsonObject json = element.getAsJsonObject();
@@ -105,7 +105,7 @@ public class CursedAltarRecipeManager extends SimplePreparableReloadListener<Map
     }
 
     @Override
-    protected void apply(@NonNull Map<Identifier, CursedAltarRecipe> map, @NonNull ResourceManager resourceManager, @NonNull ProfilerFiller profiler) {
+    protected void apply(@NonNull Map<ResourceLocation, CursedAltarRecipe> map, @NonNull ResourceManager resourceManager, @NonNull ProfilerFiller profiler) {
         RECIPES.clear();
         RECIPES.putAll(map);
         GunsmithsGadgetsnGizmos.LOGGER.info("[CursedAltar] Successfully loaded {} Altar Recipes (from datapacks, other mods & generated resources)!", RECIPES.size());

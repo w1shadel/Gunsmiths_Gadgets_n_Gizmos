@@ -13,7 +13,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Matrix4f;
 import org.joml.Vector4f;
-import org.jspecify.annotations.NonNull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 public class CigarSmokeLayer extends RenderLayer<ApostleGunRenderState, ApostleGunModel> {
     private final RandomSource random = RandomSource.create();

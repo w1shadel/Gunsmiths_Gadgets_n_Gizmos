@@ -6,7 +6,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.Item;
 
@@ -15,15 +15,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MuzzleBoneAutoLoader {
-    private static final Map<Identifier, MuzzleOffset> AUTO_OFFSETS = new HashMap<>();
+    private static final Map<ResourceLocation, MuzzleOffset> AUTO_OFFSETS = new HashMap<>();
 
     public static MuzzleOffset getOffset(Item gunItem) {
-        Identifier itemId = BuiltInRegistries.ITEM.getKey(gunItem);
+        ResourceLocation itemId = BuiltInRegistries.ITEM.getKey(gunItem);
         return AUTO_OFFSETS.computeIfAbsent(itemId, MuzzleBoneAutoLoader::loadFromModelJson);
     }
 
-    private static MuzzleOffset loadFromModelJson(Identifier itemId) {
-        Identifier modelLocation = Identifier.fromNamespaceAndPath(
+    private static MuzzleOffset loadFromModelJson(ResourceLocation itemId) {
+        ResourceLocation modelLocation = ResourceLocation.fromNamespaceAndPath(
                 itemId.getNamespace(),
                 "geckolib/models/item/" + itemId.getPath() + ".geo.json"
         );

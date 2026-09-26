@@ -5,7 +5,7 @@ import com.maxwell.gunsmiths_gadgetsn_gizmos.api.ammo.AmmoType;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.init.ModAmmoTypes;
 import com.maxwell.gunsmiths_gadgetsn_gizmos.init.ModDataComponents;
 import io.redspace.irons_artifice.api.ComposeShotEvent;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -17,7 +17,7 @@ public class ModAmmoEvents {
         ItemStack gun = event.getShotProfile().itemStack();
         String ammoId = gun.get(ModDataComponents.LOADED_AMMO_TYPE.get());
         if (ammoId != null) {
-            Identifier id = Identifier.tryParse(ammoId);
+            ResourceLocation id = ResourceLocation.tryParse(ammoId);
             if (id != null) {
                 AmmoType type = ModAmmoTypes.REGISTRY.getValue(id);
                 if (type != null) {

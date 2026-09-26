@@ -8,15 +8,15 @@ import io.redspace.irons_artifice.registry.ItemRegistry;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementType;
-import net.minecraft.advancements.criterion.*;
+import net.minecraft.advancements.critereon.*;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.advancements.AdvancementSubProvider;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import org.jspecify.annotations.NonNull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.function.Consumer;
 
@@ -34,7 +34,7 @@ public class ModAdvancementProvider implements AdvancementSubProvider {
                         ModBlocks.GUNSMITH_BENCH.get(),
                         Component.translatable("advancements.gunsmiths_gadgetsn_gizmos.root.title"),
                         Component.translatable("advancements.gunsmiths_gadgetsn_gizmos.root.desc"),
-                        Identifier.withDefaultNamespace("textures/gui/advancements/backgrounds/stone.png"),
+                        ResourceLocation.withDefaultNamespace("textures/gui/advancements/backgrounds/stone.png"),
                         AdvancementType.TASK,
                         false, false, false
                 )
