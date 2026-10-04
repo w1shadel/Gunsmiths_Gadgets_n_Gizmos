@@ -23,9 +23,11 @@ import java.util.List;
 public class ClientGunAuraEvents {
     @SubscribeEvent
     public static void onClientTick(ClientTickEvent.Post event) {
-        if (!GunsmithConfig.CLIENT.enableGunAuraParticles.get()) return;
         Minecraft mc = Minecraft.getInstance();
-        if (mc.isPaused() || mc.level == null || mc.player == null) return;
+        if (mc.isPaused() || mc.level == null || mc.player == null || mc.player.tickCount < 2) return;
+        if (!io.redspace.irons_artifice.config.ClientConfig.SPEC.isLoaded()) return;
+        if (!GunsmithConfig.CLIENT_SPEC.isLoaded()) return;
+        if (!GunsmithConfig.CLIENT.enableGunAuraParticles.get()) return;
         Player player = mc.player;
         ItemStack heldGun = player.getMainHandItem();
         if (heldGun.getItem() instanceof GunItem) {
