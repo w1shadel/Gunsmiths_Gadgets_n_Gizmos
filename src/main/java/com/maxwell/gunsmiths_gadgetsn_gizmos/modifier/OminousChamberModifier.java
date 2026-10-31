@@ -18,8 +18,12 @@ public final class OminousChamberModifier implements GunModifier {
     @Override
     public void apply(ShotComponentMap components) {
         components.getOrCreate(ShotComponents.POST_HIT_EFFECTS).add(new OminousTrialPostHit());
-        components.getOrCreate(ShotComponents.DAMAGE)
-                .addModifier(new ValueModifier(0.25, ValueModifier.Operation.MULTIPLY_TOTAL, ValueModifier.Type.BENEFICIAL));
+
+        // ベース威力を取得して ADD (加算) に変更
+        io.redspace.irons_artifice.data.Value damageValue = components.getOrCreate(ShotComponents.DAMAGE);
+        double baseDamage = damageValue.base();
+        damageValue.addModifier(new ValueModifier(baseDamage * 0.25, ValueModifier.Operation.ADD, ValueModifier.Type.BENEFICIAL));
+
         components.getOrCreate(ShotComponents.PARTICLE_TRAIL).add(
                 ColorTransitionParticleOption.bulletTrail(OMINOUS_COLOR_FROM, OMINOUS_COLOR_TO)
         );

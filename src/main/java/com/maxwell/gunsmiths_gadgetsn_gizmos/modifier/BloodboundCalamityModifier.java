@@ -34,8 +34,15 @@ public final class BloodboundCalamityModifier implements GunModifier {
 
     @Override
     public void apply(ShotComponentMap components) {
-        components.getOrCreate(ShotComponents.DAMAGE)
-                .addModifier(new ValueModifier(1.20, ValueModifier.Operation.MULTIPLY_TOTAL, ValueModifier.Type.BENEFICIAL));
+        io.redspace.irons_artifice.data.Value damageValue = components.getOrCreate(ShotComponents.DAMAGE);
+        double baseDamage = damageValue.base();
+
+        damageValue.addModifier(new ValueModifier(
+                baseDamage * 1.20,
+                ValueModifier.Operation.ADD,
+                ValueModifier.Type.BENEFICIAL
+        ));
+
         components.getOrCreate(ShotComponents.PIERCING)
                 .addModifier(new ValueModifier(2, ValueModifier.Operation.ADD, ValueModifier.Type.BENEFICIAL));
         components.getOrCreate(ShotComponents.GRAVITY)

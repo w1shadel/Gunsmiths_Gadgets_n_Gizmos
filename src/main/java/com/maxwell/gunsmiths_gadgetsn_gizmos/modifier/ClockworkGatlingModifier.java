@@ -13,8 +13,11 @@ public final class ClockworkGatlingModifier implements GunModifier {
     @Override
     public void apply(ShotComponentMap components) {
         components.set(ShotComponents.FORCE_AUTO_FIRE, true);
+
+        // 基礎レート(1.0) × 2.5 = +2.5 の加算に修正
         components.getOrCreate(ShotComponents.FIRE_RATE)
-                .addModifier(new ValueModifier(2.5, ValueModifier.Operation.MULTIPLY_TOTAL, ValueModifier.Type.BENEFICIAL));
+                .addModifier(new ValueModifier(2.5, ValueModifier.Operation.ADD, ValueModifier.Type.BENEFICIAL));
+
         components.getOrCreate(ShotComponents.SPREAD)
                 .addModifier(new ValueModifier(-1.0, ValueModifier.Operation.ADD, ValueModifier.Type.BENEFICIAL));
         components.getOrCreate(ShotComponents.CAMERA_RECOIL_MULTIPLIER)
