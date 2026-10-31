@@ -31,7 +31,6 @@ public record GunSetBonus(
             BonusStats.CODEC.optionalFieldOf("bonuses", BonusStats.EMPTY).forGetter(GunSetBonus::bonuses),
             SetBonusEffect.CODEC.listOf().optionalFieldOf("custom_effects", List.of()).forGetter(GunSetBonus::customEffects)
     ).apply(builder, GunSetBonus::new));
-
     public boolean matches(List<ItemStack> installedModifiers) {
         Set<ResourceLocation> installedIds = installedModifiers.stream()
                 .filter(stack -> !stack.isEmpty())
@@ -39,7 +38,6 @@ public record GunSetBonus(
                 .collect(Collectors.toSet());
         return installedIds.containsAll(requiredModifiers);
     }
-
     public void apply(ShotProfile profile, net.minecraft.world.entity.LivingEntity shooter) {
         if (bonuses.damageMultiplier() != 0) {
             profile.modifyValue(ShotComponents.DAMAGE,
@@ -93,6 +91,18 @@ public record GunSetBonus(
             Optional<ParticleOptions> auraParticle
     ) {
         public static final BonusStats EMPTY = new BonusStats(0, 0, 0, 0, 0, Optional.empty(), Optional.empty(), Optional.empty());
+        private static final Codec<ParticleOptions> FLEXIBLE_PARTICLE_CODEC = Codec.either(
+                ParticleTypes.CODEC,
+                BuiltInRegistries.PARTICLE_TYPE.byNameCodec().comapFlatMap(
+                        type -> type instanceof ParticleOptions options
+                                ? com.mojang.serialization.DataResult.success(options)
+                                : com.mojang.serialization.DataResult.error(() -> "Particle requires parameters"),
+                        ParticleOptions::getType
+                )
+        ).xmap(
+                either -> either.map(a -> a, b -> b),
+                com.mojang.datafixers.util.Either::left
+        );
         public static final Codec<BonusStats> CODEC = RecordCodecBuilder.create(builder -> builder.group(
                 Codec.DOUBLE.optionalFieldOf("damage_multiplier", 0.0).forGetter(BonusStats::damageMultiplier),
                 Codec.DOUBLE.optionalFieldOf("bullet_speed_multiplier", 0.0).forGetter(BonusStats::bulletSpeedMultiplier),
@@ -101,7 +111,7 @@ public record GunSetBonus(
                 Codec.INT.optionalFieldOf("piercing_add", 0).forGetter(BonusStats::piercingAdd),
                 Codec.STRING.optionalFieldOf("trail_color").forGetter(BonusStats::trailColor),
                 Codec.STRING.optionalFieldOf("muzzle_flash_color").forGetter(BonusStats::muzzleFlashColor),
-                ParticleTypes.CODEC.optionalFieldOf("aura_particle").forGetter(BonusStats::auraParticle)
+                FLEXIBLE_PARTICLE_CODEC.optionalFieldOf("aura_particle").forGetter(BonusStats::auraParticle)
         ).apply(builder, BonusStats::new));
     }
 }

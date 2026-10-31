@@ -135,7 +135,7 @@ dependencies {
     compileOnly "curse.maven:emi-580555:6420931"
     implementation "curse.maven:mekanism-268560:7621971"
     implementation "curse.maven:pipez-443900:5757713"
-    implementation "curse.maven:irons-artifice-1650193:8974634"
+    implementation "curse.maven:irons-artifice-1650193:9290331"
     implementation "curse.maven:geckolib-388172:8893490"
     implementation "curse.maven:irons-lib-1492763:8973642"
     implementation "curse.maven:jade-324717:8591319"

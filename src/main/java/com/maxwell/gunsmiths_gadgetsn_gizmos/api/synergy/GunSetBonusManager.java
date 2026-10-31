@@ -47,7 +47,7 @@ public class GunSetBonusManager extends SimplePreparableReloadListener<Map<Resou
             ResourceLocation id = CONVERTER.fileToId(fullPath);
             try (Reader reader = entry.getValue().openAsReader()) {
                 JsonElement json = JsonParser.parseReader(reader);
-                DataResult<GunSetBonus> result = GunSetBonus.CODEC.parse(JsonOps.INSTANCE, json);
+                DataResult<GunSetBonus> result = GunSetBonus.CODEC.parse(JsonOps.INSTANCE, (JsonElement) json);
                 result.ifSuccess(bonus -> map.put(id, bonus));
                 result.ifError(err -> System.err.println("[Gunsmiths SetBonus] Error parsing " + id + ": " + err.message()));
             } catch (Exception e) {

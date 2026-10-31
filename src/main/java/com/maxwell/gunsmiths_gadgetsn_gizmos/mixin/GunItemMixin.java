@@ -34,9 +34,27 @@ public class GunItemMixin {
                 tooltipComponents.add(Component.literal("★ ")
                         .append(Component.translatable(bonus.nameKey()))
                         .withStyle(ChatFormatting.GREEN, ChatFormatting.BOLD));
-                tooltipComponents.add(Component.literal("  ")
-                        .append(Component.translatable(bonus.descKey()))
-                        .withStyle(ChatFormatting.DARK_GREEN));
+
+                var stats = bonus.bonuses();
+                if (stats.damageMultiplier() != 0.0) {
+                    int percent = (int) Math.round(stats.damageMultiplier() * 100);
+                    tooltipComponents.add(Component.literal("  " + (percent > 0 ? "+" : "") + percent + "% Damage")
+                            .withStyle(ChatFormatting.DARK_GREEN));
+                }
+                if (stats.bulletSpeedMultiplier() != 0.0) {
+                    int percent = (int) Math.round(stats.bulletSpeedMultiplier() * 100);
+                    tooltipComponents.add(Component.literal("  " + (percent > 0 ? "+" : "") + percent + "% Bullet Speed")
+                            .withStyle(ChatFormatting.DARK_GREEN));
+                }
+                if (stats.recoilMultiplier() != 0.0) {
+                    int percent = (int) Math.round(stats.recoilMultiplier() * 100);
+                    tooltipComponents.add(Component.literal("  " + (percent > 0 ? "+" : "") + percent + "% Recoil")
+                            .withStyle(ChatFormatting.DARK_GREEN));
+                }
+                if (stats.piercingAdd() != 0) {
+                    tooltipComponents.add(Component.literal("  +" + stats.piercingAdd() + " Piercing")
+                            .withStyle(ChatFormatting.DARK_GREEN));
+                }
             }
         }
     }
