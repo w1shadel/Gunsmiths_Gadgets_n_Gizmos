@@ -13,8 +13,10 @@ public final class UnstableOverclockModifier implements GunModifier {
     @Override
     public void apply(ShotComponentMap components) {
         components.set(ShotComponents.FORCE_AUTO_FIRE, true);
+
         components.getOrCreate(ShotComponents.FIRE_RATE)
-                .addModifier(new ValueModifier(2.0, ValueModifier.Operation.MULTIPLY_TOTAL, ValueModifier.Type.BENEFICIAL));
+                .addModifier(new ValueModifier(2.0, ValueModifier.Operation.ADD, ValueModifier.Type.BENEFICIAL));
+
         components.getOrCreate(ShotComponents.CAMERA_RECOIL_MULTIPLIER)
                 .addModifier(new ValueModifier(1.5, ValueModifier.Operation.MULTIPLY_TOTAL, ValueModifier.Type.HARMFUL));
         components.getOrCreate(ShotComponents.SPREAD)

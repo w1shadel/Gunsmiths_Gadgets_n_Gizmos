@@ -31,12 +31,29 @@ public class GunItemMixin {
         if (!bonuses.isEmpty()) {
             builder.accept(Component.empty());
             for (var bonus : bonuses) {
+                // セットボーナス名
                 builder.accept(Component.literal("★ ")
                         .append(Component.translatable(bonus.nameKey()))
                         .withStyle(ChatFormatting.GREEN, ChatFormatting.BOLD));
-                builder.accept(Component.literal("  ")
-                        .append(Component.translatable(bonus.descKey()))
-                        .withStyle(ChatFormatting.DARK_GREEN));
+
+                // ★ JSONで設定された実際の数値を動的にフォーマットして表示
+                var stats = bonus.bonuses();
+                if (stats.damageMultiplier() != 0.0) {
+                    builder.accept(Component.literal("  +").append((int)(stats.damageMultiplier() * 100) + "% Damage")
+                            .withStyle(ChatFormatting.DARK_GREEN));
+                }
+                if (stats.bulletSpeedMultiplier() != 0.0) {
+                    builder.accept(Component.literal("  +").append((int)(stats.bulletSpeedMultiplier() * 100) + "% Bullet Speed")
+                            .withStyle(ChatFormatting.DARK_GREEN));
+                }
+                if (stats.recoilMultiplier() != 0.0) {
+                    builder.accept(Component.literal("  ").append((int)(stats.recoilMultiplier() * 100) + "% Recoil")
+                            .withStyle(ChatFormatting.DARK_GREEN));
+                }
+                if (stats.piercingAdd() != 0) {
+                    builder.accept(Component.literal("  +").append(stats.piercingAdd() + " Piercing")
+                            .withStyle(ChatFormatting.DARK_GREEN));
+                }
             }
         }
     }

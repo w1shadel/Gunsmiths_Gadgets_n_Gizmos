@@ -25,8 +25,9 @@ public final class SculkWhisperSilencerModifier implements GunModifier {
     public static void onComposeShot(ComposeShotEvent event) {
         if (ModifierHelper.hasModifier(event.getShotProfile(), ModItems.SCULK_WHISPER_SILENCER_MODIFIER.get())) {
             if (event.getEntity().isCrouching()) {
+                double baseDamage = event.getShotProfile().peek(ShotComponents.DAMAGE).base();
                 event.getShotProfile().modifyValue(ShotComponents.DAMAGE, new ValueModifier(
-                        SNEAK_DAMAGE_BONUS, ValueModifier.Operation.MULTIPLY_TOTAL, ValueModifier.Type.BENEFICIAL
+                        baseDamage * SNEAK_DAMAGE_BONUS, ValueModifier.Operation.ADD, ValueModifier.Type.BENEFICIAL
                 ));
             }
         }
